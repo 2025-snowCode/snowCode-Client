@@ -1,1 +1,17 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+
+@theme {
+  --color-*: initial;
+  --color-white: #ffffff;
+  --color-background: #f6f5f8;
+  --color-primary: #856cff;
+  --color-stroke: #dfdbf0;
+  --color-purple: #a390ff;
+  --color-lightPurple: #bcbbff;
+  --color-lightBlack: #7d7993;
+  --color-secondaryBlack: #555267;
+}
+
+.header-btn {
+  @apply bg-primary w-15.5 h-15.5 rounded-full flex justify-center items-center;
+}
