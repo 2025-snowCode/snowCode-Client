@@ -1,4 +1,4 @@
-import StudentHeader from './components/StudentHeader';
+import StudentHeader from './components/Header/StudentHeader';
 
 function App() {
   return (
