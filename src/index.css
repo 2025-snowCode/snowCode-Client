@@ -1,1 +1,22 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+
+@theme {
+  --color-*: initial;
+  --color-white: #ffffff;
+  --color-background: #f6f5f8;
+  --color-primary: #856cff;
+  --color-stroke: #dfdbf0;
+  --color-purple: #a390ff;
+  --color-light-purple: #bcbbff;
+  --color-light-black: #7d7993;
+  --color-secondary-black: #555267;
+}
+
+@utility flex-center {
+  @apply flex items-center;
+}
+
+/* 헤더 버튼 컴포너트 css */
+.header-btn {
+  @apply bg-primary size-15.5 rounded-full flex-center justify-center;
+}
