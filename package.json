@@ -8,12 +8,13 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "svgr" : "npx @svgr/cli -d src/assets/svg --ignore-existing --typescript --no-dimensions public/svg"
+    "svgr": "npx @svgr/cli -d src/assets/svg --ignore-existing --typescript --no-dimensions public/svg"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.11",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-router-dom": "^7.6.3",
     "tailwindcss": "^4.1.11"
   },
   "devDependencies": {
