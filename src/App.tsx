@@ -5,7 +5,20 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<Layout />}></Route>
+        {/* 공통 영역 */}
+        <Route path='/' element={<Layout />}>
+          {/* 추가 페이지들 */}
+        </Route>
+
+        {/* 학생 전용 영역 */}
+        <Route path='/student' element={<Layout />}>
+          {/* 추가 페이지들 */}
+        </Route>
+
+        {/* 관리자 전용 영역 */}
+        <Route path='/admin' element={<Layout />}>
+          {/* 추가 페이지들 */}
+        </Route>
       </Routes>
     </BrowserRouter>
   );
