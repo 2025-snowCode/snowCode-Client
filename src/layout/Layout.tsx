@@ -32,10 +32,22 @@ const Layout = () => {
           ),
           rightContent: (
             <nav className='flex-1 bg-linear-to-r from-light-purple to-purple w-1/3 h-full px-3 rounded-full flex-center justify-between'>
-              <Button icon={<ChatIcon width={27} height={27} />} />
-              <Button icon={<NotificationIcon width={24} height={29} />} />
-              <Button icon={<UserIcon width={27} height={28} />} />
-              <Button icon={<SignoutIcon width={27} height={27} />} />
+              <Button
+                icon={<ChatIcon width={24} height={24} />}
+                aria-label='채팅'
+              />
+              <Button
+                icon={<NotificationIcon width={24} height={29} />}
+                aria-label='알림'
+              />
+              <Button
+                icon={<UserIcon width={27} height={28} />}
+                aria-label='프로필'
+              />
+              <Button
+                icon={<SignoutIcon width={27} height={27} />}
+                aria-label='로그아웃'
+              />
             </nav>
           ),
         };
