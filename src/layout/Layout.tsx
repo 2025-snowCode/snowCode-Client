@@ -1,7 +1,7 @@
 import {useLocation, Outlet} from 'react-router-dom';
 import BaseHeader from '../components/common/BaseHeader';
 import {NotificationIcon, SignoutIcon, UserIcon, ChatIcon} from '../assets/svg';
-import Button from '../components/common/Button';
+import IconButton from '../components/common/IconButton';
 
 const Layout = () => {
   const location = useLocation();
@@ -32,19 +32,19 @@ const Layout = () => {
           ),
           rightContent: (
             <nav className='flex-1 bg-linear-to-r from-light-purple to-purple w-1/3 h-full px-3 rounded-full flex-center justify-between'>
-              <Button
+              <IconButton
                 icon={<ChatIcon width={24} height={24} />}
                 aria-label='채팅'
               />
-              <Button
+              <IconButton
                 icon={<NotificationIcon width={24} height={29} />}
                 aria-label='알림'
               />
-              <Button
+              <IconButton
                 icon={<UserIcon width={27} height={28} />}
                 aria-label='프로필'
               />
-              <Button
+              <IconButton
                 icon={<SignoutIcon width={27} height={27} />}
                 aria-label='로그아웃'
               />
@@ -61,9 +61,9 @@ const Layout = () => {
           ),
           rightContent: (
             <nav className='flex-1 bg-linear-to-r from-light-purple to-purple w-1/4 h-full px-3 rounded-full flex-center justify-between'>
-              <Button icon={<NotificationIcon width={24} height={29} />} />
-              <Button icon={<UserIcon width={27} height={28} />} />
-              <Button icon={<SignoutIcon width={27} height={27} />} />
+              <IconButton icon={<NotificationIcon width={24} height={29} />} />
+              <IconButton icon={<UserIcon width={27} height={28} />} />
+              <IconButton icon={<SignoutIcon width={27} height={27} />} />
             </nav>
           ),
         };
