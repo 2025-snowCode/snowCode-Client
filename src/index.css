@@ -10,6 +10,7 @@
   --color-light-purple: #bcbbff;
   --color-light-black: #7d7993;
   --color-secondary-black: #555267;
+  --color-gray: #f9f9f9;
 }
 
 @utility flex-center {
