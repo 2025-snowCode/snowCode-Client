@@ -1,29 +1,29 @@
-import logo from '../../assets/images/snowCode_logo_mini.svg';
+import logo from '../../../assets/images/snowCode_logo_mini.svg';
 import CourseCard from './CourseCard';
 import type {Course} from './types';
 
-const mockData: Course[] = [
+const courses: Course[] = [
   {
     id: 1,
-    courseName: '소프트웨어의 이해',
-    courseYear: 2025,
-    courseSem: '1',
-    classNum: '005',
-    courseDescription:
+    year: 2025,
+    semester: 'FIRST',
+    section: '005',
+    title: '소프트웨어의 이해',
+    description:
       'Python 언어를 기반으로 하여 프로그래밍에 대한 기본 원리를 학습한다.',
-    moduleNum: 12,
-    probNum: 36,
+    unitCount: 12,
+    assignmentCount: 36,
   },
   {
     id: 2,
-    courseName: '데이터 구조와 알고리즘',
-    courseYear: 2025,
-    courseSem: '1',
-    classNum: '001',
-    courseDescription:
+    year: 2025,
+    semester: 'FIRST',
+    section: '001',
+    title: '데이터 구조와 알고리즘',
+    description:
       '자료구조의 기본 원리와 다양한 알고리즘의 동작 원리를 학습하고 구현한다.',
-    moduleNum: 18,
-    probNum: 20,
+    unitCount: 18,
+    assignmentCount: 20,
   },
 ];
 
@@ -43,7 +43,7 @@ const CourseList = () => {
         </div>
       </div>
       <div>
-        {mockData.map((course) => (
+        {courses.map((course) => (
           <CourseCard key={course.id} {...course} />
         ))}
       </div>

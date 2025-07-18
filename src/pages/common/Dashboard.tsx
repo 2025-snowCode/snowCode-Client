@@ -1,5 +1,5 @@
-import CourseList from '../components/Dashboard/CourseList';
-import ScheduleList from '../components/Dashboard/ScheduleList';
+import CourseList from '../../components/common/Dashboard/CourseList';
+import ScheduleList from '../../components/common/Dashboard/ScheduleList';
 
 const Dashboard = () => {
   return (
