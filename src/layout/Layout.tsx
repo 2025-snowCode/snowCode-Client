@@ -40,7 +40,7 @@ const Layout = () => {
   // 네비게이션 컴포넌트
   const NavigationBar = ({buttons, width}) => (
     <nav
-      className={`flex-1 bg-gradient-to-r from-light-purple to-purple ${width} h-full px-3 rounded-full flex items-center justify-between`}>
+      className={`flex-1 bg-gradient-to-r from-light-purple to-purple ${width} h-full px-3 py-[8px] rounded-full flex items-center justify-between gap-9`}>
       {buttons.map((button, index) => (
         <IconButton key={index} icon={button.icon} aria-label={button.label} />
       ))}
