@@ -49,6 +49,7 @@
   --color-hover: #b4a5ff;
 
   --font-coolvetica: 'Coolvetica', sans-serif;
+  --shadow-card: 0px 0px 14px 0px rgba(223, 219, 240, 0.4);
 }
 
 @utility flex-center {
