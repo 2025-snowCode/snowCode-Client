@@ -1,11 +1,14 @@
 import {useState, useRef, useEffect} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, useLocation} from 'react-router-dom';
 import ActionButton from '../../components/common/ActionButton';
 import SnowCodeEntryMini from '../../assets/images/snowCode_entry_mini.svg';
 import {ArrowleftIcon} from '../../assets/svg';
 
 export default function UserIdInputPage() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const type = new URLSearchParams(location.search).get('type');
+
   const length = 7;
   const [userId, setUserId] = useState<string[]>(new Array(length).fill(''));
   const [activeIndex, setActiveIndex] = useState(0);
@@ -53,9 +56,20 @@ export default function UserIdInputPage() {
   };
 
   const userIdString = userId.join('');
+  const isComplete = userIdString.length === length;
 
   const handleBeforeClick = () => {
     navigate('/');
+  };
+
+  const handleSubmit = () => {
+    if (!isComplete) return;
+
+    if (type === 'student') {
+      navigate('/student');
+    } else if (type === 'admin') {
+      navigate('/admin');
+    }
   };
 
   return (
@@ -106,8 +120,9 @@ export default function UserIdInputPage() {
 
         <ActionButton
           label='확인'
-          disabled={userIdString.length !== length}
-          className={userIdString.length !== length ? 'cursor-not-allowed' : ''}
+          disabled={!isComplete}
+          onClick={handleSubmit}
+          className={!isComplete ? 'cursor-not-allowed' : ''}
         />
       </div>
     </div>
