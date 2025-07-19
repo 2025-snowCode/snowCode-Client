@@ -1,17 +1,30 @@
 import {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 import snowCodeEntry from '/src/assets/images/snowCode_entry.svg';
 import snowCodeStudent from '/src/assets/images/snowCode_student.svg';
 import snowCodeAdmin from '/src/assets/images/snowCode_admin.svg';
 import googleLogo from '/src/assets/images/google_logo.svg';
+import {ArrowIcon} from '../../assets/svg';
 import ActionButton from '../../components/common/ActionButton';
 
 type HoverState = 'none' | 'student' | 'admin';
 
 export default function LandingPage() {
+  const navigate = useNavigate();
   const [hover, setHover] = useState<HoverState>('none');
   const [selected, setSelected] = useState<'none' | 'student' | 'admin'>(
     'none'
   );
+
+  const handleNextClick = () => {
+    if (selected === 'student') {
+      navigate('/userid?type=student');
+    } else if (selected === 'admin') {
+      navigate('/userid?type=admin');
+    } else {
+      alert('사용자 유형을 선택해주세요!');
+    }
+  };
 
   const imgSrc =
     hover === 'student'
@@ -21,7 +34,16 @@ export default function LandingPage() {
       : snowCodeEntry;
 
   return (
-    <div className='flex flex-col justify-center items-center min-h-[calc(100vh-120px)] text-center'>
+    <div className='relative flex flex-col justify-center items-center min-h-[calc(100vh-120px)] text-center'>
+      <div className='absolute top-[43px] right-[60px] flex items-center gap-4'>
+        <ArrowIcon className='w-[18px] h-[24px]' />
+        <button
+          onClick={handleNextClick}
+          className='text-black text-[18px] font-medium'>
+          다음으로
+        </button>
+      </div>
+
       <div
         className={`relative w-[433px] ${
           imgSrc === snowCodeStudent ? 'h-[439px]' : 'h-[433px]'
