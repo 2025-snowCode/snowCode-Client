@@ -1,6 +1,7 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import Layout from './layout/Layout';
 import LandingPage from './pages/common/LandingPage';
+import UserIdInputPage from './pages/common/UserIdInputPage';
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
         {/* 공통 영역 */}
         <Route path='/' element={<Layout />}>
           <Route index element={<LandingPage />} />
+          <Route path='/userid' element={<UserIdInputPage />} />
         </Route>
 
         {/* 학생 전용 영역 */}
