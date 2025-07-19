@@ -1,11 +1,11 @@
 import * as React from 'react';
 
-interface ButtonProps {
+interface IconButtonProps {
   icon: React.ReactElement;
 }
 
-const Button = ({icon}: ButtonProps) => {
+const IconButton = ({icon}: IconButtonProps) => {
   return <button className='header-btn'>{icon}</button>;
 };
 
-export default Button;
+export default IconButton;
