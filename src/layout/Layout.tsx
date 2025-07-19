@@ -49,7 +49,11 @@ const Layout = () => {
 
   // 헤더 컨텐츠 결정
   const getHeaderContent = () => {
-    if (pathname === '/' || pathname.startsWith('/common')) {
+    if (
+      pathname === '/' ||
+      pathname.startsWith('/common') ||
+      pathname.startsWith('/userid')
+    ) {
       return {
         rightContent: (
           <div className='pr-8 text-primary text-center text-4xl font-normal leading-[1.56rem] font-coolvetica'>
