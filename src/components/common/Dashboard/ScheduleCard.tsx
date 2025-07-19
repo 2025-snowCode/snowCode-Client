@@ -9,7 +9,7 @@ const ScheduleCard = (props: Props) => {
       <div
         className={`text-white px-4 py-1 rounded-full whitespace-nowrap ${
           props.remainingDays === 1
-            ? 'bg-radial-[at_38%_100%] from-[#7D63FF] to-[#AB9AFF] border-0'
+            ? 'bg-radial-[50%_50%_at_50%_50%] from-[#7D63FF] from-38% to-[#AB9AFF] to-100% border-0'
             : 'bg-[#403D4D] border-1 border-solid border-[#5C5B7F]'
         } `}>
         {`${props.remainingDays}일 전`}
