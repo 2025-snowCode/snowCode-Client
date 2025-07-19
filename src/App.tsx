@@ -1,6 +1,7 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import Layout from './layout/Layout';
 import Dashboard from './pages/common/Dashboard';
+import ManageAssignments from './pages/admin/ManageAssignments';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path='/admin' element={<Layout />}>
           {/* 추가 페이지들 */}
           <Route index element={<Dashboard />} />
+          <Route path='assignments' element={<ManageAssignments />} />
         </Route>
       </Routes>
     </BrowserRouter>
