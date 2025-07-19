@@ -1,5 +1,9 @@
+export {default as ArrowDownIcon} from './ArrowDownIcon';
+export {default as ChatIcon} from './ChatIcon';
+export {default as DeleteIcon} from './DeleteIcon';
+export {default as DragAndDropIcon} from './DragAndDropIcon';
+export {default as EditIcon} from './EditIcon';
+export {default as EllipsisIcon} from './EllipsisIcon';
 export {default as NotificationIcon} from './NotificationIcon';
 export {default as SignoutIcon} from './SignoutIcon';
 export {default as UserIcon} from './UserIcon';
-export {default as ChatIcon} from './ChatIcon';
-export {default as EllipsisIcon} from './EllipsisIcon';
