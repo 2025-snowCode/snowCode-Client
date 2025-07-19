@@ -98,7 +98,7 @@ const Layout = () => {
             </div>
           )}
 
-          <div className={showHeader ? 'pt-8' : ''}>
+          <div className={showHeader ? 'pt-11' : ''}>
             <Outlet />
           </div>
         </div>
