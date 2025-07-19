@@ -69,6 +69,8 @@ export default function UserIdInputPage() {
       navigate('/student');
     } else if (type === 'admin') {
       navigate('/admin');
+    } else {
+      navigate('/');
     }
   };
 
