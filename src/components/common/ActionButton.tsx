@@ -1,14 +1,35 @@
 interface ActionButtonProps {
-  label: string;
+  label?: string;
+  children?: React.ReactNode;
   onClick?: () => void;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
+  className?: string; // 추가 스타일링 위해
+  selected?: boolean;
 }
 
-export default function ActionButton({label, onClick}: ActionButtonProps) {
+export default function ActionButton({
+  label,
+  children,
+  onClick,
+  onMouseEnter,
+  onMouseLeave,
+  className = '',
+  selected = false,
+}: ActionButtonProps) {
+  const baseClass =
+    'w-40 py-[15px] rounded-xl border border-stroke font-medium transition-colors';
+  const selectedClass = selected
+    ? 'bg-primary text-white'
+    : 'bg-white text-primary-black hover:bg-hover hover:text-white';
+
   return (
     <button
-      className='w-40 py-[15px] rounded-xl border border-[#DFDBF0] bg-white text-primary-black font-medium hover:bg-gray-50 transition-colors'
-      onClick={onClick}>
-      {label}
+      className={`${baseClass} ${selectedClass} ${className}`}
+      onClick={onClick}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}>
+      {label || children}
     </button>
   );
 }
