@@ -1,0 +1,98 @@
+import {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
+
+import snowCodeEntry from '/src/assets/images/snowCode_entry.svg';
+import snowCodeStudent from '/src/assets/images/snowCode_student.svg';
+import snowCodeAdmin from '/src/assets/images/snowCode_admin.svg';
+import googleLogo from '/src/assets/images/google_logo.svg';
+import {ArrowIcon} from '../../assets/svg';
+import ActionButton from '../../components/common/ActionButton';
+
+type HoverState = 'none' | 'student' | 'admin';
+
+export default function LandingPage() {
+  const navigate = useNavigate();
+  const [hover, setHover] = useState<HoverState>('none');
+  const [selected, setSelected] = useState<'none' | 'student' | 'admin'>(
+    'none'
+  );
+
+  const handleNextClick = () => {
+    if (selected === 'student') {
+      navigate('/userid?type=student');
+    } else if (selected === 'admin') {
+      navigate('/userid?type=admin');
+    } else {
+      alert('사용자 유형을 선택해주세요!');
+    }
+  };
+
+  const imgSrc =
+    hover === 'student'
+      ? snowCodeStudent
+      : hover === 'admin'
+      ? snowCodeAdmin
+      : snowCodeEntry;
+
+  return (
+    <div className='relative flex flex-col justify-center items-center min-h-[calc(100vh-120px)] text-center'>
+      {/* 상단 오른쪽 "다음으로" 버튼 */}
+      <div className='absolute top-[43px] right-[60px] flex items-center gap-4'>
+        <ArrowIcon className='w-[18px] h-[24px]' />
+        <button
+          onClick={handleNextClick}
+          className='text-black text-[18px] font-medium'>
+          다음으로
+        </button>
+      </div>
+
+      {/* 로고 이미지 (선택/호버에 따라 이미지 변경) */}
+      <div
+        className={`relative w-[433px] ${
+          imgSrc === snowCodeStudent ? 'h-[439px]' : 'h-[433px]'
+        }`}>
+        <img
+          src={imgSrc}
+          alt='로고'
+          className='w-full h-full transition-all duration-300'
+        />
+      </div>
+
+      {/* 텍스트 및 버튼 영역 */}
+      <div className='flex flex-col gap-[60px] -mt-12'>
+        <div className='flex flex-col gap-7'>
+          <span className='text-black-primary text-4xl font-semibold leading-[150%]'>
+            환영합니다!
+            <br />
+            사용자 유형을 선택해주세요.
+          </span>
+
+          <div className='flex gap-11 justify-center'>
+            <ActionButton
+              label='학생'
+              onClick={() => setSelected('student')}
+              onMouseEnter={() => setHover('student')}
+              onMouseLeave={() => selected === 'none' && setHover('none')}
+              selected={selected === 'student'}
+            />
+            <ActionButton
+              label='관리자'
+              onClick={() => setSelected('admin')}
+              onMouseEnter={() => setHover('admin')}
+              onMouseLeave={() => selected === 'none' && setHover('none')}
+              selected={selected === 'admin'}
+            />
+          </div>
+        </div>
+
+        {/* 구글 로그인 버튼 */}
+        <button
+          className='flex gap-2 justify-center text-black-primary text-lg font-normal leading-[150%] underline decoration-solid'
+          aria-label='구글 이메일 로그인'>
+          <img src={googleLogo} alt='로고' className='w-[26px] h-[26px]' />
+          구글 이메일로 로그인
+        </button>
+      </div>
+    </div>
+  );
+}
