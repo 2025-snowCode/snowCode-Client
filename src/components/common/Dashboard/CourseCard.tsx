@@ -21,7 +21,7 @@ const getSemesterNumber = (semester: string): string => {
 const CourseCard = (props: Props) => {
   props.semester;
   return (
-    <div className='min-h-36 rounded-3xl bg-gray border-0 flex-center my-5 shadow-card'>
+    <div className='min-h-36 rounded-3xl bg-gray border-0 flex-center my-4 shadow-card'>
       <section className='p-8 bg-white rounded-tl-3xl rounded-bl-3xl'>
         <p className='text-sm font-light text-light-black'>
           {`${props.year}\\${getSemesterNumber(props.semester)}학기\\${

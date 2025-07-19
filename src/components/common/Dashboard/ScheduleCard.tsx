@@ -5,7 +5,7 @@ interface Props extends Assignment {
 
 const ScheduleCard = (props: Props) => {
   return (
-    <div className='flex items-start p-7 gap-6 border-0 bg-white w-[396px] mb-5 rounded-3xl shadow-card'>
+    <div className='flex items-start p-7 gap-6 border-0 bg-white w-[396px] mb-3 rounded-3xl shadow-card'>
       <div
         className={`text-white px-4 py-1 rounded-full whitespace-nowrap ${
           props.remainingDays === 1
