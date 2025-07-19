@@ -1,5 +1,6 @@
 import logo from '../../../assets/images/snowCode_logo_mini.svg';
 import CourseCard from './CourseCard';
+import {AddIcon} from '../../../assets/svg';
 import type {Course} from './types';
 
 const courses: Course[] = [
@@ -35,9 +36,10 @@ const CourseList = () => {
           <img src={logo} alt='snowCode-logo' />
           강의 목록
         </span>
-        <div className='flex gap-4 text-base'>
-          <button className='bg-white border-0 px-3 py-0.5 rounded-[10px]'>
-            + 추가
+        <div className='flex gap-4 text-base font-medium text-secondary-black'>
+          <button className='bg-white border-0 px-3 py-1 rounded-[10px] flex-center gap-[6px]'>
+            <AddIcon width={12} height={12} />
+            <span>추가</span>
           </button>
           <button>더보기</button>
         </div>
