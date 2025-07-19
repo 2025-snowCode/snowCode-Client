@@ -6,7 +6,12 @@ interface Props extends Assignment {
 const ScheduleCard = (props: Props) => {
   return (
     <div className='flex items-start p-7 gap-6 border-0 bg-white w-[396px] mb-5 rounded-3xl'>
-      <div className='border-0 text-white px-4 py-1 rounded-full whitespace-nowrap bg-radial-[at_38%_100%] from-[#7D63FF] to-[#AB9AFF]'>
+      <div
+        className={`text-white px-4 py-1 rounded-full whitespace-nowrap ${
+          props.remainingDays === 1
+            ? 'bg-radial-[at_38%_100%] from-[#7D63FF] to-[#AB9AFF] border-0'
+            : 'bg-[#403D4D] border-1 border-solid border-[#5C5B7F]'
+        } `}>
         {`${props.remainingDays}일 전`}
       </div>
       <div className='flex flex-col w-62'>
