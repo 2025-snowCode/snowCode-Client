@@ -47,6 +47,7 @@
   --color-gray: #f9f9f9;
 
   --font-coolvetica: 'Coolvetica', sans-serif;
+  --shadow-dropdown: 2px 4px 7px 0px rgba(0, 0, 0, 0.1);
 }
 
 @utility flex-center {
