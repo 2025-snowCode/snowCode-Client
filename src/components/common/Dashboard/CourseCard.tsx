@@ -1,7 +1,9 @@
 import {EllipsisIcon} from '../../../assets/svg';
 import type {Course, UserType} from './types';
 
-interface CourseCardProps extends Course {}
+interface CourseCardProps extends Course {
+  userType: UserType;
+}
 
 const getSemesterNumber = (semester: string): string => {
   switch (semester) {
@@ -26,6 +28,7 @@ const CourseCard = ({
   description,
   unitCount,
   assignmentCount,
+  userType,
 }: CourseCardProps) => {
   semester;
   return (
@@ -40,9 +43,13 @@ const CourseCard = ({
         </p>
       </section>
       <section className='relative'>
-        <button className='absolute right-8'>
-          <EllipsisIcon width={21.2} height={5} />
-        </button>
+        {userType === 'admin' ? (
+          <button className='absolute right-8'>
+            <EllipsisIcon width={21.2} height={5} />
+          </button>
+        ) : (
+          ''
+        )}
         <div className='flex-center p-4'>
           <div className='flex-center flex-col whitespace-nowrap border-r border-[#7A768C] px-4'>
             <div>단원 수</div>
