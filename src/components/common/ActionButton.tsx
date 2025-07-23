@@ -6,6 +6,7 @@ interface ActionButtonProps {
   onMouseLeave?: () => void;
   className?: string; // 추가 스타일링 위해
   selected?: boolean;
+  disabled?: boolean;
 }
 
 export default function ActionButton({

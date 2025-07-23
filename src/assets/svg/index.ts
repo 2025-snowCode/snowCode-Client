@@ -1,5 +1,6 @@
 export {default as AddIcon} from './AddIcon';
-export {default as ArrowIcon} from './ArrowIcon';
+export {default as ArrowleftIcon} from './ArrowleftIcon';
+export {default as ArrowrightIcon} from './ArrowrightIcon';
 export {default as ChatIcon} from './ChatIcon';
 export {default as EllipsisIcon} from './EllipsisIcon';
 export {default as NotificationIcon} from './NotificationIcon';
