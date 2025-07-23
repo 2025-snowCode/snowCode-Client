@@ -32,6 +32,10 @@ interface CourseListProps {
   userType: UserType;
 }
 
+// const onClickAdd = () => {
+
+// }
+
 const CourseList = ({userType}: CourseListProps) => {
   return (
     <section className='w-148'>
@@ -40,13 +44,11 @@ const CourseList = ({userType}: CourseListProps) => {
           <img src={logo} alt='snowCode-logo' />
           강의 목록
         </span>
-        {userType === 'admin' ? (
-          <button className='bg-white border-0 px-3 py-1 rounded-[10px] flex-center gap-[6px] text-base font-medium text-secondary-black'>
+        {userType === 'admin' && (
+          <button className='bg-white border-0 px-3 py-1 rounded-[10px] flex-center gap-[6px] text-base font-medium text-secondary-black cursor-pointer hover:bg-gray'>
             <AddIcon width={12} height={12} />
             <span>추가</span>
           </button>
-        ) : (
-          ''
         )}
       </div>
       <div>
