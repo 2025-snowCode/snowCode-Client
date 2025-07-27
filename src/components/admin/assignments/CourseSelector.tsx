@@ -1,6 +1,5 @@
 import {useState} from 'react';
 import type {Assignment} from '../../common/Dashboard/types';
-import {ArrowdownIcon} from '../../../assets/svg';
 const assignments: Assignment[] = [
   {
     id: 1,
@@ -53,7 +52,6 @@ const CourseSelector = () => {
         className='flex items-center w-[324px] h-[45px] border-1 rounded-[9px] border-stroke gap-40 px-[14px]'
         onClick={handleOnClick}>
         <span className='text-light-black'>강의를 선택하세요</span>
-        <ArrowdownIcon width={13.5} height={8} />
       </div>
       {open && (
         <ul className='flex flex-col w-[324px] bg-gray border-0 rounded-[9px] absolute shadow-dropdown'>
