@@ -47,14 +47,14 @@ const CourseSelector = () => {
   };
 
   return (
-    <div className='space-y-2 relative pt-7'>
+    <div className='relative pt-7'>
       <div
-        className='flex items-center w-[324px] h-[45px] border-1 rounded-[9px] border-stroke gap-40 px-[14px]'
+        className='flex items-center w-81 h-[45px] border-1 rounded-[9px] border-stroke px-[14px]'
         onClick={handleOnClick}>
         <span className='text-light-black'>강의를 선택하세요</span>
       </div>
       {open && (
-        <ul className='flex flex-col w-[324px] bg-gray border-0 rounded-[9px] absolute shadow-dropdown'>
+        <ul className='flex flex-col w-81 mt-2 bg-gray border-0 rounded-[9px] absolute shadow-dropdown'>
           {assignments.map((a, index) => (
             <li
               key={a.id}
