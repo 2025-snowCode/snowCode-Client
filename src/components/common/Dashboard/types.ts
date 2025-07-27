@@ -1,3 +1,5 @@
+type UserType = 'admin' | 'student';
+
 interface Schedule {
   id: number;
   date: Date;
@@ -23,4 +25,4 @@ interface Course {
   assignmentCount: number;
 }
 
-export type {Course, Schedule, Assignment};
+export type {Course, Schedule, Assignment, UserType};

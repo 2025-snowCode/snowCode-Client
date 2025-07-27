@@ -1,6 +1,7 @@
 import logo from '../../../assets/images/snowCode_logo_mini.svg';
 import CourseCard from './CourseCard';
-import type {Course} from './types';
+import {AddIcon} from '../../../assets/svg';
+import type {Course, UserType} from './types';
 
 const courses: Course[] = [
   {
@@ -27,7 +28,15 @@ const courses: Course[] = [
   },
 ];
 
-const CourseList = () => {
+interface CourseListProps {
+  userType: UserType;
+}
+
+// const onClickAdd = () => {
+
+// }
+
+const CourseList = ({userType}: CourseListProps) => {
   return (
     <section className='w-148'>
       <div className='flex-center justify-between'>
@@ -35,16 +44,16 @@ const CourseList = () => {
           <img src={logo} alt='snowCode-logo' />
           강의 목록
         </span>
-        <div className='flex gap-4 text-base'>
-          <button className='bg-white border-0 px-3 py-0.5 rounded-[10px]'>
-            + 추가
+        {userType === 'admin' && (
+          <button className='bg-white border-0 px-3 py-1 rounded-[10px] flex-center gap-[6px] text-base font-medium text-secondary-black cursor-pointer hover:bg-gray'>
+            <AddIcon width={12} height={12} />
+            <span>추가</span>
           </button>
-          <button>더보기</button>
-        </div>
+        )}
       </div>
       <div>
         {courses.map((course) => (
-          <CourseCard key={course.id} {...course} />
+          <CourseCard key={course.id} userType={userType} {...course} />
         ))}
       </div>
     </section>

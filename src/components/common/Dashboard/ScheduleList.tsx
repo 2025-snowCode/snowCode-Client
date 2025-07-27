@@ -66,7 +66,7 @@ const ScheduleList = () => {
       </span>
       <div className='my-5'>
         {schedules.map((schedule) => (
-          <div className='mb-10' key={schedule.id}>
+          <div className='mb-6' key={schedule.id}>
             {schedule.assignments.map((assignment, index) =>
               index === 0 ? (
                 <div className='flex items-start gap-6' key={assignment.id}>
