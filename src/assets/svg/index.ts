@@ -1,4 +1,6 @@
 export {default as ArrowdownIcon} from './ArrowdownIcon';
+export {default as ArrowleftIcon} from './ArrowleftIcon';
+export {default as ArrowrightIcon} from './ArrowrightIcon';
 export {default as ChatIcon} from './ChatIcon';
 export {default as DeleteIcon} from './DeleteIcon';
 export {default as DragAndDropIcon} from './DragAndDropIcon';
