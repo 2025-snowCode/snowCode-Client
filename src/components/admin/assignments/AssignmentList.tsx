@@ -17,8 +17,8 @@ const AssignmentList = ({courses}: AssignmentListProps) => {
   };
 
   return (
-    <div>
-      <p className='mb-3 mt-10 font-medium text-lg'>{countAssignments()}문제</p>
+    <div className='mt-10 mb-[11px]'>
+      <p className='mb-3 font-medium text-lg'>{countAssignments()}문제</p>
       <div className='flex flex-col'>
         {courses.map((course) =>
           course.assignments.map((assignment) => (

@@ -14,8 +14,8 @@ const ManageAssignments = () => {
   };
 
   return (
-    <div className='w-[900px] h-[760px] bg-white rounded-[30px]'>
-      <div className='flex flex-col h-1/4 px-14 justify-center border-b-1 border-stroke'>
+    <div className='mx-auto pt-9 pb-8 w-[900px] bg-white rounded-[30px]'>
+      <div className='flex flex-col h-1/4 px-14 pb-[22px] justify-center border-b-1 border-stroke'>
         <h3 className='text-2xl font-semibold'>문제 관리</h3>
         <CourseSelector courses={fullCourses} onSelectCourse={onSelectCourse} />
       </div>

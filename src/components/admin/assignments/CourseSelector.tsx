@@ -25,7 +25,7 @@ const CourseSelector = ({courses, onSelectCourse}: CourseSelectorProps) => {
   return (
     <div className='relative pt-7'>
       <div
-        className='flex items-center justify-between w-81 h-[45px] border-1 rounded-[9px] border-stroke px-[14px]'
+        className='flex items-center justify-between w-81 h-[45px] border-1 rounded-[9px] border-stroke px-[14px] cursor-pointer'
         onClick={handleOnClick}>
         <span className='text-light-black'>강의를 선택하세요</span>
         <ArrowdownIcon width={13.5} height={8} />
