@@ -17,7 +17,8 @@ const buttonTheme: ButtonTheme = {
 
 const Button = ({theme, text, icon}: ButtonProps) => {
   return (
-    <button className={`py-1.5 px-3 rounded-[10px] ${buttonTheme[theme]}`}>
+    <button
+      className={`py-1.5 px-3 rounded-[10px] cursor-pointer ${buttonTheme[theme]}`}>
       {icon}
       <span className='text-btn'>{text}</span>
     </button>

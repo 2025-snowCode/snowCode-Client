@@ -10,7 +10,7 @@ const AssignmentCard = ({title}: AssignmentCardProps) => {
         <DragAndDropIcon width={8} height={13} />
         <div>{title}</div>
       </div>
-      <div className='flex-center gap-6'>
+      <div className='flex-center gap-6 cursor-pointer'>
         <EditIcon width={14} height={16} />
         <DeleteIcon width={12} height={12} />
       </div>
