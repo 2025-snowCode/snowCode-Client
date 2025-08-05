@@ -2,8 +2,8 @@ import AssignmentCard from '../../components/admin/assignments/AssignmentCard';
 import CourseSelector from '../../components/admin/assignments/CourseSelector';
 import type {Assignment} from '../../components/common/Dashboard/types';
 import {AddIcon} from '../../assets/svg';
-// import AddButton from '../../components/admin/AddButton';
 import Button from '../../components/common/Button';
+import AssignmentList from '../../components/admin/assignments/AssignmentList';
 
 const assignments: Assignment[] = [
   {
@@ -52,14 +52,7 @@ const ManageAssignments = () => {
         <CourseSelector />
       </div>
       <div className='px-14'>
-        <p className='mb-3 mt-10 font-medium text-lg'>
-          {assignments.length}문제
-        </p>
-        <div className='flex flex-col'>
-          {assignments.map((assignment) => (
-            <AssignmentCard key={assignment.id} {...assignment} />
-          ))}
-        </div>
+        <AssignmentList />
         <Button
           theme='secondaryPurpleStroke'
           text='문제 추가'
