@@ -1,4 +1,5 @@
 export {default as AddIcon} from './AddIcon';
+export {default as ArrowdownIcon} from './ArrowdownIcon';
 export {default as ArrowleftIcon} from './ArrowleftIcon';
 export {default as ArrowrightIcon} from './ArrowrightIcon';
 export {default as ChatIcon} from './ChatIcon';

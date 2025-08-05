@@ -1,6 +1,6 @@
 import {useState} from 'react';
-import type {Assignment} from '../../common/Dashboard/types';
 import {ArrowdownIcon} from '../../../assets/svg';
+import type {Assignment} from '../../common/Dashboard/types';
 const assignments: Assignment[] = [
   {
     id: 1,
