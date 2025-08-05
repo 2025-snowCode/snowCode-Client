@@ -1,50 +1,25 @@
 import {useState} from 'react';
 import {ArrowdownIcon} from '../../../assets/svg';
-import type {Assignment} from '../../common/Dashboard/types';
-const assignments: Assignment[] = [
-  {
-    id: 1,
-    course: '소프트웨어의 이해',
-    section: '005',
-    assignment: '음수 구별하기',
-  },
-  {
-    id: 2,
-    course: '데이터 구조와 알고리즘',
-    section: '001',
-    assignment: '스택 (Stack) 구현하기',
-  },
-  {
-    id: 3,
-    course: '데이터 구조와 알고리즘',
-    section: '001',
-    assignment: '스택 (Stack) 구현하기',
-  },
-  {
-    id: 4,
-    course: '데이터 구조와 알고리즘',
-    section: '001',
-    assignment: '스택 (Stack) 구현하기',
-  },
-  {
-    id: 5,
-    course: '데이터 구조와 알고리즘',
-    section: '001',
-    assignment: '스택 (Stack) 구현하기',
-  },
-  {
-    id: 6,
-    course: '데이터 구조와 알고리즘',
-    section: '001',
-    assignment: '스택 (Stack) 구현하기',
-  },
-];
+import type {Course} from './dummy/types';
 
-const CourseSelector = () => {
+interface CourseSelectorProps {
+  courses: Course[];
+  onSelectCourse: (courseId: number) => void;
+}
+
+const CourseSelector = ({courses, onSelectCourse}: CourseSelectorProps) => {
   const [open, setOpen] = useState(false);
 
   const handleOnClick = () => {
     setOpen(!open);
+  };
+
+  const onClick = (courseId: number) => {
+    onSelectCourse(courseId);
+  };
+
+  const onMouseLeave = () => {
+    setOpen(false);
   };
 
   return (
@@ -56,14 +31,17 @@ const CourseSelector = () => {
         <ArrowdownIcon width={13.5} height={8} />
       </div>
       {open && (
-        <ul className='flex flex-col w-81 mt-2 bg-gray border-0 rounded-[9px] absolute shadow-dropdown'>
-          {assignments.map((a, index) => (
+        <ul
+          onMouseLeave={onMouseLeave}
+          className='flex flex-col w-81 mt-2 bg-gray border-0 rounded-[9px] absolute shadow-dropdown cursor-pointer'>
+          {courses.map((course, index) => (
             <li
-              key={a.id}
+              onClick={() => onClick(course.id)}
+              key={course.id}
               className={`border-stroke px-[15.5px] py-[13px] ${
-                index !== assignments.length - 1 ? 'border-b-1' : ''
-              }`}>
-              {a.course} {a.section}
+                index !== courses.length - 1 ? 'border-b-1' : ''
+              } hover:bg-purple-stroke first:rounded-t-[9px] last:rounded-b-[9px]`}>
+              {course.title} {course.section}
             </li>
           ))}
         </ul>
