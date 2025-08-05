@@ -3,9 +3,15 @@ import AssignmentCard from './AssignmentCard';
 
 interface AssignmentListProps {
   courses: Course[];
+  select?: boolean;
+  onLinkAssignments?: (id: number, title: string, isSelected: boolean) => void;
 }
 
-const AssignmentList = ({courses}: AssignmentListProps) => {
+const AssignmentList = ({
+  courses,
+  select,
+  onLinkAssignments,
+}: AssignmentListProps) => {
   // 문제 수 세기
   const countAssignments = () => {
     let count = 0;
@@ -22,7 +28,12 @@ const AssignmentList = ({courses}: AssignmentListProps) => {
       <div className='flex flex-col'>
         {courses.map((course) =>
           course.assignments.map((assignment) => (
-            <AssignmentCard key={assignment.id} {...assignment} />
+            <AssignmentCard
+              key={assignment.id}
+              select={select}
+              onLinkAssignments={onLinkAssignments}
+              {...assignment}
+            />
           ))
         )}
       </div>
