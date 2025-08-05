@@ -46,6 +46,7 @@
   --color-secondary-black: #555267;
   --color-gray: #f9f9f9;
   --color-primary-black: #2c2a36;
+  --color-purple-stroke: #dfdbf0;
   --color-hover: #b4a5ff;
 
   --font-coolvetica: 'Coolvetica', sans-serif;
@@ -60,4 +61,12 @@
 
 .header-btn {
   @apply bg-primary w-16 h-16 rounded-full flex-center;
+}
+
+.secondary-btn {
+  @apply flex-center gap-[6px] border-0 py-1.5 px-3 rounded-[10px];
+}
+
+.text-btn {
+  @apply text-base font-medium;
 }

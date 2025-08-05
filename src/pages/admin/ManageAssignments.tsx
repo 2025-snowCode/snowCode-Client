@@ -1,6 +1,9 @@
 import AssignmentCard from '../../components/admin/assignments/AssignmentCard';
 import CourseSelector from '../../components/admin/assignments/CourseSelector';
 import type {Assignment} from '../../components/common/Dashboard/types';
+import {AddIcon} from '../../assets/svg';
+// import AddButton from '../../components/admin/AddButton';
+import Button from '../../components/common/Button';
 
 const assignments: Assignment[] = [
   {
@@ -57,6 +60,11 @@ const ManageAssignments = () => {
             <AssignmentCard key={assignment.id} {...assignment} />
           ))}
         </div>
+        <Button
+          theme='secondaryPurpleStroke'
+          text='문제 추가'
+          icon={<AddIcon width={12} height={12} />}
+        />
       </div>
     </div>
   );
