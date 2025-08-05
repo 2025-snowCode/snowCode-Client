@@ -63,8 +63,12 @@
   @apply bg-primary w-16 h-16 rounded-full flex-center;
 }
 
+.primary-btn {
+  @apply w-25 h-10 text-center;
+}
+
 .secondary-btn {
-  @apply flex-center gap-[6px] border-0 py-1.5 px-3 rounded-[10px];
+  @apply flex-center gap-[6px] border-0;
 }
 
 .text-btn {

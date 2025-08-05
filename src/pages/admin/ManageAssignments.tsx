@@ -65,6 +65,10 @@ const ManageAssignments = () => {
           text='문제 추가'
           icon={<AddIcon width={12} height={12} />}
         />
+        <div className='flex justify-end gap-5'>
+          <Button theme='primaryWhite' text='취소' />
+          <Button theme='primaryPurple' text='저장' />
+        </div>
       </div>
     </div>
   );
