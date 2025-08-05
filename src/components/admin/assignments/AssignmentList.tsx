@@ -3,13 +3,13 @@ import AssignmentCard from './AssignmentCard';
 
 interface AssignmentListProps {
   courses: Course[];
-  select?: boolean;
+  selectMode: boolean;
   onLinkAssignments?: (id: number, title: string, isSelected: boolean) => void;
 }
 
 const AssignmentList = ({
   courses,
-  select,
+  selectMode,
   onLinkAssignments,
 }: AssignmentListProps) => {
   // 문제 수 세기
@@ -30,7 +30,7 @@ const AssignmentList = ({
           course.assignments.map((assignment) => (
             <AssignmentCard
               key={assignment.id}
-              select={select}
+              selectMode={selectMode}
               onLinkAssignments={onLinkAssignments}
               {...assignment}
             />

@@ -8,14 +8,14 @@ import {
 import type {Assignment} from './dummy/types';
 
 interface AssignmentCardProps extends Assignment {
-  select?: boolean;
+  selectMode: boolean;
   onLinkAssignments?: (id: number, title: string, isSelected: boolean) => void;
 }
 
 const AssignmentCard = ({
   id,
   title,
-  select,
+  selectMode,
   onLinkAssignments,
 }: AssignmentCardProps) => {
   const [isSelected, setIsSelected] = useState(false);
@@ -29,10 +29,12 @@ const AssignmentCard = ({
     <div
       onClick={handleOnClick}
       className={`bg-background w-[612px] py-4 rounded-[9px] my-1 flex items-center justify-between px-[21.5px] ${
-        isSelected ? 'border-1 border-primary' : 'border-1 border-background'
+        isSelected && selectMode
+          ? 'border-1 border-primary'
+          : 'border-1 border-background'
       }`}>
       <div className='flex-center gap-4 cursor-pointer '>
-        {select ? (
+        {selectMode ? (
           <SingleEllipsisIcon
             width={12}
             height={12}
@@ -43,7 +45,7 @@ const AssignmentCard = ({
         )}
         <div>{title}</div>
       </div>
-      {!select && (
+      {!selectMode && (
         <div className='flex-center gap-6 cursor-pointer'>
           <EditIcon width={14} height={16} />
           <DeleteIcon width={12} height={12} />
