@@ -4,6 +4,7 @@ import LandingPage from './pages/common/LandingPage';
 import UserIdInputPage from './pages/common/UserIdInputPage';
 import Dashboard from './pages/common/Dashboard';
 import ManageAssignments from './pages/admin/ManageAssignments';
+import SelectAssignments from './pages/admin/SelectAssignments';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           {/* 추가 페이지들 */}
           <Route index element={<Dashboard />} />
           <Route path='assignments' element={<ManageAssignments />} />
+          <Route path='assignments/:id' element={<SelectAssignments />} />
         </Route>
       </Routes>
     </BrowserRouter>
