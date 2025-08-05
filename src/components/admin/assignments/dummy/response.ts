@@ -3,7 +3,7 @@ import type {CoursesResponse} from './types';
 export const coursesResponse: CoursesResponse = {
   success: true,
   response: {
-    count: 2,
+    count: 5,
     courses: [
       {
         id: 1,
@@ -11,16 +11,13 @@ export const coursesResponse: CoursesResponse = {
         year: 2025,
         semester: 'FIRST',
         section: '002',
-        count: 2,
+        count: 5,
         assignments: [
-          {
-            id: 1,
-            title: '날씨 데이터로 크롤링하기',
-          },
-          {
-            id: 3,
-            title: '날씨 데이터로 크롤링하기',
-          },
+          {id: 1, title: '날씨 데이터로 크롤링하기'},
+          {id: 3, title: '정렬 알고리즘 구현하기'},
+          {id: 5, title: '스택과 큐로 계산기 만들기'},
+          {id: 6, title: '이진 트리 순회'},
+          {id: 7, title: '그래프 탐색 시각화'},
         ],
       },
       {
@@ -31,14 +28,48 @@ export const coursesResponse: CoursesResponse = {
         section: '003',
         count: 2,
         assignments: [
-          {
-            id: 2,
-            title: '날씨 데이터로 크롤링하기',
-          },
-          {
-            id: 4,
-            title: '날씨 데이터로 크롤링하기',
-          },
+          {id: 2, title: '행렬 연산 연습문제'},
+          {id: 4, title: '이산 수학과 부울 대수'},
+        ],
+      },
+      {
+        id: 3,
+        title: '운영체제',
+        year: 2025,
+        semester: 'SECOND',
+        section: '001',
+        count: 3,
+        assignments: [
+          {id: 8, title: 'CPU 스케줄링 시뮬레이터'},
+          {id: 9, title: '가상 메모리 구조 분석'},
+          {id: 10, title: '프로세스 동기화 실습'},
+        ],
+      },
+      {
+        id: 4,
+        title: '웹프로그래밍',
+        year: 2025,
+        semester: 'SUMMER',
+        section: '101',
+        count: 4,
+        assignments: [
+          {id: 11, title: 'HTML/CSS로 개인 홈페이지 만들기'},
+          {id: 12, title: 'JavaScript 인터랙션 추가하기'},
+          {id: 13, title: 'React로 게시판 구현'},
+          {id: 14, title: 'API 연동 과제'},
+        ],
+      },
+      {
+        id: 5,
+        title: 'AI기초',
+        year: 2025,
+        semester: 'WINTER',
+        section: '201',
+        count: 3,
+        assignments: [
+          {id: 15, title: '선형회귀 모델 구현'},
+          {id: 16, title: '데이터 전처리 실습'},
+          {id: 17, title: 'PyTorch 기초 과제'},
         ],
       },
     ],
