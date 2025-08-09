@@ -1,25 +1,11 @@
 import {useState} from 'react';
 import {EllipsisIcon} from '../../../assets/svg';
 import type {Course, UserType} from './types';
+import {getSemesterNumber} from '../../../utils/getSemesterNumber';
 
 interface CourseCardProps extends Course {
   userType: UserType;
 }
-
-const getSemesterNumber = (semester: string): string => {
-  switch (semester) {
-    case 'FIRST':
-      return '1';
-    case 'SUMMER':
-      return '여름';
-    case 'SECOND':
-      return '2';
-    case 'WINTER':
-      return '겨울';
-    default:
-      return 'unknown';
-  }
-};
 
 const CourseCard = ({
   semester,
