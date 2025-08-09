@@ -8,14 +8,16 @@ interface CourseSelectorProps {
 }
 
 const CourseSelector = ({courses, onSelectCourse}: CourseSelectorProps) => {
+  const [placeHolder, setPlaceHolder] = useState('강의를 선택하세요');
   const [open, setOpen] = useState(false);
 
   const handleOnClick = () => {
     setOpen(!open);
   };
 
-  const onClick = (courseId: number) => {
-    onSelectCourse(courseId);
+  const handleSelectCourse = (id: number, title: string, section: string) => {
+    setPlaceHolder(`${title} ${section}`);
+    onSelectCourse(id);
   };
 
   const onMouseLeave = () => {
@@ -27,7 +29,7 @@ const CourseSelector = ({courses, onSelectCourse}: CourseSelectorProps) => {
       <div
         className='flex items-center justify-between w-81 h-[45px] border-1 rounded-[9px] border-stroke px-[14px] cursor-pointer'
         onClick={handleOnClick}>
-        <span className='text-light-black'>강의를 선택하세요</span>
+        <span className='text-light-black'>{placeHolder}</span>
         <ArrowdownIcon width={13.5} height={8} />
       </div>
       {open && (
@@ -36,7 +38,9 @@ const CourseSelector = ({courses, onSelectCourse}: CourseSelectorProps) => {
           className='flex flex-col w-81 mt-2 bg-gray border-0 rounded-[9px] absolute shadow-dropdown cursor-pointer'>
           {courses.map((course, index) => (
             <li
-              onClick={() => onClick(course.id)}
+              onClick={() =>
+                handleSelectCourse(course.id, course.title, course.section)
+              }
               key={course.id}
               className={`border-stroke px-[15.5px] py-[13px] ${
                 index !== courses.length - 1 ? 'border-b-1' : ''
