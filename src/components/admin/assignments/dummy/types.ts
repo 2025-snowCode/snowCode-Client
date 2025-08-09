@@ -1,3 +1,5 @@
+type SemesterCode = 'FIRST' | 'SECOND' | 'SUMMER' | 'WINTER';
+
 interface Assignment {
   id: number;
   title: string;
@@ -7,7 +9,7 @@ interface Course {
   id: number;
   title: string;
   year: number;
-  semester: 'FIRST' | 'SECOND' | 'SUMMER' | 'WINTER';
+  semester: SemesterCode;
   section: string;
   count: number;
   assignments: Assignment[];
@@ -21,4 +23,4 @@ interface CoursesResponse {
   };
 }
 
-export type {Assignment, Course, CoursesResponse};
+export type {Assignment, Course, CoursesResponse, SemesterCode};
