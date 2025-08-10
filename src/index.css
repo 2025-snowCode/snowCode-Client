@@ -46,11 +46,13 @@
   --color-secondary-black: #555267;
   --color-gray: #f9f9f9;
   --color-primary-black: #2c2a36;
+  --color-purple-stroke: #dfdbf0;
   --color-hover: #b4a5ff;
 
   --font-coolvetica: 'Coolvetica', sans-serif;
   --shadow-card: 0px 0px 14px 0px rgba(223, 219, 240, 0.4);
   --shadow-modal: 4px 4px 7px 0px rgba(0, 0, 0, 0.1);
+  --shadow-dropdown: 2px 4px 7px 0px rgba(0, 0, 0, 0.1);
 }
 
 @utility flex-center {
@@ -59,4 +61,16 @@
 
 .header-btn {
   @apply bg-primary w-16 h-16 rounded-full flex-center;
+}
+
+.primary-btn {
+  @apply w-25 h-10 text-center;
+}
+
+.secondary-btn {
+  @apply flex-center gap-[6px] border-0;
+}
+
+.text-btn {
+  @apply text-base font-medium;
 }

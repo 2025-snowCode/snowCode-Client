@@ -3,6 +3,8 @@ import Layout from './layout/Layout';
 import LandingPage from './pages/common/LandingPage';
 import UserIdInputPage from './pages/common/UserIdInputPage';
 import Dashboard from './pages/common/Dashboard';
+import AssignmentsPage from './pages/admin/AssignmentsPage';
+import AssignmentSelectPage from './pages/admin/AssignmentSelectPage';
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
         <Route path='/admin' element={<Layout />}>
           {/* 추가 페이지들 */}
           <Route index element={<Dashboard />} />
+          <Route path='assignments' element={<AssignmentsPage />} />
+          <Route path='assignments/:id' element={<AssignmentSelectPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

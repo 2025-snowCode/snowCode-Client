@@ -1,3 +1,5 @@
+import type {SemesterCode} from '../../admin/assignments/dummy/types';
+
 type UserType = 'admin' | 'student';
 
 interface Schedule {
@@ -17,7 +19,7 @@ interface Assignment {
 interface Course {
   id: number;
   year: number;
-  semester: string;
+  semester: SemesterCode;
   section: string;
   title: string;
   description: string;

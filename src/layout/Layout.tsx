@@ -102,7 +102,7 @@ const Layout = () => {
             </div>
           )}
 
-          <div className={showHeader ? 'pt-11' : ''}>
+          <div className={`${showHeader ? 'pt-11' : ''} pb-15`}>
             <Outlet />
           </div>
         </div>
