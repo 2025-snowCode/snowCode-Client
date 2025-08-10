@@ -4,7 +4,7 @@ import LandingPage from './pages/common/LandingPage';
 import UserIdInputPage from './pages/common/UserIdInputPage';
 import Dashboard from './pages/common/Dashboard';
 import AssignmentsPage from './pages/admin/AssignmentsPage';
-import AssignmentSelectPage from './pages/admin/AssignmentSelectPage';
+import AssignmentSelectPage from './pages/admin/assignments/AssignmentSelectPage';
 
 function App() {
   return (
