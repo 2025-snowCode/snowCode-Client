@@ -1,8 +1,8 @@
-import {coursesResponse} from '../../components/admin/assignments/dummy/response';
+import {coursesResponse} from '../../../components/admin/assignments/dummy/response';
 import {useState} from 'react';
 import {useParams} from 'react-router-dom';
-import type {Assignment} from '../../components/admin/assignments/dummy/types';
-import AssignmentPageLayout from '../../components/admin/assignments/AssignmentPageLayout';
+import type {Assignment} from '../../../components/admin/assignments/dummy/types';
+import AssignmentPageLayout from '../../../components/admin/assignments/AssignmentPageLayout';
 
 const AssignmentSelectPage = () => {
   // url에서 course id 가져오기
