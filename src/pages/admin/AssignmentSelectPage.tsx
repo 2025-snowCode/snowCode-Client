@@ -26,13 +26,12 @@ const AssignmentSelectPage = () => {
     title: string,
     isSelected: boolean
   ) => {
-    if (isSelected) {
-      setLinkedAssignments([...linkedAssignments, {id: id, title: title}]);
-    } else {
-      setLinkedAssignments(
-        linkedAssignments.filter((assignment) => assignment.id !== id)
-      );
-    }
+    setLinkedAssignments((prev) => {
+      if (isSelected) {
+        return [...prev, {id, title}];
+      }
+      return prev.filter((a) => a.id !== id);
+    });
   };
 
   return (
