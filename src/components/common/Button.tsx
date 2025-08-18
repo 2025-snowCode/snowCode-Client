@@ -13,6 +13,7 @@ const buttonTheme: ButtonTheme = {
   primaryPurple: 'primary-btn bg-primary text-white',
   primaryWhite: 'primary-btn bg-white text-primary border',
   secondaryPurpleStroke: 'secondary-btn bg-purple-stroke text-secondary-black',
+  secondaryPurple: 'secondary-btn bg-primary text-white',
 };
 
 const Button = ({theme, text, icon}: ButtonProps) => {
