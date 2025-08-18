@@ -1,4 +1,3 @@
-import * as React from 'react';
 import type {SVGProps} from 'react';
 const SvgAddIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -7,7 +6,7 @@ const SvgAddIcon = (props: SVGProps<SVGSVGElement>) => (
     viewBox='0 0 14 15'
     {...props}>
     <path
-      stroke='#555267'
+      stroke={props.color}
       strokeLinecap='round'
       strokeWidth={1.3}
       d='M1 7.32h12M7.004 1.5v12'
