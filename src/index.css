@@ -74,3 +74,13 @@
 .text-btn {
   @apply text-base font-medium;
 }
+
+.input-field {
+  @apply bg-white w-[295px] px-[14.6px] py-[10.5px] rounded-[9px] border-[0.9px] border-purple-stroke focus:outline-1 focus:outline-primary;
+}
+
+@layer base {
+  label {
+    @apply flex flex-col gap-[12.5px];
+  }
+}
