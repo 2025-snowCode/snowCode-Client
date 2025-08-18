@@ -5,6 +5,7 @@ import UserIdInputPage from './pages/common/UserIdInputPage';
 import Dashboard from './pages/common/Dashboard';
 import AssignmentsPage from './pages/admin/AssignmentsPage';
 import AssignmentSelectPage from './pages/admin/AssignmentSelectPage';
+import UnitPage from './pages/admin/UnitPage';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route index element={<Dashboard />} />
           <Route path='assignments' element={<AssignmentsPage />} />
           <Route path='assignments/:id' element={<AssignmentSelectPage />} />
+          <Route path='units' element={<UnitPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
