@@ -56,7 +56,7 @@ const UnitForm = ({
             />
           ))}
         </div>
-        <div className='pt-[12.5px]'>
+        <div className='py-[12.5px]'>
           <Button
             theme='secondaryPurpleStroke'
             text='문제 연결'
