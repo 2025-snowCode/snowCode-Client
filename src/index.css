@@ -28,6 +28,7 @@
 :root {
   font-family: Pretendard;
   background-color: #f6f5f8;
+  box-sizing: border-box;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
