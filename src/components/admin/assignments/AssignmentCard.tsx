@@ -10,6 +10,7 @@ import type {Assignment} from './dummy/types';
 interface AssignmentCardProps extends Assignment {
   selectMode: boolean;
   onLinkAssignments?: (id: number, title: string, isSelected: boolean) => void;
+  color?: string;
 }
 
 const AssignmentCard = ({
@@ -17,6 +18,7 @@ const AssignmentCard = ({
   title,
   selectMode,
   onLinkAssignments,
+  color,
 }: AssignmentCardProps) => {
   const [isSelected, setIsSelected] = useState(false);
   const handleOnClick = () => {
@@ -32,7 +34,7 @@ const AssignmentCard = ({
         isSelected && selectMode
           ? 'border-1 border-primary'
           : 'border-1 border-background'
-      }`}>
+      } ${color}`}>
       <div className='flex-center gap-4 cursor-pointer '>
         {selectMode ? (
           <SingleEllipsisIcon
