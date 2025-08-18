@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import {ArrowdownIcon} from '../../../assets/svg';
-import type {Course} from './dummy/types';
+import type {Course, SemesterCode} from './dummy/types';
+import {getSemesterLabel} from '../../../utils/getSemesterLabel';
 
 interface CourseSelectorProps {
   courses: Course[];
@@ -15,8 +16,16 @@ const CourseSelector = ({courses, onSelectCourse}: CourseSelectorProps) => {
     setOpen(!open);
   };
 
-  const handleSelectCourse = (id: number, title: string, section: string) => {
-    setPlaceHolder(`${title} ${section}`);
+  const handleSelectCourse = (
+    id: number,
+    title: string,
+    section: string,
+    year: number,
+    semester: SemesterCode
+  ) => {
+    setPlaceHolder(
+      `${year}\\${getSemesterLabel(semester)}학기\\${section}분반 ${title}`
+    );
     onSelectCourse(id);
   };
 
@@ -29,7 +38,9 @@ const CourseSelector = ({courses, onSelectCourse}: CourseSelectorProps) => {
       <div
         className='flex items-center justify-between w-81 h-[45px] border-1 rounded-[9px] border-stroke px-[14px] cursor-pointer'
         onClick={handleOnClick}>
-        <span className='text-light-black'>{placeHolder}</span>
+        <span className='text-light-black whitespace-nowrap'>
+          {placeHolder}
+        </span>
         <ArrowdownIcon width={13.5} height={8} />
       </div>
       {open && (
@@ -39,13 +50,21 @@ const CourseSelector = ({courses, onSelectCourse}: CourseSelectorProps) => {
           {courses.map((course, index) => (
             <li
               onClick={() =>
-                handleSelectCourse(course.id, course.title, course.section)
+                handleSelectCourse(
+                  course.id,
+                  course.title,
+                  course.section,
+                  course.year,
+                  course.semester
+                )
               }
               key={course.id}
               className={`border-stroke px-[15.5px] py-[13px] ${
                 index !== courses.length - 1 ? 'border-b-1' : ''
               } hover:bg-purple-stroke first:rounded-t-[9px] last:rounded-b-[9px]`}>
-              {course.title} {course.section}
+              {`${course.year}\\${getSemesterLabel(course.semester)}학기\\${
+                course.section
+              }분반 ${course.title}`}
             </li>
           ))}
         </ul>
