@@ -35,7 +35,7 @@ const AssignmentPageLayout = ({
           <Button
             theme='secondaryPurpleStroke'
             text='문제 추가'
-            icon={<AddIcon width={12} height={12} />}
+            icon={<AddIcon width={12} height={12} color='#555267' />}
           />
         )}
         <div className='flex justify-end gap-5 mt-3'>
