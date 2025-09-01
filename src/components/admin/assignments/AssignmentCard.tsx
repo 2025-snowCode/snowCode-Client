@@ -1,10 +1,5 @@
 import {useState} from 'react';
-import {
-  SingleEllipsisIcon,
-  DragAndDropIcon,
-  DeleteIcon,
-  EditIcon,
-} from '../../../assets/svg';
+import {SingleEllipsisIcon, DeleteIcon, EditIcon} from '../../../assets/svg';
 import type {Assignment} from './dummy/types';
 
 interface AssignmentCardProps extends Assignment {
@@ -36,14 +31,12 @@ const AssignmentCard = ({
           : 'border-1 border-background'
       } ${color}`}>
       <div className='flex-center gap-4 cursor-pointer '>
-        {selectMode ? (
+        {selectMode && (
           <SingleEllipsisIcon
             width={12}
             height={12}
             stroke={isSelected ? '#856cff' : '#ffffff'}
           />
-        ) : (
-          <DragAndDropIcon width={8} height={13} />
         )}
         <div>{title}</div>
       </div>
