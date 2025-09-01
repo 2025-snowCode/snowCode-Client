@@ -7,7 +7,7 @@ export const unit: UnitResponse = {
     title: '날씨 데이터 확인하기',
     releaseDate: '2025-07-27',
     dueDate: '2025-07-27',
-    assignmentCount: 2,
+    assignmentCount: 5,
     assignments: [
       {
         id: 1,
@@ -15,6 +15,18 @@ export const unit: UnitResponse = {
       },
       {
         id: 2,
+        title: '날씨 데이터를 활용한 앱 만들기',
+      },
+      {
+        id: 3,
+        title: '날씨 데이터를 활용한 앱 만들기',
+      },
+      {
+        id: 4,
+        title: '날씨 데이터를 활용한 앱 만들기',
+      },
+      {
+        id: 5,
         title: '날씨 데이터를 활용한 앱 만들기',
       },
     ],
