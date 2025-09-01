@@ -24,7 +24,7 @@ const AssignmentPageLayout = ({
   };
 
   return (
-    <div className='mx-auto pb-8 w-[900px] bg-white rounded-[30px]'>
+    <div className='mx-auto pb-8 w-225 h-190 bg-white rounded-[30px] overflow-y-scroll'>
       <div className='flex flex-col h-1/4 px-14 pt-[37px] pb-[22px] justify-center border-b-1 border-stroke'>
         <h3 className='text-2xl font-semibold'>{title}</h3>
         <CourseSelector courses={fullCourses} onSelectCourse={onSelectCourse} />
