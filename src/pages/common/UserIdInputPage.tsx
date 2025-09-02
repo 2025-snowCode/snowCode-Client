@@ -12,7 +12,7 @@ export default function UserIdInputPage() {
   const length = 7;
   const [userId, setUserId] = useState<string[]>(new Array(length).fill(''));
   const [activeIndex, setActiveIndex] = useState(0);
-  const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   useEffect(() => {
     inputRefs.current[activeIndex]?.focus();
@@ -98,7 +98,9 @@ export default function UserIdInputPage() {
           {userId.map((digit, i) => (
             <input
               key={i}
-              ref={(ref) => (inputRefs.current[i] = ref)}
+              ref={(el) => {
+                inputRefs.current[i] = el;
+              }}
               type='text'
               inputMode='numeric'
               maxLength={1}
