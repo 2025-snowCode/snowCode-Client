@@ -8,6 +8,7 @@ export {default as DeleteIcon} from './DeleteIcon';
 export {default as DragAndDropIcon} from './DragAndDropIcon';
 export {default as EditIcon} from './EditIcon';
 export {default as EllipsisIcon} from './EllipsisIcon';
+export {default as File} from './File';
 export {default as NotificationIcon} from './NotificationIcon';
 export {default as SignoutIcon} from './SignoutIcon';
 export {default as SingleEllipsisIcon} from './SingleEllipsisIcon';
