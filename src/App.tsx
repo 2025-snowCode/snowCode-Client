@@ -5,6 +5,7 @@ import UserIdInputPage from './pages/common/UserIdInputPage';
 import Dashboard from './pages/common/Dashboard';
 import AssignmentsPage from './pages/admin/AssignmentsPage';
 import AssignmentSelectPage from './pages/admin/AssignmentSelectPage';
+import CourseOverviewPage from './pages/common/CourseOverviewPage';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path='/student' element={<Layout />}>
           {/* 추가 페이지들 */}
           <Route index element={<Dashboard />} />
+          <Route path='course/:id' element={<CourseOverviewPage />} />
         </Route>
 
         {/* 관리자 전용 영역 */}
@@ -28,6 +30,7 @@ function App() {
           <Route index element={<Dashboard />} />
           <Route path='assignments' element={<AssignmentsPage />} />
           <Route path='assignments/:id' element={<AssignmentSelectPage />} />
+          <Route path='course/:id' element={<CourseOverviewPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
