@@ -14,13 +14,18 @@ const AssignmentItem = ({
 }: AssignmentItemProps) => {
   return (
     <div
-      className={`h-[60px] flex items-center justify-between px-80 ${
+      className={`w-100% h-[60px] flex items-center px-74 ${
         index !== 1 && 'border-t-1 border-[#EEEBFC]'
       }`}>
-      <div className={`flex-center ${!isOpen && 'opacity-[0.6]'}`}>
+      <div
+        className={`w-108 flex items-center justify-start ${
+          !isOpen && 'opacity-[0.6]'
+        }`}>
+        {/* 문제 번호 */}
         <span className='w-[31px] py-0.5 flex-center rounded-full border-1 border-purple-stroke text-base text-light-black font-medium'>
           {index}
         </span>
+        {/* 문제 제목 */}
         <span
           className={`text-secondary-black text-base font-normal pl-[30px] curosr-pointer ${
             isOpen &&
@@ -29,7 +34,6 @@ const AssignmentItem = ({
           {title}
         </span>
       </div>
-
       {isOpen && <SubmissionBadge submittedStatus={submittedStatus} />}
     </div>
   );

@@ -34,7 +34,7 @@ const SubmissionBadge = ({submittedStatus}: SubmissionBadgeProps) => {
 
   return (
     <div
-      className={`inline-flex gap-2 text-center px-3.5 py-1.5 rounded-[35px] ${variant}`}>
+      className={`inline-flex gap-2 text-center px-3.5 py-1.5 rounded-[35px] mr-auto ${variant}`}>
       <img src={icon} alt={label} />
       <span>{label}</span>
     </div>

@@ -17,13 +17,15 @@ const UnitHeader = ({
   dueDate,
 }: UnitHeaderProps) => {
   return (
-    <div className='h-[55px] bg-gray flex items-center justify-between px-55 whitespace-nowrap'>
-      <UnitLabel unitNo={index} />
-      <span className='pl-[13.5px] text-lg text-secondary-black font-medium'>
-        {title}
-      </span>
-      {!isOpen && <img src={lock} alt='잠금' />}
-      <span className='text-base text-light-black font-normal'>{`${releaseDate.replaceAll(
+    <div className='h-[55px] bg-gray flex items-center px-55 whitespace-nowrap'>
+      <div className='flex items-center w-70%'>
+        <UnitLabel unitNo={index} />
+        <span className='pl-[13.5px] pr-[10.5px] text-lg text-secondary-black font-medium'>
+          {title}
+        </span>
+        {!isOpen && <img src={lock} alt='잠금' />}
+      </div>
+      <span className='w-10% text-base text-light-black font-normal ml-auto'>{`${releaseDate.replaceAll(
         '-',
         '.'
       )} ~ ${dueDate.replaceAll('-', '.')}`}</span>
