@@ -18,7 +18,7 @@ const AssignmentItem = ({
         index !== 1 && 'border-t-1 border-[#EEEBFC]'
       }`}>
       <div
-        className={`w-108 flex items-center justify-start ${
+        className={`w-141 flex-center items-center justify-start ${
           !isOpen && 'opacity-[0.6]'
         }`}>
         {/* 문제 번호 */}
@@ -27,7 +27,7 @@ const AssignmentItem = ({
         </span>
         {/* 문제 제목 */}
         <span
-          className={`text-secondary-black text-base font-normal pl-[30px] curosr-pointer ${
+          className={`whitespace-nowrap text-secondary-black text-base font-normal pl-[30px] cursor-pointer ${
             isOpen &&
             'hover:text-primary hover:underline hover:underline-offset-4'
           }`}>
