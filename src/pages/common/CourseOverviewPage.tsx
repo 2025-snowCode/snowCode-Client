@@ -16,7 +16,7 @@ const isActiveCourse = courseResponse.response.unitCount !== 0;
 
 const CourseOverviewPage = () => {
   return (
-    <div className='w-full min-h-screen flex flex-col'>
+    <div className='p-4 w-full min-h-screen flex flex-col absolute top-0 left-0 z-0'>
       <CourseHero
         title={courseResponse.response.title}
         year={courseResponse.response.year}

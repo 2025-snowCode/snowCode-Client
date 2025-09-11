@@ -9,7 +9,7 @@ interface UnitInfo {
   title: string;
   releaseDate: string;
   dueDate: string;
-  isOpen: boolean;
+  isOpen?: boolean;
   assignmentCount: number;
   assignments: Assignment[];
 }
