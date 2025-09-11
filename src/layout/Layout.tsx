@@ -92,12 +92,12 @@ const Layout = () => {
   };
 
   return (
-    <div className='min-h-screen overflow-x-hidden'>
+    <div className='min-h-screen overflow-x-hidden relative'>
       {/* 헤더와 컨텐츠 모두 동일한 컨테이너 사용 */}
-      <div className='flex justify-center'>
+      <div className='flex justify-center '>
         <div className='w-[1156px] px-4'>
           {showHeader && (
-            <div className='pt-10'>
+            <div className='pt-10 z-10 relative'>
               <BaseHeader {...getHeaderContent()} />
             </div>
           )}
