@@ -2,6 +2,7 @@ import AssignmentFormLayout from '@/components/admin/assignments/AssignmentFormL
 import LabeledInput from '@/components/admin/form/LabeledInput';
 import FileUpload from '@/components/admin/form/FileUpload';
 import {useState} from 'react';
+import LabeledDropdown from '@/components/admin/form/LabeledDropdown';
 
 const AssignmentCreatePage = () => {
   const [examples, setExamples] = useState([{input: '', output: '', 공개: ''}]);
@@ -48,9 +49,9 @@ const AssignmentCreatePage = () => {
                   placeholder='입력하세요'
                   className='w-full'
                 />
-                <LabeledInput
+                <LabeledDropdown
                   label={idx === 0 ? '공개 여부' : ''}
-                  variant='dropdown'
+                  variant='visibility'
                   className='w-full'
                 />
               </div>
