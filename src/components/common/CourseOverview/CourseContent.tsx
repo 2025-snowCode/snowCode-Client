@@ -10,17 +10,19 @@ const CourseContent = ({units}: CourseContentProps) => {
   return (
     <div className='w-full bg-white flex-1 rounded-b-[30px]'>
       {units.map((unit, index) => {
+        const openStatus = unit.isOpen === undefined ? true : unit.isOpen;
+
         return (
           <div key={unit.id}>
             <UnitHeader
               index={index + 1}
               title={unit.title}
-              isOpen={unit.isOpen}
+              isOpen={openStatus}
               releaseDate={unit.releaseDate}
               dueDate={unit.dueDate}
             />
             <AssignmentList
-              isOpen={unit.isOpen}
+              isOpen={openStatus}
               assignments={unit.assignments}
             />
           </div>
