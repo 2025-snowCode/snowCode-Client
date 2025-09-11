@@ -3,7 +3,7 @@ import CourseActionsBar from './CourseActionsBar';
 
 const EmptyCourse = () => {
   return (
-    <div className='w-full bg-white flex-1 rounded-b-[30px] flex-center flex-col'>
+    <div className='w-full py-25 bg-white flex-1 rounded-b-[30px] flex-center flex-col'>
       <img src={snowCodeOverview} alt='' />
       <span className='text-lg leading-7 font-normal pt-6 pb-1'>
         비어있는 강의
