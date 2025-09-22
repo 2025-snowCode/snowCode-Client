@@ -2,6 +2,7 @@ import Button from '@/components/common/Button';
 
 type AssignmentFormLayoutProps = {
   title: string;
+  titleExtra?: React.ReactNode;
   content: React.ReactNode;
   onCancel: () => void;
   onConfirm: () => void;
@@ -9,6 +10,7 @@ type AssignmentFormLayoutProps = {
 
 const AssignmentFormLayout = ({
   title,
+  titleExtra,
   content,
   onCancel,
   onConfirm,
@@ -17,7 +19,10 @@ const AssignmentFormLayout = ({
     <div>
       <div className='mx-auto w-[900px] bg-white rounded-[30px] flex flex-col min-h-[600px] pt-9 pb-8 pl-[56px] pr-[32px]'>
         {/* 제목 */}
-        <h2 className='text-black text-[24px] font-semibold'>{title}</h2>
+        <div className='flex items-center gap-3'>
+          <h2 className='text-black text-[24px] font-semibold'>{title}</h2>
+          {titleExtra}
+        </div>
 
         {/* 본문 */}
         <div className='flex-1 mt-7'>{content}</div>
