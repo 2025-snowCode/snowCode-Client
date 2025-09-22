@@ -6,6 +6,8 @@ import Dashboard from './pages/common/Dashboard';
 import AssignmentsPage from './pages/admin/AssignmentsPage';
 import AssignmentSelectPage from './pages/admin/AssignmentSelectPage';
 import CourseOverviewPage from './pages/common/CourseOverviewPage';
+import AssignmentCreatePage from './pages/admin/assignments/AssignmentCreatePage';
+import CourseCreatePage from './pages/admin/courses/CourseCreatePage';
 
 function App() {
   return (
@@ -31,6 +33,11 @@ function App() {
           <Route path='assignments' element={<AssignmentsPage />} />
           <Route path='assignments/:id' element={<AssignmentSelectPage />} />
           <Route path='course/:id' element={<CourseOverviewPage />} />
+          <Route
+            path='/admin/assignments/create'
+            element={<AssignmentCreatePage />}
+          />
+          <Route path='/admin/courses/create' element={<CourseCreatePage />} />
         </Route>
       </Routes>
     </BrowserRouter>
