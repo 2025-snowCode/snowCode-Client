@@ -11,6 +11,7 @@ export {default as EllipsisIcon} from './EllipsisIcon';
 export {default as File} from './File';
 export {default as NotificationIcon} from './NotificationIcon';
 export {default as ProfileImage} from './ProfileImage';
+export {default as Search} from './Search';
 export {default as SignoutIcon} from './SignoutIcon';
 export {default as SingleEllipsisIcon} from './SingleEllipsisIcon';
 export {default as UserIcon} from './UserIcon';
