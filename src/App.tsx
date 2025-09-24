@@ -3,11 +3,11 @@ import Layout from './layout/Layout';
 import LandingPage from './pages/common/LandingPage';
 import UserIdInputPage from './pages/common/UserIdInputPage';
 import Dashboard from './pages/common/Dashboard';
-import AssignmentsPage from './pages/admin/AssignmentsPage';
-import AssignmentSelectPage from './pages/admin/AssignmentSelectPage';
 import CourseOverviewPage from './pages/common/CourseOverviewPage';
 import AssignmentCreatePage from './pages/admin/assignments/AssignmentCreatePage';
 import CourseCreatePage from './pages/admin/courses/CourseCreatePage';
+import AssignmentsPage from './pages/admin/assignments/AssignmentsPage';
+import AssignmentSelectPage from './pages/admin/assignments/AssignmentSelectPage';
 
 function App() {
   return (
