@@ -1,5 +1,5 @@
-import {coursesResponse} from '../../components/admin/assignments/dummy/response';
-import AssignmentPageLayout from '../../components/admin/assignments/AssignmentPageLayout';
+import AssignmentPageLayout from '@/components/admin/assignments/AssignmentPageLayout';
+import {coursesResponse} from '@/components/admin/assignments/dummy/response';
 
 const AssignmentsPage = () => {
   // 전체 강의 가져오기

@@ -12,6 +12,7 @@ interface ButtonTheme {
 const buttonTheme: ButtonTheme = {
   primaryPurple: 'primary-btn bg-primary text-white',
   primaryWhite: 'primary-btn bg-white text-primary border',
+  primaryTransparent: 'primary-btn text-white border border-white',
   secondaryPurpleStroke: 'secondary-btn bg-purple-stroke text-secondary-black',
 };
 
