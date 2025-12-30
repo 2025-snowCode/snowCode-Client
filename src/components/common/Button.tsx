@@ -1,27 +1,36 @@
-interface ButtonProps {
-  theme: string;
-  text: string;
-  icon?: React.ReactElement;
+import {tv, type VariantProps} from 'tailwind-variants/lite';
+
+const button = tv({
+  base: 'flex-center px-3 py-1.5 text-center text-base font-medium whitespace-nowrap rounded-[10px] border',
+  variants: {
+    color: {
+      primary: 'bg-primary text-white border-primary',
+      secondary: 'bg-white text-primary-black border-purple-stroke',
+      outlinePurple: 'bg-white text-primary border-primary',
+      outlineWhite: 'bg-transparent text-white border-white',
+      tonal: 'bg-purple-stroke text-secondary-black border-purple-stroke',
+    },
+    isIcon: {
+      true: 'rounded-full',
+    },
+  },
+  defaultVariants: {
+    color: 'primary',
+    isIcon: false,
+  },
+});
+
+type ButtonVariants = VariantProps<typeof button>;
+
+interface ButtonProps extends ButtonVariants {
+  children: React.ReactNode;
   onClick?: () => void;
 }
 
-interface ButtonTheme {
-  [key: string]: string;
-}
-
-const buttonTheme: ButtonTheme = {
-  primaryPurple: 'primary-btn bg-primary text-white',
-  primaryWhite: 'primary-btn bg-white text-primary border',
-  primaryTransparent: 'primary-btn text-white border border-white',
-  secondaryPurpleStroke: 'secondary-btn bg-purple-stroke text-secondary-black',
-};
-
-const Button = ({theme, text, icon}: ButtonProps) => {
+const Button = ({children, onClick, ...props}: ButtonProps) => {
   return (
-    <button
-      className={`py-1.5 px-3 rounded-[10px] cursor-pointer ${buttonTheme[theme]}`}>
-      {icon}
-      <span className='text-btn'>{text}</span>
+    <button onClick={onClick} className={button(props)}>
+      {children}
     </button>
   );
 };
