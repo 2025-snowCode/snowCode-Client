@@ -17,10 +17,10 @@ const button = tv({
       default: 'w-24 h-10 px-3 py-1.5',
       compact: 'w-fit leading-5 px-3 py-1.5',
       wide: 'w-40 py-[15px]',
-      none: 'w-fit p-0',
+      none: 'p-0',
     },
     isIcon: {
-      true: 'rounded-full',
+      true: 'rounded-full w-16 h-16',
     },
   },
   defaultVariants: {
