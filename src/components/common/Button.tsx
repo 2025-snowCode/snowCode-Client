@@ -1,7 +1,7 @@
 import {tv, type VariantProps} from 'tailwind-variants/lite';
 
 const button = tv({
-  base: 'cursor-pointer flex-center text-center gap-2 text-base font-medium whitespace-nowrap rounded-[10px] border',
+  base: 'cursor-pointer rounded-[10px] border',
   variants: {
     color: {
       primary: 'bg-primary text-white border-primary',
@@ -15,19 +15,22 @@ const button = tv({
     },
     size: {
       default: 'w-24 h-10 px-3 py-1.5',
-      compact: 'w-fit leading-5 px-3 py-1.5',
+      compact: 'w-fit px-3 py-1.5 leading-5',
       wide: 'w-40 py-[15px]',
-      none: 'p-0',
+      none: 'w-fit p-0',
+      icon: 'w-16 h-16 p-0 rounded-full', // 아이콘 버튼 rounded 속성 적용
     },
-    isIcon: {
-      true: 'rounded-full w-16 h-16',
+    content: {
+      text: 'text-center text-base font-medium whitespace-nowrap',
+      icon: 'flex-center',
+      mixed:
+        'flex-center gap-2 text-center text-base font-medium whitespace-nowrap',
     },
   },
   defaultVariants: {
     color: 'primary',
     size: 'default',
-    disabled: false,
-    isIcon: false,
+    content: 'text',
   },
 });
 
