@@ -24,8 +24,12 @@ const AssignmentFormLayout = ({
 
         {/* 하단 버튼 */}
         <div className='mt-auto flex justify-end gap-[21px]'>
-          <Button theme='primaryWhite' text='취소' onClick={onCancel} />
-          <Button theme='primaryPurple' text='확인' onClick={onConfirm} />
+          <Button color='outlinePurple' onClick={onCancel}>
+            취소
+          </Button>
+          <Button color='primary' onClick={onConfirm}>
+            저장
+          </Button>
         </div>
       </div>
     </div>
