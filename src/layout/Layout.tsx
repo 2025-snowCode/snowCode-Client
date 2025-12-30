@@ -2,7 +2,7 @@
 import {useLocation, Outlet} from 'react-router-dom';
 import BaseHeader from '../components/common/BaseHeader';
 import {NotificationIcon, SignoutIcon, UserIcon, ChatIcon} from '../assets/svg';
-import IconButton from '../components/common/IconButton';
+import Button from '@/components/common/Button';
 
 const Layout = () => {
   const location = useLocation();
@@ -42,7 +42,9 @@ const Layout = () => {
     <nav
       className={`flex-1 bg-gradient-to-r from-light-purple to-purple ${width} h-full px-3 py-[8px] rounded-full flex items-center justify-between gap-9`}>
       {buttons.map((button, index) => (
-        <IconButton key={index} icon={button.icon} aria-label={button.label} />
+        <Button key={index} isIcon={true} size='none' aria-label={button.label}>
+          {button.icon}
+        </Button>
       ))}
     </nav>
   );
