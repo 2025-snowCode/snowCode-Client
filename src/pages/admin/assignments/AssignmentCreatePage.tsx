@@ -60,7 +60,11 @@ const AssignmentCreatePage = () => {
             ))}
           </div>
 
-          <Button color='tonal' size='compact' onClick={handleAddExample}>
+          <Button
+            color='tonal'
+            size='compact'
+            content='mixed'
+            onClick={handleAddExample}>
             <AddIcon width={12} height={12} />
             추가
           </Button>

@@ -32,7 +32,7 @@ const AssignmentPageLayout = ({
       <div className='px-14'>
         <AssignmentList courses={courses} selectMode={selectMode} />
         {!selectMode && (
-          <Button color='tonal' size='compact'>
+          <Button color='tonal' size='compact' content='mixed'>
             <AddIcon width={12} height={12} />
             문제 추가
           </Button>

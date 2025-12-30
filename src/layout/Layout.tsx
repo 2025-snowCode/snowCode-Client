@@ -42,7 +42,11 @@ const Layout = () => {
     <nav
       className={`flex-1 bg-gradient-to-r from-light-purple to-purple ${width} h-full px-3 py-[8px] rounded-full flex items-center justify-between gap-9`}>
       {buttons.map((button, index) => (
-        <Button key={index} isIcon={true} size='none' aria-label={button.label}>
+        <Button
+          key={index}
+          content='icon'
+          size='icon'
+          aria-label={button.label}>
           {button.icon}
         </Button>
       ))}
