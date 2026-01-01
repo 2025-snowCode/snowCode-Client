@@ -1,7 +1,7 @@
 import {tv, type VariantProps} from 'tailwind-variants/lite';
 
 const badgeStyles = tv({
-  base: 'rounded-[35px] px-3.5 py-1.5 text-center text-base font-medium border whitespace-nowrap',
+  base: 'rounded-full px-3.5 py-1.5 leading-[19px] text-center text-base font-medium border whitespace-nowrap',
 });
 
 const scheduleBadgeStyles = tv({
