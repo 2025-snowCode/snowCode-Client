@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {EllipsisIcon} from '../../../assets/svg';
+import EllipsisIcon from '/public/svg/ellipsisIcon.svg?react';
 import type {Course, UserType} from './types';
 import {getSemesterLabel} from '../../../utils/getSemesterLabel';
 

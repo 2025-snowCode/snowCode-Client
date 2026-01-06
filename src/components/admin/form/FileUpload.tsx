@@ -1,6 +1,6 @@
 import {useRef, useState} from 'react';
 import type {ChangeEvent} from 'react';
-import {File} from '@/assets/svg';
+import FileIcon from '/public/svg/file.svg?react';
 
 type FileUploadProps = {
   label: string;
@@ -103,7 +103,7 @@ export default function FileUpload({
             'focus:outline-none focus:ring-2 focus:ring-primary',
           ].join(' ')}>
           <div className='flex flex-col gap-2 items-center'>
-            <File className='w-[32px] h-[38px]' />
+            <FileIcon className='w-[32px] h-[38px]' />
             <div className='pointer-events-none text-sm text-primary  text-decoration-line: underline'>
               {description}
             </div>

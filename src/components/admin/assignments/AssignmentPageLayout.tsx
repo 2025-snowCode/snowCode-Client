@@ -2,7 +2,7 @@ import CourseSelector from './CourseSelector';
 import AssignmentList from './AssignmentList';
 import Button from '../../common/Button';
 import type {Course} from './dummy/types';
-import {AddIcon} from '../../../assets/svg';
+import AddIcon from '/public/svg/addIcon.svg?react';
 import {useState} from 'react';
 
 interface AssignmentPageLayoutProps {

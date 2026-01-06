@@ -1,11 +1,15 @@
 import AssignmentFormLayout from '@/components/admin/assignments/AssignmentFormLayout';
-import {Search} from '@/assets/svg';
+import Search from '/public/svg/search.svg?react';
+import {useSearchParams} from 'react-router-dom';
 
 export default function StudentManagementPage() {
+  const [searchParams] = useSearchParams();
+  const course = searchParams.get('course');
+
   const titleExtra = (
     <div className='flex justify-between items-center flex-1'>
       <button className=' text-primary px-3 py-[6px] rounded-4xl inline-flex h-8 justify-center items-center border border-primary'>
-        소프트웨어 이해 (005)
+        {course || '전체'}
       </button>
       <div className='relative'>
         <input

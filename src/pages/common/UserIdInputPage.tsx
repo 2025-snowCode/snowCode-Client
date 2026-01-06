@@ -2,7 +2,7 @@ import {useState, useRef, useEffect} from 'react';
 import {useNavigate, useLocation} from 'react-router-dom';
 import ActionButton from '../../components/common/ActionButton';
 import SnowCodeEntryMini from '../../assets/images/snowCode_entry_mini.svg';
-import {ArrowleftIcon} from '../../assets/svg';
+import ArrowleftIcon from '/public/svg/arrowleftIcon.svg?react';
 
 export default function UserIdInputPage() {
   const navigate = useNavigate();

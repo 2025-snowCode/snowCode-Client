@@ -33,7 +33,11 @@ const CourseHero = ({
     <div className='w-full h-[353px] flex-center flex-col rounded-t-[30px] bg-radial-[80%_74%_at_34%_0%] from-[#AC9BFF] from-0% to-[#7D63FF] to-100%'>
       {isAdmin && isActiveCourse && (
         <div className='pl-190 absolute top-36 right-26'>
-          <CourseActionsBar isActive={isActiveCourse} />{' '}
+          <CourseActionsBar
+            isActive={isActiveCourse}
+            title={title}
+            section={section}
+          />
         </div>
       )}
       <img className='pt-22 pb-[4px]' src={snowcodeOverviewMini} alt='logo' />
