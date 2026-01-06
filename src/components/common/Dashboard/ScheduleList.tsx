@@ -1,6 +1,6 @@
 import ScheduleCard from './ScheduleCard';
-import logo from '../../../assets/images/snowCode_logo_mini.svg';
-import mark from '../../../assets/images/snowCode_mark.svg';
+import logo from '@/assets/images/snowCode_logo_mini.svg';
+import mark from '@/assets/images/snowCode_mark.svg';
 import type {Schedule} from './types';
 
 const schedules: Schedule[] = [

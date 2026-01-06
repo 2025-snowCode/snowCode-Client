@@ -1,4 +1,4 @@
-import type {SemesterCode} from '../../admin/assignments/dummy/types';
+import type {SemesterCode} from '@/components/admin/assignments/dummy/types';
 
 type UserType = 'admin' | 'student';
 

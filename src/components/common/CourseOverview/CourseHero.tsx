@@ -1,7 +1,7 @@
 import {useLocation} from 'react-router-dom';
-import snowcodeOverviewMini from '../../../assets/images/snowcode_overview_mini.svg';
-import {getSemesterLabel} from '../../../utils/getSemesterLabel';
-import type {SemesterCode} from '../../admin/assignments/dummy/types';
+import snowcodeOverviewMini from '@/assets/images/snowcode_overview_mini.svg';
+import {getSemesterLabel} from '@/utils/getSemesterLabel';
+import type {SemesterCode} from '@/components/admin/assignments/dummy/types';
 import CourseActionsBar from './CourseActionsBar';
 import CourseStat from './CourseStat';
 

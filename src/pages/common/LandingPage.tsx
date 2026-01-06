@@ -5,8 +5,8 @@ import snowCodeEntry from '/src/assets/images/snowCode_entry.svg';
 import snowCodeStudent from '/src/assets/images/snowCode_student.svg';
 import snowCodeAdmin from '/src/assets/images/snowCode_admin.svg';
 import googleLogo from '/src/assets/images/google_logo.svg';
-import ArrowrightIcon from '/public/svg/arrowrightIcon.svg?react';
-import ActionButton from '../../components/common/ActionButton';
+import ArrowrightIcon from '/svg/arrowrightIcon.svg?react';
+import ActionButton from '@/components/common/ActionButton';
 
 type HoverState = 'none' | 'student' | 'admin';
 
@@ -31,8 +31,8 @@ export default function LandingPage() {
     hover === 'student'
       ? snowCodeStudent
       : hover === 'admin'
-      ? snowCodeAdmin
-      : snowCodeEntry;
+        ? snowCodeAdmin
+        : snowCodeEntry;
 
   return (
     <div className='relative flex flex-col justify-center items-center min-h-[calc(100vh-120px)] text-center'>

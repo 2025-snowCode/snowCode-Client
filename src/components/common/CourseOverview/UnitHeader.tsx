@@ -1,5 +1,6 @@
 import UnitLabel from './UnitLabel';
-import lock from '../../../assets/images/lock.svg';
+import UnitLabel from './UnitLabel';
+import lock from '@/assets/images/lock.svg';
 
 interface UnitHeaderProps {
   index: number;

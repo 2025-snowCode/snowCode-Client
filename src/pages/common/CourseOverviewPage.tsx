@@ -1,7 +1,7 @@
-import CourseContent from '../../components/common/CourseOverview/CourseContent';
-import CourseHero from '../../components/common/CourseOverview/CourseHero';
-import {courseResponse} from '../../components/common/CourseOverview/dummy/response';
-import EmptyCourse from '../../components/common/CourseOverview/EmptyCourse';
+import CourseContent from '@/components/common/CourseOverview/CourseContent';
+import CourseHero from '@/components/common/CourseOverview/CourseHero';
+import {courseResponse} from '@/components/common/CourseOverview/dummy/response';
+import EmptyCourse from '@/components/common/CourseOverview/EmptyCourse';
 
 function countAssignments() {
   let assignmentCount = 0;

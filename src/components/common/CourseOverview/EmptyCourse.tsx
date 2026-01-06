@@ -1,4 +1,4 @@
-import snowCodeOverview from '../../../assets/images/snowcode_overview.svg';
+import snowCodeOverview from '@/assets/images/snowcode_overview.svg';
 import CourseActionsBar from './CourseActionsBar';
 
 const EmptyCourse = () => {

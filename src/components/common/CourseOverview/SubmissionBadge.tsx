@@ -1,7 +1,7 @@
-import type {SubmissionStatus} from '../../admin/assignments/dummy/types';
-import correct from '../../../assets/images/correct.svg';
-import incorrect from '../../../assets/images/incorrect.svg';
-import unsubmitted from '../../../assets/images/unsubmitted.svg';
+import type {SubmissionStatus} from '@/components/admin/assignments/dummy/types';
+import correct from '@/assets/images/correct.svg';
+import incorrect from '@/assets/images/incorrect.svg';
+import unsubmitted from '@/assets/images/unsubmitted.svg';
 
 interface SubmissionBadgeProps {
   submittedStatus?: SubmissionStatus;

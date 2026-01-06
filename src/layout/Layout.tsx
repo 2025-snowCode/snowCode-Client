@@ -1,11 +1,11 @@
 // Layout.js
 import {useLocation, Outlet} from 'react-router-dom';
-import BaseHeader from '../components/common/BaseHeader';
-import NotificationIcon from '/public/svg/notificationIcon.svg?react';
-import SignoutIcon from '/public/svg/signoutIcon.svg?react';
-import UserIcon from '/public/svg/userIcon.svg?react';
-import ChatIcon from '/public/svg/chatIcon.svg?react';
-import IconButton from '../components/common/IconButton';
+import BaseHeader from '@/components/common/BaseHeader';
+import NotificationIcon from '/svg/notificationIcon.svg?react';
+import SignoutIcon from '/svg/signoutIcon.svg?react';
+import UserIcon from '/svg/userIcon.svg?react';
+import ChatIcon from '/svg/chatIcon.svg?react';
+import IconButton from '@/components/common/IconButton';
 import React from 'react';
 
 type UserType = 'admin' | 'student';

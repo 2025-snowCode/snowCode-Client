@@ -1,6 +1,6 @@
 import {useRef, useState} from 'react';
 import type {ChangeEvent} from 'react';
-import FileIcon from '/public/svg/file.svg?react';
+import FileIcon from '/svg/file.svg?react';
 
 type FileUploadProps = {
   label: string;

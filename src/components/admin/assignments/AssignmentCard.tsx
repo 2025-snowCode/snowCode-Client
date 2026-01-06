@@ -1,8 +1,8 @@
 import {useState} from 'react';
-import SingleEllipsisIcon from '/public/svg/singleEllipsisIcon.svg?react';
-import DragAndDropIcon from '/public/svg/dragAndDropIcon.svg?react';
-import DeleteIcon from '/public/svg/deleteIcon.svg?react';
-import EditIcon from '/public/svg/editIcon.svg?react';
+import SingleEllipsisIcon from '/svg/singleEllipsisIcon.svg?react';
+import DragAndDropIcon from '/svg/dragAndDropIcon.svg?react';
+import DeleteIcon from '/svg/deleteIcon.svg?react';
+import EditIcon from '/svg/editIcon.svg?react';
 import type {Assignment} from './dummy/types';
 
 interface AssignmentCardProps extends Assignment {
