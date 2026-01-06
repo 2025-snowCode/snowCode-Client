@@ -11,7 +11,7 @@ const EmptyCourse = () => {
       <span className='text-2xl leading-9 font-medium pb-7'>
         아직 생성된 단원이 없어요
       </span>
-      <CourseActionsBar isActive={false} />
+      <CourseActionsBar isActive={false} title='' section='' />
     </div>
   );
 };
