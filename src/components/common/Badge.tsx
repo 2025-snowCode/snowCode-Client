@@ -1,4 +1,5 @@
 import {tv, type VariantProps} from 'tailwind-variants/lite';
+import {Correct, Incorrect, Unsubmitted} from '@/assets/svg';
 
 const badgeStyles = tv({
   base: 'rounded-full px-3.5 py-1.5 leading-[19px] text-center text-base font-medium border whitespace-nowrap',
@@ -17,20 +18,13 @@ const scheduleBadgeStyles = tv({
 
 const submissionBadgeStyles = tv({
   extend: badgeStyles,
-  base: 'bg-transparent flex-center',
+  base: 'bg-transparent flex-center gap-2',
   variants: {
     status: {
-      correct: 'border-primary text-primary',
-      incorrect: 'border-[#FF6F6F] text-[#FF6F6F]',
-      pending: 'border-light-black text-light-black',
+      CORRECT: 'border-primary text-primary',
+      INCORRECT: 'border-[#FF6F6F] text-[#FF6F6F]',
+      NOT_SUBMITTED: 'border-light-black text-light-black',
     },
-    onlyIcon: {
-      true: 'rounded-full',
-      false: 'gap-2',
-    },
-  },
-  defaultVariants: {
-    onlyIcon: false,
   },
 });
 
@@ -46,6 +40,7 @@ const indexBadgeStyles = tv({
 
 type ScheduleBadgeProps = {
   variant: 'schedule';
+  children: React.ReactNode;
 } & VariantProps<typeof scheduleBadgeStyles>;
 
 type SubmissionBadgeProps = {
@@ -53,32 +48,63 @@ type SubmissionBadgeProps = {
 } & VariantProps<typeof submissionBadgeStyles>;
 
 type IndexBadgeProps = {
+  children: React.ReactNode;
   variant: 'index';
 } & VariantProps<typeof indexBadgeStyles>;
 
-type BadgeProps = (
-  | ScheduleBadgeProps
-  | SubmissionBadgeProps
-  | IndexBadgeProps
-) & {
-  children: React.ReactNode;
-  className?: string;
-};
+type BadgeProps = ScheduleBadgeProps | SubmissionBadgeProps | IndexBadgeProps;
 
-const Badge = ({children, variant, className, ...props}: BadgeProps) => {
-  const renderBadgeVariant = () => {
-    if (variant === 'schedule') {
-      // 일정 배지
-      return scheduleBadgeStyles({className, ...props});
-    } else if (variant === 'submission') {
-      // 제출 상태 배지
-      return submissionBadgeStyles({className, ...props});
-    } else if (variant === 'index') {
-      // 인덱스 배지 (단원, 문제 등)
-      return indexBadgeStyles({className, ...props});
-    }
-  };
-  return <span className={renderBadgeVariant()}>{children}</span>;
+const SubmissionMeta = {
+  CORRECT: {
+    label: '정답',
+    icon: <Correct className='w-3 h-3' />,
+  },
+  INCORRECT: {
+    label: '오답',
+    icon: <Incorrect className='w-3 h-3' />,
+  },
+  NOT_SUBMITTED: {
+    label: '미제출',
+    icon: <Unsubmitted className='w-3 h-3' />,
+  },
+} as const;
+
+const Badge = (props: BadgeProps) => {
+  const {variant} = props;
+
+  switch (variant) {
+    // 일정 배지
+    case 'schedule':
+      return (
+        <span className={scheduleBadgeStyles({schedule: props.schedule})}>
+          {props.children}일 전
+        </span>
+      );
+
+    // 인덱스 배지 (단원, 문제 등)
+    case 'index':
+      const suffix = props.kind === 'unit' ? '단원' : ' 문제';
+
+      return (
+        <span className={indexBadgeStyles({kind: props.kind})}>
+          {props.children}
+          {suffix}
+        </span>
+      );
+
+    // 제출 상태 배지
+    case 'submission':
+      const {label, icon} = SubmissionMeta[props.status!];
+
+      return (
+        <span
+          className={submissionBadgeStyles({
+            status: props.status,
+          })}>
+          {icon} {label}
+        </span>
+      );
+  }
 };
 
 export default Badge;
