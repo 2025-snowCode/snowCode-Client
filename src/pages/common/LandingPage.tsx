@@ -1,10 +1,10 @@
 import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 
-import snowCodeEntry from '/src/assets/images/snowCode_entry.svg';
-import snowCodeStudent from '/src/assets/images/snowCode_student.svg';
-import snowCodeAdmin from '/src/assets/images/snowCode_admin.svg';
-import googleLogo from '/src/assets/images/google_logo.svg';
+import snowCodeEntry from '@/assets/images/snowCode_entry.svg';
+import snowCodeStudent from '@/assets/images/snowCode_student.svg';
+import snowCodeAdmin from '@/assets/images/snowCode_admin.svg';
+import googleLogo from '@/assets/images/google_logo.svg';
 import ArrowrightIcon from '@/assets/svg/arrowrightIcon.svg?react';
 import Button from '@/components/common/Button';
 
