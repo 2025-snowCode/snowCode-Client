@@ -5,7 +5,7 @@ import snowCodeEntry from '/src/assets/images/snowCode_entry.svg';
 import snowCodeStudent from '/src/assets/images/snowCode_student.svg';
 import snowCodeAdmin from '/src/assets/images/snowCode_admin.svg';
 import googleLogo from '/src/assets/images/google_logo.svg';
-import ArrowrightIcon from '/svg/arrowrightIcon.svg?react';
+import ArrowrightIcon from '@/assets/svg/arrowrightIcon.svg?react';
 import ActionButton from '@/components/common/ActionButton';
 
 type HoverState = 'none' | 'student' | 'admin';

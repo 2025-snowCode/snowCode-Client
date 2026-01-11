@@ -1,5 +1,5 @@
 import {useState, useRef} from 'react';
-import Chevrondown from '/svg/chevrondown.svg?react';
+import Chevrondown from '@/assets/svg/chevrondown.svg?react';
 import useClickOutside from '@/hooks/useClickOutside';
 
 interface LabeledDropdownProps

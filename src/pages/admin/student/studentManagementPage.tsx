@@ -1,5 +1,5 @@
 import AssignmentFormLayout from '@/components/admin/assignments/AssignmentFormLayout';
-import Search from '/svg/search.svg?react';
+import Search from '@/assets/svg/search.svg?react';
 import {useSearchParams} from 'react-router-dom';
 
 export default function StudentManagementPage() {
