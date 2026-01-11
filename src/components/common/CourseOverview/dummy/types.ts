@@ -1,7 +1,7 @@
 import type {
   Assignment,
   SemesterCode,
-} from '../../../admin/assignments/dummy/types';
+} from '@/components/admin/assignments/dummy/types';
 
 // unit branch merge되면 삭제
 interface UnitInfo {

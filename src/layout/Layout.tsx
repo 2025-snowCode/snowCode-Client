@@ -1,8 +1,19 @@
 // Layout.js
 import {useLocation, Outlet} from 'react-router-dom';
-import BaseHeader from '../components/common/BaseHeader';
-import {NotificationIcon, SignoutIcon, UserIcon, ChatIcon} from '../assets/svg';
-import IconButton from '../components/common/IconButton';
+import BaseHeader from '@/components/common/BaseHeader';
+import NotificationIcon from '/svg/notificationIcon.svg?react';
+import SignoutIcon from '/svg/signoutIcon.svg?react';
+import UserIcon from '/svg/userIcon.svg?react';
+import ChatIcon from '/svg/chatIcon.svg?react';
+import IconButton from '@/components/common/IconButton';
+import React from 'react';
+
+type UserType = 'admin' | 'student';
+
+interface NavButton {
+  icon: React.ReactElement;
+  label: string;
+}
 
 const Layout = () => {
   const location = useLocation();
@@ -13,8 +24,8 @@ const Layout = () => {
   const showHeader = !noHeaderPages.includes(pathname);
 
   // 네비게이션 아이콘 버튼들
-  const getNavigationButtons = (userType) => {
-    const commonButtons = [
+  const getNavigationButtons = (userType: UserType): NavButton[] => {
+    const commonButtons: NavButton[] = [
       {icon: <NotificationIcon width={24} height={29} />, label: '알림'},
       {icon: <UserIcon width={27} height={28} />, label: '프로필'},
       {icon: <SignoutIcon width={27} height={27} />, label: '로그아웃'},
@@ -31,14 +42,20 @@ const Layout = () => {
   };
 
   // 사용자 환영 메시지
-  const getWelcomeMessage = (userName) => (
+  const getWelcomeMessage = (userName: string) => (
     <span className='text-lg font-normal'>
       <span className='font-medium'>{userName}</span>님 환영합니다!
     </span>
   );
 
   // 네비게이션 컴포넌트
-  const NavigationBar = ({buttons, width}) => (
+  const NavigationBar = ({
+    buttons,
+    width,
+  }: {
+    buttons: NavButton[];
+    width: string;
+  }) => (
     <nav
       className={`flex-1 bg-gradient-to-r from-light-purple to-purple ${width} h-full px-3 py-[8px] rounded-full flex items-center justify-between gap-9`}>
       {buttons.map((button, index) => (

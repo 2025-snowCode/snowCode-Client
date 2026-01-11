@@ -1,8 +1,8 @@
 import {useState, useRef, useEffect} from 'react';
 import {useNavigate, useLocation} from 'react-router-dom';
-import ActionButton from '../../components/common/ActionButton';
-import SnowCodeEntryMini from '../../assets/images/snowCode_entry_mini.svg';
-import {ArrowleftIcon} from '../../assets/svg';
+import ActionButton from '@/components/common/ActionButton';
+import SnowCodeEntryMini from '@/assets/images/snowCode_entry_mini.svg';
+import ArrowleftIcon from '/svg/arrowleftIcon.svg?react';
 
 export default function UserIdInputPage() {
   const navigate = useNavigate();
@@ -114,8 +114,8 @@ export default function UserIdInputPage() {
                   activeIndex === i
                     ? 'border-primary focus:outline-none focus:ring-0'
                     : digit
-                    ? 'border-stroke text-primary-black'
-                    : 'border-stroke'
+                      ? 'border-stroke text-primary-black'
+                      : 'border-stroke'
                 }
               `}
             />

@@ -1,4 +1,4 @@
-import logo from '../../assets/images/snowCode_logo.svg';
+import logo from '@/assets/images/snowCode_logo.svg';
 
 interface BaseHeaderProps {
   leftContent?: React.ReactNode;

@@ -16,9 +16,10 @@ const buttonTheme: ButtonTheme = {
   secondaryPurpleStroke: 'secondary-btn bg-purple-stroke text-secondary-black',
 };
 
-const Button = ({theme, text, icon}: ButtonProps) => {
+const Button = ({theme, text, icon, onClick}: ButtonProps) => {
   return (
     <button
+      onClick={onClick}
       className={`py-1.5 px-3 rounded-[10px] cursor-pointer ${buttonTheme[theme]}`}>
       {icon}
       <span className='text-btn'>{text}</span>
