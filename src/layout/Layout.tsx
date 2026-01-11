@@ -5,7 +5,7 @@ import NotificationIcon from '@/assets/svg/notificationIcon.svg?react';
 import SignoutIcon from '@/assets/svg/signoutIcon.svg?react';
 import UserIcon from '@/assets/svg/userIcon.svg?react';
 import ChatIcon from '@/assets/svg/chatIcon.svg?react';
-import IconButton from '@/components/common/IconButton';
+import Button from '@/components/common/Button';
 import React from 'react';
 
 type UserType = 'admin' | 'student';
@@ -59,7 +59,13 @@ const Layout = () => {
     <nav
       className={`flex-1 bg-gradient-to-r from-light-purple to-purple ${width} h-full px-3 py-[8px] rounded-full flex items-center justify-between gap-9`}>
       {buttons.map((button, index) => (
-        <IconButton key={index} icon={button.icon} aria-label={button.label} />
+        <Button
+          key={index}
+          content='icon'
+          size='icon'
+          aria-label={button.label}>
+          {button.icon}
+        </Button>
       ))}
     </nav>
   );

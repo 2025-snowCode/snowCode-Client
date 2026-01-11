@@ -32,15 +32,14 @@ const AssignmentPageLayout = ({
       <div className='px-14'>
         <AssignmentList courses={courses} selectMode={selectMode} />
         {!selectMode && (
-          <Button
-            theme='secondaryPurpleStroke'
-            text='문제 추가'
-            icon={<AddIcon width={12} height={12} />}
-          />
+          <Button color='tonal' size='compact' content='mixed'>
+            <AddIcon width={12} height={12} />
+            문제 추가
+          </Button>
         )}
         <div className='flex justify-end gap-5 mt-3'>
-          <Button theme='primaryWhite' text='취소' />
-          <Button theme='primaryPurple' text='저장' />
+          <Button color='outlinePurple'>취소</Button>
+          <Button color='primary'>등록</Button>
         </div>
       </div>
     </div>

@@ -1,8 +1,8 @@
 import {useState, useRef, useEffect} from 'react';
 import {useNavigate, useLocation} from 'react-router-dom';
-import ActionButton from '@/components/common/ActionButton';
 import SnowCodeEntryMini from '@/assets/images/snowCode_entry_mini.svg';
 import ArrowleftIcon from '@/assets/svg/arrowleftIcon.svg?react';
+import Button from '@/components/common/Button';
 
 export default function UserIdInputPage() {
   const navigate = useNavigate();
@@ -78,13 +78,14 @@ export default function UserIdInputPage() {
     <div className='relative flex flex-col items-center min-h-[calc(100vh-120px)] text-center'>
       <div className='absolute top-[43px] left-[60px] flex items-center gap-4'>
         <ArrowleftIcon className='w-[18px] h-[24px]' />
-        <button
+        <Button
+          color='ghost'
           onClick={handleBeforeClick}
-          className='text-black text-[18px] font-medium'>
+          size='none'
+          className='leading-7 text-lg'>
           이전으로
-        </button>
+        </Button>
       </div>
-
       <div className='w-[216px] h-[216px] mt-19'>
         <img src={SnowCodeEntryMini} alt='SnowCode Entry Mini' />
       </div>
@@ -121,13 +122,14 @@ export default function UserIdInputPage() {
             />
           ))}
         </div>
-
-        <ActionButton
-          label='확인'
+        <Button
+          color='secondary'
+          size='wide'
           disabled={!isComplete}
           onClick={handleSubmit}
-          className={!isComplete ? 'cursor-not-allowed' : ''}
-        />
+          className='disabled:cursor-not-allowed'>
+          확인
+        </Button>
       </div>
     </div>
   );
