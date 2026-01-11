@@ -1,4 +1,4 @@
-import type {SemesterCode} from '../components/admin/assignments/dummy/types';
+import type {SemesterCode} from '@/components/admin/assignments/dummy/types';
 
 const SEMESTER_LABEL: Record<SemesterCode, '1' | '2' | '여름' | '겨울'> = {
   FIRST: '1',

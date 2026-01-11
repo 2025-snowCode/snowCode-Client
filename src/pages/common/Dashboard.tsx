@@ -1,5 +1,5 @@
-import CourseList from '../../components/common/Dashboard/CourseList';
-import ScheduleList from '../../components/common/Dashboard/ScheduleList';
+import CourseList from '@/components/common/Dashboard/CourseList';
+import ScheduleList from '@/components/common/Dashboard/ScheduleList';
 import {useLocation} from 'react-router-dom';
 
 const Dashboard = () => {

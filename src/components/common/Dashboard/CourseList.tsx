@@ -1,6 +1,6 @@
-import logo from '../../../assets/images/snowCode_logo_mini.svg';
+import logo from '@/assets/images/snowCode_logo_mini.svg';
 import CourseCard from './CourseCard';
-import {AddIcon} from '../../../assets/svg';
+import AddIcon from '/svg/addIcon.svg?react';
 import type {Course, UserType} from './types';
 import Button from '../Button';
 

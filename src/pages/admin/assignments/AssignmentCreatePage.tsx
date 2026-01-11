@@ -37,7 +37,7 @@ const AssignmentCreatePage = () => {
             className='w-full'
           />
           <div className='space-y-2'>
-            {examples.map((ex, idx) => (
+            {examples.map((_, idx) => (
               <div
                 key={idx}
                 className='grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)_200px] gap-4'>

@@ -1,0 +1,34 @@
+echo "📝 커밋 메시지를 검증합니다..."
+
+# 커밋 메시지 읽기
+commit_msg=$(cat $1)
+
+# 이슈 번호 뒤에 공백 없이 문자가 오는 경우 체크 (#13test, #13chore 등)
+if echo "$commit_msg" | grep -qE '^#[0-9]+[a-zA-Z]'; then
+  echo "❌ 이슈 번호 뒤에는 공백이 필요합니다."
+  echo "잘못된 형식: $(echo "$commit_msg" | grep -oE '^#[0-9]+[a-zA-Z][^ ]*')"
+  echo "올바른 형식: #13 chore: 메시지"
+  exit 1
+fi
+
+# commitlint 실행
+if npx --no -- commitlint --edit $1; then
+  echo "✅ 커밋 메시지가 규칙에 맞습니다."
+  exit 0
+else
+  echo "❌ 커밋 메시지가 컨벤션에 맞지 않습니다."
+  echo ""
+  echo "올바른 커밋 메시지 형식:"
+  echo "  <type>: <subject>"
+  echo "  #<이슈번호> <type>: <subject>  (이슈 번호는 선택사항)"
+  echo ""
+  echo "예시:"
+  echo "  feat: 새로운 기능 추가"
+  echo "  #13 fix: 버그 수정"
+  echo "  docs: 문서 수정"
+  echo "  #42 refactor: 코드 리팩토링"
+  echo ""
+  echo "사용 가능한 type:"
+  echo "  feat, fix, docs, style, refactor, test, chore, perf, ci, build, revert"
+  exit 1
+fi

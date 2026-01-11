@@ -1,4 +1,4 @@
-import type {Assignment} from '../../admin/assignments/dummy/types';
+import type {Assignment} from '@/components/admin/assignments/dummy/types';
 import Badge from '../Badge';
 
 interface AssignmentItemProps extends Assignment {
