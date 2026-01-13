@@ -3,6 +3,8 @@ import LabeledInput from '@/components/admin/form/LabeledInput';
 import FileUpload from '@/components/admin/form/FileUpload';
 import {useState} from 'react';
 import LabeledDropdown from '@/components/admin/form/LabeledDropdown';
+import Button from '@/components/common/Button';
+import {AddIcon} from '@/assets/svg';
 
 const AssignmentCreatePage = () => {
   const [examples, setExamples] = useState([{input: '', output: '', 공개: ''}]);
@@ -58,11 +60,14 @@ const AssignmentCreatePage = () => {
             ))}
           </div>
 
-          <button
-            className='w-fit self-start px-3 py-1.5 bg-purple-stroke rounded-[10px] cursor-pointer'
+          <Button
+            color='tonal'
+            size='compact'
+            content='mixed'
             onClick={handleAddExample}>
-            + 추가
-          </button>
+            <AddIcon width={12} height={12} />
+            추가
+          </Button>
           <FileUpload
             label='테스트 케이스'
             onFileChange={() => {}}

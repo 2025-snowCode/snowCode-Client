@@ -1,5 +1,5 @@
 import type {Assignment} from '@/components/admin/assignments/dummy/types';
-import SubmissionBadge from './SubmissionBadge';
+import Badge from '../Badge';
 
 interface AssignmentItemProps extends Assignment {
   index: number;
@@ -34,7 +34,12 @@ const AssignmentItem = ({
           {title}
         </span>
       </div>
-      {isOpen && <SubmissionBadge submittedStatus={submittedStatus} />}
+      {isOpen && (
+        <Badge
+          variant='submission'
+          status={submittedStatus || 'NOT_SUBMITTED'}
+        />
+      )}
     </div>
   );
 };

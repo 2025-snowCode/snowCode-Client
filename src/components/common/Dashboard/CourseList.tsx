@@ -2,6 +2,7 @@ import logo from '@/assets/images/snowCode_logo_mini.svg';
 import CourseCard from './CourseCard';
 import AddIcon from '/svg/addIcon.svg?react';
 import type {Course, UserType} from './types';
+import Button from '../Button';
 
 const courses: Course[] = [
   {
@@ -45,10 +46,13 @@ const CourseList = ({userType}: CourseListProps) => {
           강의 목록
         </span>
         {userType === 'admin' && (
-          <button className='bg-white border-0 px-3 py-1 rounded-[10px] flex-center gap-[6px] text-base font-medium text-secondary-black cursor-pointer hover:bg-gray'>
+          <Button
+            color='ghostWhite'
+            size='compact'
+            className='hover:opacity-70'>
             <AddIcon width={12} height={12} />
-            <span>추가</span>
-          </button>
+            추가
+          </Button>
         )}
       </div>
       <div>

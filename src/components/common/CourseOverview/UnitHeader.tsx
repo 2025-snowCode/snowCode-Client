@@ -1,6 +1,5 @@
-import UnitLabel from './UnitLabel';
-import UnitLabel from './UnitLabel';
 import lock from '@/assets/images/lock.svg';
+import Badge from '../Badge';
 
 interface UnitHeaderProps {
   index: number;
@@ -20,7 +19,9 @@ const UnitHeader = ({
   return (
     <div className='h-[55px] bg-gray flex items-center px-55 whitespace-nowrap'>
       <div className='flex items-center w-70%'>
-        <UnitLabel unitNo={index} />
+        <Badge variant='index' kind='unit'>
+          {index}
+        </Badge>
         <span className='pl-[13.5px] pr-[10.5px] text-lg text-secondary-black font-medium'>
           {title}
         </span>

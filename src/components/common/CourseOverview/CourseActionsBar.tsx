@@ -16,15 +16,8 @@ const CourseActionsBar = ({isActive, title, section}: CourseActionsBarProps) => 
 
   return (
     <div className='flex gap-5'>
-      <Button
-        theme={`${isActive ? 'primaryTransparent' : 'primaryWhite'}`}
-        text='학생 목록'
-        onClick={handleStudentListClick}
-      />
-      <Button
-        theme={`${isActive ? 'primaryWhite' : 'primaryPurple'}`}
-        text='단원 추가'
-      />
+      <Button color='outlineWhite'>학생 목록</Button>
+      <Button color='outlinePurple'>단원 추가</Button>
     </div>
   );
 };
