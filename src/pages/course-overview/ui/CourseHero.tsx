@@ -1,30 +1,31 @@
 import snowcodeOverviewMini from '@/assets/images/snowcode_overview_mini.svg';
-import {Link, useLocation} from 'react-router-dom';
 import type {CourseOverview} from '@/models/course';
 import {formatSemester} from '@/utils/course';
-import Button from '@/components/common/Button';
+import CourseActionsBar from './CourseActionsBar';
 
 // 강의 상세 페이지 - Hero 섹션
 interface CourseHeroProps {
   courseData: Omit<CourseOverview, 'units'>;
   assignmentCount: number;
   isActiveCourse: boolean;
+  isAdmin: boolean;
 }
 
 export const CourseHero = ({
   courseData,
   assignmentCount,
   isActiveCourse,
+  isAdmin,
 }: CourseHeroProps) => {
-  // 관리자 경로 확인
-  const pathname = useLocation().pathname;
-  const isAdmin = pathname.startsWith('/admin');
-
   const {title, year, semester, section, unitCount, studentCount} = courseData;
 
   return (
     <section className='relative w-full flex-center flex-col pt-38.5 pb-12.5 rounded-t-[30px] bg-radial-gradient'>
-      {isAdmin && isActiveCourse && <CourseActionsBar />}
+      {isAdmin && isActiveCourse && (
+        <nav className='absolute top-36 right-35'>
+          <CourseActionsBar isActiveCourse={true} />
+        </nav>
+      )}
 
       <CourseInfo
         title={title}
@@ -84,22 +85,6 @@ const CourseStats = ({
     <article className='px-3.5 py-1.5 text-center bg-white rounded-[35px]'>
       <span className='text-base font-normal'>{courseStats}</span>
     </article>
-  );
-};
-
-// 강의 관리 버튼 바 (관리자 전용)
-const CourseActionsBar = () => {
-  return (
-    <nav className='absolute top-36 right-35'>
-      <article className='flex gap-5'>
-        <Link to=''>
-          <Button color='outlineWhite'>학생 목록</Button>
-        </Link>
-        <Link to=''>
-          <Button color='outlinePurple'>단원 추가</Button>
-        </Link>
-      </article>
-    </nav>
   );
 };
 
