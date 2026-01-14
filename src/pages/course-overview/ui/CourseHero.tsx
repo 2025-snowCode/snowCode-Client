@@ -1,9 +1,9 @@
 import snowcodeOverviewMini from '@/assets/images/snowcode_overview_mini.svg';
 import {useLocation} from 'react-router-dom';
-import {getSemesterLabel} from '@/utils/getSemesterLabel';
 import CourseActionsBar from './CourseActionsBar';
 import CourseStat from './CourseStats';
-import type {CourseOverview} from '@/models/Course';
+import type {CourseOverview} from '@/models/course';
+import {formatSemester} from '@/utils/course';
 
 interface CourseHeroProps {
   courseData: Omit<CourseOverview, 'units'>;
@@ -36,7 +36,7 @@ const CourseHero = ({
       <span className='pb-[1px] text-2xl text-white font-medium leading-9'>
         {title}
       </span>
-      <span className='pb-[11px] text-base text-white font-normal leading-6'>{`${year}년 ${getSemesterLabel(
+      <span className='pb-[11px] text-base text-white font-normal leading-6'>{`${year}년 ${formatSemester(
         semester
       )}학기 ${section}분반`}</span>
       {isActiveCourse && (
