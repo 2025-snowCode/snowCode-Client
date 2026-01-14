@@ -1,4 +1,4 @@
-import type {UnitInfo} from './dummy/types';
+import type {UnitInfo} from '../models/types';
 import Unit from './Unit';
 
 interface CourseContentProps {

@@ -1,5 +1,5 @@
 import type {Assignment} from '@/components/admin/assignments/dummy/types';
-import Badge from '../Badge';
+import Badge from '@/components/common/Badge';
 
 interface AssignmentItemProps extends Assignment {
   index: number;

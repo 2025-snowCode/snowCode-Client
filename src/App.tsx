@@ -5,7 +5,7 @@ import UserIdInputPage from './pages/common/UserIdInputPage';
 import Dashboard from './pages/common/Dashboard';
 import AssignmentsPage from './pages/admin/assignments/AssignmentsPage';
 import AssignmentSelectPage from './pages/admin/assignments/AssignmentSelectPage';
-import CourseOverviewPage from './pages/common/CourseOverviewPage';
+import CourseOverviewPage from './pages/course-overview/CourseOverviewPage';
 import AssignmentCreatePage from './pages/admin/assignments/AssignmentCreatePage';
 import CourseCreatePage from './pages/admin/courses/CourseCreatePage';
 import StudentManagementPage from './pages/admin/student/studentManagementPage';

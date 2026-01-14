@@ -1,5 +1,5 @@
 import lock from '@/assets/images/lock.svg';
-import Badge from '../Badge';
+import Badge from '@/components/common/Badge';
 
 interface UnitHeaderProps {
   index: number;
