@@ -20,7 +20,7 @@ const scheduleBadgeStyles = tv({
 
 const submissionBadgeStyles = tv({
   extend: badgeStyles,
-  base: 'bg-transparent flex-center gap-2',
+  base: 'bg-transparent flex-center gap-2 text-sm',
   variants: {
     status: {
       CORRECT: 'border-primary text-primary',
