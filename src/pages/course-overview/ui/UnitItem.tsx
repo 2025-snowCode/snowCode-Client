@@ -58,7 +58,7 @@ const UnitHeader = ({
         </div>
 
         {/* 우측: 데드라인 */}
-        <div className='shrink-0 text-base text-light-black font-normal min-w-0 whitespace-nowrap'>
+        <div className='shrink-0 ml-2 text-base text-light-black font-normal min-w-0 whitespace-nowrap'>
           <time dateTime={releaseDate}>{deadline}</time>
         </div>
       </div>
