@@ -4,6 +4,7 @@ import type {CourseOverview} from '@/models/course';
 import {formatSemester} from '@/utils/course';
 import Button from '@/components/common/Button';
 
+// 강의 상세 페이지 - Hero 섹션
 interface CourseHeroProps {
   courseData: Omit<CourseOverview, 'units'>;
   assignmentCount: number;
@@ -15,6 +16,7 @@ export const CourseHero = ({
   assignmentCount,
   isActiveCourse,
 }: CourseHeroProps) => {
+  // 관리자 경로 확인
   const pathname = useLocation().pathname;
   const isAdmin = pathname.startsWith('/admin');
 
@@ -43,6 +45,7 @@ export const CourseHero = ({
   );
 };
 
+// 강의 정보 표시
 type CourseInfoProps = Pick<
   CourseHeroProps['courseData'],
   'title' | 'year' | 'semester' | 'section'
@@ -60,6 +63,7 @@ const CourseInfo = ({title, year, semester, section}: CourseInfoProps) => {
   );
 };
 
+// 강의 Stats 표시
 interface CourseStatsProps
   extends Pick<CourseHeroProps['courseData'], 'unitCount' | 'studentCount'> {
   assignmentCount: CourseHeroProps['assignmentCount'];
@@ -83,6 +87,7 @@ const CourseStats = ({
   );
 };
 
+// 강의 관리 버튼 바 (관리자 전용)
 const CourseActionsBar = () => {
   return (
     <nav className='absolute top-36 right-35'>
