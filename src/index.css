@@ -62,6 +62,10 @@
   @apply flex items-center justify-center;
 }
 
+@utility bg-radial-gradient {
+  @apply bg-radial-[80%_74%_at_34%_0%] from-[#AC9BFF] from-0% to-[#7D63FF] to-100%;
+}
+
 .header-btn {
   @apply bg-primary w-16 h-16 rounded-full flex-center;
 }
