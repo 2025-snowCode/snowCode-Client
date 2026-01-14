@@ -11,3 +11,7 @@ export const formatSemester = (semester: SemesterCode) => {
   const label = SEMESTER_MAP[semester];
   return `${label}학기`;
 };
+
+export const formatDate = (date: string) => {
+  return date.replaceAll('-', '.');
+};
