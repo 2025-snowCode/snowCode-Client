@@ -1,33 +1,25 @@
-import {useLocation} from 'react-router-dom';
 import snowcodeOverviewMini from '@/assets/images/snowcode_overview_mini.svg';
+import {useLocation} from 'react-router-dom';
 import {getSemesterLabel} from '@/utils/getSemesterLabel';
-import type {SemesterCode} from '@/components/admin/assignments/dummy/types';
 import CourseActionsBar from './CourseActionsBar';
-import CourseStat from './CourseStat';
+import CourseStat from './CourseStats';
+import type {CourseOverview} from '@/models/Course';
 
-interface CoursHeroProps {
-  title: string;
-  year: number;
-  semester: SemesterCode;
-  section: string;
-  unitCount: number;
+interface CourseHeroProps {
+  courseData: Omit<CourseOverview, 'units'>;
   assignmentCount: number;
-  studentCount?: number;
   isActiveCourse: boolean;
 }
 
 const CourseHero = ({
-  title,
-  year,
-  semester,
-  section,
-  unitCount,
+  courseData,
   assignmentCount,
-  studentCount,
   isActiveCourse,
-}: CoursHeroProps) => {
+}: CourseHeroProps) => {
   const pathname = useLocation().pathname;
   const isAdmin = pathname.startsWith('/admin');
+
+  const {title, year, semester, section, unitCount, studentCount} = courseData;
 
   return (
     <div className='w-full h-[353px] flex-center flex-col rounded-t-[30px] bg-radial-[80%_74%_at_34%_0%] from-[#AC9BFF] from-0% to-[#7D63FF] to-100%'>

@@ -1,5 +1,5 @@
 import AssignmentList from './AssignmentList';
-import type {UnitInfo} from './dummy/types';
+import type {UnitInfo} from '../models/types';
 import UnitHeader from './UnitHeader';
 
 interface UnitProps extends UnitInfo {
