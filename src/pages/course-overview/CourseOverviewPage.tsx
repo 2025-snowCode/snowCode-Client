@@ -1,34 +1,32 @@
+import {getTotalAssignmentCount} from '@/utils/course';
 import CourseContent from './ui/CourseContent';
 import CourseHero from './ui/CourseHero';
 import {courseResponse} from '@/pages/course-overview/models/response';
-import EmptyCourse from './ui/EmptyCourse';
-
-function countAssignments() {
-  let assignmentCount = 0;
-  courseResponse.response.units.forEach(
-    (unit) => (assignmentCount += unit.assignmentCount)
-  );
-
-  return assignmentCount;
-}
-
-const courseData = courseResponse.response;
-const isActiveCourse = courseData.unitCount > 0;
+import {useLocation} from 'react-router-dom';
 
 const CourseOverviewPage = () => {
+  // 관리자 경로 확인
+  const pathname = useLocation().pathname;
+  const isAdmin = pathname.startsWith('/admin');
+
+  const courseData = courseResponse.response;
+  const totalAssignmentCount = getTotalAssignmentCount(courseData.units); // 총 문제 수 계산
+  const hasUnits = courseData.unitCount !== 0 ? true : false;
+
   return (
-    <div className='p-4 w-full min-h-screen flex flex-col absolute top-0 left-0 z-0'>
+    <main className='w-full min-h-screen flex flex-col absolute top-0 left-0 z-0 p-4'>
       <CourseHero
         courseData={courseData}
-        assignmentCount={countAssignments()}
-        isActiveCourse={isActiveCourse}
+        assignmentCount={totalAssignmentCount}
+        isActiveCourse={hasUnits}
+        isAdmin={isAdmin}
       />
-      {isActiveCourse ? (
-        <CourseContent units={courseResponse.response.units} />
-      ) : (
-        <EmptyCourse />
-      )}
-    </div>
+      <CourseContent
+        units={courseData.units}
+        isActiveCourse={hasUnits}
+        isAdmin={isAdmin}
+      />
+    </main>
   );
 };
 
