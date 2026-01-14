@@ -1,4 +1,4 @@
-import type {SemesterCode} from '@/models/Course';
+import type {SemesterCode} from '@/models/course';
 
 const SEMESTER_MAP: Record<SemesterCode, '1' | '2' | '여름' | '겨울'> = {
   FIRST: '1',

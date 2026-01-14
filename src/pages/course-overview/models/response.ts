@@ -1,4 +1,4 @@
-import type {CourseOverviewResponse} from '@/models/Course';
+import type {CourseOverviewResponse} from '@/models/course';
 
 export const courseResponse: CourseOverviewResponse = {
   success: true,
