@@ -2,13 +2,8 @@ import {getTotalAssignmentCount} from '@/utils/course';
 import CourseContent from './ui/CourseContent';
 import CourseHero from './ui/CourseHero';
 import {courseResponse} from '@/pages/course-overview/models/response';
-import {useLocation} from 'react-router-dom';
 
 const CourseOverviewPage = () => {
-  // 관리자 경로 확인
-  const pathname = useLocation().pathname;
-  const isAdmin = pathname.startsWith('/admin');
-
   const courseData = courseResponse.response;
   const totalAssignmentCount = getTotalAssignmentCount(courseData.units); // 총 문제 수 계산
   const hasUnits = courseData.unitCount !== 0 ? true : false;
@@ -19,13 +14,8 @@ const CourseOverviewPage = () => {
         courseData={courseData}
         assignmentCount={totalAssignmentCount}
         isActiveCourse={hasUnits}
-        isAdmin={isAdmin}
       />
-      <CourseContent
-        units={courseData.units}
-        isActiveCourse={hasUnits}
-        isAdmin={isAdmin}
-      />
+      <CourseContent units={courseData.units} isActiveCourse={hasUnits} />
     </main>
   );
 };
