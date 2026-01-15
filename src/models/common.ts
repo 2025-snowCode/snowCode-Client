@@ -6,3 +6,5 @@ export interface ApiResponse<T> {
   success: boolean;
   response: T;
 }
+
+export type UserType = 'admin' | 'student' | 'guest';

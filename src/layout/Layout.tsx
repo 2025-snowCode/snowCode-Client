@@ -6,9 +6,7 @@ import SignoutIcon from '@/assets/svg/signoutIcon.svg?react';
 import UserIcon from '@/assets/svg/userIcon.svg?react';
 import ChatIcon from '@/assets/svg/chatIcon.svg?react';
 import Button from '@/components/common/Button';
-import React from 'react';
-
-type UserType = 'admin' | 'student';
+import type {UserType} from '@/models/common';
 
 interface NavButton {
   icon: React.ReactElement;
