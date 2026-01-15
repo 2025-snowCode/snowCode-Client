@@ -2,21 +2,22 @@ import snowcodeOverviewMini from '@/assets/images/snowcode_overview_mini.svg';
 import type {CourseOverview} from '@/models/course';
 import {formatSemester} from '@/utils/course';
 import CourseActionsBar from './CourseActionsBar';
+import {useContext} from 'react';
+import {UserTypeContext} from '@/App';
 
 // 강의 상세 페이지 - Hero 섹션
 interface CourseHeroProps {
   courseData: Omit<CourseOverview, 'units'>;
   assignmentCount: number;
   isActiveCourse: boolean;
-  isAdmin: boolean;
 }
 
 export const CourseHero = ({
   courseData,
   assignmentCount,
   isActiveCourse,
-  isAdmin,
 }: CourseHeroProps) => {
+  const isAdmin = useContext(UserTypeContext) === 'admin' ? true : false;
   const {title, year, semester, section, unitCount, studentCount} = courseData;
 
   return (
