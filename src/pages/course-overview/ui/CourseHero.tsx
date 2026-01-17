@@ -1,18 +1,16 @@
 import snowcodeOverviewMini from '@/assets/images/snowcode_overview_mini.svg';
-import type {CourseOverview} from '@/models/course';
 import {formatSemester} from '@/utils/course';
 import CourseActionsBar from './CourseActionsBar';
 import {useContext} from 'react';
 import {UserTypeContext} from '@/App';
+import type {
+  CourseHeroProps,
+  CourseInfoProps,
+  CourseStatsProps,
+} from '../models/types';
 
 // 강의 상세 페이지 - Hero 섹션
-interface CourseHeroProps {
-  courseData: Omit<CourseOverview, 'units'>;
-  assignmentCount: number;
-  isActiveCourse: boolean;
-}
-
-export const CourseHero = ({
+const CourseHero = ({
   courseData,
   assignmentCount,
   isActiveCourse,
@@ -47,12 +45,7 @@ export const CourseHero = ({
   );
 };
 
-// 강의 정보 표시
-type CourseInfoProps = Pick<
-  CourseHeroProps['courseData'],
-  'title' | 'year' | 'semester' | 'section'
->;
-
+// 강의 기본 정보 표시
 const CourseInfo = ({title, year, semester, section}: CourseInfoProps) => {
   const courseInfo = `${year}년 ${formatSemester(semester)} ${section}분반`;
 
@@ -66,12 +59,6 @@ const CourseInfo = ({title, year, semester, section}: CourseInfoProps) => {
 };
 
 // 강의 Stats 표시
-interface CourseStatsProps
-  extends Pick<CourseHeroProps['courseData'], 'unitCount' | 'studentCount'> {
-  assignmentCount: CourseHeroProps['assignmentCount'];
-  isAdmin: boolean;
-}
-
 const CourseStats = ({
   unitCount,
   assignmentCount,

@@ -1,12 +1,8 @@
 import AssignmentList from './AssignmentList';
-import type {Unit} from '@/models/course';
 import Lock from '@/assets/svg/lock.svg?react';
 import Badge from '@/components/common/Badge';
 import {formatDate} from '@/utils/course';
-
-interface UnitProps extends Unit {
-  index: number;
-}
+import type {UnitHeaderProps, UnitProps} from '../models/types';
 
 const UnitItem = ({index, ...unit}: UnitProps) => {
   const isOpen = unit.isOpen ?? true;
@@ -26,10 +22,6 @@ const UnitItem = ({index, ...unit}: UnitProps) => {
 };
 
 // 단원 헤더 컴포넌트
-type UnitHeaderProps = Omit<
-  UnitProps,
-  'id' | 'assignmentCount' | 'assignments'
->;
 
 const UnitHeader = ({
   index,

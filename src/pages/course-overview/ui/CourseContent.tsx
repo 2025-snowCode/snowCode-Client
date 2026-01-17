@@ -1,14 +1,9 @@
-import type {CourseOverview} from '@/models/course';
 import snowCodeOverview from '@/assets/images/snowcode_overview.svg';
 import UnitItem from './UnitItem';
 import CourseActionsBar from './CourseActionsBar';
 import {useContext} from 'react';
 import {UserTypeContext} from '@/App';
-
-interface CourseContentProps {
-  units: CourseOverview['units'];
-  isActiveCourse: boolean;
-}
+import type {CourseContentProps} from '../models/types';
 
 const CourseContent = ({units, isActiveCourse}: CourseContentProps) => {
   // 빈 강의
