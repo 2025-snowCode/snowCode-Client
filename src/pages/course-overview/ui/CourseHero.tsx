@@ -1,5 +1,5 @@
 import snowcodeOverviewMini from '@/assets/images/snowcode_overview_mini.svg';
-import {formatSemester} from '@/utils/course';
+import {formatCourseInfo, formatSemester} from '@/utils/course';
 import CourseActionsBar from './CourseActionsBar';
 import {useContext} from 'react';
 import {UserTypeContext} from '@/App';
@@ -47,13 +47,13 @@ const CourseHero = ({
 
 // 강의 기본 정보 표시
 const CourseInfo = ({title, year, semester, section}: CourseInfoProps) => {
-  const courseInfo = `${year}년 ${formatSemester(semester)} ${section}분반`;
-
   return (
     <article className='flex-center flex-col text-white'>
       <img src={snowcodeOverviewMini} alt='snowCode logo' />
       <h1 className='pb-[1px] text-2xl font-medium leading-9'>{title}</h1>
-      <p className='pb-[11px] text-base font-normal leading-6'>{courseInfo}</p>
+      <p className='pb-[11px] text-base font-normal leading-6'>
+        {formatCourseInfo(year, semester, section)}
+      </p>
     </article>
   );
 };
