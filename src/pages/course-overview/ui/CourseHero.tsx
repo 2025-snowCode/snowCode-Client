@@ -1,0 +1,79 @@
+import snowcodeOverviewMini from '@/assets/images/snowcode_overview_mini.svg';
+import {formatCourseInfo, formatSemester} from '@/utils/course';
+import CourseActionsBar from './CourseActionsBar';
+import {useContext} from 'react';
+import {UserTypeContext} from '@/App';
+import type {
+  CourseHeroProps,
+  CourseInfoProps,
+  CourseStatsProps,
+} from '../models/types';
+
+// 강의 상세 페이지 - Hero 섹션
+const CourseHero = ({
+  courseData,
+  assignmentCount,
+  isActiveCourse,
+}: CourseHeroProps) => {
+  const isAdmin = useContext(UserTypeContext) === 'admin' ? true : false;
+  const {title, year, semester, section, unitCount, studentCount} = courseData;
+
+  return (
+    <section className='relative w-full flex-center flex-col pt-38.5 pb-12.5 rounded-t-[30px] bg-radial-gradient'>
+      {isAdmin && isActiveCourse && (
+        <nav className='absolute top-36 right-35'>
+          <CourseActionsBar isActiveCourse={true} />
+        </nav>
+      )}
+
+      <CourseInfo
+        title={title}
+        year={year}
+        semester={semester}
+        section={section}
+      />
+
+      {isActiveCourse && (
+        <CourseStats
+          unitCount={unitCount}
+          assignmentCount={assignmentCount}
+          studentCount={studentCount}
+          isAdmin={isAdmin}
+        />
+      )}
+    </section>
+  );
+};
+
+// 강의 기본 정보 표시
+const CourseInfo = ({title, year, semester, section}: CourseInfoProps) => {
+  return (
+    <article className='flex-center flex-col text-white'>
+      <img src={snowcodeOverviewMini} alt='snowCode logo' />
+      <h1 className='pb-[1px] text-2xl font-medium leading-9'>{title}</h1>
+      <p className='pb-[11px] text-base font-normal leading-6'>
+        {formatCourseInfo(year, semester, section)}
+      </p>
+    </article>
+  );
+};
+
+// 강의 Stats 표시
+const CourseStats = ({
+  unitCount,
+  assignmentCount,
+  studentCount,
+  isAdmin,
+}: CourseStatsProps) => {
+  const studentInfo =
+    isAdmin && studentCount !== undefined ? ` | ${studentCount}명` : '';
+  const courseStats = `${unitCount}단원 | ${assignmentCount}문제${studentInfo}`;
+
+  return (
+    <article className='px-3.5 py-1.5 text-center bg-white rounded-[35px]'>
+      <span className='text-base font-normal'>{courseStats}</span>
+    </article>
+  );
+};
+
+export default CourseHero;

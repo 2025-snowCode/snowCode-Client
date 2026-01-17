@@ -1,9 +1,7 @@
 import {useState, useRef, useEffect} from 'react';
 import {useNavigate, useLocation} from 'react-router-dom';
 import SnowCodeEntryMini from '@/assets/images/snowCode_entry_mini.svg';
-import ArrowleftIcon from '/svg/arrowleftIcon.svg?react';
-import SnowCodeEntryMini from '../../assets/images/snowCode_entry_mini.svg';
-import {ArrowleftIcon} from '../../assets/svg';
+import ArrowleftIcon from '@/assets/svg/arrowleftIcon.svg?react';
 import Button from '@/components/common/Button';
 
 export default function UserIdInputPage() {

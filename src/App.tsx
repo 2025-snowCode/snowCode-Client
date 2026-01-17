@@ -1,18 +1,29 @@
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {BrowserRouter, Routes, Route, useLocation} from 'react-router-dom';
 import Layout from './layout/Layout';
 import LandingPage from './pages/common/LandingPage';
 import UserIdInputPage from './pages/common/UserIdInputPage';
 import Dashboard from './pages/common/Dashboard';
 import AssignmentsPage from './pages/admin/assignments/AssignmentsPage';
 import AssignmentSelectPage from './pages/admin/assignments/AssignmentSelectPage';
-import CourseOverviewPage from './pages/common/CourseOverviewPage';
+import CourseOverviewPage from './pages/course-overview/CourseOverviewPage';
 import AssignmentCreatePage from './pages/admin/assignments/AssignmentCreatePage';
 import CourseCreatePage from './pages/admin/courses/CourseCreatePage';
 import StudentManagementPage from './pages/admin/student/studentManagementPage';
+import type {UserType} from './models/common';
+import {createContext} from 'react';
 
-function App() {
+export const UserTypeContext = createContext<UserType>('guest');
+
+const AppContent = () => {
+  const pathname = useLocation().pathname;
+  const userType = pathname.startsWith('/admin')
+    ? 'admin'
+    : pathname.startsWith('/student')
+      ? 'student'
+      : 'guest';
+
   return (
-    <BrowserRouter>
+    <UserTypeContext.Provider value={userType}>
       <Routes>
         {/* 공통 영역 */}
         <Route path='/' element={<Layout />}>
@@ -39,6 +50,14 @@ function App() {
           <Route path='student' element={<StudentManagementPage />} />
         </Route>
       </Routes>
+    </UserTypeContext.Provider>
+  );
+};
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
     </BrowserRouter>
   );
 }

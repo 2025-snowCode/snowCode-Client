@@ -1,14 +1,12 @@
 // Layout.js
 import {useLocation, Outlet} from 'react-router-dom';
 import BaseHeader from '@/components/common/BaseHeader';
-import NotificationIcon from '/svg/notificationIcon.svg?react';
-import SignoutIcon from '/svg/signoutIcon.svg?react';
-import UserIcon from '/svg/userIcon.svg?react';
-import ChatIcon from '/svg/chatIcon.svg?react';
+import NotificationIcon from '@/assets/svg/notificationIcon.svg?react';
+import SignoutIcon from '@/assets/svg/signoutIcon.svg?react';
+import UserIcon from '@/assets/svg/userIcon.svg?react';
+import ChatIcon from '@/assets/svg/chatIcon.svg?react';
 import Button from '@/components/common/Button';
-import React from 'react';
-
-type UserType = 'admin' | 'student';
+import type {UserType} from '@/models/common';
 
 interface NavButton {
   icon: React.ReactElement;

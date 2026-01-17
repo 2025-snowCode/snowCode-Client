@@ -1,6 +1,6 @@
-import type {CourseResponse} from './types';
+import type {CourseOverviewResponse} from '@/models/course';
 
-export const courseResponse: CourseResponse = {
+export const courseResponse: CourseOverviewResponse = {
   success: true,
   response: {
     id: 1,

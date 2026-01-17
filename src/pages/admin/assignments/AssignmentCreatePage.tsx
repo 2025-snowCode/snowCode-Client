@@ -4,7 +4,7 @@ import FileUpload from '@/components/admin/form/FileUpload';
 import {useState} from 'react';
 import LabeledDropdown from '@/components/admin/form/LabeledDropdown';
 import Button from '@/components/common/Button';
-import {AddIcon} from '@/assets/svg';
+import AddIcon from '@/assets/svg/addIcon.svg?react';
 
 const AssignmentCreatePage = () => {
   const [examples, setExamples] = useState([{input: '', output: '', 공개: ''}]);

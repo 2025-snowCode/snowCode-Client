@@ -1,5 +1,7 @@
 import {tv, type VariantProps} from 'tailwind-variants/lite';
-import {Correct, Incorrect, Unsubmitted} from '@/assets/svg';
+import Correct from '@/assets/svg/correct.svg?react';
+import Incorrect from '@/assets/svg/incorrect.svg?react';
+import Unsubmitted from '@/assets/svg/unsubmitted.svg?react';
 
 const badgeStyles = tv({
   base: 'rounded-full px-3.5 py-1.5 leading-[19px] text-center text-base font-medium border whitespace-nowrap',
@@ -18,7 +20,7 @@ const scheduleBadgeStyles = tv({
 
 const submissionBadgeStyles = tv({
   extend: badgeStyles,
-  base: 'bg-transparent flex-center gap-2',
+  base: 'bg-transparent flex-center gap-2 text-sm',
   variants: {
     status: {
       CORRECT: 'border-primary text-primary',
