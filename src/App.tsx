@@ -45,7 +45,7 @@ const AppContent = () => {
           <Route path='assignments' element={<AssignmentsPage />} />
           <Route path='assignments/create' element={<AssignmentCreatePage />} />
           <Route path='assignments/:id' element={<AssignmentSelectPage />} />
-          <Route path='course/:id' element={<CourseOverviewPage />} />
+          <Route path='courses/:id' element={<CourseOverviewPage />} />
           <Route path='courses/create' element={<CourseCreatePage />} />
           <Route path='student' element={<StudentManagementPage />} />
         </Route>
