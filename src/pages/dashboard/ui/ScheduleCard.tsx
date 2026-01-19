@@ -8,7 +8,7 @@ const ScheduleCard = ({
   assignment,
 }: ScheduleCardProps) => {
   return (
-    <li className='bg-white w-99 flex items-start px-6 py-5 gap-5 rounded-3xl shadow-card'>
+    <li className='bg-white w-92 flex items-start px-6 py-5 gap-5 rounded-3xl shadow-card'>
       {/* 남은 일수 배지 */}
       <div className='w-20 shrink-0 flex '>
         <Badge
