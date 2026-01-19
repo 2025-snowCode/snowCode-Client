@@ -2,7 +2,7 @@ import {BrowserRouter, Routes, Route, useLocation} from 'react-router-dom';
 import Layout from './layout/Layout';
 import LandingPage from './pages/common/LandingPage';
 import UserIdInputPage from './pages/common/UserIdInputPage';
-import Dashboard from './pages/common/Dashboard';
+import Dashboard from './pages/dashboard/Dashboard';
 import AssignmentsPage from './pages/admin/assignments/AssignmentsPage';
 import AssignmentSelectPage from './pages/admin/assignments/AssignmentSelectPage';
 import CourseOverviewPage from './pages/course-overview/CourseOverviewPage';
