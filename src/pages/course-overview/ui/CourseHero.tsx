@@ -1,8 +1,7 @@
 import snowcodeOverviewMini from '@/assets/images/snowcode_overview_mini.svg';
-import {formatCourseInfo, formatSemester} from '@/utils/course';
+import {formatCourseInfo} from '@/utils/course';
 import CourseActionsBar from './CourseActionsBar';
-import {useContext} from 'react';
-import {UserTypeContext} from '@/App';
+import {useUserStore} from '@/entities/user/model/user.store';
 import type {
   CourseHeroProps,
   CourseInfoProps,
@@ -15,7 +14,7 @@ const CourseHero = ({
   assignmentCount,
   isActiveCourse,
 }: CourseHeroProps) => {
-  const isAdmin = useContext(UserTypeContext) === 'admin' ? true : false;
+  const isAdmin = useUserStore((state) => state.userType) === 'admin';
   const {title, year, semester, section, unitCount, studentCount} = courseData;
 
   return (
