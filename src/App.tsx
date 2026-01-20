@@ -9,38 +9,37 @@ import CourseOverviewPage from './pages/course-overview/CourseOverviewPage';
 import AssignmentCreatePage from './pages/admin/assignments/AssignmentCreatePage';
 import CourseCreatePage from './pages/admin/courses/CourseCreatePage';
 import StudentManagementPage from './pages/admin/student/studentManagementPage';
-import type {UserType} from './models/common';
-import {createContext} from 'react';
+import {useEffect} from 'react';
+import {useUserStore} from '@/entities/user/model/user.store';
 
-export const UserTypeContext = createContext<UserType>('guest');
+const AppRoutes = () => {
+  const {pathname} = useLocation();
+  const {setUserType} = useUserStore();
 
-const AppContent = () => {
-  const pathname = useLocation().pathname;
-  const userType = pathname.startsWith('/admin')
-    ? 'admin'
-    : pathname.startsWith('/student')
-      ? 'student'
-      : 'guest';
+  useEffect(() => {
+    const userType = pathname.startsWith('/admin')
+      ? 'admin'
+      : pathname.startsWith('/student')
+        ? 'student'
+        : 'guest';
+    setUserType(userType);
+  }, [pathname, setUserType]);
 
   return (
-    <UserTypeContext.Provider value={userType}>
-      <Routes>
+    <Routes>
+      <Route element={<Layout />}>
         {/* 공통 영역 */}
-        <Route path='/' element={<Layout />}>
-          <Route index element={<LandingPage />} />
-          <Route path='userid' element={<UserIdInputPage />} />
-        </Route>
+        <Route index element={<LandingPage />} />
+        <Route path='userid' element={<UserIdInputPage />} />
 
-        {/* 학생 전용 영역 */}
-        <Route path='/student' element={<Layout />}>
-          {/* 추가 페이지들 */}
+        {/* 학생 영역 */}
+        <Route path='student'>
           <Route index element={<Dashboard />} />
           <Route path='course/:id' element={<CourseOverviewPage />} />
         </Route>
 
-        {/* 관리자 전용 영역 */}
-        <Route path='/admin' element={<Layout />}>
-          {/* 추가 페이지들 */}
+        {/* 관리자 영역 */}
+        <Route path='admin'>
           <Route index element={<Dashboard />} />
           <Route path='assignments' element={<AssignmentsPage />} />
           <Route path='assignments/create' element={<AssignmentCreatePage />} />
@@ -49,15 +48,15 @@ const AppContent = () => {
           <Route path='courses/create' element={<CourseCreatePage />} />
           <Route path='student' element={<StudentManagementPage />} />
         </Route>
-      </Routes>
-    </UserTypeContext.Provider>
+      </Route>
+    </Routes>
   );
 };
 
 function App() {
   return (
     <BrowserRouter>
-      <AppContent />
+      <AppRoutes />
     </BrowserRouter>
   );
 }
