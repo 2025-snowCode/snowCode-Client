@@ -5,7 +5,7 @@ import SignoutIcon from '@/assets/svg/signoutIcon.svg?react';
 import UserIcon from '@/assets/svg/userIcon.svg?react';
 import ChatIcon from '@/assets/svg/chatIcon.svg?react';
 import Button from '@/components/common/Button';
-import {useUserStore} from '@/entities/user/model/user.store';
+import {useUserStore} from '@/entities/user/model/useUserStore';
 
 interface NavButton {
   icon: React.ReactElement;
