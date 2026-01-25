@@ -18,7 +18,7 @@ const CourseManagementMenu = ({courseId}: {courseId: number}) => {
 
   // 강의 관리 드롭다운 메뉴 트리거
   const CourseMenuTrigger = (
-    <div className='p-2'>
+    <div className='cursor-pointer p-2'>
       <EllipsisIcon className='w-[21.2px] h-[5px]' />
     </div>
   );
