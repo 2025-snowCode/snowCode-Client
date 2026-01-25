@@ -3,8 +3,10 @@ import {formateCourseTermWithSlash} from '@/utils/course';
 import {UserTypeContext} from '@/App';
 import type {DashboardCourse} from '@/models/course';
 import CourseManagementMenu from './CourseManagementMenu';
+import {useNavigate} from 'react-router-dom';
 
 const CourseCard = (course: DashboardCourse) => {
+  const navigate = useNavigate();
   const userType = useContext(UserTypeContext);
   const {
     id,
@@ -18,9 +20,11 @@ const CourseCard = (course: DashboardCourse) => {
   } = course;
 
   return (
-    <li className='w-148 flex items-stretch bg-white rounded-3xl shadow-card cursor-pointer'>
+    <li className='w-148 flex items-stretch bg-white rounded-3xl shadow-card *:first:hover:opacity-50'>
       {/* 좌측: 강의 기본 정보 */}
-      <div className='flex flex-col gap-1.5 pl-8 pr-6.5 py-5.5'>
+      <div
+        onClick={() => navigate(`courses/${id}`)}
+        className='cursor-pointer flex flex-col gap-1.5 pl-8 pr-6.5 py-5.5'>
         <p className='text-sm font-light text-light-black'>
           {formateCourseTermWithSlash(year, semester, section)}
         </p>
