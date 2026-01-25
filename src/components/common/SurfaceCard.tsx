@@ -1,5 +1,6 @@
 import type {HTMLAttributes, ReactNode} from 'react';
 import {tv} from 'tailwind-variants';
+import type {VariantProps} from 'tailwind-variants';
 
 const surfaceCard = tv({
   base: 'bg-white rounded-[30px] w-[900px] shadow-[0px_0px_14px_0px_rgba(223,219,240,0.40)]',
@@ -14,10 +15,10 @@ const surfaceCard = tv({
   },
 });
 
-type SurfaceCardProps = {
-  size?: 'medium' | 'large';
-  children: ReactNode;
-} & Omit<HTMLAttributes<HTMLDivElement>, 'children'>;
+type SurfaceCardProps = HTMLAttributes<HTMLDivElement> &
+  VariantProps<typeof surfaceCard> & {
+    children: ReactNode;
+  };
 
 const SurfaceCard = ({
   size,
