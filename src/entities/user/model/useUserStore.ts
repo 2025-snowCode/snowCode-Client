@@ -41,6 +41,12 @@ export const useUserStore = create<UserState>()(
         });
       },
     }),
-    {name: 'user-storage'}
+    {
+      name: 'user-storage',
+      partialize: (state) => ({
+        userType: state.userType,
+        isAuthenticated: state.isAuthenticated,
+      }),
+    }
   )
 );
