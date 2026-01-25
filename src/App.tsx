@@ -35,7 +35,7 @@ const AppContent = () => {
         <Route path='/student' element={<Layout />}>
           {/* 추가 페이지들 */}
           <Route index element={<Dashboard />} />
-          <Route path='course/:id' element={<CourseOverviewPage />} />
+          <Route path='courses/:id' element={<CourseOverviewPage />} />
         </Route>
 
         {/* 관리자 전용 영역 */}
