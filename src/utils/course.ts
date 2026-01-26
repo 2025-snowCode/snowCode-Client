@@ -26,12 +26,12 @@ export const formatDateMonthDay = (date: string) => {
 };
 
 // 년/학기/분반 형식으로 변환
-export const formateCourseTermWithSlash = (
+export const formatCourseTermWithSlash = (
   year: number,
   semester: SemesterCode,
   section: string
 ): string => {
-  return `${year}\/${formatSemester(semester)}\/${section}분반`;
+  return `${year}/${formatSemester(semester)}/${section}분반`;
 };
 
 // 과제 기간 포맷팅
@@ -40,7 +40,7 @@ export const formatPeriod = (releaseDate: string, dueDate: string) => {
 };
 
 // 강의 정보 포맷팅
-export const formatCourseInfo = (
+export const formatCourseTerm = (
   year: number,
   semester: SemesterCode,
   section: string
