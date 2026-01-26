@@ -1,13 +1,13 @@
-import {useContext} from 'react';
 import {formateCourseTermWithSlash} from '@/utils/course';
-import {UserTypeContext} from '@/App';
 import type {DashboardCourse} from '@/models/course';
 import CourseManagementDropdown from './CourseManagementDropdown';
 import {useNavigate} from 'react-router-dom';
+import {useUserStore} from '@/entities/user/model/useUserStore';
 
 const CourseCard = (course: DashboardCourse) => {
   const navigate = useNavigate();
-  const userType = useContext(UserTypeContext);
+  const userType = useUserStore((state) => state.userType);
+
   const {
     id,
     year,

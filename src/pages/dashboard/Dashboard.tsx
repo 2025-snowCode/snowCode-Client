@@ -3,14 +3,13 @@ import CourseList from './ui/CourseList';
 import {responseCourseList} from './models/ResponseCourseList';
 import Button from '@/components/common/Button';
 import AddIcon from '@/assets/svg/addIcon.svg?react';
-import {useContext} from 'react';
-import {UserTypeContext} from '@/App';
 import ScheduleList from './ui/ScheduleList';
 import {Link} from 'react-router-dom';
+import {useUserStore} from '@/entities/user/model/useUserStore';
 
 const Dashboard = () => {
   const courseListData = responseCourseList.response.courses;
-  const userType = useContext(UserTypeContext);
+  const userType = useUserStore((state) => state.userType);
 
   return (
     <main className='w-full'>
