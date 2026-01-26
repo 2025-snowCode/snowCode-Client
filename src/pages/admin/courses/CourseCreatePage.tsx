@@ -3,6 +3,9 @@ import LabeledInput from '@/components/admin/form/LabeledInput';
 import FileUpload from '@/components/admin/form/FileUpload';
 import LabeledDropdown from '@/components/admin/form/LabeledDropdown';
 
+const YEAR_OPTIONS = ['2021', '2022', '2023', '2024', '2025', '2026'];
+const SEMESTER_OPTIONS = ['1학기', '2학기', '여름학기', '겨울학기'];
+
 const CourseCreatePage = () => {
   return (
     <AssignmentFormLayout
@@ -24,13 +27,13 @@ const CourseCreatePage = () => {
               label='연도'
               placeholder='연도를 선택하세요'
               className='w-full'
-              variant='year'
+              options={YEAR_OPTIONS}
             />
             <LabeledDropdown
               label='학기'
               placeholder='학기를 선택하세요'
               className='w-full'
-              variant='semester'
+              options={SEMESTER_OPTIONS}
             />
           </div>
 

@@ -6,28 +6,20 @@ interface LabeledDropdownProps
   extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onSelect'> {
   label: string;
   className?: string;
-  variant: 'visibility' | 'year' | 'semester';
+  options: string[];
   placeholder?: string;
   onSelect?: (value: string) => void;
 }
 
-const OPTIONS = {
-  visibility: ['공개', '비공개'],
-  year: ['2021', '2022', '2023', '2024', '2025'],
-  semester: ['1학기', '2학기', '여름학기', '겨울학기'],
-};
-
 const LabeledDropdown = ({
   label,
   className,
-  variant,
+  options,
   placeholder,
   onSelect,
   ...rest
 }: LabeledDropdownProps) => {
   const [selectedValue, setSelectedValue] = useState('');
-
-  const optionsToUse = OPTIONS[variant];
 
   const handleSelect = (option: string) => {
     setSelectedValue(option);
@@ -54,7 +46,7 @@ const LabeledDropdown = ({
 
       <Dropdown
         dropDownButton={TriggerButton}
-        options={optionsToUse}
+        options={options}
         onSelect={handleSelect}
         className='relative'
         menuClassName='w-full bg-gray mt-1'
