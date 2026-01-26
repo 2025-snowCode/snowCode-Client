@@ -2,7 +2,7 @@ import {useContext} from 'react';
 import {formateCourseTermWithSlash} from '@/utils/course';
 import {UserTypeContext} from '@/App';
 import type {DashboardCourse} from '@/models/course';
-import CourseManagementMenu from './CourseManagementMenu';
+import CourseManagementDropdown from './CourseManagementDropdown';
 import {useNavigate} from 'react-router-dom';
 
 const CourseCard = (course: DashboardCourse) => {
@@ -46,7 +46,7 @@ const CourseCard = (course: DashboardCourse) => {
         </div>
 
         {/* 관리자용 강의 관리 버튼 */}
-        {userType === 'admin' && <CourseManagementMenu courseId={id} />}
+        {userType === 'admin' && <CourseManagementDropdown courseId={id} />}
       </div>
     </li>
   );
