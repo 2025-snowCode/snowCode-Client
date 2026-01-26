@@ -2,7 +2,7 @@ import EllipsisIcon from '@/assets/svg/ellipsisIcon.svg?react';
 import Dropdown from '@/components/common/Dropdown';
 import {useNavigate} from 'react-router-dom';
 
-const CourseManagementMenu = ({courseId}: {courseId: number}) => {
+const CourseManagementDropdown = ({courseId}: {courseId: number}) => {
   const navigate = useNavigate();
   const COURSE_MENU_OPTIONS = ['수정하기', '삭제하기'];
 
@@ -34,4 +34,4 @@ const CourseManagementMenu = ({courseId}: {courseId: number}) => {
   );
 };
 
-export default CourseManagementMenu;
+export default CourseManagementDropdown;
