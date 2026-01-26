@@ -1,4 +1,4 @@
-import logo from '@/assets/images/snowCode_logo_mini.svg';
+import LogoIcon from '@/assets/images/snowCode_logo.svg?react';
 import CourseList from './ui/CourseList';
 import {responseCourseList} from './models/ResponseCourseList';
 import Button from '@/components/common/Button';
@@ -40,7 +40,7 @@ const Dashboard = () => {
 const SectionHeader = ({title}: {title: string}) => {
   return (
     <header className='flex items-center gap-2 mb-5'>
-      <img src={logo} alt='' />
+      <LogoIcon className='w-8 h-5 shrink-0' />
       <h2 className='text-xl/normal font-medium'>{title}</h2>
     </header>
   );

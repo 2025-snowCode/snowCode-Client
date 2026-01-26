@@ -1,5 +1,5 @@
 import ScheduleCard from './ScheduleCard';
-import mark from '@/assets/images/snowCode_mark.svg';
+import EventMarkerIcon from '@/assets/svg/eventMarkerIcon.svg?react';
 import {responseScheduleList} from '../models/ResponseScheduleList';
 import {formatDateMonthDay} from '@/utils/course';
 
@@ -37,7 +37,7 @@ const ScheduleList = () => {
 const DeadLine = ({date}: {date: string}) => {
   return (
     <span className='text-secondary-black text-lg flex items-center gap-1'>
-      <img src={mark} alt='' />
+      <EventMarkerIcon className='w-5 h-5 shrink-0' />
       <span className='font-medium'>{formatDateMonthDay(date)}</span>
     </span>
   );
