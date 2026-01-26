@@ -1,14 +1,8 @@
-import type {CourseOverview} from '@/models/course';
 import snowCodeOverview from '@/assets/images/snowcode_overview.svg';
 import UnitItem from './UnitItem';
 import CourseActionsBar from './CourseActionsBar';
-import {useContext} from 'react';
-import {UserTypeContext} from '@/App';
-
-interface CourseContentProps {
-  units: CourseOverview['units'];
-  isActiveCourse: boolean;
-}
+import {useUserStore} from '@/entities/user/model/useUserStore';
+import type {CourseContentProps} from '../models/types';
 
 const CourseContent = ({units, isActiveCourse}: CourseContentProps) => {
   // 빈 강의
@@ -26,7 +20,7 @@ const CourseContent = ({units, isActiveCourse}: CourseContentProps) => {
 };
 
 const EmptyCourse = () => {
-  const userType = useContext(UserTypeContext); // 유저 타입 확인
+  const userType = useUserStore((state) => state.userType); // 유저 타입 확인
 
   return (
     <section className='flex-1 flex-center flex-col bg-white w-full pt-30 pb-41 rounded-b-[30px]'>

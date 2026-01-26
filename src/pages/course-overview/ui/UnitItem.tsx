@@ -1,12 +1,8 @@
 import AssignmentList from './AssignmentList';
-import type {Unit} from '@/models/course';
 import Lock from '@/assets/svg/lock.svg?react';
 import Badge from '@/components/common/Badge';
-import {formatDate} from '@/utils/course';
-
-interface UnitProps extends Unit {
-  index: number;
-}
+import {formatPeriod} from '@/utils/course';
+import type {UnitHeaderProps, UnitProps} from '../models/types';
 
 const UnitItem = ({index, ...unit}: UnitProps) => {
   const isOpen = unit.isOpen ?? true;
@@ -26,11 +22,6 @@ const UnitItem = ({index, ...unit}: UnitProps) => {
 };
 
 // 단원 헤더 컴포넌트
-type UnitHeaderProps = Omit<
-  UnitProps,
-  'id' | 'assignmentCount' | 'assignments'
->;
-
 const UnitHeader = ({
   index,
   title,
@@ -38,8 +29,6 @@ const UnitHeader = ({
   releaseDate,
   dueDate,
 }: UnitHeaderProps) => {
-  const deadline = `${formatDate(releaseDate)} ~ ${formatDate(dueDate)}`;
-
   return (
     <header className='bg-gray w-full p-4'>
       <div className='max-w-4xl mx-auto flex items-center justify-between'>
@@ -59,7 +48,7 @@ const UnitHeader = ({
 
         {/* 우측: 데드라인 */}
         <div className='shrink-0 ml-2 text-base text-light-black font-normal min-w-0 whitespace-nowrap'>
-          <time dateTime={releaseDate}>{deadline}</time>
+          <span>{formatPeriod(releaseDate, dueDate)}</span>
         </div>
       </div>
     </header>
