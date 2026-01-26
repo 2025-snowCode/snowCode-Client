@@ -2,7 +2,7 @@ import {BrowserRouter, Routes, Route, useLocation} from 'react-router-dom';
 import Layout from './layout/Layout';
 import LandingPage from './pages/common/LandingPage';
 import UserIdInputPage from './pages/common/UserIdInputPage';
-import Dashboard from './pages/common/Dashboard';
+import Dashboard from './pages/dashboard/Dashboard';
 import AssignmentsPage from './pages/admin/assignments/AssignmentsPage';
 import AssignmentSelectPage from './pages/admin/assignments/AssignmentSelectPage';
 import CourseOverviewPage from './pages/course-overview/CourseOverviewPage';
@@ -35,7 +35,7 @@ const AppRoutes = () => {
         {/* 학생 영역 */}
         <Route path='student'>
           <Route index element={<Dashboard />} />
-          <Route path='course/:id' element={<CourseOverviewPage />} />
+          <Route path='courses/:id' element={<CourseOverviewPage />} />
         </Route>
 
         {/* 관리자 영역 */}
@@ -44,7 +44,7 @@ const AppRoutes = () => {
           <Route path='assignments' element={<AssignmentsPage />} />
           <Route path='assignments/create' element={<AssignmentCreatePage />} />
           <Route path='assignments/:id' element={<AssignmentSelectPage />} />
-          <Route path='course/:id' element={<CourseOverviewPage />} />
+          <Route path='courses/:id' element={<CourseOverviewPage />} />
           <Route path='courses/create' element={<CourseCreatePage />} />
           <Route path='student' element={<StudentManagementPage />} />
         </Route>

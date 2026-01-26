@@ -18,6 +18,22 @@ export const formatDate = (date: string) => {
   return date.replaceAll('-', '.');
 };
 
+// MM.DD 형식으로 변환
+export const formatDateMonthDay = (date: string) => {
+  const [, month, day] = date.split('-');
+
+  return `${month}.${day}`;
+};
+
+// 년/학기/분반 형식으로 변환
+export const formateCourseTermWithSlash = (
+  year: number,
+  semester: SemesterCode,
+  section: string
+): string => {
+  return `${year}\/${formatSemester(semester)}\/${section}분반`;
+};
+
 // 과제 기간 포맷팅
 export const formatPeriod = (releaseDate: string, dueDate: string) => {
   return `${formatDate(releaseDate)} ~ ${formatDate(dueDate)}`;

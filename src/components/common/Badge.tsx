@@ -12,7 +12,7 @@ const scheduleBadgeStyles = tv({
   variants: {
     schedule: {
       upcoming:
-        'bg-radial-[50%_50%_at_50%_50%] from-[#7D63FF] from-38% to-[#AB9AFF] to-100% border-0 text-white',
+        'bg-radial-[50%_50%_at_50%_50%] from-[#7D63FF] from-38% to-[#AB9AFF] to-100% text-white',
       later: 'bg-[#403D4D] border-[#5C5B7F] text-white',
     },
   },
