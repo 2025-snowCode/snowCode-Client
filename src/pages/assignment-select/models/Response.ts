@@ -15,25 +15,25 @@ export const response: AssignmentSelectResponse = {
         assignments: [
           {
             id: 1,
-            title: '날씨 데이터로 크롤링하기',
+            title: '날씨 데이터로 크롤링하기 1',
           },
           {
             id: 3,
-            title: '날씨 데이터로 크롤링하기',
+            title: '날씨 데이터로 크롤링하기 2',
           },
           {
             id: 7,
-            title: '날씨 데이터로 크롤링하기',
+            title: '날씨 데이터로 크롤링하기 3',
           },
           {
             id: 8,
-            title: '날씨 데이터로 크롤링하기',
+            title: '날씨 데이터로 크롤링하기 4',
           },
         ],
       },
       {
         id: 2,
-        title: '컴퓨터수학',
+        title: '데이터구조와 알고리즘',
         year: 2025,
         semester: 'SECOND',
         section: '003',
@@ -41,19 +41,19 @@ export const response: AssignmentSelectResponse = {
         assignments: [
           {
             id: 2,
-            title: '날씨 데이터로 크롤링하기',
+            title: '날씨 데이터로 크롤링하기 5',
           },
           {
             id: 4,
-            title: '날씨 데이터로 크롤링하기',
+            title: '날씨 데이터로 크롤링하기 6',
           },
           {
             id: 5,
-            title: '날씨 데이터로 크롤링하기',
+            title: '날씨 데이터로 크롤링하기 7',
           },
           {
             id: 6,
-            title: '날씨 데이터로 크롤링하기',
+            title: '날씨 데이터로 크롤링하기 8',
           },
         ],
       },
