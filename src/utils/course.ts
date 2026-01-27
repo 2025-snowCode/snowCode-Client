@@ -1,4 +1,4 @@
-import type {SemesterCode, Unit} from '@/models/course';
+import type {AssignmentSelectCourse, SemesterCode, Unit} from '@/models/course';
 
 const SEMESTER_MAP: Record<SemesterCode, '1' | '2' | '여름' | '겨울'> = {
   FIRST: '1',
@@ -51,4 +51,11 @@ export const formatCourseTerm = (
 // 총 과제 수 계산
 export const getTotalAssignmentCount = (units: Unit[]): number => {
   return units.reduce((acc, unit) => acc + unit.assignmentCount, 0);
+};
+
+// 총 문제 수 계산 for 문제 선택 페이지
+export const getTotalProblemCount = (
+  courseList: AssignmentSelectCourse[]
+): number => {
+  return courseList.reduce((acc, course) => acc + course.assignments.length, 0);
 };
