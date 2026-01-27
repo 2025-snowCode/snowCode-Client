@@ -1,17 +1,9 @@
+import type {Assignment} from './assignment';
 import type {ApiResponse} from './common';
 
 // 학기 및 제출 상태 상수 타입 정의
 export type SemesterCode = 'FIRST' | 'SECOND' | 'SUMMER' | 'WINTER';
 export type SubmissionStatus = 'NOT_SUBMITTED' | 'CORRECT' | 'INCORRECT';
-
-/**
- * 과제(Assignment) 인터페이스 정의
- */
-export interface Assignment {
-  id: number;
-  title: string;
-  submittedStatus: SubmissionStatus;
-}
 
 /**
  * 일정(Schedule) 인터페이스 정의
@@ -69,6 +61,14 @@ export interface DashboardCourse extends BaseCourse {
   assignmentCount: number;
 }
 
+/**
+ * 문제 선택 페이지용 강의 인터페이스 정의
+ */
+export interface AssignmentSelectCourse extends Omit<BaseCourse, 'unitCount'> {
+  count: number;
+  assignments: Pick<Assignment, 'id' | 'title'>[];
+}
+
 // 강의 상세 응답 타입 정의
 export type CourseOverviewResponse = ApiResponse<CourseOverview>;
 
@@ -82,4 +82,10 @@ export type DashboardCourseListResponse = ApiResponse<{
 export type DashboardScheduleListResponse = ApiResponse<{
   count: number;
   schedule: Schedule[];
+}>;
+
+// 문제 선택 페이지 응답 타입 정의
+export type AssignmentSelectResponse = ApiResponse<{
+  count: number;
+  courses: AssignmentSelectCourse[];
 }>;
