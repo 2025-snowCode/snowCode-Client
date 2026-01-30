@@ -66,35 +66,33 @@ const AssignmentSelectPage = () => {
   const assignmentList = courseList.flatMap((course) => course.assignments);
 
   return (
-    <SurfaceCard size='large' className='mx-auto'>
-      <AssignmentPageLayout
-        header={
-          <>
-            <SectionTitle title='문제 선택' />
-            <CourseSelector
-              options={COURSE_OPTIONS}
-              onSelect={handleCourseSelect}
-            />
-          </>
-        }
-        list={
-          <>
-            <AssignmentListContainer
-              items={assignmentList}
-              title={`${assignmentList.length}문제`}
-              onSelect={handleAssignmentSelect}
-              renderItem={(assignment) => (
-                <ProblemItem
-                  title={assignment.title}
-                  selected={selectedAssignments.includes(assignment.id)}
-                />
-              )}
-            />
-          </>
-        }
-        footer={<ActionButtonGroup />}
-      />
-    </SurfaceCard>
+    <AssignmentPageLayout
+      header={
+        <>
+          <SectionTitle title='문제 선택' />
+          <CourseSelector
+            options={COURSE_OPTIONS}
+            onSelect={handleCourseSelect}
+          />
+        </>
+      }
+      list={
+        <>
+          <AssignmentListContainer
+            items={assignmentList}
+            title={`${assignmentList.length}문제`}
+            onSelect={handleAssignmentSelect}
+            renderItem={(assignment) => (
+              <ProblemItem
+                title={assignment.title}
+                selected={selectedAssignments.includes(assignment.id)}
+              />
+            )}
+          />
+        </>
+      }
+      footer={<ActionButtonGroup />}
+    />
   );
 };
 
