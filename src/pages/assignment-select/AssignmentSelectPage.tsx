@@ -3,15 +3,17 @@ import CourseSelector from './ui/CourseSelector';
 import AssignmentPageLayout from './AssignmentPageLayout';
 import SectionTitle from './ui/SectionTitle';
 import {response} from './models/Response';
-import ProblemListContainer from './ui/ProblemListContainer';
+import AssignmentListContainer from './ui/AssignmentListContainer';
 import ActionButtonGroup from './ui/ActionButtonGroup';
 import {formatCourseTermWithSlash} from '@/utils/course';
 import {useEffect, useState} from 'react';
+import ProblemItem from '@/components/common/AssignmentItem';
 
-const ProblemSelectPage = () => {
+const AssignmentSelectPage = () => {
   const {courses} = response.response;
-  const [selectedCourseId, setSelectedCourseId] = useState<number | null>(null); // null이면 전체 강의 선택
+  const [selectedCourseId, setSelectedCourseId] = useState<number | null>(null);
   const [courseList, setCourseList] = useState(courses); // 표시할 강의 목록
+  const [selectedAssignments, setSelectedAssignments] = useState<number[]>([]); // 선택된 문제 ID 목록
 
   const handleCourseSelect = (value: string) => {
     if (value === '전체 강의') {
@@ -30,6 +32,16 @@ const ProblemSelectPage = () => {
       )?.id || null;
 
     setSelectedCourseId(courseId);
+  };
+
+  const handleAssignmentSelect = (assignmentId: number) => {
+    setSelectedAssignments((prev) => {
+      if (prev.includes(assignmentId)) {
+        return prev.filter((id) => id !== assignmentId);
+      } else {
+        return [...prev, assignmentId];
+      }
+    });
   };
 
   useEffect(() => {
@@ -51,6 +63,8 @@ const ProblemSelectPage = () => {
     ),
   ];
 
+  const assignmentList = courseList.flatMap((course) => course.assignments);
+
   return (
     <SurfaceCard size='large' className='mx-auto'>
       <AssignmentPageLayout
@@ -65,7 +79,17 @@ const ProblemSelectPage = () => {
         }
         list={
           <>
-            <ProblemListContainer courseList={courseList} />
+            <AssignmentListContainer
+              items={assignmentList}
+              title={`${assignmentList.length}문제`}
+              onSelect={handleAssignmentSelect}
+              renderItem={(assignment) => (
+                <ProblemItem
+                  title={assignment.title}
+                  selected={selectedAssignments.includes(assignment.id)}
+                />
+              )}
+            />
           </>
         }
         footer={<ActionButtonGroup />}
@@ -74,4 +98,4 @@ const ProblemSelectPage = () => {
   );
 };
 
-export default ProblemSelectPage;
+export default AssignmentSelectPage;
