@@ -36,7 +36,7 @@ const Dropdown = ({
 
       {isOpen && (
         <ul
-          className={`absolute z-10 overflow-auto rounded-[9px] divide-y divide-purple-stroke shadow-dropdown text-left ${menuClassName}`}>
+          className={`absolute z-10 mt-2 overflow-auto rounded-[9px] divide-y divide-purple-stroke shadow-dropdown text-left ${menuClassName}`}>
           {options.map((option) => (
             <li
               key={option}
