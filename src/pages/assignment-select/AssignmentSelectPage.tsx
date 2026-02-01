@@ -1,4 +1,3 @@
-import SurfaceCard from '@/components/common/SurfaceCard';
 import CourseSelector from './ui/CourseSelector';
 import AssignmentPageLayout from './AssignmentPageLayout';
 import SectionTitle from './ui/SectionTitle';
@@ -7,7 +6,9 @@ import AssignmentListContainer from './ui/AssignmentListContainer';
 import ActionButtonGroup from './ui/ActionButtonGroup';
 import {formatCourseTermWithSlash} from '@/utils/course';
 import {useEffect, useState} from 'react';
-import ProblemItem from '@/components/common/AssignmentItem';
+import AssignmentItem from '@/components/common/AssignmentItem';
+
+const ALL_COURSES_OPTION = '전체 강의' as const;
 
 const AssignmentSelectPage = () => {
   const {courses} = response.response;
@@ -16,7 +17,7 @@ const AssignmentSelectPage = () => {
   const [selectedAssignments, setSelectedAssignments] = useState<number[]>([]); // 선택된 문제 ID 목록
 
   const handleCourseSelect = (value: string) => {
-    if (value === '전체 강의') {
+    if (value === ALL_COURSES_OPTION) {
       setSelectedCourseId(null);
       return;
     }
@@ -37,9 +38,9 @@ const AssignmentSelectPage = () => {
   const handleAssignmentSelect = (assignmentId: number) => {
     setSelectedAssignments((prev) => {
       if (prev.includes(assignmentId)) {
-        return prev.filter((id) => id !== assignmentId);
+        return prev.filter((id) => id !== assignmentId); // 선택 해제
       } else {
-        return [...prev, assignmentId];
+        return [...prev, assignmentId]; // 선택 추가
       }
     });
   };
@@ -56,7 +57,7 @@ const AssignmentSelectPage = () => {
 
   // 강의 선택 옵션 생성
   const COURSE_OPTIONS = [
-    '전체 강의',
+    ALL_COURSES_OPTION,
     ...courses.map(
       (course) =>
         `${course.title} ${formatCourseTermWithSlash(course.year, course.semester, course.section)}`
@@ -83,7 +84,7 @@ const AssignmentSelectPage = () => {
             title={`${assignmentList.length}문제`}
             onSelect={handleAssignmentSelect}
             renderItem={(assignment) => (
-              <ProblemItem
+              <AssignmentItem
                 title={assignment.title}
                 selected={selectedAssignments.includes(assignment.id)}
               />
