@@ -52,3 +52,13 @@ export const formatCourseTerm = (
 export const getTotalAssignmentCount = (units: Unit[]): number => {
   return units.reduce((acc, unit) => acc + unit.assignmentCount, 0);
 };
+
+// 강의 옵션 라벨 포맷팅
+export const formatCourseOptionLabel = (
+  title: string,
+  year: number,
+  semester: SemesterCode,
+  section: string
+) => {
+  return `${title} ${formatCourseTermWithSlash(year, semester, section)}`;
+};
