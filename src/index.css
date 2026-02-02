@@ -66,20 +66,24 @@
   @apply bg-radial-[80%_74%_at_34%_0%] from-[#AC9BFF] from-0% to-[#7D63FF] to-100%;
 }
 
-.header-btn {
-  @apply bg-primary w-16 h-16 rounded-full flex-center;
-}
+@utility custom-scrollbar {
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
 
-.primary-btn {
-  @apply w-25 h-10 text-center;
-}
+  ::-webkit-scrollbar-track {
+    background-color: #f9f9f9;
+    border-radius: 5px;
+  }
 
-.secondary-btn {
-  @apply flex-center gap-[6px] border-0;
-}
+  ::-webkit-scrollbar-thumb {
+    background-color: #555267;
+    border-radius: 5px;
+  }
 
-.text-btn {
-  @apply text-base font-medium;
+  ::-webkit-scrollbar-button {
+    display: none;
+  }
 }
 
 input::placeholder {
