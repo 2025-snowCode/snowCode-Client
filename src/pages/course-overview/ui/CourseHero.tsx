@@ -1,7 +1,7 @@
 import snowcodeOverviewMini from '@/assets/images/snowcode_overview_mini.svg';
 import {formatCourseInfo} from '@/utils/course';
 import CourseActionsBar from './CourseActionsBar';
-import {useUserStore} from '@/entities/user/model/useUserStore';
+import {useUserStore} from '@/entities/auth/model/useUserStore';
 import type {
   CourseHeroProps,
   CourseInfoProps,
