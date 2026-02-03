@@ -1,4 +1,4 @@
-import ChevronDown from '@assets/icons/chevron-down.svg?react';
+import ChevronDown from '@/assets/svg/chevrondown.svg?react';
 
 export default function Pagination({
   totalItems,
