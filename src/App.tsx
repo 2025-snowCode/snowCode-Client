@@ -10,7 +10,7 @@ import AssignmentCreatePage from './pages/admin/assignments/AssignmentCreatePage
 import CourseCreatePage from './pages/admin/courses/CourseCreatePage';
 import StudentManagementPage from './pages/admin/student/studentManagementPage';
 import {useEffect} from 'react';
-import {useUserStore} from '@/entities/user/model/useUserStore';
+import {useUserStore} from '@/entities/auth/model/useUserStore';
 
 const AppRoutes = () => {
   const {pathname} = useLocation();
