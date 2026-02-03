@@ -7,6 +7,8 @@ type AssignmentFormLayoutProps = {
   content: React.ReactNode;
   onCancel: () => void;
   onConfirm: () => void;
+  cancelLabel?: string;
+  confirmLabel?: string;
 };
 
 const AssignmentFormLayout = ({
@@ -15,6 +17,8 @@ const AssignmentFormLayout = ({
   content,
   onCancel,
   onConfirm,
+  cancelLabel = '취소',
+  confirmLabel = '저장',
 }: AssignmentFormLayoutProps) => {
   return (
     <div className='flex flex-col items-center gap-6'>
@@ -33,10 +37,10 @@ const AssignmentFormLayout = ({
         {/* 하단 버튼 */}
         <div className='mt-7 flex justify-end gap-[21px]'>
           <Button color='outlinePurple' onClick={onCancel}>
-            취소
+            {cancelLabel}
           </Button>
           <Button color='primary' onClick={onConfirm}>
-            저장
+            {confirmLabel}
           </Button>
         </div>
       </SurfaceCard>
