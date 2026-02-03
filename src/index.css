@@ -67,6 +67,16 @@
   @apply bg-radial-[80%_74%_at_34%_0%] from-[#AC9BFF] from-0% to-[#7D63FF] to-100%;
 }
 
+@layer base {
+  button {
+    @apply cursor-pointer;
+  }
+
+  button:disabled {
+    @apply cursor-not-allowed opacity-50;
+  }
+}
+
 .header-btn {
   @apply bg-primary w-16 h-16 rounded-full flex-center;
 }
