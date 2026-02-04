@@ -43,7 +43,11 @@ export const StudentTable = ({students}: StudentTableProps) => {
       <thead>
         <tr className='h-12.75 text-secondary-black font-medium text-base bg-gray'>
           <th className='w-12'>
-            <Checkbox checked={selectAll} onChange={handleSelectAll} />
+            <Checkbox
+              checked={selectAll}
+              onChange={handleSelectAll}
+              aria-label='전체 학생 선택'
+            />
           </th>
           <th className='text-left pl-4'>학번</th>
           <th className='text-left pl-4'>이름</th>
@@ -58,6 +62,7 @@ export const StudentTable = ({students}: StudentTableProps) => {
               <Checkbox
                 checked={selectedStudents.has(student.id)}
                 onChange={(checked) => handleSelectStudent(student.id, checked)}
+                aria-label={`${student.name} 학생 선택`}
               />
             </td>
             <td className='pl-4 text-secondary-black align-middle'>
