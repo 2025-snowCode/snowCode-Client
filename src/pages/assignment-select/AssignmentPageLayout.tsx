@@ -1,5 +1,5 @@
 import SurfaceCard from '@/components/common/SurfaceCard';
-import CourseSelector from './ui/CourseSelector';
+import CourseSelector from '../../features/course/filter-course/CourseSelector';
 import Button from '@/components/common/Button';
 
 interface AssignmentPageLayoutProps {
@@ -11,7 +11,7 @@ interface AssignmentPageLayoutProps {
   onConfirm: () => void;
 }
 
-const AssignmentPageLayout = ({
+export const AssignmentPageLayout = ({
   title,
   list,
   courseOptions,
@@ -22,27 +22,23 @@ const AssignmentPageLayout = ({
   return (
     <SurfaceCard size='large' className='mx-auto flex flex-col *:px-14.5'>
       {/* 상단 영역  */}
-      <header className='flex flex-col gap-4 justify-start pt-9.5 pb-5.5 border-b border-purple-stroke'>
+      <div className='flex flex-col gap-4 justify-start pt-9.5 pb-5.5 border-b border-purple-stroke'>
         <h1 className='text-primary-black text-2xl/9 font-semibold'>{title}</h1>
         <CourseSelector options={courseOptions} onSelect={onCourseSelect} />
-      </header>
+      </div>
 
       {/* 문제 목록 영역 */}
-      <main className='pt-10'>{list}</main>
+      <section className='pt-10'>{list}</section>
 
-      {/* 하단 버튼 */}
-      <footer className='mb-8.5 mt-auto'>
-        <div className='flex justify-end gap-5'>
-          <Button color='outlinePurple' onClick={onCancel}>
-            취소
-          </Button>
-          <Button color='primary' onClick={onConfirm}>
-            등록
-          </Button>
-        </div>
-      </footer>
+      {/* 하단 버튼 영역 */}
+      <div className='mb-8.5 mt-auto flex justify-end gap-5'>
+        <Button color='outlinePurple' onClick={onCancel}>
+          취소
+        </Button>
+        <Button color='primary' onClick={onConfirm}>
+          등록
+        </Button>
+      </div>
     </SurfaceCard>
   );
 };
-
-export default AssignmentPageLayout;
