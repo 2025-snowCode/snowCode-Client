@@ -4,7 +4,7 @@ import LandingPage from './pages/common/LandingPage';
 import UserIdInputPage from './pages/common/UserIdInputPage';
 import Dashboard from './pages/dashboard/Dashboard';
 import AssignmentsPage from './pages/admin/assignments/AssignmentsPage';
-import AssignmentSelectPage from './pages/admin/assignments/AssignmentSelectPage';
+import AssignmentSelectPage from './pages/assignment-select/AssignmentSelectPage';
 import CourseOverviewPage from './pages/course-overview/CourseOverviewPage';
 import AssignmentCreatePage from './pages/admin/assignments/AssignmentCreatePage';
 import CourseCreatePage from './pages/admin/courses/CourseCreatePage';

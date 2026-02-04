@@ -1,5 +1,5 @@
 import snowcodeOverviewMini from '@/assets/images/snowcode_overview_mini.svg';
-import {formatCourseInfo} from '@/utils/course';
+import {formatCourseTerm} from '@/utils/course';
 import CourseActionsBar from './CourseActionsBar';
 import {useUserStore} from '@/entities/auth/model/useUserStore';
 import type {
@@ -51,7 +51,7 @@ const CourseInfo = ({title, year, semester, section}: CourseInfoProps) => {
       <img src={snowcodeOverviewMini} alt='snowCode logo' />
       <h1 className='pb-[1px] text-2xl font-medium leading-9'>{title}</h1>
       <p className='pb-[11px] text-base font-normal leading-6'>
-        {formatCourseInfo(year, semester, section)}
+        {formatCourseTerm(year, semester, section)}
       </p>
     </article>
   );

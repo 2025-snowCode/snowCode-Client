@@ -4,7 +4,7 @@ import Dropdown from '@/components/common/Dropdown';
 
 interface LabeledDropdownProps
   extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onSelect'> {
-  label: string;
+  label?: string;
   className?: string;
   options: string[];
   placeholder?: string;

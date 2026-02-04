@@ -1,4 +1,4 @@
-import {formateCourseTermWithSlash} from '@/utils/course';
+import {formatCourseTermWithSlash} from '@/utils/course';
 import type {DashboardCourse} from '@/models/course';
 import CourseManagementDropdown from './CourseManagementDropdown';
 import {useNavigate} from 'react-router-dom';
@@ -26,7 +26,7 @@ const CourseCard = (course: DashboardCourse) => {
         onClick={() => navigate(`courses/${id}`)}
         className='cursor-pointer flex flex-col gap-1.5 pl-8 pr-6.5 py-5.5'>
         <p className='text-sm font-light text-light-black'>
-          {formateCourseTermWithSlash(year, semester, section)}
+          {formatCourseTermWithSlash(year, semester, section)}
         </p>
         <h3 className='text-[22px]'>{title}</h3>
         <p className='text-base font-light text-secondary-black line-clamp-3'>
