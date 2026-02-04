@@ -1,16 +1,18 @@
 import ChevronDown from '@/assets/svg/chevrondown.svg?react';
 
+interface PaginationProps {
+  totalItems: number;
+  pageSize: number;
+  currentPage: number;
+  onPageChange: (page: number) => void;
+}
+
 export default function Pagination({
   totalItems,
   pageSize,
   currentPage,
   onPageChange,
-}: {
-  totalItems: number;
-  pageSize: number;
-  currentPage: number;
-  onPageChange: (page: number) => void;
-}) {
+}: PaginationProps) {
   const totalPages = Math.ceil(totalItems / pageSize);
 
   if (totalPages == 0) {
