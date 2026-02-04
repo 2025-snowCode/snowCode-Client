@@ -1,20 +1,29 @@
 import styles from './Checkbox.module.css';
+import type {ChangeEvent, InputHTMLAttributes} from 'react';
 
-interface CheckboxProps {
-    checked: boolean;
-    onChange: (checked: boolean) => void;
-    className?: string;
+interface CheckboxProps
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'checked'> {
+  checked: boolean;
+  onChange: (checked: boolean) => void;
+  className?: string;
 }
 
-const Checkbox = ({checked, onChange, className=''}: CheckboxProps) => {
-    return (
-        <input 
-            type="checkbox" 
-            checked={checked}
-            onChange={(e) => onChange(e.target.checked)}
-            className={`${styles.checkbox} ${className}`}
-        />
-    )
-}
-
-export default Checkbox
+export const Checkbox = ({
+  checked,
+  onChange,
+  className = '',
+  ...rest
+}: CheckboxProps) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    onChange(e.target.checked);
+  };
+  return (
+    <input
+      type='checkbox'
+      checked={checked}
+      onChange={handleChange}
+      className={`${styles.checkbox} ${className}`}
+      {...rest}
+    />
+  );
+};
