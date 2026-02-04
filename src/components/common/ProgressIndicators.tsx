@@ -29,7 +29,7 @@ export const ProgressIndicators = ({
   className = '',
 }: ProgressIndicatorsProps) => {
   return (
-    <div className={`flex gap-2.45 ${className}`}>
+    <div className={`flex gap-2.5 ${className}`}>
       {statuses.map((progress, index) => {
         const config = STATUS_CONFIG[progress.status];
 
