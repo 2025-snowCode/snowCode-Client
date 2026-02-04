@@ -1,6 +1,6 @@
 import {Checkbox} from '@/components/common/Checkbox';
 import {ProgressIndicators} from '@/components/common/ProgressIndicators';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import type {Student} from '@/entities/student/model/types';
 
@@ -13,6 +13,10 @@ export const StudentTable = ({students}: StudentTableProps) => {
     new Set()
   );
   const [selectAll, setSelectAll] = useState(false);
+  useEffect(() => {
+    setSelectedStudents(new Set());
+    setSelectAll(false);
+  }, [students]);
 
   const handleSelectAll = (checked: boolean) => {
     setSelectAll(checked);
