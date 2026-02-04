@@ -3,7 +3,7 @@ import {tv} from 'tailwind-variants';
 import type {VariantProps} from 'tailwind-variants';
 
 const surfaceCard = tv({
-  base: 'bg-white rounded-[30px] w-[900px] shadow-[0px_0px_14px_0px_rgba(223,219,240,0.40)]',
+  base: 'bg-white rounded-[30px] min-w-[900px] w-full shadow-[0px_0px_14px_0px_rgba(223,219,240,0.40)]',
   variants: {
     size: {
       medium: 'min-h-[690px]',

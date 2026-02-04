@@ -8,9 +8,9 @@ import AssignmentSelectPage from './pages/admin/assignments/AssignmentSelectPage
 import CourseOverviewPage from './pages/course-overview/CourseOverviewPage';
 import AssignmentCreatePage from './pages/admin/assignments/AssignmentCreatePage';
 import CourseCreatePage from './pages/admin/courses/CourseCreatePage';
-import StudentManagementPage from './pages/admin/student/studentManagementPage';
+import StudentManagementPage from './pages/admin/student/StudentManagementPage';
 import {useEffect} from 'react';
-import {useUserStore} from '@/entities/user/model/useUserStore';
+import {useUserStore} from '@/entities/auth/model/useUserStore';
 
 const AppRoutes = () => {
   const {pathname} = useLocation();
