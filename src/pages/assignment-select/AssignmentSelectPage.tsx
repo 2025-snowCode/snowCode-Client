@@ -1,8 +1,6 @@
-import CourseSelector from './ui/CourseSelector';
 import AssignmentPageLayout from './AssignmentPageLayout';
 import {response} from './models/Response';
 import AssignmentListContainer from './ui/AssignmentListContainer';
-import ActionButtonGroup from './ui/ActionButtonGroup';
 import {formatCourseOptionLabel} from '@/utils/course';
 import {useEffect, useMemo, useState} from 'react';
 import AssignmentItem from '@/components/common/AssignmentItem';
@@ -32,7 +30,7 @@ const AssignmentSelectPage = () => {
     return map;
   }, [courses]);
 
-  const COURSE_OPTIONS = useMemo(() => {
+  const courseOptions = useMemo(() => {
     return [ALL_COURSES_OPTION, ...Array.from(courseOptionMap.keys())];
   }, [courseOptionMap]);
 
@@ -73,17 +71,9 @@ const AssignmentSelectPage = () => {
 
   return (
     <AssignmentPageLayout
-      header={
-        <div>
-          <h1 className='text-primary-black text-2xl/9 font-semibold'>
-            문제 선택
-          </h1>
-          <CourseSelector
-            options={COURSE_OPTIONS}
-            onSelect={handleCourseSelect}
-          />
-        </div>
-      }
+      title='문제 선택'
+      courseOptions={courseOptions}
+      onCourseSelect={handleCourseSelect}
       list={
         <AssignmentListContainer
           items={assignmentList}
@@ -97,7 +87,8 @@ const AssignmentSelectPage = () => {
           )}
         />
       }
-      footer={<ActionButtonGroup />}
+      onCancel={() => {}}
+      onConfirm={() => {}}
     />
   );
 };
