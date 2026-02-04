@@ -1,37 +1,48 @@
-import type { StudentProgress } from '@/entities/student/model/types';
+import type {StudentProgress} from '@/entities/student/model/types';
 
 interface ProgressIndicatorsProps {
-  statuses: StudentProgress[]; // progress 배열
+  statuses: StudentProgress[];
   className?: string;
 }
 
-const ProgressIndicators = ({ statuses, className = '' }: ProgressIndicatorsProps) => {
-  const getColorClass = (status: StudentProgress['status']) => {
-    switch (status) {
-      case 'PASSED':
-        return 'bg-status-green';
-      case 'NOT_SUBMITTED':
-        return 'bg-white border border-stroke';
-      case 'PARTIAL':
-        return 'bg-status-yellow';
-      case 'FAILED':
-        return 'bg-status-red';
-      default:
-        return 'bg-white border border-stroke';
-    }
-  };
+const STATUS_CONFIG = {
+  PASSED: {
+    color: 'bg-status-green',
+    label: '통과',
+  },
+  NOT_SUBMITTED: {
+    color: 'bg-white border border-stroke',
+    label: '미제출',
+  },
+  PARTIAL: {
+    color: 'bg-status-yellow',
+    label: '부분 제출',
+  },
+  FAILED: {
+    color: 'bg-status-red',
+    label: '실패',
+  },
+} as const;
 
+export const ProgressIndicators = ({
+  statuses,
+  className = '',
+}: ProgressIndicatorsProps) => {
   return (
-    <div className={`flex gap-1.5 ${className}`}>
-      {statuses.map((progress, index) => (
-        <div
-          key={index}
-          className={`w-5 h-5 rounded-full border border-purple-stroke ${getColorClass(progress.status)}`}
-        />
-      ))}
+    <div className={`flex gap-2.45 ${className}`}>
+      {statuses.map((progress, index) => {
+        const config = STATUS_CONFIG[progress.status];
+
+        return (
+          <div
+            key={index}
+            role='status'
+            aria-label={config.label}
+            title={config.label}
+            className={`w-6.5 h-6.5 rounded-full border border-purple-stroke ${config.color}`}
+          />
+        );
+      })}
     </div>
   );
 };
-
-export default ProgressIndicators;
-
