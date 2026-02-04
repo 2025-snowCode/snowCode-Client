@@ -1,7 +1,7 @@
 import AssignmentFormLayout from '@/components/admin/assignments/AssignmentFormLayout';
 import Search from '@/assets/svg/search.svg?react';
 import {useForm} from 'react-hook-form';
-import Pagination from '@/shared/ui/pagination/pagination';
+import {Pagination} from '@/shared/ui/pagination/pagination';
 import {useState} from 'react';
 import Input from '@/components/common/Input';
 import {StudentTable} from '@/entities/student/StudentTable';
@@ -21,6 +21,7 @@ export default function StudentManagementPage() {
       <Input
         type='text'
         placeholder='학번을 검색하세요'
+        label='학번 검색'
         icon={<Search className='w-4 h-4' />}
         {...register('studentSearch')}
       />
