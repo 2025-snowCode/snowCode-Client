@@ -1,3 +1,5 @@
+import type {ApiResponse} from '@/models/common';
+
 export type ProgressStatus = 'PASSED' | 'NOT_SUBMITTED' | 'PARTIAL' | 'FAILED';
 
 export interface StudentProgress {
@@ -13,14 +15,11 @@ export interface Student {
   progress: StudentProgress[];
 }
 
-export interface CourseStudentsResponse {
-  success: boolean;
-  response: {
-    id: number;
-    title: string;
-    section: string;
-    unitCount: number;
-    studentCount: number;
-    students: Student[];
-  };
-}
+export type CourseStudentsResponse = ApiResponse<{
+  id: number;
+  title: string;
+  section: string;
+  unitCount: number;
+  studentCount: number;
+  students: Student[];
+}>;
