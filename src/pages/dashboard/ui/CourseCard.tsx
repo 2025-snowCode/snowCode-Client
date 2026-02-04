@@ -2,7 +2,7 @@ import {formatCourseTermWithSlash} from '@/utils/course';
 import type {DashboardCourse} from '@/models/course';
 import CourseManagementDropdown from './CourseManagementDropdown';
 import {useNavigate} from 'react-router-dom';
-import {useUserStore} from '@/entities/user/model/useUserStore';
+import {useUserStore} from '@/entities/auth/model/useUserStore';
 
 const CourseCard = (course: DashboardCourse) => {
   const navigate = useNavigate();
