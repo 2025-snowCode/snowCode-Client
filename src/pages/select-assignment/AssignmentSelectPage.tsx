@@ -3,7 +3,7 @@ import {useState} from 'react';
 import {response, courseOptionsResponse} from './mocks/response';
 import {useCourseFilter} from '@/features/course/filter-course/lib/useCourseFilter';
 import {AssignmentPageLayout} from '@/widgets/assignment-page-layout';
-import SeletableItem from '@/components/common/SelectableItem';
+import SelectableItem from '@/components/common/SelectableItem';
 
 const AssignmentSelectPage = () => {
   const {courses} = courseOptionsResponse.response; // /courses/my API 응답 모킹
@@ -12,7 +12,7 @@ const AssignmentSelectPage = () => {
   const {courseOptions, handleCourseSelect, selectedCourseId} =
     useCourseFilter(courses);
 
-  // 문제 목록 /courses/{couseId}/assignments API 응답 모킹
+  // 문제 목록 /courses/{courseId}/assignments API 응답 모킹
   const assignmentList = response.response.courses.flatMap(
     (course) => course.assignments
   );
@@ -39,7 +39,7 @@ const AssignmentSelectPage = () => {
           title={`${assignmentList.length}문제`}
           onSelect={handleAssignmentSelect}
           renderItem={(assignment) => (
-            <SeletableItem
+            <SelectableItem
               title={assignment.title}
               selected={selectedAssignments.includes(assignment.id)}
             />

@@ -1,6 +1,6 @@
 import {tv, type VariantProps} from 'tailwind-variants';
 
-export const seletableItemStyles = tv({
+export const selectableItemStyles = tv({
   base: 'cursor-pointer bg-background w-full flex items-center rounded-[9px] pl-4.5 pr-7.5 py-4 gap-4 border',
   variants: {
     selected: {
@@ -8,25 +8,28 @@ export const seletableItemStyles = tv({
       false: 'border-transparent',
     },
   },
+  defaultVariants: {
+    selected: false,
+  },
 });
 
-type SeletableItemVariants = VariantProps<typeof seletableItemStyles>;
+type SelectableItemVariants = VariantProps<typeof selectableItemStyles>;
 
-interface SeletableItemProps extends SeletableItemVariants {
-  selected: boolean;
+interface SelectableItemProps extends SelectableItemVariants {
+  selected?: boolean;
   leftIcon?: React.ReactNode;
   title: string;
   rightIcon?: React.ReactNode;
 }
 
-const SeletableItem = ({
-  selected,
+const SelectableItem = ({
+  selected = false,
   leftIcon,
   title,
   rightIcon,
-}: SeletableItemProps) => {
+}: SelectableItemProps) => {
   return (
-    <div className={seletableItemStyles({selected})}>
+    <div className={selectableItemStyles({selected})}>
       <div>{leftIcon}</div>
       <p className='text-base/6 font-normal'>{title}</p>
       <div className='ml-auto'>{rightIcon}</div>
@@ -34,4 +37,4 @@ const SeletableItem = ({
   );
 };
 
-export default SeletableItem;
+export default SelectableItem;
