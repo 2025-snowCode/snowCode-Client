@@ -4,14 +4,14 @@ import {useForm} from 'react-hook-form';
 import Pagination from '@/shared/ui/pagination/pagination';
 import {useState} from 'react';
 import Input from '@/components/common/Input';
-import StudentTable from '@/entities/student/studentTable';
+import {StudentTable} from '@/entities/student/StudentTable';
 import mockCourseStudents from '@/entities/student/model/mock';
 
 export default function StudentManagementPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const {register} = useForm();
 
-  const { response } = mockCourseStudents;
+  const {response} = mockCourseStudents;
 
   const titleExtra = (
     <div className='flex justify-between items-center flex-1'>

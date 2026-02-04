@@ -1,5 +1,5 @@
-import Checkbox from '@/components/common/Checkbox';
-import ProgressIndicators from '@/components/common/ProgressIndicators';
+import {Checkbox} from '@/components/common/Checkbox';
+import {ProgressIndicators} from '@/components/common/ProgressIndicators';
 import {useState} from 'react';
 import {Link} from 'react-router-dom';
 import type {Student} from '@/entities/student/model/types';
@@ -8,7 +8,7 @@ interface StudentTableProps {
   students: Student[];
 }
 
-const StudentTable = ({students}: StudentTableProps) => {
+export const StudentTable = ({students}: StudentTableProps) => {
   const [selectedStudents, setSelectedStudents] = useState<Set<number>>(
     new Set()
   );
@@ -37,7 +37,7 @@ const StudentTable = ({students}: StudentTableProps) => {
   return (
     <table className='w-full'>
       <thead>
-        <tr className='h-11 text-secondary-black font-medium text-base bg-gray'>
+        <tr className='h-12.75 text-secondary-black font-medium text-base bg-gray'>
           <th className='w-12'>
             <Checkbox checked={selectAll} onChange={handleSelectAll} />
           </th>
@@ -49,7 +49,7 @@ const StudentTable = ({students}: StudentTableProps) => {
       </thead>
       <tbody>
         {students.map((student) => (
-          <tr key={student.id} className='border-b border-stroke h-9'>
+          <tr key={student.id} className='border-b border-stroke h-15'>
             <td className='text-center align-middle'>
               <Checkbox
                 checked={selectedStudents.has(student.id)}
@@ -78,5 +78,3 @@ const StudentTable = ({students}: StudentTableProps) => {
     </table>
   );
 };
-
-export default StudentTable;
