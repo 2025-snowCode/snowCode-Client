@@ -6,6 +6,8 @@ import LabeledDropdown from '@/components/admin/form/LabeledDropdown';
 import Button from '@/components/common/Button';
 import AddIcon from '@/assets/svg/addIcon.svg?react';
 
+const PUBLIC_OPTIONS = ['공개', '비공개'];
+
 const AssignmentCreatePage = () => {
   const [examples, setExamples] = useState([{input: '', output: '', 공개: ''}]);
 
@@ -53,7 +55,7 @@ const AssignmentCreatePage = () => {
                 />
                 <LabeledDropdown
                   label={idx === 0 ? '공개 여부' : ''}
-                  variant='visibility'
+                  options={PUBLIC_OPTIONS}
                   className='w-full'
                 />
               </div>

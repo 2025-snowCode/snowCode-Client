@@ -18,13 +18,29 @@ export const formatDate = (date: string) => {
   return date.replaceAll('-', '.');
 };
 
+// MM.DD 형식으로 변환
+export const formatDateMonthDay = (date: string) => {
+  const [, month, day] = date.split('-');
+
+  return `${month}.${day}`;
+};
+
+// 년/학기/분반 형식으로 변환
+export const formatCourseTermWithSlash = (
+  year: number,
+  semester: SemesterCode,
+  section: string
+): string => {
+  return `${year}/${formatSemester(semester)}/${section}분반`;
+};
+
 // 과제 기간 포맷팅
 export const formatPeriod = (releaseDate: string, dueDate: string) => {
   return `${formatDate(releaseDate)} ~ ${formatDate(dueDate)}`;
 };
 
 // 강의 정보 포맷팅
-export const formatCourseInfo = (
+export const formatCourseTerm = (
   year: number,
   semester: SemesterCode,
   section: string
@@ -35,4 +51,14 @@ export const formatCourseInfo = (
 // 총 과제 수 계산
 export const getTotalAssignmentCount = (units: Unit[]): number => {
   return units.reduce((acc, unit) => acc + unit.assignmentCount, 0);
+};
+
+// 강의 옵션 라벨 포맷팅
+export const formatCourseOptionLabel = (
+  title: string,
+  year: number,
+  semester: SemesterCode,
+  section: string
+) => {
+  return `${title} ${formatCourseTermWithSlash(year, semester, section)}`;
 };
