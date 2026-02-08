@@ -4,7 +4,7 @@ import {useForm} from 'react-hook-form';
 import {Pagination} from '@/shared/ui/pagination/pagination';
 import {useState} from 'react';
 import Input from '@/components/common/Input';
-import {StudentTable} from '@/entities/student/StudentTable';
+import {StudentTable} from '@/entities/student/ui/StudentTable';
 import mockCourseStudents from '@/entities/student/model/mock';
 
 export default function StudentManagementPage() {
