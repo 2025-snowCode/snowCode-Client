@@ -49,6 +49,9 @@
   --color-primary-black: #2c2a36;
   --color-purple-stroke: #dfdbf0;
   --color-hover: #b4a5ff;
+  --color-status-green: #c4ffa4;
+  --color-status-yellow: #ffe292;
+  --color-status-red: #ffb3b3;
 
   --font-coolvetica: 'Coolvetica', sans-serif;
   --shadow-card: 0px 0px 14px 0px rgba(223, 219, 240, 0.4);
@@ -58,6 +61,10 @@
 
 @utility flex-center {
   @apply flex items-center justify-center;
+}
+
+@utility bg-radial-gradient {
+  @apply bg-radial-[80%_74%_at_34%_0%] from-[#AC9BFF] from-0% to-[#7D63FF] to-100%;
 }
 
 .header-btn {
@@ -74,6 +81,10 @@
 
 .text-btn {
   @apply text-base font-medium;
+}
+
+input::placeholder {
+  color: var(--color-light-black);
 }
 
 .input-field {

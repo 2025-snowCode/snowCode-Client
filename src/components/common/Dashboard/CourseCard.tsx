@@ -1,7 +1,7 @@
 import {useState} from 'react';
-import {EllipsisIcon} from '../../../assets/svg';
+import EllipsisIcon from '@/assets/svg/ellipsisIcon.svg?react';
 import type {Course, UserType} from './types';
-import {getSemesterLabel} from '../../../utils/getSemesterLabel';
+import {formatSemester} from '@/utils/course';
 
 interface CourseCardProps extends Course {
   userType: UserType;
@@ -27,7 +27,7 @@ const CourseCard = ({
     <div className='min-h-36 rounded-3xl bg-gray border-0 flex-center my-4 shadow-card'>
       <section className='p-8 bg-white rounded-tl-3xl rounded-bl-3xl'>
         <p className='text-sm font-light text-light-black'>
-          {`${year}\\${getSemesterLabel(semester)}학기\\${section}분반`}
+          {`${year}\\${formatSemester(semester)}학기\\${section}분반`}
         </p>
         <h3 className='text-[22px]'>{title}</h3>
         <p className='text-base font-light text-secondary-black'>

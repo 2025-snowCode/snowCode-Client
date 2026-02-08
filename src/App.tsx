@@ -1,37 +1,64 @@
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {BrowserRouter, Routes, Route, useLocation} from 'react-router-dom';
 import Layout from './layout/Layout';
 import LandingPage from './pages/common/LandingPage';
 import UserIdInputPage from './pages/common/UserIdInputPage';
 import Dashboard from './pages/common/Dashboard';
-import AssignmentsPage from './pages/admin/AssignmentsPage';
-import AssignmentSelectPage from './pages/admin/AssignmentSelectPage';
+import AssignmentsPage from './pages/admin/assignments/AssignmentsPage';
+import AssignmentSelectPage from './pages/admin/assignments/AssignmentSelectPage';
 import UnitPage from './pages/admin/UnitPage';
+import CourseOverviewPage from './pages/course-overview/CourseOverviewPage';
+import AssignmentCreatePage from './pages/admin/assignments/AssignmentCreatePage';
+import CourseCreatePage from './pages/admin/courses/CourseCreatePage';
+import StudentManagementPage from './pages/admin/student/studentManagementPage';
+import {useEffect} from 'react';
+import {useUserStore} from '@/entities/user/model/useUserStore';
+
+const AppRoutes = () => {
+  const {pathname} = useLocation();
+  const {setUserType} = useUserStore();
+
+  useEffect(() => {
+    const userType = pathname.startsWith('/admin')
+      ? 'admin'
+      : pathname.startsWith('/student')
+        ? 'student'
+        : 'guest';
+    setUserType(userType);
+  }, [pathname, setUserType]);
+
+  return (
+    <Routes>
+      <Route element={<Layout />}>
+        {/* 공통 영역 */}
+        <Route index element={<LandingPage />} />
+        <Route path='userid' element={<UserIdInputPage />} />
+
+        {/* 학생 영역 */}
+        <Route path='student'>
+          <Route index element={<Dashboard />} />
+          <Route path='course/:id' element={<CourseOverviewPage />} />
+        </Route>
+
+        {/* 관리자 영역 */}
+        <Route path='admin'>
+          <Route index element={<Dashboard />} />
+          <Route path='assignments' element={<AssignmentsPage />} />
+          <Route path='assignments/create' element={<AssignmentCreatePage />} />
+          <Route path='assignments/:id' element={<AssignmentSelectPage />} />
+          <Route path='course/:id' element={<CourseOverviewPage />} />
+          <Route path='courses/create' element={<CourseCreatePage />} />
+          <Route path='student' element={<StudentManagementPage />} />
+        </Route>
+        <Route path='units' element={<UnitPage />} />
+      </Route>
+    </Routes>
+  );
+};
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        {/* 공통 영역 */}
-        <Route path='/' element={<Layout />}>
-          <Route index element={<LandingPage />} />
-          <Route path='/userid' element={<UserIdInputPage />} />
-        </Route>
-
-        {/* 학생 전용 영역 */}
-        <Route path='/student' element={<Layout />}>
-          {/* 추가 페이지들 */}
-          <Route index element={<Dashboard />} />
-        </Route>
-
-        {/* 관리자 전용 영역 */}
-        <Route path='/admin' element={<Layout />}>
-          {/* 추가 페이지들 */}
-          <Route index element={<Dashboard />} />
-          <Route path='assignments' element={<AssignmentsPage />} />
-          <Route path='assignments/:id' element={<AssignmentSelectPage />} />
-          <Route path='units' element={<UnitPage />} />
-        </Route>
-      </Routes>
+      <AppRoutes />
     </BrowserRouter>
   );
 }

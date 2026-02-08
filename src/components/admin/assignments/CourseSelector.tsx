@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {ArrowdownIcon} from '../../../assets/svg';
+import ArrowdownIcon from '@/assets/svg/arrowdownIcon.svg?react';
 import type {Course} from './dummy/types';
 
 interface CourseSelectorProps {

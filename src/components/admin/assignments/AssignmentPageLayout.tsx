@@ -1,9 +1,10 @@
 import CourseSelector from './CourseSelector';
 import AssignmentList from './AssignmentList';
-import Button from '../../common/Button';
+import Button from '@/components/common/Button';
 import type {Course} from './dummy/types';
-import {AddIcon} from '../../../assets/svg';
+import AddIcon from '@/assets/svg/addIcon.svg?react';
 import {useState} from 'react';
+import SurfaceCard from '@/components/common/SurfaceCard';
 
 interface AssignmentPageLayoutProps {
   title: string;
@@ -24,26 +25,30 @@ const AssignmentPageLayout = ({
   };
 
   return (
-    <div className='mx-auto pt-9 pb-8 w-[900px] bg-white rounded-[30px]'>
-      <div className='flex flex-col h-1/4 px-14 pb-[22px] justify-center border-b-1 border-stroke'>
-        <h3 className='text-2xl font-semibold'>{title}</h3>
-        <CourseSelector courses={fullCourses} onSelectCourse={onSelectCourse} />
-      </div>
-      <div className='px-14'>
-        <AssignmentList courses={courses} selectMode={selectMode} />
-        {!selectMode && (
-          <Button
-            theme='secondaryPurpleStroke'
-            text='문제 추가'
-            icon={<AddIcon width={12} height={12} color='#555267' />}
+    <SurfaceCard size='large' className='mx-auto'>
+      <div className='pt-9 pb-8'>
+        <div className='flex flex-col h-1/4 px-14 pb-[22px] justify-center border-b-1 border-stroke'>
+          <h3 className='text-2xl font-semibold'>{title}</h3>
+          <CourseSelector
+            courses={fullCourses}
+            onSelectCourse={onSelectCourse}
           />
-        )}
-        <div className='flex justify-end gap-5 mt-3'>
-          <Button theme='primaryWhite' text='취소' />
-          <Button theme='primaryPurple' text='저장' />
+        </div>
+        <div className='px-14'>
+          <AssignmentList courses={courses} selectMode={selectMode} />
+          {!selectMode && (
+            <Button color='tonal' size='compact' content='mixed'>
+              <AddIcon width={12} height={12} />
+              문제 추가
+            </Button>
+          )}
+          <div className='flex justify-end gap-5 mt-3'>
+            <Button color='outlinePurple'>취소</Button>
+            <Button color='primary'>등록</Button>
+          </div>
         </div>
       </div>
-    </div>
+    </SurfaceCard>
   );
 };
 

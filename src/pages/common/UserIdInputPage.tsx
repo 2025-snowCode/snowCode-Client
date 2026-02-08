@@ -1,8 +1,8 @@
 import {useState, useRef, useEffect} from 'react';
 import {useNavigate, useLocation} from 'react-router-dom';
-import ActionButton from '../../components/common/ActionButton';
-import SnowCodeEntryMini from '../../assets/images/snowCode_entry_mini.svg';
-import {ArrowleftIcon} from '../../assets/svg';
+import SnowCodeEntryMini from '@/assets/images/snowCode_entry_mini.svg';
+import ArrowleftIcon from '@/assets/svg/arrowleftIcon.svg?react';
+import Button from '@/components/common/Button';
 
 export default function UserIdInputPage() {
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ export default function UserIdInputPage() {
   const length = 7;
   const [userId, setUserId] = useState<string[]>(new Array(length).fill(''));
   const [activeIndex, setActiveIndex] = useState(0);
-  const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   useEffect(() => {
     inputRefs.current[activeIndex]?.focus();
@@ -78,13 +78,14 @@ export default function UserIdInputPage() {
     <div className='relative flex flex-col items-center min-h-[calc(100vh-120px)] text-center'>
       <div className='absolute top-[43px] left-[60px] flex items-center gap-4'>
         <ArrowleftIcon className='w-[18px] h-[24px]' />
-        <button
+        <Button
+          color='ghost'
           onClick={handleBeforeClick}
-          className='text-black text-[18px] font-medium'>
+          size='none'
+          className='leading-7 text-lg'>
           이전으로
-        </button>
+        </Button>
       </div>
-
       <div className='w-[216px] h-[216px] mt-19'>
         <img src={SnowCodeEntryMini} alt='SnowCode Entry Mini' />
       </div>
@@ -98,7 +99,9 @@ export default function UserIdInputPage() {
           {userId.map((digit, i) => (
             <input
               key={i}
-              ref={(ref) => (inputRefs.current[i] = ref)}
+              ref={(el) => {
+                inputRefs.current[i] = el;
+              }}
               type='text'
               inputMode='numeric'
               maxLength={1}
@@ -112,20 +115,21 @@ export default function UserIdInputPage() {
                   activeIndex === i
                     ? 'border-primary focus:outline-none focus:ring-0'
                     : digit
-                    ? 'border-stroke text-primary-black'
-                    : 'border-stroke'
+                      ? 'border-stroke text-primary-black'
+                      : 'border-stroke'
                 }
               `}
             />
           ))}
         </div>
-
-        <ActionButton
-          label='확인'
+        <Button
+          color='secondary'
+          size='wide'
           disabled={!isComplete}
           onClick={handleSubmit}
-          className={!isComplete ? 'cursor-not-allowed' : ''}
-        />
+          className='disabled:cursor-not-allowed'>
+          확인
+        </Button>
       </div>
     </div>
   );

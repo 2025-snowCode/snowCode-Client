@@ -1,12 +1,12 @@
 import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 
-import snowCodeEntry from '/src/assets/images/snowCode_entry.svg';
-import snowCodeStudent from '/src/assets/images/snowCode_student.svg';
-import snowCodeAdmin from '/src/assets/images/snowCode_admin.svg';
-import googleLogo from '/src/assets/images/google_logo.svg';
-import {ArrowrightIcon} from '../../assets/svg';
-import ActionButton from '../../components/common/ActionButton';
+import snowCodeEntry from '@/assets/images/snowCode_entry.svg';
+import snowCodeStudent from '@/assets/images/snowCode_student.svg';
+import snowCodeAdmin from '@/assets/images/snowCode_admin.svg';
+import googleLogo from '@/assets/images/google_logo.svg';
+import ArrowrightIcon from '@/assets/svg/arrowrightIcon.svg?react';
+import Button from '@/components/common/Button';
 
 type HoverState = 'none' | 'student' | 'admin';
 
@@ -31,19 +31,21 @@ export default function LandingPage() {
     hover === 'student'
       ? snowCodeStudent
       : hover === 'admin'
-      ? snowCodeAdmin
-      : snowCodeEntry;
+        ? snowCodeAdmin
+        : snowCodeEntry;
 
   return (
     <div className='relative flex flex-col justify-center items-center min-h-[calc(100vh-120px)] text-center'>
       {/* 상단 오른쪽 "다음으로" 버튼 */}
       <div className='absolute top-[43px] right-[60px] flex items-center gap-4'>
         <ArrowrightIcon className='w-[18px] h-[24px]' />
-        <button
+        <Button
+          color='ghost'
           onClick={handleNextClick}
-          className='text-black text-[18px] font-medium'>
+          size='none'
+          className='leading-7 text-lg'>
           다음으로
-        </button>
+        </Button>
       </div>
 
       {/* 로고 이미지 (선택/호버에 따라 이미지 변경) */}
@@ -68,20 +70,22 @@ export default function LandingPage() {
           </span>
 
           <div className='flex gap-11 justify-center'>
-            <ActionButton
-              label='학생'
+            <Button
+              color={selected === 'student' ? 'primary' : 'secondary'}
+              size='wide'
               onClick={() => setSelected('student')}
               onMouseEnter={() => setHover('student')}
-              onMouseLeave={() => selected === 'none' && setHover('none')}
-              selected={selected === 'student'}
-            />
-            <ActionButton
-              label='관리자'
+              onMouseLeave={() => selected === 'none' && setHover('none')}>
+              학생
+            </Button>
+            <Button
+              color={selected === 'admin' ? 'primary' : 'secondary'}
+              size='wide'
               onClick={() => setSelected('admin')}
               onMouseEnter={() => setHover('admin')}
-              onMouseLeave={() => selected === 'none' && setHover('none')}
-              selected={selected === 'admin'}
-            />
+              onMouseLeave={() => selected === 'none' && setHover('none')}>
+              관리자
+            </Button>
           </div>
         </div>
 

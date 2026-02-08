@@ -1,8 +1,10 @@
 type SemesterCode = 'FIRST' | 'SECOND' | 'SUMMER' | 'WINTER';
+type SubmissionStatus = 'NOT_SUBMITTED' | 'CORRECT' | 'INCORRECT';
 
 interface Assignment {
   id: number;
   title: string;
+  submittedStatus?: SubmissionStatus;
 }
 
 interface Course {
@@ -23,4 +25,10 @@ interface CoursesResponse {
   };
 }
 
-export type {Assignment, Course, CoursesResponse, SemesterCode};
+export type {
+  Assignment,
+  Course,
+  CoursesResponse,
+  SemesterCode,
+  SubmissionStatus,
+};
