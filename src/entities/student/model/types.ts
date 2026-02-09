@@ -4,6 +4,18 @@ export type ProgressStatus = 'PASSED' | 'NOT_SUBMITTED' | 'PARTIAL' | 'FAILED';
 
 export interface StudentProgress {
   status: ProgressStatus;
+  assignmentName?: string;
+  score?: number;
+  totalScore?: number;
+  plagiarismRate?: number;
+}
+
+export interface Unit {
+  id: number;
+  name: string;
+  startDate: string;
+  endDate: string;
+  assignments: StudentProgress[];
 }
 
 export interface Student {
@@ -13,6 +25,7 @@ export interface Student {
   score: number;
   totalScore: number;
   progress: StudentProgress[];
+  units?: Unit[];
 }
 
 export type CourseStudentsResponse = ApiResponse<{
