@@ -6,5 +6,5 @@ import type {SubmissionStatus} from './course';
 export interface Assignment {
   id: number;
   title: string;
-  submittedStatus: SubmissionStatus;
+  submittedStatus?: SubmissionStatus;
 }
