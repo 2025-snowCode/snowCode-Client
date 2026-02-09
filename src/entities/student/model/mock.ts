@@ -13,8 +13,8 @@ const mockCourseStudents: CourseStudentsResponse = {
         id: 1,
         studentId: '2210456',
         name: '백수민',
-        score: 8,
-        totalScore: 20,
+        score: 35,
+        totalScore: 70,
         progress: [
           {status: 'PASSED'},
           {status: 'NOT_SUBMITTED'},
@@ -26,6 +26,7 @@ const mockCourseStudents: CourseStudentsResponse = {
           {
             id: 1,
             name: '1단원',
+            title: '변수와 수식',
             startDate: '2025.06.19',
             endDate: '06.25',
             assignments: [
@@ -62,6 +63,7 @@ const mockCourseStudents: CourseStudentsResponse = {
           {
             id: 2,
             name: '2단원',
+            title: '변수와 수식',
             startDate: '2025.06.19',
             endDate: '06.25',
             assignments: [
@@ -101,8 +103,8 @@ const mockCourseStudents: CourseStudentsResponse = {
         id: 2,
         studentId: '2313398',
         name: '주아정',
-        score: 20,
-        totalScore: 20,
+        score: 80,
+        totalScore: 80,
         progress: [
           {status: 'PASSED'},
           {status: 'PASSED'},
@@ -114,6 +116,7 @@ const mockCourseStudents: CourseStudentsResponse = {
           {
             id: 1,
             name: '1단원',
+            title: '변수와 수식',
             startDate: '2025.06.19',
             endDate: '06.25',
             assignments: [
@@ -150,6 +153,7 @@ const mockCourseStudents: CourseStudentsResponse = {
           {
             id: 2,
             name: '2단원',
+            title: '변수와 수식',
             startDate: '2025.06.19',
             endDate: '06.25',
             assignments: [
