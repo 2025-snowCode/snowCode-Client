@@ -7,23 +7,27 @@ export const singleUnitResponse: SingleUnitResponse = {
     title: '날씨 데이터 확인하기',
     releaseDate: '2025-07-27',
     dueDate: '2025-07-27',
-    assignmentCount: 4,
+    assignmentCount: 5,
     assignments: [
       {
         id: 1,
-        title: '날씨 데이터를 활용한 앱 만들기',
+        title: '날씨 데이터를 활용한 앱 만들기 1',
       },
       {
         id: 2,
-        title: '날씨 데이터를 활용한 앱 만들기',
+        title: '날씨 데이터를 활용한 앱 만들기 2',
       },
       {
         id: 3,
-        title: '날씨 데이터를 활용한 앱 만들기',
+        title: '날씨 데이터를 활용한 앱 만들기 3',
       },
       {
         id: 4,
-        title: '날씨 데이터를 활용한 앱 만들기',
+        title: '날씨 데이터를 활용한 앱 만들기 4',
+      },
+      {
+        id: 5,
+        title: '날씨 데이터를 활용한 앱 만들기 4',
       },
     ],
   },
