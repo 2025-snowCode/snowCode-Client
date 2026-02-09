@@ -13,6 +13,7 @@ export interface StudentProgress {
 export interface Unit {
   id: number;
   name: string;
+  title: string;
   startDate: string;
   endDate: string;
   assignments: StudentProgress[];
