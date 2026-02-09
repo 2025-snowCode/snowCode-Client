@@ -3,6 +3,7 @@ import Button from '@/components/common/Button';
 import BinIcon from '@/assets/svg/binIcon.svg?react';
 import LabeledInput from '@/components/admin/form/LabeledInput';
 import type {Unit} from '@/models/course';
+import {SortableAssignmentList} from './SortableAssignmentList';
 
 const UnitFormEditor = ({unit}: {unit: Unit}) => {
   const {
@@ -18,11 +19,11 @@ const UnitFormEditor = ({unit}: {unit: Unit}) => {
   };
 
   return (
-    <div className='flex flex-col h-full p-5 '>
+    <div className='flex flex-col h-full p-5 custom-scrollbar'>
       {/* 단원 편집 폼 */}
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className=' bg-background flex flex-col flex-1 rounded-[30px] overflow-hidden'>
+        className='bg-background h-[670px] flex flex-col flex-1 rounded-[30px] overflow-y-auto'>
         {/* 폼 헤더 */}
         <div className='bg-[#EDE9FF] flex justify-between items-center px-7.5 py-4'>
           {/* TODO: 단원 Index 추가하기 */}
@@ -36,7 +37,7 @@ const UnitFormEditor = ({unit}: {unit: Unit}) => {
         </div>
 
         {/* 폼 본문 */}
-        <div className='flex-1 p-7.5 overflow-y-auto custom-scrollbar space-y-8'>
+        <div className='flex-1 p-7.5 space-y-8'>
           {/* 단원 제목 섹션 */}
           <section className='grid grid-cols-2 gap-5.5'>
             <LabeledInput
@@ -68,27 +69,17 @@ const UnitFormEditor = ({unit}: {unit: Unit}) => {
             />
           </section>
 
-          <hr className='border-stroke' />
+          <hr className='border-stroke mb-7' />
 
           {/* 문제 등록 섹션 */}
           <section>
-            <h4 className='text-base/6 font-medium'>문제 등록</h4>
-
-            {
-              /* 문제 리스트 */
-              // TODO: 문제 리스트 컴포넌트 추가
-            }
+            <SortableAssignmentList assignmentList={unit.assignments} />
           </section>
         </div>
       </form>
 
-      {
-        /* 문제 등록 */
-        // TODO: 문제 등록 컴포넌트로 교체 필요
-      }
-
       {/* 제출 버튼 */}
-      <div className='mt-8 flex justify-end gap-5.5'>
+      <div className='mt-6 mb-2 flex justify-end gap-5.5'>
         <Button color='outlinePurple'>취소</Button>
         <Button>저장</Button>
       </div>
