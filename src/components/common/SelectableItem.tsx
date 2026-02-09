@@ -20,6 +20,7 @@ interface SelectableItemProps extends SelectableItemVariants {
   leftIcon?: React.ReactNode;
   title: string;
   rightIcon?: React.ReactNode;
+  className?: string;
 }
 
 const SelectableItem = ({
@@ -27,9 +28,10 @@ const SelectableItem = ({
   leftIcon,
   title,
   rightIcon,
+  className,
 }: SelectableItemProps) => {
   return (
-    <div className={selectableItemStyles({selected})}>
+    <div className={selectableItemStyles({selected, className})}>
       <div>{leftIcon}</div>
       <p className='text-base/6 font-normal'>{title}</p>
       <div className='ml-auto'>{rightIcon}</div>
