@@ -9,7 +9,7 @@ const Layout = () => {
   const showHeader = !noHeaderPages.includes(pathname);
 
   return (
-    <div className='min-h-screen overflow-x-hidden flex items-center'>
+    <div className='min-h-screen flex items-center'>
       <div className='w-[1156px] mx-auto px-4 py-12'>
         {showHeader && (
           <div className='pb-8'>
