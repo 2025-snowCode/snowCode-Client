@@ -48,13 +48,17 @@ interface ButtonProps extends ButtonVariants {
 
 const Button = ({
   children,
+  className,
   onClick,
   type = 'button',
   disabled = false,
   ...props
 }: ButtonProps) => {
   return (
-    <button onClick={onClick} disabled={disabled} className={button(props)}>
+    <button
+      onClick={onClick}
+      disabled={disabled}
+      className={button({...props, className})}>
       {children}
     </button>
   );
