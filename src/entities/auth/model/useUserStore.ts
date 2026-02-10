@@ -8,10 +8,15 @@ interface UserState {
   userType: UserType;
   userName: string;
   isAuthenticated: boolean;
+  accessToken: string | null;
 
   setUserType: (userType: UserType) => void;
   setUserName: (userName: string) => void;
-  login: (userName: string, userType: AuthenticatedUserType) => void;
+  login: (
+    userName: string,
+    userType: AuthenticatedUserType,
+    accessToken: string
+  ) => void;
   logout: () => void;
 }
 
@@ -21,14 +26,16 @@ export const useUserStore = create<UserState>()(
       userType: 'guest',
       userName: '',
       isAuthenticated: false,
+      accessToken: null,
 
       setUserType: (userType) => set({userType}),
       setUserName: (userName) => set({userName}),
 
-      login: (userName, userType) => {
+      login: (userName, userType, accessToken) => {
         set({
           userName,
           userType,
+          accessToken,
           isAuthenticated: true,
         });
       },
@@ -37,6 +44,7 @@ export const useUserStore = create<UserState>()(
         set({
           userType: 'guest',
           userName: '',
+          accessToken: null,
           isAuthenticated: false,
         });
       },
@@ -46,6 +54,7 @@ export const useUserStore = create<UserState>()(
       partialize: (state) => ({
         userType: state.userType,
         isAuthenticated: state.isAuthenticated,
+        accessToken: state.accessToken,
       }),
     }
   )
