@@ -1,5 +1,9 @@
 import {useUserStore} from '@/entities/auth/model/useUserStore';
-import axios, {AxiosError, type AxiosInstance, type AxiosResponse} from 'axios';
+import axios, {
+  type AxiosError,
+  type AxiosInstance,
+  type AxiosResponse,
+} from 'axios';
 const BASE_URL = '/api';
 
 /**
@@ -39,15 +43,18 @@ privateAxios.interceptors.request.use(
   }
 );
 
+let isLogginOut = false;
 // privateAxios 응답 인터셉터 설정
 privateAxios.interceptors.response.use(
   // 성공적인 응답 처리
   (response: AxiosResponse) => {
+    isLogginOut = false;
     return response;
   },
   // 오류 응답 처리
   (error: AxiosError) => {
-    if (error.response?.status === 401) {
+    if (error.response?.status === 401 && !isLogginOut) {
+      isLogginOut = true;
       console.error('인증이 만료되었습니다. 다시 로그인해주세요!');
 
       // 사용자 상태 초기화
