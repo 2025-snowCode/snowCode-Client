@@ -2,10 +2,19 @@ import SurfaceCard from '@/components/common/SurfaceCard';
 import UnitFormEditor from './ui/UnitFormEditor';
 import UnitList from './ui/UnitList';
 import {allUnitsResponse, singleUnitResponse} from './mocks/response';
+import {useQuery} from '@tanstack/react-query';
+import {allUnitsQueryOptions} from '@/entities/unit/api/unitQueryOptions';
+import {useParams} from 'react-router-dom';
+import {useState} from 'react';
 
 const CreateUnitPage = () => {
   const unitList = allUnitsResponse.response.units;
   const currentUnit = singleUnitResponse.response;
+  const {id} = useParams();
+  // const {currentUnitId, setCurrentUnitId} = useState<number | null>(null);
+  const {data: allUnits} = useQuery(allUnitsQueryOptions(Number(id)));
+
+  console.log('allUnits', allUnits);
 
   return (
     <div className='flex justify-center gap-4 p-6'>
