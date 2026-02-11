@@ -19,8 +19,6 @@ import {
   sortableKeyboardCoordinates,
 } from '@dnd-kit/sortable';
 import {CSS} from '@dnd-kit/utilities';
-import Button from '@/components/common/Button';
-import AddIcon from '@/assets/svg/addIcon.svg?react';
 
 export const SortableAssignmentList = ({
   assignmentList,
@@ -63,9 +61,6 @@ export const SortableAssignmentList = ({
 
   return (
     <div>
-      {/* 섹션 제목 - 문제 등록 */}
-      <h4 className='text-base/6 font-medium'>문제 등록</h4>
-
       {/* draggable & sortable 문제 목록 영역 */}
       <DndContext
         sensors={sensors}
@@ -81,14 +76,6 @@ export const SortableAssignmentList = ({
           </ul>
         </SortableContext>
       </DndContext>
-
-      {/* 문제 연결 버튼 */}
-      <div className='mt-3.5'>
-        <Button color='tonal' size='compact' content='mixed'>
-          <AddIcon className='w-3 h-3' />
-          문제 연결
-        </Button>
-      </div>
     </div>
   );
 };

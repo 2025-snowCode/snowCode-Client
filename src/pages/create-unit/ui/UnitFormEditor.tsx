@@ -2,18 +2,30 @@ import {useForm} from 'react-hook-form';
 import Button from '@/components/common/Button';
 import BinIcon from '@/assets/svg/binIcon.svg?react';
 import LabeledInput from '@/components/admin/form/LabeledInput';
-import type {Unit} from '@/models/course';
 import {SortableAssignmentList} from './SortableAssignmentList';
 import {zodResolver} from '@hookform/resolvers/zod';
-import {unitFormSchema, type TUnitFormSchema} from '../model/types';
+import {
+  unitFormSchema,
+  type TUnitFormSchema,
+  type UnitFormEditorProps,
+} from '../model/types';
+import AddIcon from '@/assets/svg/addIcon.svg?react';
+import {EmptyState} from '@/components/common/EmptyState';
 
-const UnitFormEditor = ({unit}: {unit: Unit}) => {
+const UnitFormEditor = ({unit}: UnitFormEditorProps) => {
   const {
     register,
     handleSubmit,
     formState: {errors, isSubmitting},
     reset,
-  } = useForm<TUnitFormSchema>({resolver: zodResolver(unitFormSchema)});
+  } = useForm<TUnitFormSchema>({
+    resolver: zodResolver(unitFormSchema),
+    values: {
+      title: unit?.title || '',
+      releaseDate: unit?.releaseDate || '',
+      dueDate: unit?.dueDate || '',
+    },
+  });
 
   const onSubmit = async (data: TUnitFormSchema) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -75,8 +87,25 @@ const UnitFormEditor = ({unit}: {unit: Unit}) => {
           <hr className='border-stroke mb-7' />
 
           {/* 문제 등록 섹션 */}
-          <section>
-            <SortableAssignmentList assignmentList={unit.assignments} />
+          <section className=''>
+            <h4 className='text-base/6 font-medium'>문제 등록</h4>
+
+            {/* 드래그 앤 드롭 가능한 문제 리스트 */}
+            {!unit || !unit.assignments || unit.assignments.length === 0 ? (
+              <EmptyState className='mt-4 mb-5'>
+                등록된 문제가 없습니다.
+              </EmptyState>
+            ) : (
+              <SortableAssignmentList assignmentList={unit.assignments} />
+            )}
+
+            {/* 문제 연결 버튼 */}
+            <div className='mt-3.5'>
+              <Button color='tonal' size='compact' content='mixed'>
+                <AddIcon className='w-3 h-3' />
+                문제 연결
+              </Button>
+            </div>
           </section>
         </div>
       </form>

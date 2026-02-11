@@ -1,3 +1,4 @@
+import type {Unit} from '@/models/course';
 import z from 'zod';
 
 // 단원 생성/수정 폼 스키마
@@ -15,3 +16,7 @@ export const unitFormSchema = z
 
 // 단원 생성/수정 폼 타입
 export type TUnitFormSchema = z.infer<typeof unitFormSchema>;
+
+export interface UnitFormEditorProps {
+  unit?: Unit;
+}
