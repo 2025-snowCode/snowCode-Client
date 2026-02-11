@@ -1,7 +1,7 @@
 import {formatCourseTermWithSlash} from '@/utils/course';
 import CourseManagementDropdown from './CourseManagementDropdown';
 import {useNavigate} from 'react-router-dom';
-import {useUserStore} from '@/entities/user/model/useUserStore';
+import {useUserStore} from '@/entities/auth/model/useUserStore';
 import type {CourseCardProps} from '../models/types';
 
 const CourseCard = ({onDelete, ...course}: CourseCardProps) => {

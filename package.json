@@ -17,6 +17,7 @@
     "axios": "^1.13.4",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-hook-form": "^7.71.1",
     "react-router-dom": "^7.6.3",
     "tailwind-merge": "^3.4.0",
     "tailwind-variants": "^3.2.2",
