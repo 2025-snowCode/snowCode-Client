@@ -1,31 +1,40 @@
 import SurfaceCard from '@/components/common/SurfaceCard';
 import UnitFormEditor from './ui/UnitFormEditor';
 import UnitList from './ui/UnitList';
-import {allUnitsResponse, singleUnitResponse} from './mocks/response';
-import {useQuery} from '@tanstack/react-query';
-import {allUnitsQueryOptions} from '@/entities/unit/api/unitQueryOptions';
+import {useQuery, useSuspenseQuery} from '@tanstack/react-query';
+import {
+  allUnitsQueryOptions,
+  unitQueryOptions,
+} from '@/entities/unit/api/unitQueryOptions';
 import {useParams} from 'react-router-dom';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 
 const CreateUnitPage = () => {
-  const unitList = allUnitsResponse.response.units;
-  const currentUnit = singleUnitResponse.response;
   const {id} = useParams();
-  // const {currentUnitId, setCurrentUnitId} = useState<number | null>(null);
-  const {data: allUnits} = useQuery(allUnitsQueryOptions(Number(id)));
+  const [selectedUnitId, setSelectedUnitId] = useState<number | null>(null);
+  const {data: allUnits} = useSuspenseQuery(allUnitsQueryOptions(Number(id)));
+  const {data: unit} = useQuery(unitQueryOptions(selectedUnitId));
 
-  console.log('allUnits', allUnits);
+  useEffect(() => {
+    if (allUnits && allUnits.response.count !== 0 && selectedUnitId === null) {
+      setSelectedUnitId(allUnits.response.units[0].id);
+    }
+  }, [allUnits, selectedUnitId, setSelectedUnitId]);
 
   return (
     <div className='flex justify-center gap-4 p-6'>
       {/* 단원 목차 섹션 */}
       <SurfaceCard className='w-112.5 min-w-0' size='large'>
-        <UnitList unitList={unitList} />
+        <UnitList
+          unitList={allUnits?.response.units}
+          onUnitClick={(id) => setSelectedUnitId(id)}
+          selectedUnitId={selectedUnitId}
+        />
       </SurfaceCard>
 
       {/* 단원 폼 섹션 */}
       <SurfaceCard className='w-185 min-w-0' size='large'>
-        <UnitFormEditor unit={currentUnit} />
+        <UnitFormEditor unit={unit?.response} />
       </SurfaceCard>
     </div>
   );
