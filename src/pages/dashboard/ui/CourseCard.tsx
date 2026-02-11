@@ -1,10 +1,10 @@
 import {formatCourseTermWithSlash} from '@/utils/course';
-import type {DashboardCourse} from '@/models/course';
 import CourseManagementDropdown from './CourseManagementDropdown';
 import {useNavigate} from 'react-router-dom';
 import {useUserStore} from '@/entities/user/model/useUserStore';
+import type {CourseCardProps} from '../models/types';
 
-const CourseCard = (course: DashboardCourse) => {
+const CourseCard = ({onDelete, ...course}: CourseCardProps) => {
   const navigate = useNavigate();
   const userType = useUserStore((state) => state.userType);
 
@@ -42,7 +42,9 @@ const CourseCard = (course: DashboardCourse) => {
         </div>
         <div className='relative pl-4 border-l-[0.5px] border-[#7A768C]'>
           {/* 관리자용 강의 관리 버튼 */}
-          {userType === 'admin' && <CourseManagementDropdown courseId={id} />}
+          {userType === 'admin' && (
+            <CourseManagementDropdown courseId={id} onDelete={onDelete} />
+          )}
 
           <p>문제 수</p>
           <p className='font-medium'>{assignmentCount}개</p>
