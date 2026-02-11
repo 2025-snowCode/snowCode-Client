@@ -6,14 +6,48 @@ import ScheduleList from './ui/ScheduleList';
 import {Link} from 'react-router-dom';
 import {useUserStore} from '@/entities/user/model/useUserStore';
 import courseQueryOptions from '@/entities/course/api/courseQueryOptions';
-import {useSuspenseQueries} from '@tanstack/react-query';
+import {
+  useMutation,
+  useQueryClient,
+  useSuspenseQueries,
+} from '@tanstack/react-query';
 import assignmentQueryOptions from '@/entities/assignment/api/assignmentQueryOptions';
+import {deleteCourse} from '@/entities/course';
 
 const Dashboard = () => {
   const userType = useUserStore((state) => state.userType);
-  const [courses, schedules] = useSuspenseQueries({
+  const queryClient = useQueryClient();
+
+  // 강의 및 스케쥴 데이터 패칭
+  const [{data: courses}, {data: schedules}] = useSuspenseQueries({
     queries: [courseQueryOptions(), assignmentQueryOptions()],
   });
+
+  // 강의 삭제 뮤테이션
+  const {mutate} = useMutation({
+    mutationFn: (courseId: number) => deleteCourse(courseId),
+    onSuccess: () => {
+      // 강의 목록 및 스케쥴 목록 갱신
+      queryClient.invalidateQueries({
+        queryKey: courseQueryOptions().queryKey,
+      });
+      queryClient.invalidateQueries({
+        queryKey: assignmentQueryOptions().queryKey,
+      });
+      alert('강의가 성공적으로 삭제되었습니다.');
+    },
+    onError: (error) => {
+      console.error('강의 삭제 실패', error);
+      alert('강의 삭제에 실패했습니다. 다시 시도해주세요.');
+    },
+  });
+
+  // 강의 삭제 핸들러
+  const handleDeleteCourse = (courseId: number) => {
+    if (confirm('강의를 삭제하시겠습니까?')) {
+      mutate(courseId);
+    }
+  };
 
   return (
     <main className='w-full'>
@@ -25,7 +59,10 @@ const Dashboard = () => {
             <SectionHeader title='강의 목록' />
             {userType === 'admin' && <AddButton />}
           </div>
-          <CourseList courseList={courses.data?.response.courses} />
+          <CourseList
+            courseList={courses?.response.courses}
+            onDelete={handleDeleteCourse}
+          />
         </section>
 
         {/* 스케쥴 목록 */}
@@ -33,7 +70,7 @@ const Dashboard = () => {
           <div className='pl-24.5'>
             <SectionHeader title='내 스케쥴' />
           </div>
-          <ScheduleList scheduleList={schedules.data?.response.schedule} />
+          <ScheduleList scheduleList={schedules?.response.schedule} />
         </section>
       </div>
     </main>
