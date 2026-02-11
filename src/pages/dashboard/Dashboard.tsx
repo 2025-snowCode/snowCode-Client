@@ -13,6 +13,7 @@ import {
 } from '@tanstack/react-query';
 import assignmentQueryOptions from '@/entities/assignment/api/assignmentQueryOptions';
 import {deleteCourse} from '@/entities/course';
+import {EmptyState} from '@/components/common/EmptyState';
 
 const Dashboard = () => {
   const userType = useUserStore((state) => state.userType);
@@ -59,10 +60,15 @@ const Dashboard = () => {
             <SectionHeader title='강의 목록' />
             {userType === 'admin' && <AddButton />}
           </div>
-          <CourseList
-            courseList={courses?.response.courses}
-            onDelete={handleDeleteCourse}
-          />
+
+          {courses.response.count === 0 ? (
+            <EmptyState>등록된 강의가 없습니다.</EmptyState>
+          ) : (
+            <CourseList
+              courseList={courses.response.courses}
+              onDelete={handleDeleteCourse}
+            />
+          )}
         </section>
 
         {/* 스케쥴 목록 */}
@@ -70,7 +76,12 @@ const Dashboard = () => {
           <div className='pl-24.5'>
             <SectionHeader title='내 스케쥴' />
           </div>
-          <ScheduleList scheduleList={schedules?.response.schedule} />
+
+          {schedules.response.count === 0 ? (
+            <EmptyState className='pl-24.5'>예정된 과제가 없습니다.</EmptyState>
+          ) : (
+            <ScheduleList scheduleList={schedules.response.schedule} />
+          )}
         </section>
       </div>
     </main>
