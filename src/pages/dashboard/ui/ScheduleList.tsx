@@ -1,12 +1,10 @@
 import ScheduleCard from './ScheduleCard';
 import EventMarkerIcon from '@/assets/svg/eventMarkerIcon.svg?react';
-import {responseScheduleList} from '../models/ResponseScheduleList';
 import {formatDateMonthDay} from '@/utils/course';
+import type {ScheduleListProps} from '../models/types';
 
 // 스케쥴 목록 컴포넌트
-const ScheduleList = () => {
-  const scheduleList = responseScheduleList.response.schedule;
-
+const ScheduleList = ({scheduleList}: ScheduleListProps) => {
   return (
     <ul className='flex flex-col gap-6'>
       {/* 날짜별 그룹 간의 간격 */}
