@@ -17,7 +17,7 @@ const button = tv({
       default: 'w-24 h-10 px-3 py-1.5',
       compact: 'w-fit px-3 py-1.5 leading-5',
       wide: 'w-40 py-[15px]',
-      none: 'w-fit p-0',
+      none: 'p-0',
       icon: 'w-16 h-16 p-0 rounded-full', // 아이콘 버튼 rounded 속성 적용
     },
     content: {
