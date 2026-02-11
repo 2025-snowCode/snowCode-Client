@@ -1,3 +1,4 @@
+import type {ApiResponse} from '@/models/common';
 import type {DashboardCourseListResponse} from '@/models/course';
 import {privateAxios} from '@/shared/api/axiosInstance';
 
@@ -6,7 +7,9 @@ export const getAllCourses = async (): Promise<DashboardCourseListResponse> => {
   return response.data;
 };
 
-export const deleteCourse = async (courseId: number) => {
+export const deleteCourse = async (
+  courseId: number
+): Promise<ApiResponse<string>> => {
   const response = await privateAxios.delete(`/courses/${courseId}`);
   return response.data;
 };
