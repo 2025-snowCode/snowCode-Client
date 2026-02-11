@@ -1,1 +1,1 @@
-export {getAllUnitsByCourseId} from './api/unitApi';
+export {getAllUnitsByCourseId, getUnitById} from './api/unitApi';
