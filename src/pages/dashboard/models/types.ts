@@ -16,3 +16,7 @@ type AssignmentType = Schedule['assignments'][number];
 export interface ScheduleCardProps extends AssignmentType {
   remainingDays: number;
 }
+
+export interface ScheduleListProps {
+  scheduleList: Schedule[];
+}
