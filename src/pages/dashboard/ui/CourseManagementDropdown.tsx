@@ -29,7 +29,7 @@ const CourseManagementDropdown = ({courseId}: {courseId: number}) => {
       options={COURSE_MENU_OPTIONS}
       dropDownButton={CourseMenuTrigger}
       onSelect={handleSelect}
-      className='absolute right-5.5 top-6.5'
+      className='absolute -right-2 -top-6'
       menuClassName='w-36.5 -right-4 bg-white'
     />
   );
