@@ -6,9 +6,11 @@ import type {AllUnitsResponse} from '@/models/course';
 
 interface UnitListProps {
   unitList: AllUnitsResponse['response']['units'];
+  onUnitClick: (id: number) => void;
+  selectedUnitId?: number | null;
 }
 
-const UnitList = ({unitList}: UnitListProps) => {
+const UnitList = ({unitList, onUnitClick, selectedUnitId}: UnitListProps) => {
   return (
     <div className='flex flex-col h-full'>
       {/* 단원 리스트 헤더 */}
@@ -19,8 +21,9 @@ const UnitList = ({unitList}: UnitListProps) => {
         {/* 단원 아이템 */}
         {unitList.map(({id, title, assignmentCount}) => (
           <li
+            onClick={() => onUnitClick(id)}
             key={id}
-            className='flex flex-col py-5 px-12 gap-2.5 hover:bg-background cursor-pointer transition-colors group'>
+            className={`flex flex-col py-5 px-12 gap-2.5 cursor-pointer ${selectedUnitId === id ? 'bg-background' : ''}`}>
             {/* 단원 인덱스 배지 */}
             <div>
               <Badge variant='index' kind='problem'>
@@ -31,7 +34,7 @@ const UnitList = ({unitList}: UnitListProps) => {
             {/* 단원 제목 및 화살표 아이콘 */}
             <div className='flex justify-between items-center'>
               <h3 className='text-lg/normal font-medium'>{title}</h3>
-              <ArrowrightIcon className='w-4.5' />
+              {id === selectedUnitId && <ArrowrightIcon className='w-4.5' />}
             </div>
           </li>
         ))}
