@@ -10,9 +10,10 @@ export function allUnitsQueryOptions(courseId: number) {
 }
 
 // 단일 단원 조회 쿼리 옵션
-export function unitQueryOptions(unitId: number) {
+export function unitQueryOptions(unitId: number | null) {
   return queryOptions({
     queryKey: ['unit', unitId],
     queryFn: () => getUnitById(unitId),
+    enabled: !!unitId,
   });
 }
