@@ -93,6 +93,7 @@ export const SortableAssignmentList = ({
   );
 };
 
+// 드래그 가능한 과제 아이템 컴포넌트
 const DraggableAssignmentItem = ({id, title}: Assignment) => {
   const {attributes, listeners, setNodeRef, transform, transition, isDragging} =
     useSortable({id});

@@ -9,7 +9,7 @@ const CreateUnitPage = () => {
 
   return (
     <div className='flex justify-center gap-4 p-6'>
-      {/* 단원 리스트 섹션 */}
+      {/* 단원 목차 섹션 */}
       <SurfaceCard className='w-112.5 min-w-0' size='large'>
         <UnitList unitList={unitList} />
       </SurfaceCard>
