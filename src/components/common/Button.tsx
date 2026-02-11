@@ -41,6 +41,7 @@ interface ButtonProps extends ButtonVariants {
   className?: string;
   type?: 'button' | 'submit';
   disabled?: boolean;
+  formID?: string;
   onClick?: () => void;
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
@@ -52,12 +53,14 @@ const Button = ({
   onClick,
   type = 'button',
   disabled = false,
+  formID,
   ...props
 }: ButtonProps) => {
   return (
     <button
       onClick={onClick}
       disabled={disabled}
+      form={formID}
       className={button({...props, className})}>
       {children}
     </button>
