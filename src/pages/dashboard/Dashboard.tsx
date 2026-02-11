@@ -1,15 +1,19 @@
 import LogoIcon from '@/assets/images/snowCode_logo.svg?react';
 import CourseList from './ui/CourseList';
-import {responseCourseList} from './models/ResponseCourseList';
 import Button from '@/components/common/Button';
 import AddIcon from '@/assets/svg/addIcon.svg?react';
 import ScheduleList from './ui/ScheduleList';
 import {Link} from 'react-router-dom';
 import {useUserStore} from '@/entities/user/model/useUserStore';
+import courseQueryOptions from '@/entities/course/api/courseQueryOptions';
+import {useSuspenseQueries} from '@tanstack/react-query';
+import assignmentQueryOptions from '@/entities/assignment/api/assignmentQueryOptions';
 
 const Dashboard = () => {
-  const courseListData = responseCourseList.response.courses;
   const userType = useUserStore((state) => state.userType);
+  const [courses, schedules] = useSuspenseQueries({
+    queries: [courseQueryOptions(), assignmentQueryOptions()],
+  });
 
   return (
     <main className='w-full'>
@@ -21,7 +25,7 @@ const Dashboard = () => {
             <SectionHeader title='강의 목록' />
             {userType === 'admin' && <AddButton />}
           </div>
-          <CourseList courseList={courseListData} />
+          <CourseList courseList={courses.data?.response.courses} />
         </section>
 
         {/* 스케쥴 목록 */}
@@ -29,7 +33,7 @@ const Dashboard = () => {
           <div className='pl-24.5'>
             <SectionHeader title='내 스케쥴' />
           </div>
-          <ScheduleList />
+          <ScheduleList scheduleList={schedules.data?.response.schedule} />
         </section>
       </div>
     </main>
