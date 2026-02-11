@@ -1,1 +1,5 @@
-export {getAllUnitsByCourseId, getUnitById} from './api/unitApi';
+export {
+  getAllUnitsByCourseId,
+  getUnitById,
+  deleteUnitById,
+} from './api/unitApi';
