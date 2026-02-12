@@ -7,6 +7,11 @@ import Input from '@/components/common/Input';
 import {StudentTable} from '@/entities/student/ui/StudentTable';
 import mockCourseStudents from '@/entities/student/model/mock';
 
+/**
+ * Render the student management page with a searchable student list, course selector, and pagination.
+ *
+ * @returns The page JSX element containing the assignment layout, a StudentTable populated from mock data, and a Pagination control.
+ */
 export default function StudentManagementPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const {register} = useForm();

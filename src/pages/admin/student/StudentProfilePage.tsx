@@ -4,6 +4,15 @@ import {StudentProfile} from '@/entities/student/ui/StudentProfile';
 import {AssignmentProgressCard} from '@/entities/student/ui/AssignmentProgressCard';
 import mockCourseStudents from '@/entities/student/model/mock';
 
+/**
+ * Admin page that displays a student's profile and assignment progress.
+ *
+ * Reads the `studentId` route parameter and, if a matching student exists,
+ * renders the student's profile alongside an assignment progress card; if no
+ * matching student is found, renders the message "학생 정보를 찾을 수 없습니다.".
+ *
+ * @returns A React element that presents the student profile page
+ */
 export default function StudentProfilePage() {
   const {studentId} = useParams<{studentId: string}>();
   const student = mockCourseStudents.response.students.find(
