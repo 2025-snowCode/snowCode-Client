@@ -1,4 +1,4 @@
-import type {Student} from '../model/types';
+import type {Student, ProgressStatus} from '../model/types';
 import {ProgressIndicators} from '@/components/common/ProgressIndicators';
 import Correct from '@/assets/svg/correct.svg?react';
 import Incorrect from '@/assets/svg/incorrect.svg?react';
@@ -11,7 +11,7 @@ interface AssignmentProgressCardProps {
 export const AssignmentProgressCard = ({
   student,
 }: AssignmentProgressCardProps) => {
-  const getStatusIcon = (status: string) => {
+  const getStatusIcon = (status: ProgressStatus) => {
     switch (status) {
       case 'PASSED':
         return (
