@@ -1,44 +1,196 @@
-import type { CourseStudentsResponse } from './types';
+import type {CourseStudentsResponse} from './types';
 
 const mockCourseStudents: CourseStudentsResponse = {
   success: true,
   response: {
     id: 1,
-    title: "소프트웨어의 이해",
-    section: "005",
+    title: '소프트웨어의 이해',
+    section: '005',
     unitCount: 5,
     studentCount: 2,
     students: [
       {
         id: 1,
-        studentId: "2210456",
-        name: "백수민",
-        score: 8,
-        totalScore: 20,
+        studentId: '2210456',
+        name: '백수민',
+        score: 35,
+        totalScore: 70,
         progress: [
-          { status: "PASSED" },
-          { status: "NOT_SUBMITTED" },
-          { status: "PARTIAL" },
-          { status: "FAILED" },
-          { status: "NOT_SUBMITTED" },
-        ]
+          {status: 'PASSED'},
+          {status: 'NOT_SUBMITTED'},
+          {status: 'PARTIAL'},
+          {status: 'FAILED'},
+          {status: 'NOT_SUBMITTED'},
+        ],
+        units: [
+          {
+            id: 1,
+            name: '1단원',
+            title: '변수와 수식',
+            startDate: '2025.06.19',
+            endDate: '06.25',
+            assignments: [
+              {
+                status: 'NOT_SUBMITTED',
+                assignmentName: '음수 구별하기',
+                score: 4,
+                totalScore: 10,
+                plagiarismRate: 56,
+              },
+              {
+                status: 'PASSED',
+                assignmentName: '변수 선언 후 값 출력해보기',
+                score: 9,
+                totalScore: 10,
+                plagiarismRate: 19,
+              },
+              {
+                status: 'PASSED',
+                assignmentName: '수식 작성 및 결과 확인 실습 과제',
+                score: 1,
+                totalScore: 10,
+                plagiarismRate: 3,
+              },
+              {
+                status: 'FAILED',
+                assignmentName: '변수에 수식 결과를 저장해보세요',
+                score: 6,
+                totalScore: 10,
+                plagiarismRate: 43,
+              },
+            ],
+          },
+          {
+            id: 2,
+            name: '2단원',
+            title: '변수와 수식',
+            startDate: '2025.06.19',
+            endDate: '06.25',
+            assignments: [
+              {
+                status: 'NOT_SUBMITTED',
+                assignmentName: '음수 구별하기',
+                score: 4,
+                totalScore: 10,
+                plagiarismRate: 56,
+              },
+              {
+                status: 'PASSED',
+                assignmentName: '변수 선언 후 값 출력해보기',
+                score: 9,
+                totalScore: 10,
+                plagiarismRate: 19,
+              },
+              {
+                status: 'PASSED',
+                assignmentName: '수식 작성 및 결과 확인 실습 과제',
+                score: 1,
+                totalScore: 10,
+                plagiarismRate: 3,
+              },
+              {
+                status: 'FAILED',
+                assignmentName: '변수에 수식 결과를 저장해보세요',
+                score: 6,
+                totalScore: 10,
+                plagiarismRate: 43,
+              },
+            ],
+          },
+        ],
       },
       {
         id: 2,
-        studentId: "2313398",
-        name: "주아정",
-        score: 20,
-        totalScore: 20,
+        studentId: '2313398',
+        name: '주아정',
+        score: 80,
+        totalScore: 80,
         progress: [
-          { status: "PASSED" },
-          { status: "PASSED" },
-          { status: "PASSED" },
-          { status: "PASSED" },
-          { status: "PASSED" },
-        ]
+          {status: 'PASSED'},
+          {status: 'PASSED'},
+          {status: 'PASSED'},
+          {status: 'PASSED'},
+          {status: 'PASSED'},
+        ],
+        units: [
+          {
+            id: 1,
+            name: '1단원',
+            title: '변수와 수식',
+            startDate: '2025.06.19',
+            endDate: '06.25',
+            assignments: [
+              {
+                status: 'PASSED',
+                assignmentName: '음수 구별하기',
+                score: 10,
+                totalScore: 10,
+                plagiarismRate: 5,
+              },
+              {
+                status: 'PASSED',
+                assignmentName: '변수 선언 후 값 출력해보기',
+                score: 10,
+                totalScore: 10,
+                plagiarismRate: 2,
+              },
+              {
+                status: 'PASSED',
+                assignmentName: '수식 작성 및 결과 확인 실습 과제',
+                score: 10,
+                totalScore: 10,
+                plagiarismRate: 1,
+              },
+              {
+                status: 'PASSED',
+                assignmentName: '변수에 수식 결과를 저장해보세요',
+                score: 10,
+                totalScore: 10,
+                plagiarismRate: 3,
+              },
+            ],
+          },
+          {
+            id: 2,
+            name: '2단원',
+            title: '변수와 수식',
+            startDate: '2025.06.19',
+            endDate: '06.25',
+            assignments: [
+              {
+                status: 'PASSED',
+                assignmentName: '음수 구별하기',
+                score: 10,
+                totalScore: 10,
+                plagiarismRate: 4,
+              },
+              {
+                status: 'PASSED',
+                assignmentName: '변수 선언 후 값 출력해보기',
+                score: 10,
+                totalScore: 10,
+                plagiarismRate: 6,
+              },
+              {
+                status: 'PASSED',
+                assignmentName: '수식 작성 및 결과 확인 실습 과제',
+                score: 10,
+                totalScore: 10,
+                plagiarismRate: 2,
+              },
+              {
+                status: 'PASSED',
+                assignmentName: '변수에 수식 결과를 저장해보세요',
+                score: 10,
+                totalScore: 10,
+                plagiarismRate: 1,
+              },
+            ],
+          },
+        ],
       },
-    ]
-  }
+    ],
+  },
 };
 
-export default mockCourseStudents
+export default mockCourseStudents;

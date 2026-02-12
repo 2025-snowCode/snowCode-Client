@@ -70,7 +70,7 @@ export const StudentTable = ({students}: StudentTableProps) => {
             </td>
             <td className='pl-4 align-middle'>
               <Link
-                to={`/admin/student/${student.id}`}
+                to={`/admin/student/profile/${student.studentId}`}
                 className='text-primary font-medium hover:underline'>
                 {student.name}
               </Link>
