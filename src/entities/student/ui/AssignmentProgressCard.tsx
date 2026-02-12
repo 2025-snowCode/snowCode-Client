@@ -85,8 +85,10 @@ export const AssignmentProgressCard = ({
                 <td className='pl-4.5 py-4.5 text-base text-secondary-black'>
                   {assignment.assignmentName}
                 </td>
-                <td className='w-19 py-4.5 text-center items-center flex justify-center'>
-                  {getStatusIcon(assignment.status)}
+                <td className='w-19 py-4.5 text-center items-center justify-center'>
+                  <div className='flex items-center justify-center'>
+                    {getStatusIcon(assignment.status)}
+                  </div>
                 </td>
                 <td className='w-25 py-4.5 text-center text-sm text-secondary-black'>
                   {assignment.score}/{assignment.totalScore}
