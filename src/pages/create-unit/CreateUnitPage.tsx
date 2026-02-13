@@ -2,10 +2,7 @@ import SurfaceCard from '@/components/common/SurfaceCard';
 import UnitFormEditor from './ui/UnitFormEditor';
 import UnitList from './ui/UnitList';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
-import {
-  allUnitsQueryOptions,
-  unitQueryOptions,
-} from '@/entities/unit/api/unitQueryOptions';
+import {unitQueries} from '@/entities/unit/api/unitQueryOptions';
 import {useParams} from 'react-router-dom';
 import {useEffect, useState} from 'react';
 import {createUnit} from '@/entities/unit/api/unitApi';
@@ -16,17 +13,17 @@ const CreateUnitPage = () => {
   const [selectedUnitId, setSelectedUnitId] = useState<number | null>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(1);
   const [isEditing, setIsEditing] = useState(false);
-  const {data: allUnits} = useQuery(allUnitsQueryOptions(Number(id)));
-  const {data: unit} = useQuery(unitQueryOptions(selectedUnitId));
+  const {data: unitList} = useQuery(unitQueries.getUnitList(Number(id)));
+  const {data: unit} = useQuery(unitQueries.getUnitDetails(selectedUnitId));
   const queryClient = useQueryClient();
 
   // 단원 목록에서 선택된 단원이 없을 때, 첫 번째 단원을 선택하도록 설정
   useEffect(() => {
-    if (allUnits && allUnits.response.count !== 0 && selectedUnitId === null) {
-      setSelectedUnitId(allUnits.response.units[0].id);
+    if (unitList && unitList.response.count !== 0 && selectedUnitId === null) {
+      setSelectedUnitId(unitList.response.units[0].id);
       setIsEditing(true); // 첫 번째 단원이 선택되면 편집 모드로 전환
     }
-  }, [allUnits, selectedUnitId]);
+  }, [unitList, selectedUnitId]);
 
   const onUnitClick = (id: number) => {
     setSelectedUnitId(id);
@@ -35,7 +32,7 @@ const CreateUnitPage = () => {
 
   const onAddNewUnit = () => {
     setSelectedUnitId(-1);
-    setCurrentIndex(allUnits ? allUnits.response.count + 1 : 1); // 새 단원의 인덱스 설정
+    setCurrentIndex(unitList ? unitList.response.count + 1 : 1); // 새 단원의 인덱스 설정
     setIsEditing(false); // 새 단원 추가 시 편집 모드 해제
   };
 
@@ -48,7 +45,7 @@ const CreateUnitPage = () => {
       setSelectedUnitId(data.response.id);
       setIsEditing(true); // 새 단원 생성 후 편집 모드로 전환
       queryClient.invalidateQueries({
-        queryKey: allUnitsQueryOptions(Number(id)).queryKey,
+        queryKey: unitQueries.getUnitList(Number(id)).queryKey,
       });
       alert('새 단원이 성공적으로 생성되었습니다.');
     },
@@ -68,7 +65,7 @@ const CreateUnitPage = () => {
       {/* 단원 목차 섹션 */}
       <SurfaceCard className='w-112.5 min-w-0' size='large'>
         <UnitList
-          unitList={allUnits?.response.units}
+          unitList={unitList?.response.units}
           onUnitClick={onUnitClick}
           onChangeIndex={(index) => setCurrentIndex(index)}
           selectedUnitId={selectedUnitId}
