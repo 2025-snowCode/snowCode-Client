@@ -4,7 +4,7 @@ import Button from '@/components/common/Button';
 import AddIcon from '@/assets/svg/addIcon.svg?react';
 import ScheduleList from './ui/ScheduleList';
 import {Link} from 'react-router-dom';
-import {useUserStore} from '@/entities/user/model/useUserStore';
+import {useUserStore} from '@/entities/auth/model/useUserStore';
 import courseQueryOptions from '@/entities/course/api/courseQueryOptions';
 import {
   useMutation,
@@ -14,7 +14,6 @@ import {
 import assignmentQueryOptions from '@/entities/assignment/api/assignmentQueryOptions';
 import {deleteCourse} from '@/entities/course';
 import {EmptyState} from '@/components/common/EmptyState';
-
 
 const Dashboard = () => {
   const userType = useUserStore((state) => state.userType);
