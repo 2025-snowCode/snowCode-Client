@@ -19,4 +19,6 @@ export type TUnitFormSchema = z.infer<typeof unitFormSchema>;
 
 export interface UnitFormEditorProps {
   unit?: Unit;
+  unitIndex: number;
+  isEditing: boolean;
 }

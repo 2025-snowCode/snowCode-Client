@@ -8,9 +8,25 @@ interface UnitListProps {
   unitList: AllUnitsResponse['response']['units'];
   onUnitClick: (id: number) => void;
   selectedUnitId?: number | null;
+  onChangeIndex: (index: number) => void;
+  onAddNewUnit?: () => void;
 }
 
-const UnitList = ({unitList, onUnitClick, selectedUnitId}: UnitListProps) => {
+const UnitList = ({
+  unitList,
+  onUnitClick,
+  selectedUnitId,
+  onChangeIndex,
+  onAddNewUnit,
+}: UnitListProps) => {
+  const handleSelectUnit = (id: number) => {
+    onUnitClick(id);
+
+    // 선택된 단원의 인덱스 찾기
+    const index = unitList.findIndex((unit) => unit.id === id);
+    onChangeIndex(index + 1);
+  };
+
   return (
     <div className='flex flex-col h-full'>
       {/* 단원 리스트 헤더 */}
@@ -21,7 +37,7 @@ const UnitList = ({unitList, onUnitClick, selectedUnitId}: UnitListProps) => {
         {/* 단원 아이템 */}
         {unitList.map(({id, title, assignmentCount}) => (
           <li
-            onClick={() => onUnitClick(id)}
+            onClick={() => handleSelectUnit(id)}
             key={id}
             className={`flex flex-col py-5 px-12 gap-2.5 cursor-pointer ${selectedUnitId === id ? 'bg-background' : ''}`}>
             {/* 단원 인덱스 배지 */}
@@ -42,7 +58,11 @@ const UnitList = ({unitList, onUnitClick, selectedUnitId}: UnitListProps) => {
 
       {/* 단원 추가 버튼 */}
       <div className='px-12 mt-4.5'>
-        <Button color='primary' size='compact' content='mixed'>
+        <Button
+          onClick={onAddNewUnit}
+          color='primary'
+          size='compact'
+          content='mixed'>
           <AddIcon className='w-3 h-3 stroke-white' />
           단원 추가
         </Button>

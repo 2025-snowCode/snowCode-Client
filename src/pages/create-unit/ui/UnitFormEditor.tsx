@@ -11,8 +11,11 @@ import {
 } from '../model/types';
 import AddIcon from '@/assets/svg/addIcon.svg?react';
 import {EmptyState} from '@/components/common/EmptyState';
+import {useState} from 'react';
 
-const UnitFormEditor = ({unit}: UnitFormEditorProps) => {
+const UnitFormEditor = ({unit, unitIndex, isEditing}: UnitFormEditorProps) => {
+  const [assignmentIds, setAssignmentIds] = useState<number[]>([]);
+
   const {
     register,
     handleSubmit,
@@ -20,11 +23,19 @@ const UnitFormEditor = ({unit}: UnitFormEditorProps) => {
     reset,
   } = useForm<TUnitFormSchema>({
     resolver: zodResolver(unitFormSchema),
-    values: {
-      title: unit?.title || '',
-      releaseDate: unit?.releaseDate || '',
-      dueDate: unit?.dueDate || '',
-    },
+    values:
+      isEditing === false
+        ? {
+            title: '',
+            releaseDate: '',
+            dueDate: '',
+            assignmentIds: [],
+          }
+        : {
+            title: unit?.title || '',
+            releaseDate: unit?.releaseDate || '',
+            dueDate: unit?.dueDate || '',
+          },
   });
 
   const onSubmit = async (data: TUnitFormSchema) => {
@@ -42,7 +53,7 @@ const UnitFormEditor = ({unit}: UnitFormEditorProps) => {
         {/* 폼 헤더 */}
         <div className='bg-[#EDE9FF] flex justify-between items-center px-7.5 py-4'>
           {/* TODO: 단원 Index 추가하기 */}
-          <h3 className='text-lg font-medium'>1. 단원</h3>
+          <h3 className='text-lg font-medium'>{unitIndex}. 단원</h3>
           <Button
             color='primary'
             content='icon'
@@ -91,7 +102,7 @@ const UnitFormEditor = ({unit}: UnitFormEditorProps) => {
             <h4 className='text-base/6 font-medium'>문제 등록</h4>
 
             {/* 드래그 앤 드롭 가능한 문제 리스트 */}
-            {!unit || !unit.assignments || unit.assignments.length === 0 ? (
+            {!unit || unit.assignmentCount === 0 ? (
               <EmptyState className='mt-4 mb-5'>
                 등록된 문제가 없습니다.
               </EmptyState>
