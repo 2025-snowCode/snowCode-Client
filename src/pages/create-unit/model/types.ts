@@ -21,4 +21,5 @@ export interface UnitFormEditorProps {
   unit?: Unit;
   unitIndex: number;
   isEditing: boolean;
+  onCreateUnit: (unit: TUnitFormSchema) => void;
 }

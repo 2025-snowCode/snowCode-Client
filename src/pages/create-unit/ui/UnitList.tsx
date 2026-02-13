@@ -5,7 +5,7 @@ import ArrowrightIcon from '@/assets/svg/arrowrightIcon.svg?react';
 import type {AllUnitsResponse} from '@/models/course';
 
 interface UnitListProps {
-  unitList: AllUnitsResponse['response']['units'];
+  unitList: AllUnitsResponse['response']['units'] | undefined;
   onUnitClick: (id: number) => void;
   selectedUnitId?: number | null;
   onChangeIndex: (index: number) => void;
@@ -23,7 +23,7 @@ const UnitList = ({
     onUnitClick(id);
 
     // 선택된 단원의 인덱스 찾기
-    const index = unitList.findIndex((unit) => unit.id === id);
+    const index = unitList?.findIndex((unit) => unit.id === id) ?? 0;
     onChangeIndex(index + 1);
   };
 
@@ -35,7 +35,7 @@ const UnitList = ({
       {/* 단원 목록 */}
       <ul className='border-y border-stroke divide-y divide-stroke overflow-y-auto'>
         {/* 단원 아이템 */}
-        {unitList.map(({id, title, assignmentCount}) => (
+        {unitList?.map(({id, title, assignmentCount}) => (
           <li
             onClick={() => handleSelectUnit(id)}
             key={id}

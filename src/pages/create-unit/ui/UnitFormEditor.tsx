@@ -13,14 +13,18 @@ import AddIcon from '@/assets/svg/addIcon.svg?react';
 import {EmptyState} from '@/components/common/EmptyState';
 import {useState} from 'react';
 
-const UnitFormEditor = ({unit, unitIndex, isEditing}: UnitFormEditorProps) => {
+const UnitFormEditor = ({
+  unit,
+  unitIndex,
+  isEditing,
+  onCreateUnit,
+}: UnitFormEditorProps) => {
   const [assignmentIds, setAssignmentIds] = useState<number[]>([]);
 
   const {
     register,
     handleSubmit,
     formState: {errors, isSubmitting},
-    reset,
   } = useForm<TUnitFormSchema>({
     resolver: zodResolver(unitFormSchema),
     values:
@@ -39,8 +43,7 @@ const UnitFormEditor = ({unit, unitIndex, isEditing}: UnitFormEditorProps) => {
   });
 
   const onSubmit = async (data: TUnitFormSchema) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    reset();
+    onCreateUnit(data);
   };
 
   return (

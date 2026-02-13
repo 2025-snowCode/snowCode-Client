@@ -1,19 +1,21 @@
 import SurfaceCard from '@/components/common/SurfaceCard';
 import UnitFormEditor from './ui/UnitFormEditor';
 import UnitList from './ui/UnitList';
-import {useQuery, useSuspenseQuery} from '@tanstack/react-query';
+import {useMutation, useQuery, useSuspenseQuery} from '@tanstack/react-query';
 import {
   allUnitsQueryOptions,
   unitQueryOptions,
 } from '@/entities/unit/api/unitQueryOptions';
 import {useParams} from 'react-router-dom';
 import {useEffect, useState} from 'react';
+import {createUnit} from '@/entities/unit/api/unitApi';
+import type {TUnitFormSchema} from './model/types';
 
 const CreateUnitPage = () => {
   const {id} = useParams();
   const [selectedUnitId, setSelectedUnitId] = useState<number | null>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(1); //
-  const {data: allUnits} = useSuspenseQuery(allUnitsQueryOptions(Number(id)));
+  const {data: allUnits} = useQuery(allUnitsQueryOptions(Number(id)));
   const {data: unit} = useQuery(unitQueryOptions(selectedUnitId));
   const [isEditing, setIsEditing] = useState(false);
 
@@ -36,6 +38,27 @@ const CreateUnitPage = () => {
     setIsEditing(false); // 새 단원 추가 시 편집 모드 해제
   };
 
+  // 단원 생성 뮤테이션
+  const {mutate: addUnit} = useMutation({
+    mutationFn: ({courseId, unit}: {courseId: number; unit: TUnitFormSchema}) =>
+      createUnit(courseId, unit),
+    onSuccess: (data) => {
+      // 단원 목록 갱신
+      alert('새 단원이 성공적으로 생성되었습니다.');
+      setSelectedUnitId(data.response.id);
+      setIsEditing(true); // 새 단원 생성 후 편집 모드로 전환
+    },
+    onError: (error) => {
+      console.error('단원 생성 실패', error);
+      alert('단원 생성에 실패했습니다. 다시 시도해주세요.');
+    },
+  });
+
+  // 단원 생성 핸들러
+  const onCreateUnit = (unit: TUnitFormSchema) => {
+    addUnit({courseId: Number(id), unit});
+  };
+
   return (
     <div className='flex justify-center gap-4 p-6'>
       {/* 단원 목차 섹션 */}
@@ -55,6 +78,7 @@ const CreateUnitPage = () => {
           unit={unit?.response}
           unitIndex={currentIndex}
           isEditing={isEditing}
+          onCreateUnit={onCreateUnit}
         />
       </SurfaceCard>
     </div>
