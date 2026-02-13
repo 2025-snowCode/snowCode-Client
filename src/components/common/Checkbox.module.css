@@ -1,0 +1,25 @@
+.checkbox {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-primary);
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s;
+  vertical-align: middle;
+}
+
+.checkbox:checked::after {
+  content: '';
+  display: block;
+  width: 10px;
+  height: 10px;
+  background-color: var(--color-primary);
+  border-radius: 2px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

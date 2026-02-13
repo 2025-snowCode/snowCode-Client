@@ -1,7 +1,7 @@
 import snowCodeOverview from '@/assets/images/snowcode_overview.svg';
 import UnitItem from './UnitItem';
 import CourseActionsBar from './CourseActionsBar';
-import {useUserStore} from '@/entities/user/model/useUserStore';
+import {useUserStore} from '@/entities/auth/model/useUserStore';
 import type {CourseContentProps} from '../models/types';
 
 const CourseContent = ({units, isActiveCourse}: CourseContentProps) => {

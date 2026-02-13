@@ -15,6 +15,7 @@ import assignmentQueryOptions from '@/entities/assignment/api/assignmentQueryOpt
 import {deleteCourse} from '@/entities/course';
 import {EmptyState} from '@/components/common/EmptyState';
 
+
 const Dashboard = () => {
   const userType = useUserStore((state) => state.userType);
   const queryClient = useQueryClient();

@@ -7,9 +7,10 @@ import AssignmentSelectPage from './pages/select-assignment/AssignmentSelectPage
 import CourseOverviewPage from './pages/course-overview/CourseOverviewPage';
 import AssignmentCreatePage from './pages/admin/assignments/AssignmentCreatePage';
 import CourseCreatePage from './pages/admin/courses/CourseCreatePage';
-import StudentManagementPage from './pages/admin/student/studentManagementPage';
+import StudentManagementPage from './pages/admin/student/StudentManagementPage';
+import StudentProfilePage from './pages/admin/student/StudentProfilePage';
 import {useEffect} from 'react';
-import {useUserStore} from '@/entities/user/model/useUserStore';
+import {useUserStore} from '@/entities/auth/model/useUserStore';
 
 const AppRoutes = () => {
   const {pathname} = useLocation();
@@ -46,6 +47,10 @@ const AppRoutes = () => {
           <Route path='courses/:id' element={<CourseOverviewPage />} />
           <Route path='courses/create' element={<CourseCreatePage />} />
           <Route path='student' element={<StudentManagementPage />} />
+          <Route
+            path='student/profile/:studentId'
+            element={<StudentProfilePage />}
+          />
         </Route>
       </Route>
     </Routes>

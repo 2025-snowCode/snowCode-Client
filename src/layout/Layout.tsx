@@ -9,14 +9,14 @@ const Layout = () => {
   const showHeader = !noHeaderPages.includes(pathname);
 
   return (
-    <div className='min-h-screen overflow-x-hidden'>
-      <div className='w-[1156px] mx-auto px-4'>
+    <div className='min-h-screen flex items-center'>
+      <div className='w-[1156px] mx-auto px-4 py-12'>
         {showHeader && (
-          <div className='pt-10 pb-11'>
+          <div className='pb-8'>
             <Header />
           </div>
         )}
-        <main className='pb-15'>
+        <main>
           <Outlet />
         </main>
       </div>
@@ -25,4 +25,3 @@ const Layout = () => {
 };
 
 export default Layout;
-

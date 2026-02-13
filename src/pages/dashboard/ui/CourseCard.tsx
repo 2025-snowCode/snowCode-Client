@@ -4,6 +4,7 @@ import {useNavigate} from 'react-router-dom';
 import {useUserStore} from '@/entities/user/model/useUserStore';
 import type {CourseCardProps} from '../models/types';
 
+
 const CourseCard = ({onDelete, ...course}: CourseCardProps) => {
   const navigate = useNavigate();
   const userType = useUserStore((state) => state.userType);
