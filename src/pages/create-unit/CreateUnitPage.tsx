@@ -1,7 +1,7 @@
 import SurfaceCard from '@/components/common/SurfaceCard';
 import UnitFormEditor from './ui/UnitFormEditor';
 import UnitList from './ui/UnitList';
-import {useMutation, useQuery, useSuspenseQuery} from '@tanstack/react-query';
+import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import {
   allUnitsQueryOptions,
   unitQueryOptions,
@@ -12,12 +12,13 @@ import {createUnit} from '@/entities/unit/api/unitApi';
 import type {TUnitFormSchema} from './model/types';
 
 const CreateUnitPage = () => {
-  const {id} = useParams();
+  const {id} = useParams(); // 강의 ID
   const [selectedUnitId, setSelectedUnitId] = useState<number | null>(null);
-  const [currentIndex, setCurrentIndex] = useState<number>(1); //
+  const [currentIndex, setCurrentIndex] = useState<number>(1);
+  const [isEditing, setIsEditing] = useState(false);
   const {data: allUnits} = useQuery(allUnitsQueryOptions(Number(id)));
   const {data: unit} = useQuery(unitQueryOptions(selectedUnitId));
-  const [isEditing, setIsEditing] = useState(false);
+  const queryClient = useQueryClient();
 
   // 단원 목록에서 선택된 단원이 없을 때, 첫 번째 단원을 선택하도록 설정
   useEffect(() => {
@@ -44,9 +45,12 @@ const CreateUnitPage = () => {
       createUnit(courseId, unit),
     onSuccess: (data) => {
       // 단원 목록 갱신
-      alert('새 단원이 성공적으로 생성되었습니다.');
       setSelectedUnitId(data.response.id);
       setIsEditing(true); // 새 단원 생성 후 편집 모드로 전환
+      queryClient.invalidateQueries({
+        queryKey: allUnitsQueryOptions(Number(id)).queryKey,
+      });
+      alert('새 단원이 성공적으로 생성되었습니다.');
     },
     onError: (error) => {
       console.error('단원 생성 실패', error);
