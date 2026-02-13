@@ -1,6 +1,6 @@
 import {tv, type VariantProps} from 'tailwind-variants/lite';
 
-const button = tv({
+export const buttonStyles = tv({
   base: 'cursor-pointer rounded-[10px] border',
   variants: {
     color: {
@@ -34,7 +34,7 @@ const button = tv({
   },
 });
 
-type ButtonVariants = VariantProps<typeof button>;
+type ButtonVariants = VariantProps<typeof buttonStyles>;
 
 interface ButtonProps extends ButtonVariants {
   children: React.ReactNode;
@@ -61,7 +61,7 @@ const Button = ({
       onClick={onClick}
       disabled={disabled}
       form={formID}
-      className={button({...props, className})}>
+      className={buttonStyles({...props, className})}>
       {children}
     </button>
   );
