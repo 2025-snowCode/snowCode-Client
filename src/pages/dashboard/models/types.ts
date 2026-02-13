@@ -5,6 +5,7 @@ import type {DashboardCourse, Schedule} from '@/models/course';
  */
 export interface CourseListProps {
   courseList: DashboardCourse[];
+  onDelete: (courseId: number) => void;
 }
 
 // 스케쥴 할당 타입
@@ -15,4 +16,17 @@ type AssignmentType = Schedule['assignments'][number];
  */
 export interface ScheduleCardProps extends AssignmentType {
   remainingDays: number;
+}
+
+export interface ScheduleListProps {
+  scheduleList: Schedule[];
+}
+
+export interface CourseCardProps extends DashboardCourse {
+  onDelete: (courseId: number) => void;
+}
+
+export interface CourseManagementDropdownProps {
+  courseId: number;
+  onDelete: (courseId: number) => void;
 }
