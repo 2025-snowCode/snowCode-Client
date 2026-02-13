@@ -1,4 +1,7 @@
-import type {AssignmentSelectResponse} from '@/models/course';
+import type {
+  AssignmentSelectResponse,
+  CourseOptionsResponse,
+} from '@/models/course';
 
 export const response: AssignmentSelectResponse = {
   success: true,
@@ -56,6 +59,45 @@ export const response: AssignmentSelectResponse = {
             title: '날씨 데이터로 크롤링하기 8',
           },
         ],
+      },
+    ],
+  },
+};
+
+export const courseOptionsResponse: CourseOptionsResponse = {
+  success: true,
+  response: {
+    count: 3,
+    courses: [
+      {
+        id: 1,
+        year: 2025,
+        semester: 'SUMMER',
+        section: '001',
+        title: '소프트웨어의이해',
+        description: '소프트웨어의이해 강의는 파이썬을 배웁니다.',
+        unitCount: 3,
+        assignmentCount: 10,
+      },
+      {
+        id: 2,
+        year: 2025,
+        semester: 'SUMMER',
+        section: '001',
+        title: '소프트웨어의이해',
+        description: '소프트웨어의이해 강의는 파이썬을 배웁니다.',
+        unitCount: 3,
+        assignmentCount: 10,
+      },
+      {
+        id: 3,
+        year: 2025,
+        semester: 'SUMMER',
+        section: '001',
+        title: '소프트웨어의이해',
+        description: '소프트웨어의이해 강의는 파이썬을 배웁니다.',
+        unitCount: 3,
+        assignmentCount: 10,
       },
     ],
   },

@@ -89,3 +89,9 @@ export type AssignmentSelectResponse = ApiResponse<{
   count: number;
   courses: AssignmentSelectCourse[];
 }>;
+
+// 강의 옵션 목록 응답 타입 정의
+export type CourseOptionsResponse = ApiResponse<{
+  count: number;
+  courses: DashboardCourse[];
+}>;

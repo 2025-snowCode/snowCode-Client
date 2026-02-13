@@ -1,6 +1,6 @@
 import LabeledDropdown from '@/components/admin/form/LabeledDropdown';
 
-const CourseSelector = ({
+export const CourseSelector = ({
   options,
   onSelect,
 }: {
@@ -18,4 +18,3 @@ const CourseSelector = ({
     </div>
   );
 };
-export default CourseSelector;
