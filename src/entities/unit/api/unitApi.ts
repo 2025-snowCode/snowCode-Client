@@ -1,5 +1,6 @@
 import type {ApiResponse} from '@/models/common';
 import type {AllUnitsResponse, Unit} from '@/models/course';
+import type {TUnitFormSchema} from '@/pages/create-unit/model/types';
 import {privateAxios} from '@/shared/api/axiosInstance';
 
 // 강의별 전체 단원 조회
@@ -23,5 +24,13 @@ export const deleteUnitById = async (
   unitId: number
 ): Promise<ApiResponse<string>> => {
   const response = await privateAxios.delete(`/units/${unitId}`);
+  return response.data;
+};
+
+export const createUnit = async (
+  courseId: number,
+  unit: TUnitFormSchema
+): Promise<ApiResponse<Unit>> => {
+  const response = await privateAxios.post(`/units/${courseId}`, unit);
   return response.data;
 };
