@@ -1,13 +1,16 @@
 import {useState, useRef, useEffect} from 'react';
 import {useNavigate, useLocation} from 'react-router-dom';
 import SnowCodeEntryMini from '@/assets/images/snowCode_entry_mini.svg';
+import kakaoLogo from '@/assets/images/kakao_logo.svg';
 import ArrowleftIcon from '@/assets/svg/arrowleftIcon.svg?react';
 import Button from '@/components/common/Button';
+import {kakaoService} from '@/features/auth/kakao/lib/kakaoService';
 
 export default function UserIdInputPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const type = new URLSearchParams(location.search).get('type');
+  const isAdmin = type === 'admin';
 
   const length = 7;
   const [userId, setUserId] = useState<string[]>(new Array(length).fill(''));
@@ -57,21 +60,15 @@ export default function UserIdInputPage() {
 
   const userIdString = userId.join('');
   const isComplete = userIdString.length === length;
+  const kakaoEnabled = isComplete;
 
   const handleBeforeClick = () => {
     navigate('/');
   };
 
-  const handleSubmit = () => {
-    if (!isComplete) return;
-
-    if (type === 'student') {
-      navigate('/student');
-    } else if (type === 'admin') {
-      navigate('/admin');
-    } else {
-      navigate('/');
-    }
+  const handleKakaoLogin = () => {
+    const role = isAdmin ? 'ADMIN' : 'USER';
+    window.location.href = kakaoService.getAuthUrl(role, userIdString);
   };
 
   return (
@@ -96,39 +93,39 @@ export default function UserIdInputPage() {
         </div>
 
         <div className='flex justify-center gap-2.5 mb-13'>
-          {userId.map((digit, i) => (
-            <input
-              key={i}
-              ref={(el) => {
-                inputRefs.current[i] = el;
-              }}
-              type='text'
-              inputMode='numeric'
-              maxLength={1}
-              value={digit}
-              onChange={(e) => handleChange(e, i)}
-              onKeyDown={(e) => handleKeyDown(e, i)}
-              onClick={() => setActiveIndex(i)}
-              className={`
-                w-10 h-12 text-center border rounded-md text-lg font-medium
-                ${
-                  activeIndex === i
-                    ? 'border-primary focus:outline-none focus:ring-0'
-                    : digit
-                      ? 'border-stroke text-primary-black'
-                      : 'border-stroke'
-                }
-              `}
-            />
-          ))}
-        </div>
+            {userId.map((digit, i) => (
+              <input
+                key={i}
+                ref={(el) => {
+                  inputRefs.current[i] = el;
+                }}
+                type='text'
+                inputMode='numeric'
+                maxLength={1}
+                value={digit}
+                onChange={(e) => handleChange(e, i)}
+                onKeyDown={(e) => handleKeyDown(e, i)}
+                onClick={() => setActiveIndex(i)}
+                className={`
+                  w-10 h-12 text-center border rounded-md text-lg font-medium
+                  ${
+                    activeIndex === i
+                      ? 'border-primary focus:outline-none focus:ring-0'
+                      : digit
+                        ? 'border-stroke text-primary-black'
+                        : 'border-stroke'
+                  }
+                `}
+              />
+            ))}
+          </div>
+
         <Button
-          color='secondary'
-          size='wide'
-          disabled={!isComplete}
-          onClick={handleSubmit}
-          className='disabled:cursor-not-allowed'>
-          확인
+          disabled={!kakaoEnabled}
+          onClick={handleKakaoLogin}
+          className='flex gap-2 justify-center text-black-primary text-lg font-semibold leading-[150%] bg-[#fade4a] decoration-solid w-[380px] py-4 rounded-lg mx-auto cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed'>
+          <img src={kakaoLogo} alt='카카오 로고' className='w-[26px] h-[26px]' />
+          카카오 로그인
         </Button>
       </div>
     </div>
