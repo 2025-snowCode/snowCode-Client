@@ -1,4 +1,4 @@
-import type {DashboardScheduleListResponse} from '@/models/course';
+import type {DashboardScheduleListResponse} from '@/entities/course/model/types';
 import {privateAxios} from '@/shared/api/axiosInstance';
 
 export const getAssignmentSchedules =

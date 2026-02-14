@@ -1,4 +1,4 @@
-import type {ApiResponse} from '@/models/common';
+import type {ApiResponse} from '@/shared/model/common';
 
 export type ProgressStatus = 'PASSED' | 'NOT_SUBMITTED' | 'PARTIAL' | 'FAILED';
 

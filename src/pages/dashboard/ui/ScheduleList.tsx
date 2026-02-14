@@ -1,6 +1,6 @@
 import ScheduleCard from './ScheduleCard';
 import EventMarkerIcon from '@/assets/svg/eventMarkerIcon.svg?react';
-import {formatDateMonthDay} from '@/utils/course';
+import {formatDateMonthDay} from '@/shared/lib/course';
 import type {ScheduleListProps} from '../models/types';
 
 // 스케쥴 목록 컴포넌트

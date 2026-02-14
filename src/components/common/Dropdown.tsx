@@ -1,4 +1,4 @@
-import useClickOutside from '@/hooks/useClickOutside';
+import useClickOutside from '@/shared/lib/useClickOutside';
 import {useRef, useState} from 'react';
 
 interface DropdownProps {

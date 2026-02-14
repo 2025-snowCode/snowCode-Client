@@ -1,7 +1,7 @@
 import AssignmentList from './AssignmentList';
 import Lock from '@/assets/svg/lock.svg?react';
 import Badge from '@/components/common/Badge';
-import {formatPeriod} from '@/utils/course';
+import {formatPeriod} from '@/shared/lib/course';
 import type {UnitHeaderProps, UnitProps} from '../models/types';
 
 const UnitItem = ({index, ...unit}: UnitProps) => {

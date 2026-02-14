@@ -1,4 +1,4 @@
-import {getTotalAssignmentCount} from '@/utils/course';
+import {getTotalAssignmentCount} from '@/shared/lib/course';
 import CourseContent from './ui/CourseContent';
 import CourseHero from './ui/CourseHero';
 import {courseResponse} from '@/pages/course-overview/models/response';

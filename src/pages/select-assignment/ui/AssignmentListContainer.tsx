@@ -1,4 +1,4 @@
-import type {AssignmentSelectCourse} from '@/models/course';
+import type {AssignmentSelectCourse} from '@/entities/course/model/types';
 
 type T = AssignmentSelectCourse['assignments'][number];
 

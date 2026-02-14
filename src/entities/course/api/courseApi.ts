@@ -1,5 +1,5 @@
-import type {ApiResponse} from '@/models/common';
-import type {DashboardCourseListResponse} from '@/models/course';
+import type {ApiResponse} from '@/shared/model/common';
+import type {DashboardCourseListResponse} from '@/entities/course/model/types';
 import {privateAxios} from '@/shared/api/axiosInstance';
 
 export const getAllCourses = async (): Promise<DashboardCourseListResponse> => {

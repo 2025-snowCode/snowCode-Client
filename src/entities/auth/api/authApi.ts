@@ -1,5 +1,5 @@
 import {publicAxios} from '@/shared/api/axiosInstance';
-import type {UserType} from '@/models/common';
+import type {UserType} from '@/shared/model/common';
 
 interface KakaoLoginApiResponse {
   memberId: number;

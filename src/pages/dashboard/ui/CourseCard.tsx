@@ -1,4 +1,4 @@
-import {formatCourseTermWithSlash} from '@/utils/course';
+import {formatCourseTermWithSlash} from '@/shared/lib/course';
 import CourseManagementDropdown from './CourseManagementDropdown';
 import {useNavigate} from 'react-router-dom';
 import {useUserStore} from '@/entities/auth/model/useUserStore';

@@ -1,7 +1,7 @@
 import type {
   AssignmentSelectResponse,
   CourseOptionsResponse,
-} from '@/models/course';
+} from '@/entities/course/model/types';
 
 export const response: AssignmentSelectResponse = {
   success: true,

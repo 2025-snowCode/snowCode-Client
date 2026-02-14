@@ -1,4 +1,4 @@
-import type {CourseOverviewResponse} from '@/models/course';
+import type {CourseOverviewResponse} from '@/entities/course/model/types';
 
 export const courseResponse: CourseOverviewResponse = {
   success: true,
