@@ -2,13 +2,28 @@ import snowcodeOverviewMini from '@/assets/images/snowcode_overview_mini.svg';
 import {formatCourseTerm} from '@/shared/lib/course';
 import CourseActionsBar from './CourseActionsBar';
 import {useUserStore} from '@/entities/auth/model/useUserStore';
-import type {
-  CourseHeroProps,
-  CourseInfoProps,
-  CourseStatsProps,
-} from '../models/types';
+import type {CourseOverview, SemesterCode} from '@/entities/course/model/types';
 
-// 강의 상세 페이지 - Hero 섹션
+interface CourseHeroProps {
+  courseData: Omit<CourseOverview, 'units'>;
+  assignmentCount: number;
+  isActiveCourse: boolean;
+}
+
+interface CourseInfoProps {
+  title: string;
+  year: number;
+  semester: SemesterCode;
+  section: string;
+}
+
+interface CourseStatsProps {
+  unitCount: number;
+  assignmentCount: number;
+  studentCount?: number;
+  isAdmin: boolean;
+}
+
 const CourseHero = ({
   courseData,
   assignmentCount,
@@ -44,7 +59,6 @@ const CourseHero = ({
   );
 };
 
-// 강의 기본 정보 표시
 const CourseInfo = ({title, year, semester, section}: CourseInfoProps) => {
   return (
     <article className='flex-center flex-col text-white'>
@@ -57,7 +71,6 @@ const CourseInfo = ({title, year, semester, section}: CourseInfoProps) => {
   );
 };
 
-// 강의 Stats 표시
 const CourseStats = ({
   unitCount,
   assignmentCount,

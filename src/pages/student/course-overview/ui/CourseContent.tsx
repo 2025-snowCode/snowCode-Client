@@ -2,10 +2,14 @@ import snowCodeOverview from '@/assets/images/snowcode_overview.svg';
 import UnitItem from './UnitItem';
 import CourseActionsBar from './CourseActionsBar';
 import {useUserStore} from '@/entities/auth/model/useUserStore';
-import type {CourseContentProps} from '../models/types';
+import type {CourseOverview} from '@/entities/course/model/types';
+
+interface CourseContentProps {
+  units: CourseOverview['units'];
+  isActiveCourse: boolean;
+}
 
 const CourseContent = ({units, isActiveCourse}: CourseContentProps) => {
-  // 빈 강의
   if (isActiveCourse === false) {
     return <EmptyCourse />;
   }
@@ -20,7 +24,7 @@ const CourseContent = ({units, isActiveCourse}: CourseContentProps) => {
 };
 
 const EmptyCourse = () => {
-  const userType = useUserStore((state) => state.userType); // 유저 타입 확인
+  const userType = useUserStore((state) => state.userType);
 
   return (
     <section className='flex-1 flex-center flex-col bg-white w-full pt-30 pb-41 rounded-b-[30px]'>
@@ -29,9 +33,9 @@ const EmptyCourse = () => {
       <p className='mb-7 text-2xl leading-9 font-medium'>
         아직 생성된 단원이 없어요
       </p>
-      {/* 강의 관리 버튼은 관리자 전용 */}
       {userType === 'admin' && <CourseActionsBar isActiveCourse={false} />}
     </section>
   );
 };
+
 export default CourseContent;

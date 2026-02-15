@@ -1,13 +1,15 @@
 import ScheduleCard from './ScheduleCard';
 import EventMarkerIcon from '@/assets/svg/eventMarkerIcon.svg?react';
 import {formatDateMonthDay} from '@/shared/lib/course';
-import type {ScheduleListProps} from '../models/types';
+import type {Schedule} from '@/entities/course/model/types';
 
-// 스케쥴 목록 컴포넌트
+interface ScheduleListProps {
+  scheduleList: Schedule[];
+}
+
 const ScheduleList = ({scheduleList}: ScheduleListProps) => {
   return (
     <ul className='flex flex-col gap-6'>
-      {/* 날짜별 그룹 간의 간격 */}
       {scheduleList.map((schedule, index) => (
         <li className='flex items-start justify-start gap-5' key={index}>
           {/* 마감일 */}
@@ -31,7 +33,6 @@ const ScheduleList = ({scheduleList}: ScheduleListProps) => {
   );
 };
 
-// 마감일 컴포넌트
 const DeadLine = ({date}: {date: string}) => {
   return (
     <span className='text-secondary-black text-lg flex items-center gap-1'>

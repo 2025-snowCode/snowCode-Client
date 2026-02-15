@@ -1,7 +1,7 @@
 import {getTotalAssignmentCount} from '@/shared/lib/course';
 import CourseContent from './ui/CourseContent';
 import CourseHero from './ui/CourseHero';
-import {courseResponse} from '@/pages/course-overview/models/response';
+import {courseResponse} from '@/shared/mocks/courseOverviewResponse';
 
 const CourseOverviewPage = () => {
   const courseData = courseResponse.response;
