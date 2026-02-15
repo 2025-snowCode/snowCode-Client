@@ -1,10 +1,10 @@
 import {useNavigate} from 'react-router-dom';
-import BaseHeader from '@/components/common/BaseHeader';
+import BaseHeader from '@/shared/ui/BaseHeader';
 import NotificationIcon from '@/assets/svg/notificationIcon.svg?react';
 import SignoutIcon from '@/assets/svg/signoutIcon.svg?react';
 import UserIcon from '@/assets/svg/userIcon.svg?react';
 import ChatIcon from '@/assets/svg/chatIcon.svg?react';
-import Button from '@/components/common/Button';
+import Button from '@/shared/ui/Button';
 import {useUserStore} from '@/entities/auth/model/useUserStore';
 
 interface NavButton {
