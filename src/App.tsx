@@ -10,7 +10,7 @@ import CourseCreatePage from './pages/admin/courses/CourseCreatePage';
 import StudentManagementPage from './pages/admin/student/StudentManagementPage';
 import StudentProfilePage from './pages/admin/student/StudentProfilePage';
 import KakaoCallbackPage from './pages/common/KakaoCallbackPage';
-import PrivateRoute from '@/shared/ui/PrivateRoute';
+import PrivateRoute from '@/widgets/private-route/ui/PrivateRoute';
 import {useEffect} from 'react';
 import {useUserStore} from '@/entities/auth/model/useUserStore';
 
@@ -47,7 +47,10 @@ const AppRoutes = () => {
           <Route path='admin'>
             <Route index element={<Dashboard />} />
             {/* <Route path='assignments' element={<AssignmentsPage />} /> */}
-            <Route path='assignments/create' element={<AssignmentCreatePage />} />
+            <Route
+              path='assignments/create'
+              element={<AssignmentCreatePage />}
+            />
             <Route path='assignments/:id' element={<AssignmentSelectPage />} />
             <Route path='courses/:id' element={<CourseOverviewPage />} />
             <Route path='courses/create' element={<CourseCreatePage />} />
