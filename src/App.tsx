@@ -35,15 +35,16 @@ const AppRoutes = () => {
         <Route path='userid' element={<UserIdInputPage />} />
         <Route path='auth/kakao/callback' element={<KakaoCallbackPage />} />
 
-        {/* 인증 필요 영역 */}
-        <Route element={<PrivateRoute />}>
-          {/* 학생 영역 */}
+        {/* 학생 영역 */}
+        <Route element={<PrivateRoute allowedRoles={['student']} />}>
           <Route path='student'>
             <Route index element={<Dashboard />} />
             <Route path='courses/:id' element={<CourseOverviewPage />} />
           </Route>
+        </Route>
 
-          {/* 관리자 영역 */}
+        {/* 관리자 영역 */}
+        <Route element={<PrivateRoute allowedRoles={['admin']} />}>
           <Route path='admin'>
             <Route index element={<Dashboard />} />
             {/* <Route path='assignments' element={<AssignmentsPage />} /> */}
