@@ -1,4 +1,4 @@
-import type {DashboardCourse, Schedule} from '@/models/course';
+import type {DashboardCourse, Schedule} from '@/entities/course/model/types';
 
 /**
  * 강의 목록 컴포넌트 props 타입

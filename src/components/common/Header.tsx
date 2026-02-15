@@ -38,12 +38,10 @@ const WelcomeMessage = ({userName}: {userName: string}) => (
 const AuthenticatedHeader = ({showChat}: {showChat: boolean}) => {
   const navigate = useNavigate();
   const userName = useUserStore((state) => state.userName);
-  const setUserType = useUserStore((state) => state.setUserType);
-  const setUserName = useUserStore((state) => state.setUserName);
+  const logout = useUserStore((state) => state.logout);
 
   const handleLogout = () => {
-    setUserType('guest');
-    setUserName('');
+    logout();
     navigate('/');
   };
 

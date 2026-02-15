@@ -1,5 +1,5 @@
 import snowcodeOverviewMini from '@/assets/images/snowcode_overview_mini.svg';
-import {formatCourseTerm} from '@/utils/course';
+import {formatCourseTerm} from '@/shared/lib/course';
 import CourseActionsBar from './CourseActionsBar';
 import {useUserStore} from '@/entities/auth/model/useUserStore';
 import type {

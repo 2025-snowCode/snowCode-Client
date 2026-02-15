@@ -1,4 +1,4 @@
-import type {Assignment, CourseOverview, Unit} from '@/models/course';
+import type {Assignment, CourseOverview, Unit} from '@/entities/course/model/types';
 
 /**
  * CourseHero 컴포넌트 props 타입 정의

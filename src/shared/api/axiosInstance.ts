@@ -23,7 +23,7 @@ export const publicAxios: AxiosInstance = axios.create({
  */
 export const privateAxios: AxiosInstance = axios.create({
   baseURL: BASE_URL,
-  withCredentials: true,
+  // withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
   },

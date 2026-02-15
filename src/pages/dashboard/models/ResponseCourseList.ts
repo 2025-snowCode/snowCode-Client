@@ -1,4 +1,4 @@
-import type {DashboardCourseListResponse} from '@/models/course';
+import type {DashboardCourseListResponse} from '@/entities/course/model/types';
 
 export const responseCourseList: DashboardCourseListResponse = {
   success: true,

@@ -1,4 +1,5 @@
 import {tv, type VariantProps} from 'tailwind-variants/lite';
+import {twMerge} from 'tailwind-merge';
 
 const button = tv({
   base: 'cursor-pointer rounded-[10px] border',
@@ -51,10 +52,15 @@ const Button = ({
   onClick,
   type = 'button',
   disabled = false,
+  className,
   ...props
 }: ButtonProps) => {
   return (
-    <button onClick={onClick} disabled={disabled} className={button(props)}>
+    <button
+      onClick={onClick}
+      disabled={disabled}
+      type={type}
+      className={twMerge(button(props), className)}>
       {children}
     </button>
   );

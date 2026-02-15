@@ -4,7 +4,6 @@ import {useNavigate} from 'react-router-dom';
 import snowCodeEntry from '@/assets/images/snowCode_entry.svg';
 import snowCodeStudent from '@/assets/images/snowCode_student.svg';
 import snowCodeAdmin from '@/assets/images/snowCode_admin.svg';
-import googleLogo from '@/assets/images/google_logo.svg';
 import ArrowrightIcon from '@/assets/svg/arrowrightIcon.svg?react';
 import Button from '@/components/common/Button';
 
@@ -61,7 +60,7 @@ export default function LandingPage() {
       </div>
 
       {/* 텍스트 및 버튼 영역 */}
-      <div className='flex flex-col gap-[60px] -mt-12'>
+      <div className='flex flex-col -mt-12'>
         <div className='flex flex-col gap-7'>
           <span className='text-black-primary text-4xl font-semibold leading-[150%]'>
             환영합니다!
@@ -88,14 +87,6 @@ export default function LandingPage() {
             </Button>
           </div>
         </div>
-
-        {/* 구글 로그인 버튼 */}
-        <button
-          className='flex gap-2 justify-center text-black-primary text-lg font-normal leading-[150%] underline decoration-solid'
-          aria-label='구글 이메일 로그인'>
-          <img src={googleLogo} alt='로고' className='w-[26px] h-[26px]' />
-          구글 이메일로 로그인
-        </button>
       </div>
     </div>
   );

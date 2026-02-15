@@ -1,4 +1,4 @@
-import type {DashboardScheduleListResponse} from '@/models/course';
+import type {DashboardScheduleListResponse} from '@/entities/course/model/types';
 
 export const responseScheduleList: DashboardScheduleListResponse = {
   success: true,
