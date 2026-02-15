@@ -93,20 +93,21 @@ export default function UserIdInputPage() {
         </div>
 
         <div className='flex justify-center gap-2.5 mb-13'>
-            {userId.map((digit, i) => (
-              <input
-                key={i}
-                ref={(el) => {
-                  inputRefs.current[i] = el;
-                }}
-                type='text'
-                inputMode='numeric'
-                maxLength={1}
-                value={digit}
-                onChange={(e) => handleChange(e, i)}
-                onKeyDown={(e) => handleKeyDown(e, i)}
-                onClick={() => setActiveIndex(i)}
-                className={`
+          {userId.map((digit, i) => (
+            <input
+              key={i}
+              ref={(el) => {
+                inputRefs.current[i] = el;
+              }}
+              type='text'
+              inputMode='numeric'
+              maxLength={1}
+              value={digit}
+              aria-label={`학번 자리 ${i + 1}`}
+              onChange={(e) => handleChange(e, i)}
+              onKeyDown={(e) => handleKeyDown(e, i)}
+              onClick={() => setActiveIndex(i)}
+              className={`
                   w-10 h-12 text-center border rounded-md text-lg font-medium
                   ${
                     activeIndex === i
@@ -116,15 +117,19 @@ export default function UserIdInputPage() {
                         : 'border-stroke'
                   }
                 `}
-              />
-            ))}
-          </div>
+            />
+          ))}
+        </div>
 
         <Button
           disabled={!kakaoEnabled}
           onClick={handleKakaoLogin}
           className='flex gap-2 justify-center text-black-primary text-lg font-semibold leading-[150%] bg-[#fade4a] decoration-solid w-[380px] py-4 rounded-lg mx-auto cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed'>
-          <img src={kakaoLogo} alt='카카오 로고' className='w-[26px] h-[26px]' />
+          <img
+            src={kakaoLogo}
+            alt='카카오 로고'
+            className='w-[26px] h-[26px]'
+          />
           카카오 로그인
         </Button>
       </div>
