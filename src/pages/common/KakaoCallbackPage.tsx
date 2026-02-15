@@ -10,6 +10,14 @@ export default function KakaoCallbackPage() {
     called.current = true;
 
     const params = new URLSearchParams(window.location.search);
+    const error = params.get('error');
+    if (error) {
+      console.warn(
+        '카카오 로그인이 취소 되었거나 실패했습니다.',
+        params.get('error_description')
+      );
+      return;
+    }
     const code = params.get('code');
     const state = params.get('state');
 
