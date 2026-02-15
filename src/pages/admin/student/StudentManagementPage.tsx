@@ -1,9 +1,9 @@
-import AssignmentFormLayout from '@/components/admin/assignments/AssignmentFormLayout';
+import AssignmentFormLayout from '@/widgets/assignment-form-layout/ui/AssignmentFormLayout';
 import Search from '@/assets/svg/search.svg?react';
 import {useForm} from 'react-hook-form';
 import {Pagination} from '@/shared/ui/pagination/pagination';
 import {useState} from 'react';
-import Input from '@/components/common/Input';
+import Input from '@/shared/ui/Input';
 import {StudentTable} from '@/entities/student/ui/StudentTable';
 import mockCourseStudents from '@/entities/student/model/mock';
 

@@ -1,4 +1,4 @@
-import LabeledDropdown from '@/components/admin/form/LabeledDropdown';
+import LabeledDropdown from '@/shared/ui/LabeledDropdown';
 
 export const CourseSelector = ({
   options,

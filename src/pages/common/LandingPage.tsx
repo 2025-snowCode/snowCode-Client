@@ -5,7 +5,7 @@ import snowCodeEntry from '@/assets/images/snowCode_entry.svg';
 import snowCodeStudent from '@/assets/images/snowCode_student.svg';
 import snowCodeAdmin from '@/assets/images/snowCode_admin.svg';
 import ArrowrightIcon from '@/assets/svg/arrowrightIcon.svg?react';
-import Button from '@/components/common/Button';
+import Button from '@/shared/ui/Button';
 
 type HoverState = 'none' | 'student' | 'admin';
 

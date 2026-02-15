@@ -1,7 +1,7 @@
-import AssignmentFormLayout from '@/components/admin/assignments/AssignmentFormLayout';
-import LabeledInput from '@/components/admin/form/LabeledInput';
-import FileUpload from '@/components/admin/form/FileUpload';
-import LabeledDropdown from '@/components/admin/form/LabeledDropdown';
+import AssignmentFormLayout from '@/widgets/assignment-form-layout/ui/AssignmentFormLayout';
+import LabeledInput from '@/shared/ui/LabeledInput';
+import FileUpload from '@/shared/ui/FileUpload';
+import LabeledDropdown from '@/shared/ui/LabeledDropdown';
 
 const YEAR_OPTIONS = ['2021', '2022', '2023', '2024', '2025', '2026'];
 const SEMESTER_OPTIONS = ['1학기', '2학기', '여름학기', '겨울학기'];
