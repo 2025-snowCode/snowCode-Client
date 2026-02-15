@@ -121,17 +121,17 @@ export default function UserIdInputPage() {
           ))}
         </div>
 
-        <Button
+        <button
           disabled={!kakaoEnabled}
           onClick={handleKakaoLogin}
-          className='flex gap-2 justify-center text-black-primary text-lg font-semibold leading-[150%] bg-[#fade4a] decoration-solid w-[380px] py-4 rounded-lg mx-auto cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed'>
+          className='flex items-center gap-2 justify-center text-primary-black text-lg font-semibold leading-[150%] bg-[#fade4a] w-[380px] py-4 rounded-lg mx-auto cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed'>
           <img
             src={kakaoLogo}
             alt='카카오 로고'
             className='w-[26px] h-[26px]'
           />
           카카오 로그인
-        </Button>
+        </button>
       </div>
     </div>
   );
