@@ -24,6 +24,7 @@ interface CourseStatsProps {
   isAdmin: boolean;
 }
 
+// 강의 상세 페이지 Hero 섹션
 const CourseHero = ({
   courseData,
   assignmentCount,
@@ -59,6 +60,7 @@ const CourseHero = ({
   );
 };
 
+// 강의 기본 정보 표시
 const CourseInfo = ({title, year, semester, section}: CourseInfoProps) => {
   return (
     <article className='flex-center flex-col text-white'>
@@ -71,6 +73,7 @@ const CourseInfo = ({title, year, semester, section}: CourseInfoProps) => {
   );
 };
 
+// 강의 Stats 표시
 const CourseStats = ({
   unitCount,
   assignmentCount,

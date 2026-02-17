@@ -15,6 +15,7 @@ const CourseManagementDropdown = ({
 }: CourseManagementDropdownProps) => {
   const navigate = useNavigate();
 
+  // 드롭다운 메뉴 옵션 선택 핸들러
   const handleSelect = (option: string) => {
     const actions: Record<string, () => void> = {
       수정하기: () => navigate('courses/create'),
@@ -24,6 +25,7 @@ const CourseManagementDropdown = ({
     actions[option]?.();
   };
 
+  // 강의 관리 드롭다운 메뉴 트리거
   const CourseMenuTrigger = (
     <div className='cursor-pointer p-2'>
       <EllipsisIcon className='w-[21.2px] h-[5px]' />

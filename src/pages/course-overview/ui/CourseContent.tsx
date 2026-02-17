@@ -10,6 +10,7 @@ interface CourseContentProps {
 }
 
 const CourseContent = ({units, isActiveCourse}: CourseContentProps) => {
+  // 빈 강의
   if (isActiveCourse === false) {
     return <EmptyCourse />;
   }
@@ -33,6 +34,7 @@ const EmptyCourse = () => {
       <p className='mb-7 text-2xl leading-9 font-medium'>
         아직 생성된 단원이 없어요
       </p>
+      {/* 강의 관리 버튼은 관리자 전용 */}
       {userType === 'admin' && <CourseActionsBar isActiveCourse={false} />}
     </section>
   );

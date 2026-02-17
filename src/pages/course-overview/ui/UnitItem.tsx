@@ -8,7 +8,10 @@ interface UnitProps extends Unit {
   index: number;
 }
 
-type UnitHeaderProps = Omit<UnitProps, 'id' | 'assignmentCount' | 'assignments'>;
+type UnitHeaderProps = Omit<
+  UnitProps,
+  'id' | 'assignmentCount' | 'assignments'
+>;
 
 const UnitItem = ({index, ...unit}: UnitProps) => {
   const isOpen = unit.isOpen ?? true;
@@ -27,6 +30,7 @@ const UnitItem = ({index, ...unit}: UnitProps) => {
   );
 };
 
+// 단원 헤더 컴포넌트
 const UnitHeader = ({
   index,
   title,
@@ -37,6 +41,7 @@ const UnitHeader = ({
   return (
     <header className='bg-gray w-full p-4'>
       <div className='max-w-4xl mx-auto flex items-center justify-between'>
+        {/* 좌측: 인덱스, 단원명, 잠금 아이콘 */}
         <div className='min-w-0 flex items-center gap-3.5'>
           <Badge variant='index' kind='unit'>
             {index}
@@ -50,6 +55,7 @@ const UnitHeader = ({
           </div>
         </div>
 
+        {/* 우측: 데드라인 */}
         <div className='shrink-0 ml-2 text-base text-light-black font-normal min-w-0 whitespace-nowrap'>
           <span>{formatPeriod(releaseDate, dueDate)}</span>
         </div>
