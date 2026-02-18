@@ -1,5 +1,5 @@
-import {BrowserRouter, Routes, Route, useLocation} from 'react-router-dom';
-import Layout from '@/layout/Layout';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import Layout from '@/shared/ui/Layout';
 import LandingPage from '@/pages/common/LandingPage';
 import UserIdInputPage from '@/pages/common/UserIdInputPage';
 import Dashboard from '@/pages/dashboard/Dashboard';
@@ -11,21 +11,10 @@ import StudentManagementPage from '@/pages/admin/student/StudentManagementPage';
 import StudentProfilePage from '@/pages/admin/student/StudentProfilePage';
 import KakaoCallbackPage from '@/pages/common/KakaoCallbackPage';
 import PrivateRoute from '@/widgets/private-route/ui/PrivateRoute';
-import {useEffect} from 'react';
-import {useUserStore} from '@/entities/auth/model/useUserStore';
+import {useSyncUserRole} from '@/features/auth/sync-user-role/model/useSyncUserRole';
 
 const AppRoutes = () => {
-  const {pathname} = useLocation();
-  const {setUserType} = useUserStore();
-
-  useEffect(() => {
-    const userType = pathname.startsWith('/admin')
-      ? 'admin'
-      : pathname.startsWith('/student')
-        ? 'student'
-        : 'guest';
-    setUserType(userType);
-  }, [pathname, setUserType]);
+  useSyncUserRole();
 
   return (
     <Routes>

@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import Chevrondown from '@/assets/svg/chevrondown.svg?react';
-import Dropdown from '@/components/common/Dropdown';
+import Dropdown from '@/shared/ui/Dropdown';
 
 interface LabeledDropdownProps
   extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onSelect'> {

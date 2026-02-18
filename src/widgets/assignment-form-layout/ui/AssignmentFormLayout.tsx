@@ -1,5 +1,5 @@
-import Button from '@/components/common/Button';
-import SurfaceCard from '@/components/common/SurfaceCard';
+import Button from '@/shared/ui/Button';
+import SurfaceCard from '@/shared/ui/SurfaceCard';
 
 type AssignmentFormLayoutProps = {
   title: string;

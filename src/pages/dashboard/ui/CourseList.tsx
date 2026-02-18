@@ -1,7 +1,11 @@
-import type {CourseListProps} from '../models/types';
+import type {DashboardCourse} from '@/entities/course/model/types';
 import CourseCard from './CourseCard';
 
-// 강의 목록
+interface CourseListProps {
+  courseList: DashboardCourse[];
+  onDelete: (courseId: number) => void;
+}
+
 const CourseList = ({courseList, onDelete}: CourseListProps) => {
   return (
     <>

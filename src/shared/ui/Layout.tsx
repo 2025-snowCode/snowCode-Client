@@ -1,5 +1,5 @@
 import {useLocation, Outlet} from 'react-router-dom';
-import Header from '@/components/common/Header';
+import Header from '@/shared/ui/Header';
 
 const Layout = () => {
   const location = useLocation();

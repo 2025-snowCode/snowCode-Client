@@ -1,6 +1,6 @@
 import LogoIcon from '@/assets/images/snowCode_logo.svg?react';
 import CourseList from './ui/CourseList';
-import Button from '@/components/common/Button';
+import Button from '@/shared/ui/Button';
 import AddIcon from '@/assets/svg/addIcon.svg?react';
 import ScheduleList from './ui/ScheduleList';
 import {Link} from 'react-router-dom';
@@ -13,7 +13,7 @@ import {
 } from '@tanstack/react-query';
 import assignmentQueryOptions from '@/entities/assignment/api/assignmentQueryOptions';
 import {deleteCourse} from '@/entities/course';
-import {EmptyState} from '@/components/common/EmptyState';
+import {EmptyState} from '@/shared/ui/EmptyState';
 
 const Dashboard = () => {
   const userType = useUserStore((state) => state.userType);

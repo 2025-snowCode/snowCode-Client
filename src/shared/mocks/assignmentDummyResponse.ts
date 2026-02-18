@@ -1,4 +1,4 @@
-import type {CoursesResponse} from './types';
+import type {CoursesResponse} from '@/shared/mocks/assignmentDummyTypes';
 
 export const coursesResponse: CoursesResponse = {
   success: true,

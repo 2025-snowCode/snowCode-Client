@@ -1,7 +1,7 @@
 import ProfileImage from '@/assets/svg/profileImage.svg?react';
 import ChatIcon from '@/assets/svg/chatIcon.svg?react';
 import MailIcon from '@/assets/svg/mailIcon.svg?react';
-import Button from '@/components/common/Button';
+import Button from '@/shared/ui/Button';
 
 interface StudentProfileProps {
   name: string;
