@@ -5,32 +5,33 @@ version-template: $MAJOR.$MINOR.$PATCH
 categories:
   - title: '🚀 기능 추가'
     labels:
-      - 'Feat'
+      - 'feat'
   - title: '♻️ 리팩토링'
     labels:
-      - 'Refactor'
+      - 'refactor'
   - title: '🐛 버그 수정'
     labels:
-      - 'Fix'
+      - 'fix'
   - title: '🧰 그 외'
     labels:
-      - 'Chore'
-      - 'CI/CD'
-      - 'Docs'
-      - 'Build'
-      - 'Common'
-      - 'Test'
+      - 'chore'
+      - 'ci/cd'
+      - 'docs'
+      - 'style'
+      - 'build'
+      - 'common'
+      - 'test'
 
 version-resolver:
   major:
     labels:
-      - 'Major'
+      - 'major'
   minor:
     labels:
-      - 'Minor'
+      - 'minor'
   patch:
     labels:
-      - 'Patch'
+      - 'patch'
   default: minor
 
 exclude-labels:
