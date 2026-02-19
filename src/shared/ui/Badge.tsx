@@ -84,7 +84,7 @@ const Badge = (props: BadgeProps) => {
       );
 
     // 인덱스 배지 (단원, 문제 등)
-    case 'index':
+    case 'index': {
       const suffix = props.kind === 'unit' ? '단원' : ' 문제';
 
       return (
@@ -93,9 +93,10 @@ const Badge = (props: BadgeProps) => {
           {suffix}
         </span>
       );
+    }
 
     // 제출 상태 배지
-    case 'submission':
+    case 'submission': {
       const {label, icon} = SubmissionMeta[props.status!];
 
       return (
@@ -106,6 +107,7 @@ const Badge = (props: BadgeProps) => {
           {icon} {label}
         </span>
       );
+    }
   }
 };
 
