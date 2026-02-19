@@ -1,6 +1,9 @@
 import AssignmentListContainer from './ui/AssignmentListContainer';
 import {useState} from 'react';
-import {response, courseOptionsResponse} from '@/shared/mocks/assignmentSelectResponse';
+import {
+  response,
+  courseOptionsResponse,
+} from '@/shared/mocks/assignmentSelectResponse';
 import {useCourseFilter} from '@/features/course/filter-course/lib/useCourseFilter';
 import {AssignmentPageLayout} from '@/widgets/assignment-page-layout';
 import SelectableItem from '@/shared/ui/SelectableItem';
