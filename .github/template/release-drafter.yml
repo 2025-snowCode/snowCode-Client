@@ -1,0 +1,48 @@
+name-template: 'v$RESOLVED_VERSION'
+tag-template: 'v$RESOLVED_VERSION'
+version-template: $MAJOR.$MINOR.$PATCH
+
+categories:
+  - title: '🚀 기능 추가'
+    labels:
+      - 'feat'
+  - title: '♻️ 리팩토링'
+    labels:
+      - 'refactor'
+  - title: '🐛 버그 수정'
+    labels:
+      - 'fix'
+  - title: '🧰 그 외'
+    labels:
+      - 'chore'
+      - 'ci/cd'
+      - 'docs'
+      - 'style'
+      - 'build'
+      - 'common'
+      - 'test'
+
+version-resolver:
+  major:
+    labels:
+      - 'major'
+  minor:
+    labels:
+      - 'minor'
+  patch:
+    labels:
+      - 'patch'
+  default: minor
+
+exclude-labels:
+  - 'Release'
+
+change-template: '- $TITLE (#$NUMBER) - @$AUTHOR'
+change-title-escapes: '\\<*_&'
+
+template: |
+  ## ✨ 변경 사항
+  $CHANGES
+
+  ## 📦 전체 변경 이력
+  [$PREVIOUS_TAG ~ v$RESOLVED_VERSION](<https://github.com/$OWNER/$REPOSITORY/compare/$PREVIOUS_TAG...v$RESOLVED_VERSION>)

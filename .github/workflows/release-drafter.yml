@@ -1,0 +1,36 @@
+name: Release Drafter
+
+on:
+  push:
+    branches:
+      - release/*
+      - main
+  # PR 이벤트 추가로 자동화 범위 확대
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+permissions:
+  contents: write
+  pull-requests: read
+
+jobs:
+  update_release_draft:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout 단계 제거 (불필요한 작업 생략)
+      - name: Update Draft Release
+        if: startsWith(github.ref, 'refs/heads/release/') || github.event_name == 'pull_request'
+        uses: release-drafter/release-drafter@v6
+        with:
+          config-name: template/release-drafter.yml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish Release
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        uses: release-drafter/release-drafter@v6
+        with:
+          config-name: template/release-drafter.yml
+          publish: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
