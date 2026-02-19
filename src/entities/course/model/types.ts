@@ -1,9 +1,6 @@
 import type {Assignment} from '@/entities/assignment/model/types';
 import type {ApiResponse, SemesterCode} from '@/shared/model/common';
 
-export type {Assignment};
-export type {SemesterCode, SubmissionStatus} from '@/shared/model/common';
-
 /**
  * 일정(Schedule) 인터페이스 정의
  */
