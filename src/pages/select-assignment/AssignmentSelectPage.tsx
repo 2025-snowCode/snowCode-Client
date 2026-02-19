@@ -9,7 +9,7 @@ const AssignmentSelectPage = () => {
   const {courses} = courseOptionsResponse.response; // /courses/my API 응답 모킹
   const [selectedAssignments, setSelectedAssignments] = useState<number[]>([]); // 선택된 문제 ID 목록
 
-  const {courseOptions, handleCourseSelect, selectedCourseId} =
+  const {courseOptions, handleCourseSelect} =
     useCourseFilter(courses);
 
   // 문제 목록 /courses/{courseId}/assignments API 응답 모킹

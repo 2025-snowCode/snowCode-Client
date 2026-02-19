@@ -1,4 +1,5 @@
 import type {Assignment} from '@/entities/assignment/model/types';
+export type {Assignment};
 import type {ApiResponse} from '@/shared/model/common';
 
 // 학기 및 제출 상태 상수 타입 정의

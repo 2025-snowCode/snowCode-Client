@@ -1,5 +1,5 @@
 import type {Assignment} from './assignment';
-import type {ApiResponse} from './common';
+import type {ApiResponse} from '../shared/model/common';
 
 // 학기 및 제출 상태 상수 타입 정의
 export type SemesterCode = 'FIRST' | 'SECOND' | 'SUMMER' | 'WINTER';
