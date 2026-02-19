@@ -2,7 +2,8 @@ import snowcodeOverviewMini from '@/assets/images/snowcode_overview_mini.svg';
 import {formatCourseTerm} from '@/shared/lib/course';
 import CourseActionsBar from './CourseActionsBar';
 import {useUserStore} from '@/entities/auth/model/useUserStore';
-import type {CourseOverview, SemesterCode} from '@/entities/course/model/types';
+import type {CourseOverview} from '@/entities/course/model/types';
+import type {SemesterCode} from '@/shared/model/common';
 
 interface CourseHeroProps {
   courseData: Omit<CourseOverview, 'units'>;

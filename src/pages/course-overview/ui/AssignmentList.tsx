@@ -1,6 +1,6 @@
 import Badge from '@/shared/ui/Badge';
 import {Link} from 'react-router-dom';
-import type {Assignment} from '@/entities/course/model/types';
+import type {Assignment} from '@/entities/assignment/model/types';
 
 interface AssignmentListProps {
   isOpen?: boolean;
