@@ -6,7 +6,7 @@ categories:
   - title: '🚀 기능 추가'
     labels:
       - 'Feat'
-  - title: '⚙️ 기능 개선'
+  - title: '♻️ 리팩토링'
     labels:
       - 'Refactor'
   - title: '🐛 버그 수정'
