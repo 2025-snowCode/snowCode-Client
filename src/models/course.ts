@@ -1,9 +1,8 @@
 import type {Assignment} from './assignment';
-import type {ApiResponse} from '../shared/model/common';
+import type {ApiResponse, SemesterCode} from '../shared/model/common';
+export type {SemesterCode, SubmissionStatus} from '../shared/model/common';
 
-// 학기 및 제출 상태 상수 타입 정의
-export type SemesterCode = 'FIRST' | 'SECOND' | 'SUMMER' | 'WINTER';
-export type SubmissionStatus = 'NOT_SUBMITTED' | 'CORRECT' | 'INCORRECT';
+
 
 /**
  * 일정(Schedule) 인터페이스 정의
