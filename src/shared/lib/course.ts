@@ -1,4 +1,5 @@
-import type {SemesterCode, Unit} from '@/entities/course/model/types';
+import type {Unit} from '@/entities/course/model/types';
+import type {SemesterCode} from '@/shared/model/common';
 
 const SEMESTER_MAP: Record<SemesterCode, '1' | '2' | '여름' | '겨울'> = {
   FIRST: '1',
