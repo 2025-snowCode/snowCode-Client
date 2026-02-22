@@ -14,6 +14,6 @@ export const unitQueries = {
     queryOptions({
       queryKey: ['units', 'detail', unitId],
       queryFn: () => getUnitById(unitId),
-      enabled: !!unitId && unitId !== -1,
+      enabled: !!unitId,
     }),
 };
