@@ -1,9 +1,13 @@
 import ScheduleCard from './ScheduleCard';
 import EventMarkerIcon from '@/assets/svg/eventMarkerIcon.svg?react';
-import {formatDateMonthDay} from '@/utils/course';
-import type {ScheduleListProps} from '../models/types';
+import {formatDateMonthDay} from '@/shared/lib/course';
+import type {Schedule} from '@/entities/course/model/types';
 
-// 스케쥴 목록 컴포넌트
+interface ScheduleListProps {
+  scheduleList: Schedule[];
+}
+
+// 스케줄 목록 컴포넌트
 const ScheduleList = ({scheduleList}: ScheduleListProps) => {
   return (
     <ul className='flex flex-col gap-6'>

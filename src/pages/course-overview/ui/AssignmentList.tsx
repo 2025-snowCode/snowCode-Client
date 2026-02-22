@@ -1,6 +1,16 @@
-import Badge from '@/components/common/Badge';
+import Badge from '@/shared/ui/Badge';
 import {Link} from 'react-router-dom';
-import type {AssignmentItemProps, AssignmentListProps} from '../models/types';
+import type {Assignment} from '@/entities/assignment/model/types';
+
+interface AssignmentListProps {
+  isOpen?: boolean;
+  assignments: Assignment[];
+}
+
+interface AssignmentItemProps extends Assignment {
+  index: number;
+  isOpen?: boolean;
+}
 
 // 문제 목록
 const AssignmentList = ({isOpen, assignments}: AssignmentListProps) => {

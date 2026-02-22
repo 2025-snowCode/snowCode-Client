@@ -1,5 +1,5 @@
-import type {DashboardCourse} from '@/models/course';
-import {formatCourseOptionLabel} from '@/utils/course';
+import type {DashboardCourse} from '@/entities/course/model/types';
+import {formatCourseOptionLabel} from '@/shared/lib/course';
 import {useMemo, useState} from 'react';
 
 const ALL_COURSES_OPTION = '전체 강의' as const;

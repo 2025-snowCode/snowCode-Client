@@ -1,9 +1,9 @@
-import AssignmentFormLayout from '@/components/admin/assignments/AssignmentFormLayout';
-import LabeledInput from '@/components/admin/form/LabeledInput';
-import FileUpload from '@/components/admin/form/FileUpload';
+import AssignmentFormLayout from '@/widgets/assignment-form-layout/ui/AssignmentFormLayout';
+import LabeledInput from '@/shared/ui/LabeledInput';
+import FileUpload from '@/shared/ui/FileUpload';
 import {useState} from 'react';
-import LabeledDropdown from '@/components/admin/form/LabeledDropdown';
-import Button from '@/components/common/Button';
+import LabeledDropdown from '@/shared/ui/LabeledDropdown';
+import Button from '@/shared/ui/Button';
 import AddIcon from '@/assets/svg/addIcon.svg?react';
 
 const PUBLIC_OPTIONS = ['공개', '비공개'];
