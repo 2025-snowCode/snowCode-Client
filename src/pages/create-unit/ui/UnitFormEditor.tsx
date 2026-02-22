@@ -16,19 +16,22 @@ import {useState} from 'react';
 const UnitFormEditor = ({
   unit,
   unitIndex,
-  isEditing,
+  mode,
   onCreateUnit,
+  onUpdateUnit,
+  onDeleteUnit,
 }: UnitFormEditorProps) => {
   const [assignmentIds, setAssignmentIds] = useState<number[]>([]);
 
   const {
     register,
     handleSubmit,
+    reset,
     formState: {errors, isSubmitting},
   } = useForm<TUnitFormSchema>({
     resolver: zodResolver(unitFormSchema),
     values:
-      isEditing === false
+      mode === 'creating'
         ? {
             title: '',
             releaseDate: '',
@@ -42,8 +45,26 @@ const UnitFormEditor = ({
           },
   });
 
+  // 단원 생성/업데이트 핸들러
   const onSubmit = async (data: TUnitFormSchema) => {
+    if (mode === 'editing' && unit) {
+      onUpdateUnit(unit.id, data);
+      return;
+    }
+
     onCreateUnit(data);
+  };
+
+  // 단원 삭제 핸들러
+  const handleDeleteUnit = () => {
+    if (unit) {
+      onDeleteUnit(unit.id);
+    }
+  };
+
+  // 단원 편집 취소 핸들러
+  const handleCancel = () => {
+    reset();
   };
 
   return (
@@ -55,13 +76,13 @@ const UnitFormEditor = ({
         className='bg-background h-167.5 flex flex-col overflow-x-hidden custom-scrollbar rounded-[30px]'>
         {/* 폼 헤더 */}
         <div className='bg-[#EDE9FF] flex justify-between items-center px-7.5 py-4'>
-          {/* TODO: 단원 Index 추가하기 */}
           <h3 className='text-lg font-medium'>{unitIndex}. 단원</h3>
           <Button
+            onClick={handleDeleteUnit}
             color='primary'
             content='icon'
             size='none'
-            className='w-9 h-9 rounded-full'>
+            className={`w-9 h-9 rounded-full ${mode !== 'editing' ? 'invisible' : ''}`}>
             <BinIcon className='w-4 h-4' />
           </Button>
         </div>
@@ -91,14 +112,12 @@ const UnitFormEditor = ({
               type='date'
               placeholder='마감일을 선택하세요'
             />
-            {errors.dueDate && (
-              <span className='col-span-2 text-xs text-badge-red -mt-2'>
-                {errors.dueDate.message}
-              </span>
-            )}
+            <span className='col-span-2 text-xs text-badge-red -mt-3 h-1'>
+              {errors.dueDate?.message}
+            </span>
           </section>
 
-          <hr className='border-stroke mb-7' />
+          <hr className='border-stroke mb-7 -mt-3' />
 
           {/* 문제 등록 섹션 */}
           <section className=''>
@@ -126,7 +145,9 @@ const UnitFormEditor = ({
 
       {/* 제출 버튼 */}
       <div className='mt-6 mb-2 flex justify-end gap-5.5'>
-        <Button color='outlinePurple'>취소</Button>
+        <Button onClick={handleCancel} color='outlinePurple'>
+          취소
+        </Button>
         <Button type='submit' formID='unit-form' disabled={isSubmitting}>
           저장
         </Button>

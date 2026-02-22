@@ -58,6 +58,7 @@ const Button = ({
 }: ButtonProps) => {
   return (
     <button
+      type={type}
       onClick={onClick}
       disabled={disabled}
       form={formID}
