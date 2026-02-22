@@ -2,25 +2,25 @@ import {useForm} from 'react-hook-form';
 import Button from '@/components/common/Button';
 import BinIcon from '@/assets/svg/binIcon.svg?react';
 import LabeledInput from '@/components/admin/form/LabeledInput';
-import {SortableAssignmentList} from './SortableAssignmentList';
+import {UnitAssignmentList} from './UnitAssignmentList';
 import {zodResolver} from '@hookform/resolvers/zod';
-import {
-  unitFormSchema,
-  type TUnitFormSchema,
-  type UnitFormEditorProps,
-} from '../model/types';
+import {type UnitFormProps} from '../model/types';
 import AddIcon from '@/assets/svg/addIcon.svg?react';
 import {EmptyState} from '@/components/common/EmptyState';
 import {useState} from 'react';
+import {
+  unitFormSchema,
+  type TUnitFormSchema,
+} from '@/entities/unit/model/types';
 
-const UnitFormEditor = ({
+export const UnitForm = ({
   unit,
   unitIndex,
   mode,
   onCreateUnit,
   onUpdateUnit,
   onDeleteUnit,
-}: UnitFormEditorProps) => {
+}: UnitFormProps) => {
   const [assignmentIds, setAssignmentIds] = useState<number[]>([]);
 
   const {
@@ -129,7 +129,7 @@ const UnitFormEditor = ({
                 등록된 문제가 없습니다.
               </EmptyState>
             ) : (
-              <SortableAssignmentList assignmentList={unit.assignments} />
+              <UnitAssignmentList assignmentList={unit.assignments} />
             )}
 
             {/* 문제 연결 버튼 */}
@@ -155,5 +155,3 @@ const UnitFormEditor = ({
     </div>
   );
 };
-
-export default UnitFormEditor;

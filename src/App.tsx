@@ -10,7 +10,7 @@ import CourseCreatePage from './pages/admin/courses/CourseCreatePage';
 import StudentManagementPage from './pages/admin/student/StudentManagementPage';
 import {useEffect} from 'react';
 import {useUserStore} from '@/entities/auth/model/useUserStore';
-import CreateUnitPage from './pages/create-unit/CreateUnitPage';
+import {UnitEditorPage} from './pages/unit-editor/UnitEditorPage';
 
 const AppRoutes = () => {
   const {pathname} = useLocation();
@@ -47,7 +47,7 @@ const AppRoutes = () => {
           <Route path='courses/:id' element={<CourseOverviewPage />} />
           <Route path='courses/create' element={<CourseCreatePage />} />
           <Route path='student' element={<StudentManagementPage />} />
-          <Route path='units/:id' element={<CreateUnitPage />} />
+          <Route path='units/:id' element={<UnitEditorPage />} />
         </Route>
       </Route>
     </Routes>

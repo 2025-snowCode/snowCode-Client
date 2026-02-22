@@ -12,7 +12,7 @@ interface UnitListProps {
   onAddNewUnit?: () => void;
 }
 
-const UnitList = ({
+export const UnitList = ({
   unitList,
   onUnitClick,
   selectedUnitId,
@@ -70,5 +70,3 @@ const UnitList = ({
     </div>
   );
 };
-
-export default UnitList;

@@ -20,7 +20,7 @@ import {
 } from '@dnd-kit/sortable';
 import {CSS} from '@dnd-kit/utilities';
 
-export const SortableAssignmentList = ({
+export const UnitAssignmentList = ({
   assignmentList,
 }: {
   assignmentList: Assignment[];

@@ -1,15 +1,16 @@
 import SurfaceCard from '@/components/common/SurfaceCard';
-import UnitFormEditor from './ui/UnitFormEditor';
-import UnitList from './ui/UnitList';
+import {UnitList} from './ui/UnitList';
+import {UnitForm} from './ui/UnitForm';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
-import {unitQueries} from '@/entities/unit/api/unitQueryOptions';
+import {unitQueries} from '@/entities/unit/api/unitQueries';
 import {useParams} from 'react-router-dom';
 import {useEffect, useState} from 'react';
-import type {Mode, TUnitFormSchema} from './model/types';
+import type {Mode} from './model/types';
 import {unitMutations} from '@/entities/unit/api/unitMutations';
 import {EmptyState} from '@/components/common/EmptyState';
+import type {TUnitFormSchema} from '@/entities/unit/model/types';
 
-const CreateUnitPage = () => {
+export const UnitEditorPage = () => {
   const {id} = useParams(); // 강의 ID
   const courseId = Number(id);
   const [mode, setMode] = useState<Mode>('idle');
@@ -127,7 +128,7 @@ const CreateUnitPage = () => {
 
       {/* 단원 폼 섹션 */}
       <SurfaceCard className='w-185 min-w-0' size='large'>
-        <UnitFormEditor
+        <UnitForm
           unit={unit?.response}
           unitIndex={currentIndex}
           mode={mode}
@@ -139,5 +140,3 @@ const CreateUnitPage = () => {
     </div>
   );
 };
-
-export default CreateUnitPage;
