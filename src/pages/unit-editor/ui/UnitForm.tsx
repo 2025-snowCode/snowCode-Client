@@ -29,7 +29,7 @@ export const UnitForm = ({
     reset,
     formState: {errors, isSubmitting},
   } = useForm<TUnitFormSchema>({
-    resolver: zodResolver(unitFormSchema),
+    resolver: zodResolver(unitFormSchema) as any,
     values:
       mode === 'creating'
         ? {
