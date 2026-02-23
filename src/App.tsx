@@ -12,7 +12,7 @@ import StudentProfilePage from '@/pages/admin/student/StudentProfilePage';
 import KakaoCallbackPage from '@/pages/common/KakaoCallbackPage';
 import PrivateRoute from '@/widgets/private-route/ui/PrivateRoute';
 import {useSyncUserRole} from '@/features/auth/sync-user-role/model/useSyncUserRole';
-import {UnitEditorPage} from './pages/unit-editor/UnitEditorPage';
+import UnitEditorPage from '@/pages/unit-editor/UnitEditorPage';
 
 const AppRoutes = () => {
   useSyncUserRole();
@@ -53,8 +53,8 @@ const AppRoutes = () => {
               path='student/profile/:studentId'
               element={<StudentProfilePage />}
             />
+            <Route path='units/:id' element={<UnitEditorPage />} />
           </Route>
-          <Route path='units/:id' element={<UnitEditorPage />} />
         </Route>
       </Route>
     </Routes>
