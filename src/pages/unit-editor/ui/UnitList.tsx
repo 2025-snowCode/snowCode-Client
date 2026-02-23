@@ -40,7 +40,7 @@ export const UnitList = ({
             onClick={() => handleSelectUnit(id)}
             key={id}
             className={`flex flex-col py-5 px-12 gap-2.5 cursor-pointer ${selectedUnitId === id ? 'bg-background' : ''}`}>
-            {/* 단원 인덱스 배지 */}
+            {/* 과제 수 배지 */}
             <div>
               <Badge variant='index' kind='problem'>
                 {assignmentCount}

@@ -1,4 +1,4 @@
-import z from 'zod';
+import {z} from 'zod';
 
 // 단원 생성/수정 폼 스키마
 export const unitFormSchema = z
