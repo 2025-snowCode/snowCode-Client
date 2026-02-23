@@ -71,7 +71,7 @@ export const UnitForm = ({
     <div className='flex flex-col w-full h-full p-5'>
       {/* 단원 편집 폼 */}
       <form
-        id='unit-form'
+        id={`unit-form-${unitIndex}`}
         onSubmit={handleSubmit(onSubmit)}
         className='bg-background h-167.5 flex flex-col overflow-x-hidden custom-scrollbar rounded-[30px]'>
         {/* 폼 헤더 */}
@@ -148,7 +148,10 @@ export const UnitForm = ({
         <Button onClick={handleCancel} color='outlinePurple'>
           취소
         </Button>
-        <Button type='submit' formID='unit-form' disabled={isSubmitting}>
+        <Button
+          type='submit'
+          formID={`unit-form-${unitIndex}`}
+          disabled={isSubmitting}>
           저장
         </Button>
       </div>
