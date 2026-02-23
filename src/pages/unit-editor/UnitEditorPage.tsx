@@ -1,4 +1,3 @@
-import SurfaceCard from '@/components/common/SurfaceCard';
 import {UnitList} from './ui/UnitList';
 import {UnitForm} from './ui/UnitForm';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
@@ -7,10 +6,11 @@ import {useParams} from 'react-router-dom';
 import {useEffect, useState} from 'react';
 import type {Mode} from './model/types';
 import {unitMutations} from '@/entities/unit/api/unitMutations';
-import {EmptyState} from '@/components/common/EmptyState';
 import type {TUnitFormSchema} from '@/entities/unit/model/types';
+import {EmptyState} from '@/shared/ui/EmptyState';
+import SurfaceCard from '@/shared/ui/SurfaceCard';
 
-export const UnitEditorPage = () => {
+const UnitEditorPage = () => {
   const {id} = useParams(); // 강의 ID
   const courseId = Number(id);
   const [mode, setMode] = useState<Mode>('idle');
@@ -19,11 +19,12 @@ export const UnitEditorPage = () => {
   const {data: unitList} = useQuery(unitQueries.getUnitList(courseId));
   const {data: unit} = useQuery(unitQueries.getUnitDetails(selectedUnitId));
 
-  // 자동으로 첫 번째 단원 선택
   useEffect(() => {
-    if (unitList && unitList.response.count !== 0 && mode === 'idle') {
+    if (unitList && unitList?.response.count !== 0 && mode === 'idle') {
       setSelectedUnitId(unitList.response.units[0].id);
-      setMode('editing'); // 편집 모드로 전환
+      setMode('editing'); // 편집 모드
+    } else if (unitList?.response.count === 0 && mode === 'idle') {
+      setMode('creating'); // 생성 모드
     }
   }, [unitList, mode]);
 
@@ -140,3 +141,5 @@ export const UnitEditorPage = () => {
     </div>
   );
 };
+
+export default UnitEditorPage;

@@ -1,4 +1,4 @@
-import Badge from '@/shared/ui/Badge';
+import Badge from '@/shared/ui/badge/Badge';
 import {Link} from 'react-router-dom';
 import type {Assignment} from '@/entities/assignment/model/types';
 

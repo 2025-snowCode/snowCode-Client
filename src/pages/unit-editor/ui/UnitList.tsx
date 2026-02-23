@@ -1,8 +1,8 @@
-import Button from '@/components/common/Button';
-import AddIcon from '@/assets/svg/addIcon.svg?react';
-import Badge from '@/components/common/Badge';
 import ArrowrightIcon from '@/assets/svg/arrowrightIcon.svg?react';
-import type {AllUnitsResponse} from '@/models/course';
+import type {AllUnitsResponse} from '@/entities/course/model/types';
+import Badge from '@/shared/ui/badge/Badge';
+import Button from '@/shared/ui/button/Button';
+import AddIcon from '@/assets/svg/addIcon.svg?react';
 
 interface UnitListProps {
   unitList: AllUnitsResponse['response']['units'] | undefined;

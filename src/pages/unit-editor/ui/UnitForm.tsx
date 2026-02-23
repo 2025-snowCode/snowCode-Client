@@ -1,12 +1,12 @@
 import {useForm} from 'react-hook-form';
-import Button from '@/components/common/Button';
+import Button from '@/shared/ui/button/Button';
 import BinIcon from '@/assets/svg/binIcon.svg?react';
-import LabeledInput from '@/components/admin/form/LabeledInput';
+import LabeledInput from '@/shared/ui/LabeledInput';
 import {UnitAssignmentList} from './UnitAssignmentList';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {type UnitFormProps} from '../model/types';
 import AddIcon from '@/assets/svg/addIcon.svg?react';
-import {EmptyState} from '@/components/common/EmptyState';
+import {EmptyState} from '@/shared/ui/EmptyState';
 import {useState} from 'react';
 import {
   unitFormSchema,

@@ -1,7 +1,7 @@
-import type {ApiResponse} from '@/models/common';
-import type {AllUnitsResponse, Unit} from '@/models/course';
 import {privateAxios} from '@/shared/api/axiosInstance';
 import type {TUnitFormSchema} from '../model/types';
+import type {ApiResponse} from '@/shared/model';
+import type {AllUnitsResponse, Unit} from '@/entities/course/model/types';
 
 // 강의별 전체 단원 조회
 export const getAllUnitsByCourseId = async (

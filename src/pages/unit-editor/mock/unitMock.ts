@@ -1,4 +1,7 @@
-import type {AllUnitsResponse, SingleUnitResponse} from '@/models/course';
+import type {
+  AllUnitsResponse,
+  SingleUnitResponse,
+} from '@/entities/course/model/types';
 
 export const singleUnitResponse: SingleUnitResponse = {
   success: true,

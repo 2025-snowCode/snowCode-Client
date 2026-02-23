@@ -1,4 +1,4 @@
-import Badge from '@/shared/ui/Badge';
+import Badge from '@/shared/ui/badge/Badge';
 import type {Schedule} from '@/entities/course/model/types';
 
 type AssignmentType = Schedule['assignments'][number];

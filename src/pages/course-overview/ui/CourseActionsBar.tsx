@@ -1,4 +1,4 @@
-import Button from '@/shared/ui/Button';
+import Button from '@/shared/ui/button/Button';
 import {Link} from 'react-router-dom';
 
 // 강의 관리 버튼 바 (관리자 전용)
@@ -10,7 +10,7 @@ const CourseActionsBar = ({isActiveCourse}: {isActiveCourse: boolean}) => {
           학생 목록
         </Button>
       </Link>
-      <Link to=''>
+      <Link to={`/admin/units/3`}>
         <Button color={isActiveCourse ? 'outlinePurple' : 'primary'}>
           단원 추가
         </Button>

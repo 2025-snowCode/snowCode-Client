@@ -1,6 +1,6 @@
 import LogoIcon from '@/assets/images/snowCode_logo.svg?react';
 import CourseList from './ui/CourseList';
-import Button from '@/shared/ui/Button';
+import Button from '@/shared/ui/button/Button';
 import AddIcon from '@/assets/svg/addIcon.svg?react';
 import ScheduleList from './ui/ScheduleList';
 import {Link} from 'react-router-dom';

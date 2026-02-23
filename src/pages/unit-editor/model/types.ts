@@ -1,5 +1,5 @@
+import type {Unit} from '@/entities/course/model/types';
 import type {TUnitFormSchema} from '@/entities/unit/model/types';
-import type {Unit} from '@/models/course';
 
 // 단원 편집 모드 타입
 export type Mode = 'idle' | 'creating' | 'editing';
