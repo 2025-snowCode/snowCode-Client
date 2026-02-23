@@ -7,7 +7,7 @@ import {zodResolver} from '@hookform/resolvers/zod';
 import {type UnitFormProps} from '../model/types';
 import AddIcon from '@/assets/svg/addIcon.svg?react';
 import {EmptyState} from '@/shared/ui/EmptyState';
-import {useState} from 'react';
+// import {useState} from 'react';
 import {
   unitFormSchema,
   type TUnitFormSchema,
@@ -21,7 +21,7 @@ export const UnitForm = ({
   onUpdateUnit,
   onDeleteUnit,
 }: UnitFormProps) => {
-  const [assignmentIds, setAssignmentIds] = useState<number[]>([]);
+  // const [assignmentIds, setAssignmentIds] = useState<number[]>([]);
 
   const {
     register,
