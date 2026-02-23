@@ -10,6 +10,8 @@ import {
   PointerSensor,
   useSensor,
   useSensors,
+  type DragEndEvent,
+  type UniqueIdentifier,
 } from '@dnd-kit/core';
 import {
   SortableContext,
@@ -28,15 +30,13 @@ export const UnitAssignmentList = ({
   const [assignments, setAssignments] = useState<Assignment[]>(assignmentList);
 
   // 과제 인덱스 찾기
-  const getAssignmentIndex = (id: number) => {
+  const getAssignmentIndex = (id: UniqueIdentifier) => {
     return assignments.findIndex((assignment) => assignment.id === id);
   };
 
-  const handleDragEnd = (event: any) => {
+  const handleDragEnd = ({active, over}: DragEndEvent) => {
     // active: 드래그 중인 아이템, over: 드래그가 끝난 위치의 아이템
-    const {active, over} = event;
-
-    if (active.id === over.id) return; // 위치가 바뀌지 않은 경우
+    if (!over || active.id === over.id) return; // 위치가 바뀌지 않은 경우
 
     // 위치가 바뀐 경우 - 배열에서 아이템의 위치를 업데이트
     setAssignments((assignments) => {
@@ -96,7 +96,7 @@ const DraggableAssignmentItem = ({id, title}: Assignment) => {
         title={title}
         leftIcon={<DragAndDropIcon />}
         rightIcon={<DeleteIcon className='w-3 h-3' />}
-        className={`cursor grab touch-none bg-white shadow-box active:cursor-grabbing ${isDragging ? 'z-10 opacity-50' : ''}`}
+        className={`cursor-grab touch-none bg-white shadow-box active:cursor-grabbing ${isDragging ? 'z-10 opacity-50' : ''}`}
       />
     </li>
   );

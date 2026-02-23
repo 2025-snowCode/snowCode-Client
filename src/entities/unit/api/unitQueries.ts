@@ -10,7 +10,7 @@ export const unitQueries = {
     }),
 
   // 단일 단원 조회 쿼리 옵션
-  getUnitDetails: (unitId: number | null) =>
+  getUnitDetails: (unitId: number) =>
     queryOptions({
       queryKey: ['units', 'detail', unitId],
       queryFn: () => getUnitById(unitId),

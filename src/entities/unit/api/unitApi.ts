@@ -13,7 +13,7 @@ export const getAllUnitsByCourseId = async (
 
 // 단일 단원 조회
 export const getUnitById = async (
-  unitId: number | null
+  unitId: number
 ): Promise<ApiResponse<Unit>> => {
   const response = await privateAxios.get(`/units/${unitId}`);
   return response.data;
