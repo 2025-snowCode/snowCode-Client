@@ -44,3 +44,14 @@ export const updateUnit = async (
   const response = await privateAxios.put(`/units/${unitId}`, unit);
   return response.data;
 };
+
+// 단원에 등록된 과제 삭제
+export const deleteAssignmentFromUnit = async (
+  unitId: number,
+  assignmentId: number
+): Promise<ApiResponse<string>> => {
+  const response = await privateAxios.delete(
+    `/units/${unitId}/assignments/${assignmentId}`
+  );
+  return response.data;
+};

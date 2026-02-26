@@ -2,13 +2,14 @@ import {UnitList} from './ui/UnitList';
 import {UnitForm} from './ui/UnitForm';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import {unitQueries} from '@/entities/unit/api/unitQueries';
-import {useParams} from 'react-router-dom';
+import {useLocation, useParams} from 'react-router-dom';
 import {useEffect, useState} from 'react';
 import type {Mode} from './model/types';
 import {unitMutations} from '@/entities/unit/api/unitMutations';
 import type {TUnitFormSchema} from '@/entities/unit/model/types';
 import {EmptyState} from '@/shared/ui/EmptyState';
 import SurfaceCard from '@/shared/ui/SurfaceCard';
+import useUnitStore from '@/entities/unit/model/useUnitStore';
 
 const UnitEditorPage = () => {
   const {id} = useParams(); // 강의 ID
@@ -18,15 +19,24 @@ const UnitEditorPage = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(1);
   const {data: unitList} = useQuery(unitQueries.getUnitList(courseId));
   const {data: unit} = useQuery(unitQueries.getUnitDetails(selectedUnitId));
+  const {state} = useLocation();
+  const {resetStore} = useUnitStore();
 
   useEffect(() => {
-    if (unitList && unitList?.response.count !== 0 && mode === 'idle') {
+    if (state?.mode && mode === 'idle') {
+      setMode(state.mode);
+      setSelectedUnitId(state.unitId);
+      setCurrentIndex(state.currentIndex ?? 1);
+      return;
+    }
+
+    if (unitList && unitList.response.count !== 0 && mode === 'idle') {
       setSelectedUnitId(unitList.response.units[0].id);
       setMode('editing'); // 편집 모드
-    } else if (unitList?.response.count === 0 && mode === 'idle') {
+    } else if (unitList && unitList.response.count === 0 && mode === 'idle') {
       setMode('creating'); // 생성 모드
     }
-  }, [unitList, mode]);
+  }, [unitList, mode, state]);
 
   const queryClient = useQueryClient();
   const invalidateUnitList = () => {
@@ -43,6 +53,7 @@ const UnitEditorPage = () => {
       invalidateUnitList();
       setSelectedUnitId(data.response.id);
       setMode('editing'); // 생성 후 편집 모드로 전환
+      resetStore(); // 단원 폼 초기화
       alert('새 단원이 성공적으로 생성되었습니다.');
     },
     onError: (error) => {
@@ -69,8 +80,8 @@ const UnitEditorPage = () => {
     ...unitMutations.deleteUnit,
     onSuccess: () => {
       invalidateUnitList();
-      setMode('idle'); // 삭제 후 대기 모드로 전환
       setSelectedUnitId(null); // 선택된 단원 초기화
+      setMode('creating');
       alert('단원이 성공적으로 삭제되었습니다.');
     },
     onError: (error) => {
@@ -93,8 +104,8 @@ const UnitEditorPage = () => {
   };
 
   // 단원 생성 핸들러
-  const onCreateUnit = (unit: TUnitFormSchema) => {
-    addUnit({courseId: courseId, unit});
+  const onCreateUnit = (unitForm: TUnitFormSchema) => {
+    addUnit({courseId, unitForm});
   };
 
   // 단원 업데이트 핸들러
