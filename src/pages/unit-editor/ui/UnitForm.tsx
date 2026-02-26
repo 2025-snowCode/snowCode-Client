@@ -7,11 +7,12 @@ import {zodResolver} from '@hookform/resolvers/zod';
 import {type UnitFormProps} from '../model/types';
 import AddIcon from '@/assets/svg/addIcon.svg?react';
 import {EmptyState} from '@/shared/ui/EmptyState';
-// import {useState} from 'react';
 import {
   unitFormSchema,
   type TUnitFormSchema,
 } from '@/entities/unit/model/types';
+import {useLocation, useNavigate} from 'react-router-dom';
+import useUnitStore from '@/entities/unit/model/useUnitStore';
 
 export const UnitForm = ({
   unit,
@@ -21,22 +22,34 @@ export const UnitForm = ({
   onUpdateUnit,
   onDeleteUnit,
 }: UnitFormProps) => {
-  // const [assignmentIds, setAssignmentIds] = useState<number[]>([]);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const {
+    storeFormData,
+    resetStore,
+    title: storedTitle,
+    releaseDate: storedReleaseDate,
+    dueDate: storedDueDate,
+    assignments,
+  } = useUnitStore();
+
+  const assignmentIds = assignments.map((assignment) => assignment.id);
 
   const {
     register,
     handleSubmit,
     reset,
+    getValues,
     formState: {errors, isSubmitting},
   } = useForm<TUnitFormSchema>({
     resolver: zodResolver(unitFormSchema),
     values:
       mode === 'creating'
         ? {
-            title: '',
-            releaseDate: '',
-            dueDate: '',
-            assignmentIds: [],
+            title: storedTitle,
+            releaseDate: storedReleaseDate,
+            dueDate: storedDueDate,
+            assignmentIds: assignmentIds,
           }
         : {
             title: unit?.title || '',
@@ -64,7 +77,22 @@ export const UnitForm = ({
 
   // 단원 편집 취소 핸들러
   const handleCancel = () => {
+    resetStore(); // 폼 데이터 초기화
     reset();
+  };
+
+  // 문제 선택 페이지로 이동 핸들러
+  const handleAssignmentSelect = () => {
+    const {title, releaseDate, dueDate} = getValues();
+    storeFormData(title, releaseDate, dueDate);
+    navigate('/admin/assignments/select', {
+      state: {
+        mode,
+        unitId: unit?.id ?? null,
+        currentIndex: unitIndex,
+        backPath: location.pathname,
+      },
+    });
   };
 
   return (
@@ -124,17 +152,24 @@ export const UnitForm = ({
             <h4 className='text-base/6 font-medium'>문제 등록</h4>
 
             {/* 드래그 앤 드롭 가능한 문제 리스트 */}
-            {!unit || unit.assignmentCount === 0 ? (
+            {mode === 'editing' && unit && unit.assignmentCount > 0 ? (
+              <UnitAssignmentList assignmentList={unit.assignments} />
+            ) : assignments.length > 0 ? (
+              <UnitAssignmentList assignmentList={assignments} />
+            ) : (
               <EmptyState className='mt-4 mb-5'>
                 등록된 문제가 없습니다.
               </EmptyState>
-            ) : (
-              <UnitAssignmentList assignmentList={unit.assignments} />
             )}
 
             {/* 문제 연결 버튼 */}
             <div className='mt-3.5'>
-              <Button color='tonal' size='compact' content='mixed'>
+              <Button
+                onClick={handleAssignmentSelect}
+                color='tonal'
+                size='compact'
+                content='mixed'
+                disabled={mode === 'editing'}>
                 <AddIcon className='w-3 h-3' />
                 문제 연결
               </Button>
