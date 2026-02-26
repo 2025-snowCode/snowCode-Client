@@ -24,7 +24,7 @@ const AssignmentFormLayout = ({
     <div className='flex flex-col items-center gap-6'>
       <SurfaceCard
         size='medium'
-        className='mx-auto pt-9 pb-8 pl-[56px] pr-[32px] flex flex-col'>
+        className='mx-auto pt-9 pb-8 px-14 flex flex-col'>
         {/* 제목 */}
         <div className='flex items-center gap-3'>
           <h2 className='text-black text-[24px] font-semibold'>{title}</h2>

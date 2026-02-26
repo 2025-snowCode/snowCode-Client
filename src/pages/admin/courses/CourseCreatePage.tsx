@@ -11,7 +11,7 @@ const CourseCreatePage = () => {
     <AssignmentFormLayout
       title='강의 개설'
       content={
-        <div className='space-y-6 max-w-[728px]'>
+        <div className='space-y-6 w-full'>
           <div className='grid grid-cols-[minmax(0,1fr)_324px] gap-6'>
             <LabeledInput
               label='강의 명'
@@ -42,6 +42,8 @@ const CourseCreatePage = () => {
             placeholder='강의 소개를 입력하세요'
             className='w-full'
           />
+
+          <div className='relative left-1/2 h-px w-[calc(100%+112px)] -translate-x-1/2 shrink-0 bg-purple-stroke' />
 
           <FileUpload
             label='강의 공유'
