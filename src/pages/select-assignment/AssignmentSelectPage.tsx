@@ -1,16 +1,18 @@
 import AssignmentListContainer from './ui/AssignmentListContainer';
 import {useState} from 'react';
-import {response, courseOptionsResponse} from './mocks/response';
+import {
+  response,
+  courseOptionsResponse,
+} from '@/shared/mocks/assignmentSelectResponse';
 import {useCourseFilter} from '@/features/course/filter-course/lib/useCourseFilter';
 import {AssignmentPageLayout} from '@/widgets/assignment-page-layout';
-import SelectableItem from '@/components/common/SelectableItem';
+import ListRow from '@/shared/ui/list-row/ListRow';
 
 const AssignmentSelectPage = () => {
   const {courses} = courseOptionsResponse.response; // /courses/my API 응답 모킹
   const [selectedAssignments, setSelectedAssignments] = useState<number[]>([]); // 선택된 문제 ID 목록
 
-  const {courseOptions, handleCourseSelect} =
-    useCourseFilter(courses);
+  const {courseOptions, handleCourseSelect} = useCourseFilter(courses);
 
   // 문제 목록 /courses/{courseId}/assignments API 응답 모킹
   const assignmentList = response.response.courses.flatMap(
@@ -39,7 +41,7 @@ const AssignmentSelectPage = () => {
           title={`${assignmentList.length}문제`}
           onSelect={handleAssignmentSelect}
           renderItem={(assignment) => (
-            <SelectableItem
+            <ListRow
               title={assignment.title}
               selected={selectedAssignments.includes(assignment.id)}
             />

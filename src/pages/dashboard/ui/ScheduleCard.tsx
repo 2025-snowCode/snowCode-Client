@@ -1,5 +1,11 @@
-import Badge from '@/components/common/Badge';
-import type {ScheduleCardProps} from '../models/types';
+import Badge from '@/shared/ui/badge/Badge';
+import type {Schedule} from '@/entities/course/model/types';
+
+type AssignmentType = Schedule['assignments'][number];
+
+interface ScheduleCardProps extends AssignmentType {
+  remainingDays: number;
+}
 
 const ScheduleCard = ({
   remainingDays,

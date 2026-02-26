@@ -1,5 +1,5 @@
-import SurfaceCard from '@/components/common/SurfaceCard';
-import Button from '@/components/common/Button';
+import SurfaceCard from '@/shared/ui/SurfaceCard';
+import Button from '@/shared/ui/button/Button';
 import {CourseSelector} from '@/features/course/filter-course';
 
 interface AssignmentPageLayoutProps {

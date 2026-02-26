@@ -1,8 +1,17 @@
 import AssignmentList from './AssignmentList';
 import Lock from '@/assets/svg/lock.svg?react';
-import Badge from '@/components/common/Badge';
+import Badge from '@/shared/ui/badge/Badge';
 import {formatPeriod} from '@/shared/lib/course';
-import type {UnitHeaderProps, UnitProps} from '../models/types';
+import type {Unit} from '@/entities/course/model/types';
+
+interface UnitProps extends Unit {
+  index: number;
+}
+
+type UnitHeaderProps = Omit<
+  UnitProps,
+  'id' | 'assignmentCount' | 'assignments'
+>;
 
 const UnitItem = ({index, ...unit}: UnitProps) => {
   const isOpen = unit.isOpen ?? true;
@@ -32,7 +41,7 @@ const UnitHeader = ({
   return (
     <header className='bg-gray w-full p-4'>
       <div className='max-w-4xl mx-auto flex items-center justify-between'>
-        {/* 좌측: 인덱스, 제목, 잠금 아이콘 */}
+        {/* 좌측: 인덱스, 단원명, 잠금 아이콘 */}
         <div className='min-w-0 flex items-center gap-3.5'>
           <Badge variant='index' kind='unit'>
             {index}

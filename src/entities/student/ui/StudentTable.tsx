@@ -1,5 +1,5 @@
-import {Checkbox} from '@/components/common/Checkbox';
-import {ProgressIndicators} from '@/components/common/ProgressIndicators';
+import {Checkbox} from '@/shared/ui/checkbox/Checkbox';
+import {ProgressIndicators} from '@/shared/ui/ProgressIndicators';
 import {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import type {Student} from '@/entities/student/model/types';
