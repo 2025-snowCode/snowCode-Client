@@ -6,10 +6,19 @@ import ListRow from '@/shared/ui/list-row/ListRow';
 import {useQuery} from '@tanstack/react-query';
 import {courseQueries} from '@/entities/course/api/courseQueries';
 import {assignmentQueries} from '@/entities/assignment/api/assignmentQueries';
+import useUnitStore from '@/entities/unit/model/useUnitStore';
+import {useLocation, useNavigate} from 'react-router-dom';
+import type {Assignment} from '@/entities/assignment/model/types';
 
 const AssignmentSelectPage = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const {data: courseList} = useQuery(courseQueries.getAllCourses());
-  const [selectedAssignments, setSelectedAssignments] = useState<number[]>([]); // 선택된 문제 ID 목록
+  const {setAssignments, assignments: currentSelectedAssignments} =
+    useUnitStore();
+  const [selectedAssignments, setSelectedAssignments] = useState<Assignment[]>(
+    currentSelectedAssignments ?? []
+  );
   const {courseOptions, handleCourseSelect, selectedCourseId} = useCourseFilter(
     courseList?.response.courses ?? []
   );
@@ -30,17 +39,29 @@ const AssignmentSelectPage = () => {
     : (allAssignments?.response.assignments ?? []);
 
   // 문제 선택 핸들러
-  const handleAssignmentSelect = (assignmentId: number) => {
+  const handleAssignmentSelect = (assignment: Assignment) => {
     setSelectedAssignments((prev) => {
-      if (prev.includes(assignmentId)) {
-        return prev.filter((id) => id !== assignmentId); // 선택 해제
-      } else {
-        return [...prev, assignmentId]; // 선택 추가
+      if (prev.some((a) => a.id === assignment.id)) {
+        return prev.filter((a) => a.id !== assignment.id);
       }
+      return [...prev, assignment];
     });
   };
 
-  console.log('선택된 강의 ID:', selectedAssignments);
+  const returnToPreviousPage = () => {
+    navigate(location.state?.backPath ?? -1, {
+      state: {
+        mode: location.state?.mode,
+        unitId: location.state?.unitId,
+        currentIndex: location.state?.currentIndex,
+      },
+    });
+  };
+
+  const handleConfirm = () => {
+    setAssignments(selectedAssignments);
+    returnToPreviousPage();
+  };
 
   return (
     <AssignmentPageLayout
@@ -55,13 +76,15 @@ const AssignmentSelectPage = () => {
           renderItem={(assignment) => (
             <ListRow
               title={assignment.title}
-              selected={selectedAssignments.includes(assignment.id)}
+              selected={selectedAssignments.some((a) => a.id === assignment.id)}
             />
           )}
         />
       }
-      onCancel={() => {}}
-      onConfirm={() => {}}
+      onCancel={() => {
+        returnToPreviousPage();
+      }}
+      onConfirm={handleConfirm}
     />
   );
 };
