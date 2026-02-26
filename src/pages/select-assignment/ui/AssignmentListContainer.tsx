@@ -7,7 +7,7 @@ interface AssignmentListContainerProps<T> {
   items: T[];
   renderItem: (item: T) => React.ReactNode;
   title: string;
-  onSelect: (item: Assignment) => void;
+  onSelect?: (item: Assignment) => void;
 }
 
 const AssignmentListContainer = ({
@@ -18,7 +18,7 @@ const AssignmentListContainer = ({
 }: AssignmentListContainerProps<T>) => {
   const handleSelect = (item: Assignment, event: React.MouseEvent) => {
     event.stopPropagation();
-    onSelect(item);
+    onSelect?.(item);
   };
   return (
     <div className='custom-scrollbar'>

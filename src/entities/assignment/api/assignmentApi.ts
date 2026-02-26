@@ -41,8 +41,6 @@ export const getAssignmentsByCourse = async (
   courseId: number
 ): Promise<AssignmentSelectResponse> => {
   const response = await privateAxios.get(`/courses/${courseId}/assignments`);
-
-  console.log('getAssignmentsByCourse API 응답:', response.data); // 응답 데이터 로깅
   return response.data;
 };
 
