@@ -9,6 +9,7 @@ interface LabeledDropdownProps
   options: string[];
   placeholder?: string;
   onSelect?: (value: string) => void;
+  errorMessage?: string;
 }
 
 const LabeledDropdown = ({
@@ -17,6 +18,7 @@ const LabeledDropdown = ({
   options,
   placeholder,
   onSelect,
+  errorMessage,
   ...rest
 }: LabeledDropdownProps) => {
   const [selectedValue, setSelectedValue] = useState('');
@@ -29,9 +31,9 @@ const LabeledDropdown = ({
   const TriggerButton = (
     <button
       type='button'
-      className={`relative h-11 w-full rounded-[9px] border border-purple-stroke px-[14px] pr-10 text-left outline-none focus:border-primary ${
-        className ?? ''
-      }`}
+      className={`relative h-11 w-full rounded-[9px] border px-[14px] pr-10 text-left outline-none focus:border-primary ${
+        errorMessage ? 'border-badge-red' : 'border-purple-stroke'
+      } ${className ?? ''}`}
       {...rest}>
       <span className={selectedValue ? 'text-black' : 'text-light-black'}>
         {selectedValue || placeholder}
@@ -51,6 +53,10 @@ const LabeledDropdown = ({
         className='relative'
         menuClassName='w-full bg-gray mt-1'
       />
+
+      {errorMessage && (
+        <span className='text-sm text-badge-red'>{errorMessage}</span>
+      )}
     </label>
   );
 };

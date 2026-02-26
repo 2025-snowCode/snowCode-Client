@@ -3,12 +3,14 @@ interface LabeledInputProps
   label: string;
   className?: string;
   showLabel?: boolean;
+  errorMessage?: string;
 }
 
 const LabeledInput = ({
   label,
   className,
   showLabel = true,
+  errorMessage,
   ...rest
 }: LabeledInputProps) => {
   return (
@@ -21,11 +23,15 @@ const LabeledInput = ({
       </span>
 
       <input
-        className={`h-11 rounded-[9px] border border-purple-stroke px-[14px] outline-none focus:border-primary ${
-          className ?? ''
-        }`}
+        className={`h-11 rounded-[9px] border px-[14px] outline-none focus:border-primary ${
+          errorMessage ? 'border-badge-red' : 'border-purple-stroke'
+        } ${className ?? ''}`}
         {...rest}
       />
+
+      {errorMessage && (
+        <span className='text-sm text-badge-red'>{errorMessage}</span>
+      )}
     </label>
   );
 };

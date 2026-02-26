@@ -9,6 +9,7 @@ type AssignmentFormLayoutProps = {
   onConfirm: () => void;
   cancelLabel?: string;
   confirmLabel?: string;
+  confirmDisabled?: boolean;
 };
 
 const AssignmentFormLayout = ({
@@ -19,6 +20,7 @@ const AssignmentFormLayout = ({
   onConfirm,
   cancelLabel = '취소',
   confirmLabel = '저장',
+  confirmDisabled = false,
 }: AssignmentFormLayoutProps) => {
   return (
     <div className='flex flex-col items-center gap-6'>
@@ -39,7 +41,7 @@ const AssignmentFormLayout = ({
           <Button color='outlinePurple' onClick={onCancel}>
             {cancelLabel}
           </Button>
-          <Button color='primary' onClick={onConfirm}>
+          <Button color='primary' onClick={onConfirm} disabled={confirmDisabled}>
             {confirmLabel}
           </Button>
         </div>
