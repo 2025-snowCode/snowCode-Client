@@ -91,3 +91,22 @@ export type CourseOptionsResponse = ApiResponse<{
   count: number;
   courses: DashboardCourse[];
 }>;
+
+// 강의 추가 요청 타입 정의
+export interface CreateCourseRequest {
+  title: string;
+  section: string;
+  year: number;
+  semester: SemesterCode;
+  description: string;
+}
+
+// 강의 추가 응답 타입 정의
+export type CreateCourseResponse = ApiResponse<{
+  id: number;
+  title: string;
+  section: string;
+  year: number;
+  semester: SemesterCode;
+  description: string;
+}>;

@@ -1,1 +1,2 @@
-export {getAllCourses, deleteCourse} from './api/courseApi';
+export {getAllCourses, deleteCourse, createCourse} from './api/courseApi';
+export {useCreateCourseMutation} from './api/useCreateCourseMutation';
