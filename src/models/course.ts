@@ -1,7 +1,8 @@
-import type {Assignment} from '@/entities/assignment/model/types';
-export type {Assignment};
-import type {ApiResponse, SemesterCode} from '@/shared/model/common';
-export type {SemesterCode, SubmissionStatus} from '@/shared/model/common';
+import type {Assignment} from './assignment';
+import type {ApiResponse, SemesterCode} from '../shared/model/common';
+export type {SemesterCode, SubmissionStatus} from '../shared/model/common';
+
+
 
 /**
  * 일정(Schedule) 인터페이스 정의
@@ -92,13 +93,4 @@ export type AssignmentSelectResponse = ApiResponse<{
 export type CourseOptionsResponse = ApiResponse<{
   count: number;
   courses: DashboardCourse[];
-}>;
-
-// 단원 조회-생성 페이지 응답 타입 정의 - 단일 단원
-export type SingleUnitResponse = ApiResponse<Unit>;
-
-// 단원 조회-생성 페이지 응답 타입 정의 - 전체 단원 목록
-export type AllUnitsResponse = ApiResponse<{
-  count: number;
-  units: Pick<Unit, 'id' | 'title' | 'assignmentCount'>[];
 }>;
