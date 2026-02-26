@@ -4,7 +4,7 @@ import NotificationIcon from '@/assets/svg/notificationIcon.svg?react';
 import SignoutIcon from '@/assets/svg/signoutIcon.svg?react';
 import UserIcon from '@/assets/svg/userIcon.svg?react';
 import ChatIcon from '@/assets/svg/chatIcon.svg?react';
-import Button from '@/shared/ui/Button';
+import Button from '@/shared/ui/button/Button';
 import {useUserStore} from '@/entities/auth/model/useUserStore';
 
 interface NavButton {

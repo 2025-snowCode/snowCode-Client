@@ -6,5 +6,5 @@ import type {SubmissionStatus} from '@/shared/model/common';
 export interface Assignment {
   id: number;
   title: string;
-  submittedStatus: SubmissionStatus;
+  submittedStatus?: SubmissionStatus;
 }

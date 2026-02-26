@@ -6,7 +6,7 @@ import {
 } from '@/shared/mocks/assignmentSelectResponse';
 import {useCourseFilter} from '@/features/course/filter-course/lib/useCourseFilter';
 import {AssignmentPageLayout} from '@/widgets/assignment-page-layout';
-import SelectableItem from '@/shared/ui/SelectableItem';
+import ListRow from '@/shared/ui/list-row/ListRow';
 
 const AssignmentSelectPage = () => {
   const {courses} = courseOptionsResponse.response; // /courses/my API 응답 모킹
@@ -41,7 +41,7 @@ const AssignmentSelectPage = () => {
           title={`${assignmentList.length}문제`}
           onSelect={handleAssignmentSelect}
           renderItem={(assignment) => (
-            <SelectableItem
+            <ListRow
               title={assignment.title}
               selected={selectedAssignments.includes(assignment.id)}
             />

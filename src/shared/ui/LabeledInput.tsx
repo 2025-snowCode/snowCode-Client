@@ -21,7 +21,7 @@ const LabeledInput = ({
       </span>
 
       <input
-        className={`h-11 rounded-[9px] border border-purple-stroke px-[14px] outline-none focus:border-primary ${
+        className={`h-11 rounded-[9px] bg-white border border-purple-stroke px-[14px] outline-none focus:border-primary ${
           className ?? ''
         }`}
         {...rest}
