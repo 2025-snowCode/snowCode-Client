@@ -5,10 +5,10 @@ import {AssignmentPageLayout} from '@/widgets/assignment-page-layout';
 import ListRow from '@/shared/ui/list-row/ListRow';
 import {useQuery} from '@tanstack/react-query';
 import {courseQueries} from '@/entities/course/api/courseQueries';
-import {assignmentQueries} from '@/entities/assignment/api/assignmentQueries';
 import useUnitStore from '@/entities/unit/model/useUnitStore';
 import {useLocation, useNavigate} from 'react-router-dom';
 import type {Assignment} from '@/entities/assignment/model/types';
+import {useAssignmentList} from '@/features/assignment/filter-assignmnet/lib/useAssignmentList';
 
 const AssignmentSelectPage = () => {
   const navigate = useNavigate();
@@ -22,21 +22,8 @@ const AssignmentSelectPage = () => {
   const {courseOptions, handleCourseSelect, selectedCourseId} = useCourseFilter(
     courseList?.response.courses ?? []
   );
-  const {data: allAssignments} = useQuery(
-    assignmentQueries.getAllAssignments()
-  );
-  const {data: assignments} = useQuery(
-    assignmentQueries.getAssignmentsByCourse(selectedCourseId ?? 0)
-  );
 
-  const filteredAssignments = assignments?.response.courses.flatMap(
-    (course) => course.assignments
-  );
-
-  // 선택된 강의에 따라 보여줄 과제 목록 결정
-  const assignmentList = selectedCourseId
-    ? (filteredAssignments ?? [])
-    : (allAssignments?.response.assignments ?? []);
+  const assignmentList = useAssignmentList(selectedCourseId);
 
   // 문제 선택 핸들러
   const handleAssignmentSelect = (assignment: Assignment) => {
@@ -48,6 +35,7 @@ const AssignmentSelectPage = () => {
     });
   };
 
+  // 이전 페이지로 돌아가기
   const returnToPreviousPage = () => {
     navigate(location.state?.backPath ?? -1, {
       state: {
@@ -58,6 +46,7 @@ const AssignmentSelectPage = () => {
     });
   };
 
+  // 등록 핸들러
   const handleConfirm = () => {
     setAssignments(selectedAssignments);
     returnToPreviousPage();
