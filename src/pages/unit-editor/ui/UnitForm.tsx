@@ -30,10 +30,14 @@ export const UnitForm = ({
     title: storedTitle,
     releaseDate: storedReleaseDate,
     dueDate: storedDueDate,
-    assignments,
+    assignments: storedAssignments,
   } = useUnitStore();
 
-  const assignmentIds = assignments.map((assignment) => assignment.id);
+  const currentAssignmentList =
+    mode === 'editing' ? (unit?.assignments ?? []) : storedAssignments;
+
+  const assignmentListKey =
+    mode === 'editing' ? `edit-${unit?.id}` : 'creating-assignments';
 
   const {
     register,
@@ -49,7 +53,7 @@ export const UnitForm = ({
             title: storedTitle,
             releaseDate: storedReleaseDate,
             dueDate: storedDueDate,
-            assignmentIds: assignmentIds,
+            assignmentIds: storedAssignments.map((a) => a.id),
           }
         : {
             title: unit?.title || '',
@@ -59,7 +63,7 @@ export const UnitForm = ({
   });
 
   // 단원 생성/업데이트 핸들러
-  const onSubmit = async (data: TUnitFormSchema) => {
+  const onSubmit = (data: TUnitFormSchema) => {
     if (mode === 'editing' && unit) {
       onUpdateUnit(unit.id, data);
       return;
@@ -77,7 +81,7 @@ export const UnitForm = ({
 
   // 단원 편집 취소 핸들러
   const handleCancel = () => {
-    resetStore(); // 폼 데이터 초기화
+    if (mode === 'creating') resetStore();
     reset();
   };
 
@@ -87,9 +91,6 @@ export const UnitForm = ({
     storeFormData(title, releaseDate, dueDate);
     navigate('/admin/assignments/select', {
       state: {
-        mode,
-        unitId: unit?.id ?? null,
-        currentIndex: unitIndex,
         backPath: location.pathname,
       },
     });
@@ -152,10 +153,11 @@ export const UnitForm = ({
             <h4 className='text-base/6 font-medium'>문제 등록</h4>
 
             {/* 드래그 앤 드롭 가능한 문제 리스트 */}
-            {mode === 'editing' && unit && unit.assignmentCount > 0 ? (
-              <UnitAssignmentList assignmentList={unit.assignments} />
-            ) : assignments.length > 0 ? (
-              <UnitAssignmentList assignmentList={assignments} />
+            {currentAssignmentList.length > 0 ? (
+              <UnitAssignmentList
+                key={assignmentListKey}
+                assignmentList={currentAssignmentList}
+              />
             ) : (
               <EmptyState className='mt-4 mb-5'>
                 등록된 문제가 없습니다.
@@ -185,7 +187,7 @@ export const UnitForm = ({
         </Button>
         <Button
           type='submit'
-          formID={`unit-form-${unitIndex}`}
+          form={`unit-form-${unitIndex}`}
           disabled={isSubmitting}>
           저장
         </Button>
