@@ -7,6 +7,11 @@ export const unitQueries = {
     queryOptions({
       queryKey: ['units', courseId],
       queryFn: () => getAllUnitsByCourseId(courseId),
+      select: (data) => ({
+        unitList: data.response.units,
+        unitCount: data.response.count,
+        firstUnitId: data.response.units[0]?.id ?? null,
+      }),
     }),
 
   // 단일 단원 조회 쿼리 옵션
@@ -15,5 +20,8 @@ export const unitQueries = {
       queryKey: ['units', 'detail', unitId],
       queryFn: () => getUnitById(unitId),
       enabled: !!unitId,
+      select: (data) => {
+        return data.response;
+      },
     }),
 };
