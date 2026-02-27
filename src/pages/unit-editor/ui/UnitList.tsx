@@ -8,7 +8,6 @@ interface UnitListProps {
   unitList: AllUnitsResponse['response']['units'] | undefined;
   onUnitClick: (id: number) => void;
   selectedUnitId?: number | null;
-  onChangeIndex: (index: number) => void;
   onAddNewUnit?: () => void;
 }
 
@@ -16,15 +15,11 @@ export const UnitList = ({
   unitList,
   onUnitClick,
   selectedUnitId,
-  onChangeIndex,
+
   onAddNewUnit,
 }: UnitListProps) => {
   const handleSelectUnit = (id: number) => {
     onUnitClick(id);
-
-    // 선택된 단원의 인덱스 찾기
-    const index = unitList?.findIndex((unit) => unit.id === id) ?? 0;
-    onChangeIndex(index + 1);
   };
 
   return (
