@@ -1,17 +1,18 @@
-import type {ApiResponse} from '@/shared/model/common';
-import type {DashboardCourseListResponse} from '@/entities/course/model/types';
+import {z} from 'zod';
 import {privateAxios} from '@/shared/api/axiosInstance';
+import {apiResponseSchema} from '@/shared/model/schemas';
+import {dashboardCourseSchema} from '../model/schemas';
 
 // 전체 강의 목록 조회 API
-export const getAllCourses = async (): Promise<DashboardCourseListResponse> => {
+export const getAllCourses = async () => {
   const response = await privateAxios.get('/courses/my');
-  return response.data;
+  return apiResponseSchema(
+    z.object({count: z.number(), courses: z.array(dashboardCourseSchema)})
+  ).parse(response.data);
 };
 
 // 강의 삭제 API
-export const deleteCourse = async (
-  courseId: number
-): Promise<ApiResponse<string>> => {
+export const deleteCourse = async (courseId: number) => {
   const response = await privateAxios.delete(`/courses/${courseId}`);
-  return response.data;
+  return apiResponseSchema(z.string()).parse(response.data);
 };

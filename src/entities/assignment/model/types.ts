@@ -1,15 +1,4 @@
-import type {SubmissionStatus} from '@/shared/model/common';
+import type {z} from 'zod';
+import type {assignmentSchema} from './schemas';
 
-/**
- * 과제(Assignment) 인터페이스 정의
- */
-export interface Assignment {
-  id: number;
-  title: string;
-  submittedStatus?: SubmissionStatus;
-}
-
-export interface AssignmentsResponse {
-  count: number;
-  assignments: Assignment[];
-}
+export type Assignment = z.infer<typeof assignmentSchema>;

@@ -1,4 +1,18 @@
 import {z} from 'zod';
+import {assignmentSchema} from '@/entities/assignment/model/schemas';
+
+// 단원 도메인 스키마
+export const unitSchema = z.object({
+  id: z.number(),
+  title: z.string(),
+  releaseDate: z.string(),
+  dueDate: z.string(),
+  isOpen: z.boolean().optional(),
+  assignmentCount: z.number(),
+  assignments: z.array(assignmentSchema),
+});
+
+export type Unit = z.infer<typeof unitSchema>;
 
 // 단원 생성/수정 폼 스키마
 export const unitFormSchema = z

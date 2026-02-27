@@ -1,33 +1,16 @@
+import type {z} from 'zod';
 import type {ApiResponse} from '@/shared/model/common';
+import type {
+  progressStatusSchema,
+  studentProgressSchema,
+  studentUnitSchema,
+  studentSchema,
+} from './schemas';
 
-export type ProgressStatus = 'PASSED' | 'NOT_SUBMITTED' | 'PARTIAL' | 'FAILED';
-
-export interface StudentProgress {
-  status: ProgressStatus;
-  assignmentName?: string;
-  score?: number;
-  totalScore?: number;
-  plagiarismRate?: number;
-}
-
-export interface Unit {
-  id: number;
-  name: string;
-  title: string;
-  startDate: string;
-  endDate: string;
-  assignments: StudentProgress[];
-}
-
-export interface Student {
-  id: number;
-  studentId: string;
-  name: string;
-  score: number;
-  totalScore: number;
-  progress: StudentProgress[];
-  units?: Unit[];
-}
+export type ProgressStatus = z.infer<typeof progressStatusSchema>;
+export type StudentProgress = z.infer<typeof studentProgressSchema>;
+export type Unit = z.infer<typeof studentUnitSchema>;
+export type Student = z.infer<typeof studentSchema>;
 
 export type CourseStudentsResponse = ApiResponse<{
   id: number;
