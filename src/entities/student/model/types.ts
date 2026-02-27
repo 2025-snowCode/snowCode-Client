@@ -1,5 +1,5 @@
 import type {z} from 'zod';
-import type {ApiResponse} from '@/shared/model/common';
+import type {ApiResponse} from '@/shared/model/type';
 import type {
   progressStatusSchema,
   studentProgressSchema,

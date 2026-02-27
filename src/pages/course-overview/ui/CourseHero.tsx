@@ -3,7 +3,7 @@ import {formatCourseTerm} from '@/shared/lib/course';
 import CourseActionsBar from './CourseActionsBar';
 import {useUserStore} from '@/entities/auth/model/useUserStore';
 import type {CourseOverview} from '@/entities/course/model/types';
-import type {SemesterCode} from '@/shared/model/common';
+import type {SemesterCode} from '@/shared/model/type';
 
 interface CourseHeroProps {
   courseData: Omit<CourseOverview, 'units'>;
@@ -66,8 +66,8 @@ const CourseInfo = ({title, year, semester, section}: CourseInfoProps) => {
   return (
     <article className='flex-center flex-col text-white'>
       <img src={snowcodeOverviewMini} alt='snowCode logo' />
-      <h1 className='pb-[1px] text-2xl font-medium leading-9'>{title}</h1>
-      <p className='pb-[11px] text-base font-normal leading-6'>
+      <h1 className='pb-px text-2xl font-medium leading-9'>{title}</h1>
+      <p className='pb-2.75 text-base font-normal leading-6'>
         {formatCourseTerm(year, semester, section)}
       </p>
     </article>
