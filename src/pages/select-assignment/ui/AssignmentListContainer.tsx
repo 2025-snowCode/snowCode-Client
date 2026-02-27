@@ -1,11 +1,12 @@
 import type {Assignment} from '@/entities/assignment/model/types';
 import type {AssignmentSelectCourse} from '@/entities/course/model/types';
+import type {MouseEvent, ReactNode} from 'react';
 
 type T = AssignmentSelectCourse['assignments'][number];
 
 interface AssignmentListContainerProps<T> {
   items: T[];
-  renderItem: (item: T) => React.ReactNode;
+  renderItem: (item: T) => ReactNode;
   title: string;
   onSelect?: (item: Assignment) => void;
 }
@@ -16,7 +17,7 @@ const AssignmentListContainer = ({
   renderItem,
   title,
 }: AssignmentListContainerProps<T>) => {
-  const handleSelect = (item: Assignment, event: React.MouseEvent) => {
+  const handleSelect = (item: Assignment, event: MouseEvent) => {
     event.stopPropagation();
     onSelect?.(item);
   };

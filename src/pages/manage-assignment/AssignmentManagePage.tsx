@@ -10,7 +10,7 @@ import {assignmentQueries} from '@/entities/assignment/api/assignmentQueries';
 import AssignmentManageActionsBar from './ui/AssignmentManageActionsBar';
 import AddIcon from '@/assets/svg/addIcon.svg?react';
 import {Link} from 'react-router-dom';
-import {buttonStyles} from '../../shared/ui/button/button-styles';
+import {buttonStyles} from '@/shared/ui/button/button-styles';
 
 const AssignmentManagePage = () => {
   const {data: courseList} = useQuery(courseQueries.getAllCourses());

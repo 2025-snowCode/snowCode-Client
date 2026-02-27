@@ -37,13 +37,7 @@ const AssignmentSelectPage = () => {
 
   // 이전 페이지로 돌아가기
   const returnToPreviousPage = () => {
-    navigate(location.state?.backPath ?? -1, {
-      state: {
-        mode: location.state?.mode,
-        unitId: location.state?.unitId,
-        currentIndex: location.state?.currentIndex,
-      },
-    });
+    navigate(location.state?.backPath ?? -1);
   };
 
   // 등록 핸들러
