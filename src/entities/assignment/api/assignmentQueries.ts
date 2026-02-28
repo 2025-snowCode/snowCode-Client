@@ -11,6 +11,10 @@ export const assignmentQueries = {
     queryOptions({
       queryKey: ['schedules'],
       queryFn: getAssignmentSchedules,
+      select: (data) => ({
+        scheduleCount: data.response.count,
+        schedules: data.response.schedule,
+      }),
     }),
 
   // 전체 과제 목록 조회 쿼리 옵션

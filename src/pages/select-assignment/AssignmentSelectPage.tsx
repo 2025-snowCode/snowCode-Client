@@ -3,7 +3,7 @@ import {useState} from 'react';
 import {useCourseFilter} from '@/features/course/filter-course/lib/useCourseFilter';
 import {AssignmentPageLayout} from '@/widgets/assignment-page-layout';
 import ListRow from '@/shared/ui/list-row/ListRow';
-import {useQuery} from '@tanstack/react-query';
+import {useSuspenseQuery} from '@tanstack/react-query';
 import {courseQueries} from '@/entities/course/api/courseQueries';
 import useUnitStore from '@/entities/unit/model/useUnitStore';
 import {useLocation, useNavigate} from 'react-router-dom';
@@ -13,7 +13,9 @@ import {useAssignmentList} from '@/features/assignment/filter-assignment/lib/use
 const AssignmentSelectPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const {data: courses} = useQuery(courseQueries.getAllCourses());
+  const {
+    data: {courses},
+  } = useSuspenseQuery(courseQueries.getAllCourses());
   const {setAssignments, assignments: currentSelectedAssignments} =
     useUnitStore();
   const [selectedAssignments, setSelectedAssignments] = useState<Assignment[]>(

@@ -2,7 +2,11 @@ import {AssignmentPageLayout} from '@/widgets/assignment-page-layout';
 import AssignmentListContainer from '../select-assignment/ui/AssignmentListContainer';
 import ListRow from '@/shared/ui/list-row/ListRow';
 import {useCourseFilter} from '@/features/course/filter-course';
-import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
+import {
+  useMutation,
+  useQueryClient,
+  useSuspenseQuery,
+} from '@tanstack/react-query';
 import {courseQueries} from '@/entities/course/api/courseQueries';
 import {useAssignmentList} from '@/features/assignment/filter-assignment/lib/useAssignmentList';
 import {assignmentMutations} from '@/entities/assignment/api/assignmentMutations';
@@ -13,7 +17,9 @@ import {Link} from 'react-router-dom';
 import {buttonStyles} from '@/shared/ui/button/button-styles';
 
 const AssignmentManagePage = () => {
-  const {data: courses} = useQuery(courseQueries.getAllCourses());
+  const {
+    data: {courses},
+  } = useSuspenseQuery(courseQueries.getAllCourses());
   const {courseOptions, handleCourseSelect, selectedCourseId} = useCourseFilter(
     courses ?? []
   );
