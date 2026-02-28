@@ -5,35 +5,45 @@ import AddIcon from '@/assets/svg/addIcon.svg?react';
 import ScheduleList from './ui/ScheduleList';
 import {Link} from 'react-router-dom';
 import {useUserStore} from '@/entities/auth/model/useUserStore';
-import courseQueryOptions from '@/entities/course/api/courseQueryOptions';
 import {
   useMutation,
   useQueryClient,
   useSuspenseQueries,
 } from '@tanstack/react-query';
-import assignmentQueryOptions from '@/entities/assignment/api/assignmentQueryOptions';
-import {deleteCourse} from '@/entities/course';
 import {EmptyState} from '@/shared/ui/EmptyState';
+import {courseQueries} from '@/entities/course/api/courseQueries';
+import {courseMutations} from '@/entities/course/api/courseMutations';
+import {assignmentQueries} from '@/entities/assignment/api/assignmentQueries';
 
 const Dashboard = () => {
   const userType = useUserStore((state) => state.userType);
   const queryClient = useQueryClient();
 
   // 강의 및 스케쥴 데이터 패칭
-  const [{data: courses}, {data: schedules}] = useSuspenseQueries({
-    queries: [courseQueryOptions(), assignmentQueryOptions()],
+  const [
+    {
+      data: {courseCount, courses},
+    },
+    {
+      data: {scheduleCount, schedules},
+    },
+  ] = useSuspenseQueries({
+    queries: [
+      courseQueries.getAllCourses(),
+      assignmentQueries.getAssignmentSchedules(),
+    ],
   });
 
-  // 강의 삭제 뮤테이션
+  // 강의 삭제
   const {mutate} = useMutation({
-    mutationFn: (courseId: number) => deleteCourse(courseId),
+    ...courseMutations.deleteCourse,
     onSuccess: () => {
       // 강의 목록 및 스케쥴 목록 갱신
       queryClient.invalidateQueries({
-        queryKey: courseQueryOptions().queryKey,
+        queryKey: courseQueries.getAllCourses().queryKey,
       });
       queryClient.invalidateQueries({
-        queryKey: assignmentQueryOptions().queryKey,
+        queryKey: assignmentQueries.getAssignmentSchedules().queryKey,
       });
       alert('강의가 성공적으로 삭제되었습니다.');
     },
@@ -61,13 +71,10 @@ const Dashboard = () => {
             {userType === 'admin' && <AddButton />}
           </div>
 
-          {courses.response.count === 0 ? (
+          {courseCount === 0 ? (
             <EmptyState>등록된 강의가 없습니다.</EmptyState>
           ) : (
-            <CourseList
-              courseList={courses.response.courses}
-              onDelete={handleDeleteCourse}
-            />
+            <CourseList courseList={courses} onDelete={handleDeleteCourse} />
           )}
         </section>
 
@@ -77,10 +84,10 @@ const Dashboard = () => {
             <SectionHeader title='내 스케쥴' />
           </div>
 
-          {schedules.response.count === 0 ? (
+          {scheduleCount === 0 ? (
             <EmptyState className='pl-24.5'>예정된 과제가 없습니다.</EmptyState>
           ) : (
-            <ScheduleList scheduleList={schedules.response.schedule} />
+            <ScheduleList scheduleList={schedules} />
           )}
         </section>
       </div>
