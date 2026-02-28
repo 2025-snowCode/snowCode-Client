@@ -47,7 +47,7 @@ const AssignmentItem = ({
           </span>
 
           {isOpen ? (
-            <Link to={`/assignments/${index}`} className='min-w-0'>
+            <Link to={`/admin/assignments/${index}`} className='min-w-0'>
               <p className='truncate text-secondary-black text-base font-normal hover:text-primary hover:underline hover:underline-offset-4 cursor-pointer'>
                 {title}
               </p>
@@ -64,7 +64,7 @@ const AssignmentItem = ({
           <div className='shrink-0 ml-2'>
             <Badge
               variant='submission'
-              status={submittedStatus || 'NOT_SUBMITTED'}
+              status={submittedStatus ?? 'NOT_SUBMITTED'}
             />
           </div>
         )}
