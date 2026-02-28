@@ -6,7 +6,7 @@ import type {CourseOverview} from '@/entities/course/model/types';
 import type {SemesterCode} from '@/shared/model/type';
 
 interface CourseHeroProps {
-  courseData: Omit<CourseOverview, 'units'>;
+  course: Omit<CourseOverview, 'units'>;
   assignmentCount: number;
   isActiveCourse: boolean;
 }
@@ -27,18 +27,18 @@ interface CourseStatsProps {
 
 // 강의 상세 페이지 Hero 섹션
 const CourseHero = ({
-  courseData,
+  course,
   assignmentCount,
   isActiveCourse,
 }: CourseHeroProps) => {
   const isAdmin = useUserStore((state) => state.userType) === 'admin';
-  const {title, year, semester, section, unitCount, studentCount} = courseData;
+  const {id, title, year, semester, section, unitCount, studentCount} = course;
 
   return (
     <section className='relative w-full flex-center flex-col pt-38.5 pb-12.5 rounded-t-[30px] bg-radial-gradient'>
       {isAdmin && isActiveCourse && (
         <nav className='absolute top-36 right-35'>
-          <CourseActionsBar isActiveCourse={true} />
+          <CourseActionsBar courseId={id} isActiveCourse={true} />
         </nav>
       )}
 
