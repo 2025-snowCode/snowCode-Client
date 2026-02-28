@@ -1,6 +1,6 @@
 import type {z} from 'zod';
 import type {ApiResponse} from '@/shared/model/type';
-import type {
+import {
   progressStatusSchema,
   studentProgressSchema,
   studentUnitSchema,
