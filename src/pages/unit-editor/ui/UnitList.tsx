@@ -1,11 +1,11 @@
 import ArrowrightIcon from '@/assets/svg/arrowrightIcon.svg?react';
-import type {AllUnitsResponse} from '@/entities/course/model/types';
 import Badge from '@/shared/ui/badge/Badge';
 import Button from '@/shared/ui/button/Button';
 import AddIcon from '@/assets/svg/addIcon.svg?react';
+import type {Unit} from '@/entities/unit/model/types';
 
 interface UnitListProps {
-  unitList: AllUnitsResponse['response']['units'] | undefined;
+  unitList: Pick<Unit, 'id' | 'title' | 'assignmentCount'>[] | undefined;
   onUnitClick: (id: number) => void;
   selectedUnitId?: number | null;
   onAddNewUnit?: () => void;
