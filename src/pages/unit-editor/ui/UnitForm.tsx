@@ -21,6 +21,7 @@ export const UnitForm = ({
   onCreateUnit,
   onUpdateUnit,
   onDeleteUnit,
+  isPending,
 }: UnitFormProps) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -44,7 +45,7 @@ export const UnitForm = ({
     handleSubmit,
     reset,
     getValues,
-    formState: {errors, isSubmitting},
+    formState: {errors},
   } = useForm<TUnitFormSchema>({
     resolver: zodResolver(unitFormSchema),
     values:
@@ -189,7 +190,7 @@ export const UnitForm = ({
         <Button
           type='submit'
           form={`unit-form-${unitIndex}`}
-          disabled={isSubmitting}>
+          disabled={isPending}>
           저장
         </Button>
       </div>

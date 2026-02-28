@@ -63,7 +63,7 @@ const UnitEditorPage = () => {
   };
 
   // 단원 생성
-  const {mutate: addUnit} = useMutation({
+  const {mutate: addUnit, isPending: isCreating} = useMutation({
     ...unitMutations.createUnit,
     onSuccess: (data) => {
       // 단원 목록 갱신
@@ -80,7 +80,7 @@ const UnitEditorPage = () => {
   });
 
   // 단원 업데이트
-  const {mutate: updateUnit} = useMutation({
+  const {mutate: updateUnit, isPending: isUpdating} = useMutation({
     ...unitMutations.updateUnit,
     onSuccess: () => {
       invalidateUnitList();
@@ -162,6 +162,7 @@ const UnitEditorPage = () => {
           onCreateUnit={onCreateUnit}
           onUpdateUnit={onUpdateUnit}
           onDeleteUnit={onDeleteUnit}
+          isPending={isCreating || isUpdating}
         />
       </SurfaceCard>
     </div>
