@@ -22,9 +22,8 @@ const AssignmentManagePage = () => {
   const {
     data: {courses},
   } = useSuspenseQuery(courseQueries.getAllCourses());
-  const {courseOptions, handleCourseSelect, selectedCourseId} = useCourseFilter(
-    courses ?? []
-  );
+  const {courseOptions, handleCourseSelect, selectedCourseId} =
+    useCourseFilter(courses);
   const assignmentList = useAssignmentList(selectedCourseId);
   const queryClient = useQueryClient();
 

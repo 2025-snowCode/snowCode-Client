@@ -20,11 +20,10 @@ const AssignmentSelectPage = () => {
   const {setAssignments, assignments: currentSelectedAssignments} =
     useUnitStore();
   const [selectedAssignments, setSelectedAssignments] = useState<Assignment[]>(
-    currentSelectedAssignments ?? []
+    currentSelectedAssignments
   );
-  const {courseOptions, handleCourseSelect, selectedCourseId} = useCourseFilter(
-    courses ?? []
-  );
+  const {courseOptions, handleCourseSelect, selectedCourseId} =
+    useCourseFilter(courses);
 
   const assignmentList = useAssignmentList(selectedCourseId);
 
@@ -70,11 +69,7 @@ const AssignmentSelectPage = () => {
       }
       buttons={
         <div className='flex gap-5'>
-          <Button
-            color='outlinePurple'
-            onClick={() => {
-              returnToPreviousPage();
-            }}>
+          <Button color='outlinePurple' onClick={() => returnToPreviousPage()}>
             취소
           </Button>
           <Button color='primary' onClick={handleConfirm}>
