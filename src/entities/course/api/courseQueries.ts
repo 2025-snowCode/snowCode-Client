@@ -7,5 +7,9 @@ export const courseQueries = {
     queryOptions({
       queryKey: ['courses'],
       queryFn: getAllCourses,
+      select: (data) => ({
+        courseCount: data.response.count,
+        courses: data.response.courses,
+      }),
     }),
 };

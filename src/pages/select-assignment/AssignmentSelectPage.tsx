@@ -3,25 +3,27 @@ import {useState} from 'react';
 import {useCourseFilter} from '@/features/course/filter-course/lib/useCourseFilter';
 import {AssignmentPageLayout} from '@/widgets/assignment-page-layout';
 import ListRow from '@/shared/ui/list-row/ListRow';
-import {useQuery} from '@tanstack/react-query';
+import {useSuspenseQuery} from '@tanstack/react-query';
 import {courseQueries} from '@/entities/course/api/courseQueries';
 import useUnitStore from '@/entities/unit/model/useUnitStore';
 import {useLocation, useNavigate} from 'react-router-dom';
 import type {Assignment} from '@/entities/assignment/model/types';
-import {useAssignmentList} from '@/features/assignment/filter-assignmnet/lib/useAssignmentList';
+import {useAssignmentList} from '@/features/assignment/filter-assignment/lib/useAssignmentList';
+import Button from '@/shared/ui/button/Button';
 
 const AssignmentSelectPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const {data: courseList} = useQuery(courseQueries.getAllCourses());
+  const {
+    data: {courses},
+  } = useSuspenseQuery(courseQueries.getAllCourses());
   const {setAssignments, assignments: currentSelectedAssignments} =
     useUnitStore();
   const [selectedAssignments, setSelectedAssignments] = useState<Assignment[]>(
-    currentSelectedAssignments ?? []
+    currentSelectedAssignments
   );
-  const {courseOptions, handleCourseSelect, selectedCourseId} = useCourseFilter(
-    courseList?.response.courses ?? []
-  );
+  const {courseOptions, handleCourseSelect, selectedCourseId} =
+    useCourseFilter(courses);
 
   const assignmentList = useAssignmentList(selectedCourseId);
 
@@ -60,14 +62,21 @@ const AssignmentSelectPage = () => {
             <ListRow
               title={assignment.title}
               selected={selectedAssignments.some((a) => a.id === assignment.id)}
+              className='cursor-pointer'
             />
           )}
         />
       }
-      onCancel={() => {
-        returnToPreviousPage();
-      }}
-      onConfirm={handleConfirm}
+      buttons={
+        <div className='flex gap-5'>
+          <Button color='outlinePurple' onClick={() => returnToPreviousPage()}>
+            취소
+          </Button>
+          <Button color='primary' onClick={handleConfirm}>
+            등록
+          </Button>
+        </div>
+      }
     />
   );
 };

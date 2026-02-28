@@ -15,13 +15,8 @@ export const UnitList = ({
   unitList,
   onUnitClick,
   selectedUnitId,
-
   onAddNewUnit,
 }: UnitListProps) => {
-  const handleSelectUnit = (id: number) => {
-    onUnitClick(id);
-  };
-
   return (
     <div className='flex flex-col h-full'>
       {/* 단원 리스트 헤더 */}
@@ -32,7 +27,7 @@ export const UnitList = ({
         {/* 단원 아이템 */}
         {unitList?.map(({id, title, assignmentCount}) => (
           <li
-            onClick={() => handleSelectUnit(id)}
+            onClick={() => onUnitClick(id)}
             key={id}
             className={`flex flex-col py-5 px-12 gap-2.5 cursor-pointer ${selectedUnitId === id ? 'bg-background' : ''}`}>
             {/* 과제 수 배지 */}

@@ -1,23 +1,21 @@
 import SurfaceCard from '@/shared/ui/SurfaceCard';
-import Button from '@/shared/ui/button/Button';
 import {CourseSelector} from '@/features/course/filter-course';
+import type {ReactNode} from 'react';
 
 interface AssignmentPageLayoutProps {
   title: string;
-  list: React.ReactNode;
+  list: ReactNode;
+  buttons: ReactNode;
   courseOptions: string[];
   onCourseSelect: (value: string) => void;
-  onCancel: () => void;
-  onConfirm: () => void;
 }
 
 export const AssignmentPageLayout = ({
   title,
   list,
+  buttons,
   courseOptions,
   onCourseSelect,
-  onCancel,
-  onConfirm,
 }: AssignmentPageLayoutProps) => {
   return (
     <SurfaceCard size='large' className='mx-auto flex flex-col *:px-14.5'>
@@ -31,14 +29,7 @@ export const AssignmentPageLayout = ({
       <section className='pt-10'>{list}</section>
 
       {/* 하단 버튼 영역 */}
-      <div className='mb-8.5 mt-auto flex justify-end gap-5'>
-        <Button color='outlinePurple' onClick={onCancel}>
-          취소
-        </Button>
-        <Button color='primary' onClick={onConfirm}>
-          등록
-        </Button>
-      </div>
+      <div className='mb-8.5 mt-auto flex justify-end'>{buttons}</div>
     </SurfaceCard>
   );
 };

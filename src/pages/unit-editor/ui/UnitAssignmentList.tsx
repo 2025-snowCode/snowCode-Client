@@ -2,7 +2,6 @@ import ListRow from '@/shared/ui/list-row/ListRow';
 import type {Assignment} from '@/entities/assignment/model/types';
 import {useState} from 'react';
 import DragAndDropIcon from '@/assets/svg/dragAndDropIcon.svg?react';
-import DeleteIcon from '@/assets/svg/deleteIcon.svg?react';
 import {
   closestCorners,
   DndContext,
@@ -95,7 +94,6 @@ const DraggableAssignmentItem = ({id, title}: Assignment) => {
       <ListRow
         title={title}
         leftIcon={<DragAndDropIcon />}
-        rightIcon={<DeleteIcon className='w-3 h-3' />}
         className={`cursor-grab touch-none bg-white shadow-box active:cursor-grabbing ${isDragging ? 'z-10 opacity-50' : ''}`}
       />
     </li>

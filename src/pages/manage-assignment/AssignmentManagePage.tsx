@@ -2,21 +2,28 @@ import {AssignmentPageLayout} from '@/widgets/assignment-page-layout';
 import AssignmentListContainer from '../select-assignment/ui/AssignmentListContainer';
 import ListRow from '@/shared/ui/list-row/ListRow';
 import {useCourseFilter} from '@/features/course/filter-course';
-import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
+import {
+  useMutation,
+  useQueryClient,
+  useSuspenseQuery,
+} from '@tanstack/react-query';
 import {courseQueries} from '@/entities/course/api/courseQueries';
-import {useAssignmentList} from '@/features/assignment/filter-assignmnet/lib/useAssignmentList';
+import {useAssignmentList} from '@/features/assignment/filter-assignment/lib/useAssignmentList';
 import {assignmentMutations} from '@/entities/assignment/api/assignmentMutations';
 import {assignmentQueries} from '@/entities/assignment/api/assignmentQueries';
 import AssignmentManageActionsBar from './ui/AssignmentManageActionsBar';
 import AddIcon from '@/assets/svg/addIcon.svg?react';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {buttonStyles} from '@/shared/ui/button/button-styles';
+import Button from '@/shared/ui/button/Button';
 
 const AssignmentManagePage = () => {
-  const {data: courseList} = useQuery(courseQueries.getAllCourses());
-  const {courseOptions, handleCourseSelect, selectedCourseId} = useCourseFilter(
-    courseList?.response.courses ?? []
-  );
+  const navigate = useNavigate();
+  const {
+    data: {courses},
+  } = useSuspenseQuery(courseQueries.getAllCourses());
+  const {courseOptions, handleCourseSelect, selectedCourseId} =
+    useCourseFilter(courses);
   const assignmentList = useAssignmentList(selectedCourseId);
   const queryClient = useQueryClient();
 
@@ -85,8 +92,15 @@ const AssignmentManagePage = () => {
           </Link>
         </>
       }
-      onCancel={() => {}}
-      onConfirm={() => {}}
+      buttons={
+        <Button
+          color='primary'
+          onClick={() => {
+            navigate(-1);
+          }}>
+          나가기
+        </Button>
+      }
     />
   );
 };
