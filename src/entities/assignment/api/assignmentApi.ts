@@ -2,7 +2,7 @@ import {z} from 'zod';
 import {privateAxios} from '@/shared/api/axiosInstance';
 import {apiResponseSchema} from '@/shared/model/schemas';
 import {assignmentScheduleSchema} from '../model/schemas';
-import {assignmentSelectCourseSchema} from '@/entities/course/model/schemas';
+import {assignmentCourseSchema} from '@/entities/course/model/schemas';
 
 // 과제 일정 조회 API
 export const getAssignmentSchedules = async () => {
@@ -33,7 +33,7 @@ export const getAssignmentsByCourse = async (courseId: number) => {
   return apiResponseSchema(
     z.object({
       count: z.number(),
-      courses: z.array(assignmentSelectCourseSchema),
+      courses: z.array(assignmentCourseSchema),
     })
   ).parse(response.data);
 };

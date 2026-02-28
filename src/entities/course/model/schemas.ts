@@ -1,7 +1,10 @@
 import {z} from 'zod';
 import {semesterCodeSchema} from '@/shared/model/schemas';
-import {assignmentSchema, assignmentScheduleSchema} from '@/entities/assignment/model/schemas';
-import {unitSchema} from '@/entities/unit/model/types';
+import {
+  assignmentSchema,
+  assignmentScheduleSchema,
+} from '@/entities/assignment/model/schemas';
+import {unitSchema} from '@/entities/unit/model/schemas';
 
 export const courseOverviewSchema = z.object({
   id: z.number(),
@@ -25,7 +28,7 @@ export const dashboardCourseSchema = z.object({
   assignmentCount: z.number(),
 });
 
-export const assignmentSelectCourseSchema = z.object({
+export const assignmentCourseSchema = z.object({
   id: z.number(),
   title: z.string(),
   year: z.number(),

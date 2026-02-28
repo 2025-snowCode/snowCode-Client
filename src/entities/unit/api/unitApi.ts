@@ -1,7 +1,8 @@
 import {z} from 'zod';
 import {privateAxios} from '@/shared/api/axiosInstance';
 import {apiResponseSchema} from '@/shared/model/schemas';
-import {unitSchema, type TUnitFormSchema} from '../model/types';
+import {type TUnitFormSchema} from '../model/types';
+import {unitSchema} from '../model/schemas';
 
 // 강의별 전체 단원 조회
 export const getAllUnitsByCourseId = async (courseId: number) => {

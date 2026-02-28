@@ -7,12 +7,10 @@ import {zodResolver} from '@hookform/resolvers/zod';
 import {type UnitFormProps} from '../model/types';
 import AddIcon from '@/assets/svg/addIcon.svg?react';
 import {EmptyState} from '@/shared/ui/EmptyState';
-import {
-  unitFormSchema,
-  type TUnitFormSchema,
-} from '@/entities/unit/model/types';
 import {useLocation, useNavigate} from 'react-router-dom';
 import useUnitStore from '@/entities/unit/model/useUnitStore';
+import {unitFormSchema} from '@/entities/unit/model/schemas';
+import type {TUnitFormSchema} from '@/entities/unit/model/types';
 
 export const UnitForm = ({
   unit,
