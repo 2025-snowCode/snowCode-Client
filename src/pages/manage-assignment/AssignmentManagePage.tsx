@@ -13,9 +13,9 @@ import {Link} from 'react-router-dom';
 import {buttonStyles} from '@/shared/ui/button/button-styles';
 
 const AssignmentManagePage = () => {
-  const {data: courseList} = useQuery(courseQueries.getAllCourses());
+  const {data: courses} = useQuery(courseQueries.getAllCourses());
   const {courseOptions, handleCourseSelect, selectedCourseId} = useCourseFilter(
-    courseList?.response.courses ?? []
+    courses ?? []
   );
   const assignmentList = useAssignmentList(selectedCourseId);
   const queryClient = useQueryClient();

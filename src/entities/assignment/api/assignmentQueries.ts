@@ -18,6 +18,7 @@ export const assignmentQueries = {
     queryOptions({
       queryKey: ['assignments'],
       queryFn: getAllAssignments,
+      select: (data) => data.response.assignments,
     }),
 
   // 강의별 과제 목록 조회 쿼리 옵션
@@ -25,6 +26,8 @@ export const assignmentQueries = {
     queryOptions({
       queryKey: ['courses', courseId, 'assignments'],
       queryFn: () => getAssignmentsByCourse(courseId),
-      enabled: !!courseId, // courseId가 있을 때만 쿼리 실행
+      enabled: !!courseId,
+      select: (data) =>
+        data.response.courses.flatMap((course) => course.assignments),
     }),
 };

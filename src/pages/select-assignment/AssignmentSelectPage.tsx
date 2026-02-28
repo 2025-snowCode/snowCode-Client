@@ -13,14 +13,14 @@ import {useAssignmentList} from '@/features/assignment/filter-assignment/lib/use
 const AssignmentSelectPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const {data: courseList} = useQuery(courseQueries.getAllCourses());
+  const {data: courses} = useQuery(courseQueries.getAllCourses());
   const {setAssignments, assignments: currentSelectedAssignments} =
     useUnitStore();
   const [selectedAssignments, setSelectedAssignments] = useState<Assignment[]>(
     currentSelectedAssignments ?? []
   );
   const {courseOptions, handleCourseSelect, selectedCourseId} = useCourseFilter(
-    courseList?.response.courses ?? []
+    courses ?? []
   );
 
   const assignmentList = useAssignmentList(selectedCourseId);
