@@ -9,6 +9,7 @@ import useUnitStore from '@/entities/unit/model/useUnitStore';
 import {useLocation, useNavigate} from 'react-router-dom';
 import type {Assignment} from '@/entities/assignment/model/types';
 import {useAssignmentList} from '@/features/assignment/filter-assignment/lib/useAssignmentList';
+import Button from '@/shared/ui/button/Button';
 
 const AssignmentSelectPage = () => {
   const navigate = useNavigate();
@@ -67,10 +68,20 @@ const AssignmentSelectPage = () => {
           )}
         />
       }
-      onCancel={() => {
-        returnToPreviousPage();
-      }}
-      onConfirm={handleConfirm}
+      buttons={
+        <div className='flex gap-5'>
+          <Button
+            color='outlinePurple'
+            onClick={() => {
+              returnToPreviousPage();
+            }}>
+            취소
+          </Button>
+          <Button color='primary' onClick={handleConfirm}>
+            등록
+          </Button>
+        </div>
+      }
     />
   );
 };

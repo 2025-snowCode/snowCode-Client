@@ -13,10 +13,12 @@ import {assignmentMutations} from '@/entities/assignment/api/assignmentMutations
 import {assignmentQueries} from '@/entities/assignment/api/assignmentQueries';
 import AssignmentManageActionsBar from './ui/AssignmentManageActionsBar';
 import AddIcon from '@/assets/svg/addIcon.svg?react';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {buttonStyles} from '@/shared/ui/button/button-styles';
+import Button from '@/shared/ui/button/Button';
 
 const AssignmentManagePage = () => {
+  const navigate = useNavigate();
   const {
     data: {courses},
   } = useSuspenseQuery(courseQueries.getAllCourses());
@@ -91,8 +93,15 @@ const AssignmentManagePage = () => {
           </Link>
         </>
       }
-      onCancel={() => {}}
-      onConfirm={() => {}}
+      buttons={
+        <Button
+          color='primary'
+          onClick={() => {
+            navigate(-1);
+          }}>
+          나가기
+        </Button>
+      }
     />
   );
 };
