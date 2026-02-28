@@ -1,8 +1,8 @@
 import type {Assignment} from '@/entities/assignment/model/types';
-import type {AssignmentSelectCourse} from '@/entities/course/model/types';
+import type {AssignmentCourse} from '@/entities/course/model/types';
 import type {MouseEvent, ReactNode} from 'react';
 
-type T = AssignmentSelectCourse['assignments'][number];
+type T = AssignmentCourse['assignments'][number];
 
 interface AssignmentListContainerProps<T> {
   items: T[];

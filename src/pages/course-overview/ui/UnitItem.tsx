@@ -2,7 +2,7 @@ import AssignmentList from './AssignmentList';
 import Lock from '@/assets/svg/lock.svg?react';
 import Badge from '@/shared/ui/badge/Badge';
 import {formatPeriod} from '@/shared/lib/course';
-import type {Unit} from '@/entities/course/model/types';
+import type {Unit} from '@/entities/unit/model/types';
 
 interface UnitProps extends Unit {
   index: number;
