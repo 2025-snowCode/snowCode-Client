@@ -165,17 +165,18 @@ export const UnitForm = ({
             )}
 
             {/* 문제 연결 버튼 */}
-            <div className='mt-3.5'>
-              <Button
-                onClick={handleAssignmentSelect}
-                color='tonal'
-                size='compact'
-                content='mixed'
-                disabled={mode === 'editing'}>
-                <AddIcon className='w-3 h-3' />
-                문제 연결
-              </Button>
-            </div>
+            {mode === 'creating' && (
+              <div className='mt-3.5'>
+                <Button
+                  onClick={handleAssignmentSelect}
+                  color='tonal'
+                  size='compact'
+                  content='mixed'>
+                  <AddIcon className='w-3 h-3' />
+                  문제 연결
+                </Button>
+              </div>
+            )}
           </section>
         </div>
       </form>
