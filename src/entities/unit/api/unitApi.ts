@@ -9,13 +9,15 @@ export const getAllUnitsByCourseId = async (courseId: number) => {
   return apiResponseSchema(
     z.object({
       count: z.number(),
-      units: z.array(unitSchema.pick({id: true, title: true, assignmentCount: true})),
+      units: z.array(
+        unitSchema.pick({id: true, title: true, assignmentCount: true})
+      ),
     })
   ).parse(response.data);
 };
 
 // 단일 단원 조회
-export const getUnitById = async (unitId: number | null) => {
+export const getUnitById = async (unitId: number) => {
   const response = await privateAxios.get(`/units/${unitId}`);
   return apiResponseSchema(unitSchema).parse(response.data);
 };
