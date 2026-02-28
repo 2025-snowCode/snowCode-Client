@@ -12,7 +12,7 @@ const Layout = () => {
     <div className='min-h-screen overflow-x-hidden flex justify-center'>
       <div className='min-w-289 px-4 py-12'>
         {showHeader && (
-          <div className='w-289 pb-8 mx-auto'>
+          <div className='w-289 pb-8 mx-auto relative z-10'>
             <Header />
           </div>
         )}
