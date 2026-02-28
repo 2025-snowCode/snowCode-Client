@@ -8,7 +8,7 @@ import {courseQueries} from '@/entities/course/api/courseQueries';
 import useUnitStore from '@/entities/unit/model/useUnitStore';
 import {useLocation, useNavigate} from 'react-router-dom';
 import type {Assignment} from '@/entities/assignment/model/types';
-import {useAssignmentList} from '@/features/assignment/filter-assignmnet/lib/useAssignmentList';
+import {useAssignmentList} from '@/features/assignment/filter-assignment/lib/useAssignmentList';
 
 const AssignmentSelectPage = () => {
   const navigate = useNavigate();
@@ -60,6 +60,7 @@ const AssignmentSelectPage = () => {
             <ListRow
               title={assignment.title}
               selected={selectedAssignments.some((a) => a.id === assignment.id)}
+              className='cursor-pointer'
             />
           )}
         />

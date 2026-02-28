@@ -4,7 +4,7 @@ import ListRow from '@/shared/ui/list-row/ListRow';
 import {useCourseFilter} from '@/features/course/filter-course';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import {courseQueries} from '@/entities/course/api/courseQueries';
-import {useAssignmentList} from '@/features/assignment/filter-assignmnet/lib/useAssignmentList';
+import {useAssignmentList} from '@/features/assignment/filter-assignment/lib/useAssignmentList';
 import {assignmentMutations} from '@/entities/assignment/api/assignmentMutations';
 import {assignmentQueries} from '@/entities/assignment/api/assignmentQueries';
 import AssignmentManageActionsBar from './ui/AssignmentManageActionsBar';

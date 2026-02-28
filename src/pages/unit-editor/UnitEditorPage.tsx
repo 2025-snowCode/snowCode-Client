@@ -19,6 +19,8 @@ const UnitEditorPage = () => {
     resetStore,
     title: storedTitle,
     assignments: storedAssignments,
+    releaseDate: storedReleaseDate,
+    dueDate: storedDueDate,
   } = useUnitStore();
   const {data} = useQuery(unitQueries.getUnitList(courseId));
   const initialMode =
@@ -27,7 +29,12 @@ const UnitEditorPage = () => {
   const [activeMode, setActiveMode] = useState<Mode | null>(null);
   const [selectedUnitId, setSelectedUnitId] = useState<number | null>(null);
 
-  const hasOngoingCreation = storedTitle !== '' || storedAssignments.length > 0;
+  const hasOngoingCreation =
+    storedTitle !== '' ||
+    storedReleaseDate !== '' ||
+    storedDueDate !== '' ||
+    storedAssignments.length > 0;
+
   const currentMode: Mode | null =
     activeMode ?? (hasOngoingCreation ? 'creating' : initialMode);
   const currentUnitId =
