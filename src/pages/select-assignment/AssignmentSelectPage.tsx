@@ -1,4 +1,4 @@
-import AssignmentListContainer from './ui/AssignmentListContainer';
+import AssignmentListContainer from '../../entities/assignment/ui/AssignmentListContainer';
 import {useState} from 'react';
 import {useCourseFilter} from '@/features/course/filter-course/lib/useCourseFilter';
 import {AssignmentPageLayout} from '@/widgets/assignment-page-layout';

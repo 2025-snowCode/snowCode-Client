@@ -1,5 +1,5 @@
 import {AssignmentPageLayout} from '@/widgets/assignment-page-layout';
-import AssignmentListContainer from '../select-assignment/ui/AssignmentListContainer';
+import AssignmentListContainer from '../../entities/assignment/ui/AssignmentListContainer';
 import ListRow from '@/shared/ui/list-row/ListRow';
 import {useCourseFilter} from '@/features/course/filter-course';
 import {
