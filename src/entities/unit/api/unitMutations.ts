@@ -5,8 +5,13 @@ export const unitMutations = {
   // 단원 추가 뮤테이션 옵션
   createUnit: {
     mutationKey: ['createUnit'],
-    mutationFn: ({courseId, unit}: {courseId: number; unit: TUnitFormSchema}) =>
-      createUnit(courseId, unit),
+    mutationFn: ({
+      courseId,
+      unitForm,
+    }: {
+      courseId: number;
+      unitForm: TUnitFormSchema;
+    }) => createUnit(courseId, unitForm),
   },
 
   // 단원 수정 뮤테이션 옵션

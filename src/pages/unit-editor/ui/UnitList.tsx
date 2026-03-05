@@ -8,7 +8,6 @@ interface UnitListProps {
   unitList: AllUnitsResponse['response']['units'] | undefined;
   onUnitClick: (id: number) => void;
   selectedUnitId?: number | null;
-  onChangeIndex: (index: number) => void;
   onAddNewUnit?: () => void;
 }
 
@@ -16,17 +15,8 @@ export const UnitList = ({
   unitList,
   onUnitClick,
   selectedUnitId,
-  onChangeIndex,
   onAddNewUnit,
 }: UnitListProps) => {
-  const handleSelectUnit = (id: number) => {
-    onUnitClick(id);
-
-    // 선택된 단원의 인덱스 찾기
-    const index = unitList?.findIndex((unit) => unit.id === id) ?? 0;
-    onChangeIndex(index + 1);
-  };
-
   return (
     <div className='flex flex-col h-full'>
       {/* 단원 리스트 헤더 */}
@@ -37,7 +27,7 @@ export const UnitList = ({
         {/* 단원 아이템 */}
         {unitList?.map(({id, title, assignmentCount}) => (
           <li
-            onClick={() => handleSelectUnit(id)}
+            onClick={() => onUnitClick(id)}
             key={id}
             className={`flex flex-col py-5 px-12 gap-2.5 cursor-pointer ${selectedUnitId === id ? 'bg-background' : ''}`}>
             {/* 과제 수 배지 */}

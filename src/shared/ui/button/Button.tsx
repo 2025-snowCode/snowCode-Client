@@ -6,7 +6,7 @@ interface ButtonProps extends ButtonVariants {
   className?: string;
   type?: 'button' | 'submit';
   disabled?: boolean;
-  formID?: string;
+  form?: string;
   onClick?: () => void;
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
@@ -17,7 +17,7 @@ const Button = ({
   onClick,
   type = 'button',
   disabled = false,
-  formID,
+  form,
   className,
   ...props
 }: ButtonProps) => {
@@ -26,7 +26,7 @@ const Button = ({
       type={type}
       onClick={onClick}
       disabled={disabled}
-      form={formID}
+      form={form}
       className={twMerge(buttonStyles(props), className)}>
       {children}
     </button>

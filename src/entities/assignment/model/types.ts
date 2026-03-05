@@ -8,3 +8,8 @@ export interface Assignment {
   title: string;
   submittedStatus?: SubmissionStatus;
 }
+
+export interface AssignmentsResponse {
+  count: number;
+  assignments: Assignment[];
+}
