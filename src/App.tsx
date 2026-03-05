@@ -6,7 +6,7 @@ import Dashboard from '@/pages/dashboard/Dashboard';
 import AssignmentSelectPage from '@/pages/select-assignment/AssignmentSelectPage';
 import CourseOverviewPage from '@/pages/course-overview/CourseOverviewPage';
 import AssignmentCreatePage from '@/pages/admin/assignments/AssignmentCreatePage';
-import CourseCreatePage from '@/pages/admin/courses/CourseCreatePage';
+import {CourseCreatePage} from '@/pages/admin/courses/CourseCreatePage';
 import StudentManagementPage from '@/pages/admin/student/StudentManagementPage';
 import StudentProfilePage from '@/pages/admin/student/StudentProfilePage';
 import KakaoCallbackPage from '@/pages/common/KakaoCallbackPage';
