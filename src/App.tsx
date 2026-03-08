@@ -14,6 +14,7 @@ import PrivateRoute from '@/widgets/private-route/ui/PrivateRoute';
 import {useSyncUserRole} from '@/features/auth/sync-user-role/model/useSyncUserRole';
 import UnitEditorPage from '@/pages/unit-editor/UnitEditorPage';
 import AssignmentManagePage from '@/pages/manage-assignment/AssignmentManagePage';
+import AssignmentSubmitPage from '@/pages/submit-assignment/AssignmentSubmitPage';
 
 const AppRoutes = () => {
   useSyncUserRole();
@@ -50,6 +51,7 @@ const AppRoutes = () => {
               path='assignments/select'
               element={<AssignmentSelectPage />}
             />
+            <Route path='assignments/:id' element={<AssignmentSubmitPage />} />
             <Route path='courses/:id' element={<CourseOverviewPage />} />
             <Route path='courses/create' element={<CourseCreatePage />} />
             <Route path='student' element={<StudentManagementPage />} />
