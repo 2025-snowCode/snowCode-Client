@@ -10,7 +10,7 @@ import {EmptyState} from '@/shared/ui/EmptyState';
 import {useLocation, useNavigate} from 'react-router-dom';
 import useUnitStore from '@/entities/unit/model/useUnitStore';
 import {unitFormSchema} from '@/entities/unit/model/schemas';
-import type {TUnitFormSchema} from '@/entities/unit/model/types';
+import type {TUnitFormSchema} from '@/entities/unit/model/schemas';
 
 export const UnitForm = ({
   unit,

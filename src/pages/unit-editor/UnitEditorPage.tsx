@@ -6,7 +6,7 @@ import {useParams} from 'react-router-dom';
 import {useState} from 'react';
 import type {Mode} from './model/types';
 import {unitMutations} from '@/entities/unit/api/unitMutations';
-import type {TUnitFormSchema} from '@/entities/unit/model/types';
+import type {TUnitFormSchema} from '@/entities/unit/model/schemas';
 import {EmptyState} from '@/shared/ui/EmptyState';
 import SurfaceCard from '@/shared/ui/SurfaceCard';
 import useUnitStore from '@/entities/unit/model/useUnitStore';

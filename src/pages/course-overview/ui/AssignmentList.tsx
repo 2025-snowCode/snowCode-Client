@@ -1,13 +1,13 @@
 import Badge from '@/shared/ui/badge/Badge';
 import {Link} from 'react-router-dom';
-import type {Assignment} from '@/entities/assignment/model/types';
+import type {TAssignment} from '@/entities/assignment/model/schemas';
 
 interface AssignmentListProps {
   isOpen?: boolean;
-  assignments: Assignment[];
+  assignments: TAssignment[];
 }
 
-interface AssignmentItemProps extends Assignment {
+interface AssignmentItemProps extends TAssignment {
   index: number;
   isOpen?: boolean;
 }

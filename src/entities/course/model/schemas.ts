@@ -1,9 +1,6 @@
 import {z} from 'zod';
 import {semesterCodeSchema} from '@/shared/model/schemas';
-import {
-  assignmentSchema,
-  assignmentScheduleSchema,
-} from '@/entities/assignment/model/schemas';
+import {assignmentSchema} from '@/entities/assignment/model/schemas';
 import {unitSchema} from '@/entities/unit/model/schemas';
 
 export const courseOverviewSchema = z.object({
@@ -38,4 +35,6 @@ export const assignmentCourseSchema = z.object({
   assignments: z.array(assignmentSchema.pick({id: true, title: true})),
 });
 
-export {assignmentScheduleSchema as scheduleSchema};
+export type TCourseOverview = z.infer<typeof courseOverviewSchema>;
+export type TDashboardCourse = z.infer<typeof dashboardCourseSchema>;
+export type TAssignmentCourse = z.infer<typeof assignmentCourseSchema>;

@@ -1,5 +1,5 @@
 import {publicAxios} from '@/shared/api/axiosInstance';
-import type {UserType} from '@/shared/model/type';
+import type {UserType} from '@/shared/model/types';
 import {kakaoLoginResponseSchema} from '../model/schemas';
 
 export const kakaoLogin = async (

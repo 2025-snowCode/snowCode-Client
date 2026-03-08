@@ -1,6 +1,6 @@
 import {create} from 'zustand';
 import {persist} from 'zustand/middleware';
-import type {UserType} from '@/shared/model/type';
+import type {UserType} from '@/shared/model/types';
 
 type AuthenticatedUserType = Exclude<UserType, 'guest'>;
 

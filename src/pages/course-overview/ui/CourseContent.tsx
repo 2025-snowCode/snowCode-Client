@@ -2,10 +2,10 @@ import snowCodeOverview from '@/assets/images/snowcode_overview.svg';
 import UnitItem from './UnitItem';
 import CourseActionsBar from './CourseActionsBar';
 import {useUserStore} from '@/entities/auth/model/useUserStore';
-import type {CourseOverview} from '@/entities/course/model/types';
+import type {TCourseOverview} from '@/entities/course/model/schemas';
 
 interface CourseContentProps {
-  units: CourseOverview['units'];
+  units: TCourseOverview['units'];
   isActiveCourse: boolean;
 }
 
