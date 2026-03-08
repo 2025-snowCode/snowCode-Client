@@ -1,2 +1,2 @@
-export type {ApiResponse, UserType} from './type';
+export type {ApiResponse, UserType} from './types';
 export {apiResponseSchema} from './schemas';

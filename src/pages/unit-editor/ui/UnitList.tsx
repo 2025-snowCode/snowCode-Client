@@ -2,10 +2,10 @@ import ArrowrightIcon from '@/assets/svg/arrowrightIcon.svg?react';
 import Badge from '@/shared/ui/badge/Badge';
 import Button from '@/shared/ui/button/Button';
 import AddIcon from '@/assets/svg/addIcon.svg?react';
-import type {Unit} from '@/entities/unit/model/types';
+import type {TUnit} from '@/entities/unit/model/schemas';
 
 interface UnitListProps {
-  unitList: Pick<Unit, 'id' | 'title' | 'assignmentCount'>[] | undefined;
+  unitList: Pick<TUnit, 'id' | 'title' | 'assignmentCount'>[] | undefined;
   onUnitClick: (id: number) => void;
   selectedUnitId?: number | null;
   onAddNewUnit?: () => void;

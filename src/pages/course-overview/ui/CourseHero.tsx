@@ -3,7 +3,7 @@ import {formatCourseTerm} from '@/shared/lib/course';
 import CourseActionsBar from './CourseActionsBar';
 import {useUserStore} from '@/entities/auth/model/useUserStore';
 import type {TCourseOverview} from '@/entities/course/model/schemas';
-import type {SemesterCode} from '@/shared/model/type';
+import type {SemesterCode} from '@/shared/model/types';
 
 interface CourseHeroProps {
   courseData: Omit<TCourseOverview, 'units'>;
