@@ -20,7 +20,14 @@ const Dashboard = () => {
   const queryClient = useQueryClient();
 
   // 강의 및 스케쥴 데이터 패칭
-  const [{data: courses}, {data: schedules}] = useSuspenseQueries({
+  const [
+    {
+      data: {courseCount, courses},
+    },
+    {
+      data: {scheduleCount, schedules},
+    },
+  ] = useSuspenseQueries({
     queries: [
       courseQueries.getAllCourses(),
       assignmentQueries.getAssignmentSchedules(),
@@ -64,13 +71,10 @@ const Dashboard = () => {
             {userType === 'admin' && <AddButton />}
           </div>
 
-          {courses.response.count === 0 ? (
+          {courseCount === 0 ? (
             <EmptyState>등록된 강의가 없습니다.</EmptyState>
           ) : (
-            <CourseList
-              courseList={courses.response.courses}
-              onDelete={handleDeleteCourse}
-            />
+            <CourseList courseList={courses} onDelete={handleDeleteCourse} />
           )}
         </section>
 
@@ -80,10 +84,10 @@ const Dashboard = () => {
             <SectionHeader title='내 스케쥴' />
           </div>
 
-          {schedules.response.count === 0 ? (
+          {scheduleCount === 0 ? (
             <EmptyState className='pl-24.5'>예정된 과제가 없습니다.</EmptyState>
           ) : (
-            <ScheduleList scheduleList={schedules.response.schedule} />
+            <ScheduleList scheduleList={schedules} />
           )}
         </section>
       </div>

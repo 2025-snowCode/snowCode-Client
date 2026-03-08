@@ -19,6 +19,7 @@ export const UnitForm = ({
   onCreateUnit,
   onUpdateUnit,
   onDeleteUnit,
+  isPending,
 }: UnitFormProps) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -42,7 +43,7 @@ export const UnitForm = ({
     handleSubmit,
     reset,
     getValues,
-    formState: {errors, isSubmitting},
+    formState: {errors},
   } = useForm<TUnitFormSchema>({
     resolver: zodResolver(unitFormSchema),
     values:
@@ -115,13 +116,14 @@ export const UnitForm = ({
         </div>
 
         {/* 폼 본문 */}
-        <div className='flex-1 p-7.5 space-y-8 overflow-y-auto '>
+        <div className='flex-1 p-7.5 space-y-3 overflow-y-auto '>
           {/* 단원 제목 섹션 */}
           <section className='grid grid-cols-2 gap-5.5'>
             <LabeledInput
               {...register('title')}
               label='제목'
               placeholder='단원 제목을 입력하세요'
+              errorMessage={errors.title?.message}
             />
           </section>
 
@@ -132,19 +134,18 @@ export const UnitForm = ({
               label='공개일'
               type='date'
               placeholder='날짜를 선택하세요'
+              errorMessage={errors.releaseDate?.message}
             />
             <LabeledInput
               {...register('dueDate')}
               label='마감일'
               type='date'
               placeholder='마감일을 선택하세요'
+              errorMessage={errors.dueDate?.message}
             />
-            <span className='col-span-2 text-xs text-badge-red -mt-3 h-1'>
-              {errors.dueDate?.message}
-            </span>
           </section>
 
-          <hr className='border-stroke mb-7 -mt-3' />
+          <hr className='border-stroke mb-5' />
 
           {/* 문제 등록 섹션 */}
           <section className=''>
@@ -163,17 +164,18 @@ export const UnitForm = ({
             )}
 
             {/* 문제 연결 버튼 */}
-            <div className='mt-3.5'>
-              <Button
-                onClick={handleAssignmentSelect}
-                color='tonal'
-                size='compact'
-                content='mixed'
-                disabled={mode === 'editing'}>
-                <AddIcon className='w-3 h-3' />
-                문제 연결
-              </Button>
-            </div>
+            {mode === 'creating' && (
+              <div className='mt-3.5'>
+                <Button
+                  onClick={handleAssignmentSelect}
+                  color='tonal'
+                  size='compact'
+                  content='mixed'>
+                  <AddIcon className='w-3 h-3' />
+                  문제 연결
+                </Button>
+              </div>
+            )}
           </section>
         </div>
       </form>
@@ -186,7 +188,7 @@ export const UnitForm = ({
         <Button
           type='submit'
           form={`unit-form-${unitIndex}`}
-          disabled={isSubmitting}>
+          disabled={isPending}>
           저장
         </Button>
       </div>

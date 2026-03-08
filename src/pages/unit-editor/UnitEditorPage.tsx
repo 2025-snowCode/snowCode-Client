@@ -19,6 +19,8 @@ const UnitEditorPage = () => {
     resetStore,
     title: storedTitle,
     assignments: storedAssignments,
+    releaseDate: storedReleaseDate,
+    dueDate: storedDueDate,
   } = useUnitStore();
   const {data} = useQuery(unitQueries.getUnitList(courseId));
   const initialMode =
@@ -27,7 +29,12 @@ const UnitEditorPage = () => {
   const [activeMode, setActiveMode] = useState<Mode | null>(null);
   const [selectedUnitId, setSelectedUnitId] = useState<number | null>(null);
 
-  const hasOngoingCreation = storedTitle !== '' || storedAssignments.length > 0;
+  const hasOngoingCreation =
+    storedTitle !== '' ||
+    storedReleaseDate !== '' ||
+    storedDueDate !== '' ||
+    storedAssignments.length > 0;
+
   const currentMode: Mode | null =
     activeMode ?? (hasOngoingCreation ? 'creating' : initialMode);
   const currentUnitId =
@@ -56,7 +63,7 @@ const UnitEditorPage = () => {
   };
 
   // 단원 생성
-  const {mutate: addUnit} = useMutation({
+  const {mutate: addUnit, isPending: isCreating} = useMutation({
     ...unitMutations.createUnit,
     onSuccess: (data) => {
       // 단원 목록 갱신
@@ -73,7 +80,7 @@ const UnitEditorPage = () => {
   });
 
   // 단원 업데이트
-  const {mutate: updateUnit} = useMutation({
+  const {mutate: updateUnit, isPending: isUpdating} = useMutation({
     ...unitMutations.updateUnit,
     onSuccess: () => {
       invalidateUnitList();
@@ -155,6 +162,7 @@ const UnitEditorPage = () => {
           onCreateUnit={onCreateUnit}
           onUpdateUnit={onUpdateUnit}
           onDeleteUnit={onDeleteUnit}
+          isPending={isCreating || isUpdating}
         />
       </SurfaceCard>
     </div>

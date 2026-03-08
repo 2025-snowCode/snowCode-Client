@@ -16,13 +16,7 @@ export const useAssignmentList = (
     assignmentQueries.getAssignmentsByCourse(selectedCourseId ?? 0)
   );
 
-  if (selectedCourseId) {
-    return unique(
-      assignments?.response.courses.flatMap((course) =>
-        course.id === selectedCourseId ? course.assignments : []
-      ) ?? []
-    );
-  }
-
-  return unique(allAssignments?.response.assignments ?? []);
+  return unique(
+    selectedCourseId ? (assignments ?? []) : (allAssignments ?? [])
+  );
 };

@@ -11,4 +11,5 @@ export interface UnitFormProps {
   onCreateUnit: (unit: TUnitFormSchema) => void;
   onUpdateUnit: (unitId: number, unit: TUnitFormSchema) => void;
   onDeleteUnit: (unitId: number) => void;
+  isPending: boolean;
 }
