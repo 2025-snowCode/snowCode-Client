@@ -7,11 +7,7 @@ export const errorResponseSchema = apiResponseSchema(
   z.object({
     errorCode: z.string(),
     errorMessage: z.string(),
-    errors: z.object({
-      additionalProp1: z.string(),
-      additionalProp2: z.string(),
-      additionalProp3: z.string(),
-    }),
+    errors: z.record(z.string()).optional(),
   })
 );
 
