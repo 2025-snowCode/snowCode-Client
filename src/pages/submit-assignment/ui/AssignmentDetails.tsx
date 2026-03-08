@@ -14,6 +14,7 @@ const AssignmentDetails = () => {
           onClick={() => navigate(-1)}
           className='absolute w-4.5 h-4.5 cursor-pointer -left-9.5'
         />
+        {/* TODO: 인데스 배지 추가 */}
         <h2 className='relative text-2xl/9'>1. {title}</h2>
       </div>
       <p className='mt-7.5 text-[20px]/7.5'>{description}</p>
