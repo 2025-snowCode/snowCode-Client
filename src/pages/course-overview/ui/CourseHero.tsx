@@ -6,7 +6,7 @@ import type {TCourseOverview} from '@/entities/course/model/schemas';
 import type {SemesterCode} from '@/shared/model/types';
 
 interface CourseHeroProps {
-  courseData: Omit<TCourseOverview, 'units'>;
+  course: Omit<TCourseOverview, 'units'>;
   assignmentCount: number;
   isActiveCourse: boolean;
 }
