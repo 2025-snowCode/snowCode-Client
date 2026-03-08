@@ -16,13 +16,16 @@ const CourseOverviewPage = () => {
 
   return (
     <div className='w-full min-h-screen flex flex-col absolute top-0 left-0 z-0 p-4'>
-    <div className='w-full min-h-screen flex flex-col absolute top-0 left-0 z-0 p-4'>
       <CourseHero
         course={course}
         assignmentCount={totalAssignmentCount}
         isActiveCourse={hasUnits}
       />
-      <CourseContent units={course.units} isActiveCourse={hasUnits} />
+      <CourseContent
+        units={course.units}
+        isActiveCourse={hasUnits}
+        courseId={courseId}
+      />
     </div>
   );
 };
