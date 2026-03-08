@@ -1,4 +1,4 @@
-import type {Assignment} from '@/entities/assignment/model/types';
+import type {TAssignment} from '@/entities/assignment/model/schemas';
 import {create} from 'zustand';
 import {createJSONStorage, persist} from 'zustand/middleware';
 
@@ -6,10 +6,10 @@ interface UnitState {
   title: string;
   releaseDate: string;
   dueDate: string;
-  assignments: Assignment[];
+  assignments: TAssignment[];
   storeFormData: (title: string, releaseDate: string, dueDate: string) => void;
   resetStore: () => void;
-  setAssignments: (assignments: Assignment[]) => void;
+  setAssignments: (assignments: TAssignment[]) => void;
 }
 
 export const useUnitStore = create<UnitState>()(

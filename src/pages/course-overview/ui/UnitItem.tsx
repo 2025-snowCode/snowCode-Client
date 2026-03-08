@@ -2,9 +2,9 @@ import AssignmentList from './AssignmentList';
 import Lock from '@/assets/svg/lock.svg?react';
 import Badge from '@/shared/ui/badge/Badge';
 import {formatPeriod} from '@/shared/lib/course';
-import type {Unit} from '@/entities/course/model/types';
+import type {TUnit} from '@/entities/unit/model/schemas';
 
-interface UnitProps extends Unit {
+interface UnitProps extends TUnit {
   index: number;
 }
 

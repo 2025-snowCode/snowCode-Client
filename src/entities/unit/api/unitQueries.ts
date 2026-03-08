@@ -1,4 +1,4 @@
-import {queryOptions} from '@tanstack/react-query';
+import {queryOptions, skipToken} from '@tanstack/react-query';
 import {getAllUnitsByCourseId, getUnitById} from './unitApi';
 
 export const unitQueries = {
@@ -18,8 +18,7 @@ export const unitQueries = {
   getUnitDetails: (unitId: number | null) =>
     queryOptions({
       queryKey: ['units', 'detail', unitId],
-      queryFn: () => getUnitById(unitId),
-      enabled: !!unitId,
+      queryFn: unitId ? () => getUnitById(unitId) : skipToken,
       select: (data) => {
         return data.response;
       },

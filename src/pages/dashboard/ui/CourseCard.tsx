@@ -2,9 +2,9 @@ import {formatCourseTermWithSlash} from '@/shared/lib/course';
 import CourseManagementDropdown from './CourseManagementDropdown';
 import {useNavigate} from 'react-router-dom';
 import {useUserStore} from '@/entities/auth/model/useUserStore';
-import type {DashboardCourse} from '@/entities/course/model/types';
+import type {TDashboardCourse} from '@/entities/course/model/schemas';
 
-interface CourseCardProps extends DashboardCourse {
+interface CourseCardProps extends TDashboardCourse {
   onDelete: (courseId: number) => void;
 }
 

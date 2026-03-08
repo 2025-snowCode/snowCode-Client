@@ -1,4 +1,4 @@
-import type {TUnitFormSchema} from '../model/types';
+import type {TUnitFormSchema} from '../model/schemas';
 import {createUnit, deleteUnit, updateUnit} from './unitApi';
 
 export const unitMutations = {
