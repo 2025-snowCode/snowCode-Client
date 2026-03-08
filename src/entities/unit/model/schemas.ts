@@ -24,3 +24,6 @@ export const unitFormSchema = z
     message: '날짜 범위가 올바르지 않습니다.',
     path: ['dueDate'],
   });
+
+export type TUnit = z.infer<typeof unitSchema>;
+export type TUnitFormSchema = z.infer<typeof unitFormSchema>;

@@ -9,14 +9,14 @@ const CourseOverviewPage = () => {
   const hasUnits = courseData.unitCount !== 0 ? true : false;
 
   return (
-    <main className='w-full min-h-screen flex flex-col absolute top-0 left-0 z-0 p-4'>
+    <div className='w-full min-h-screen flex flex-col absolute top-0 left-0 z-0 p-4'>
       <CourseHero
         courseData={courseData}
         assignmentCount={totalAssignmentCount}
         isActiveCourse={hasUnits}
       />
       <CourseContent units={courseData.units} isActiveCourse={hasUnits} />
-    </main>
+    </div>
   );
 };
 

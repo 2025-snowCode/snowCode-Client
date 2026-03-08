@@ -1,11 +1,11 @@
-import type {Unit} from '@/entities/course/model/types';
-import type {TUnitFormSchema} from '@/entities/unit/model/types';
+import type {TUnit} from '@/entities/unit/model/schemas';
+import type {TUnitFormSchema} from '@/entities/unit/model/schemas';
 
 // 단원 편집 모드 타입
 export type Mode = 'creating' | 'editing';
 
 export interface UnitFormProps {
-  unit?: Unit;
+  unit?: TUnit;
   unitIndex: number;
   mode: Mode | null;
   onCreateUnit: (unit: TUnitFormSchema) => void;

@@ -2,11 +2,11 @@ import snowcodeOverviewMini from '@/assets/images/snowcode_overview_mini.svg';
 import {formatCourseTerm} from '@/shared/lib/course';
 import CourseActionsBar from './CourseActionsBar';
 import {useUserStore} from '@/entities/auth/model/useUserStore';
-import type {CourseOverview} from '@/entities/course/model/types';
+import type {TCourseOverview} from '@/entities/course/model/schemas';
 import type {SemesterCode} from '@/shared/model/type';
 
 interface CourseHeroProps {
-  courseData: Omit<CourseOverview, 'units'>;
+  courseData: Omit<TCourseOverview, 'units'>;
   assignmentCount: number;
   isActiveCourse: boolean;
 }
