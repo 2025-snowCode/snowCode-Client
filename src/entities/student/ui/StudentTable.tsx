@@ -1,4 +1,4 @@
-import {Checkbox} from '@/shared/ui/Checkbox';
+import {Checkbox} from '@/shared/ui/checkbox/Checkbox';
 import {ProgressIndicators} from '@/shared/ui/ProgressIndicators';
 import {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';

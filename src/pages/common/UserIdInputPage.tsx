@@ -3,7 +3,7 @@ import {useNavigate, useLocation} from 'react-router-dom';
 import SnowCodeEntryMini from '@/assets/images/snowCode_entry_mini.svg';
 import kakaoLogo from '@/assets/images/kakao_logo.svg';
 import ArrowleftIcon from '@/assets/svg/arrowleftIcon.svg?react';
-import Button from '@/shared/ui/Button';
+import Button from '@/shared/ui/button/Button';
 import {kakaoService} from '@/features/auth/kakao/lib/kakaoService';
 
 export default function UserIdInputPage() {

@@ -2,11 +2,11 @@ import snowcodeOverviewMini from '@/assets/images/snowcode_overview_mini.svg';
 import {formatCourseTerm} from '@/shared/lib/course';
 import CourseActionsBar from './CourseActionsBar';
 import {useUserStore} from '@/entities/auth/model/useUserStore';
-import type {CourseOverview} from '@/entities/course/model/types';
-import type {SemesterCode} from '@/shared/model/common';
+import type {TCourseOverview} from '@/entities/course/model/schemas';
+import type {SemesterCode} from '@/shared/model/types';
 
 interface CourseHeroProps {
-  courseData: Omit<CourseOverview, 'units'>;
+  course: Omit<TCourseOverview, 'units'>;
   assignmentCount: number;
   isActiveCourse: boolean;
 }
@@ -27,18 +27,18 @@ interface CourseStatsProps {
 
 // 강의 상세 페이지 Hero 섹션
 const CourseHero = ({
-  courseData,
+  course,
   assignmentCount,
   isActiveCourse,
 }: CourseHeroProps) => {
   const isAdmin = useUserStore((state) => state.userType) === 'admin';
-  const {title, year, semester, section, unitCount, studentCount} = courseData;
+  const {id, title, year, semester, section, unitCount, studentCount} = course;
 
   return (
     <section className='relative w-full flex-center flex-col pt-38.5 pb-12.5 rounded-t-[30px] bg-radial-gradient'>
       {isAdmin && isActiveCourse && (
         <nav className='absolute top-36 right-35'>
-          <CourseActionsBar isActiveCourse={true} />
+          <CourseActionsBar courseId={id} isActiveCourse={true} />
         </nav>
       )}
 
@@ -66,8 +66,8 @@ const CourseInfo = ({title, year, semester, section}: CourseInfoProps) => {
   return (
     <article className='flex-center flex-col text-white'>
       <img src={snowcodeOverviewMini} alt='snowCode logo' />
-      <h1 className='pb-[1px] text-2xl font-medium leading-9'>{title}</h1>
-      <p className='pb-[11px] text-base font-normal leading-6'>
+      <h1 className='pb-px text-2xl font-medium leading-9'>{title}</h1>
+      <p className='pb-2.75 text-base font-normal leading-6'>
         {formatCourseTerm(year, semester, section)}
       </p>
     </article>

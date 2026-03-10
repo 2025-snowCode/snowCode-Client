@@ -1,5 +1,4 @@
-interface LabeledInputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
+interface LabeledInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
   className?: string;
   showLabel?: boolean;
@@ -11,6 +10,7 @@ const LabeledInput = ({
   className,
   showLabel = true,
   errorMessage,
+  required = true,
   ...rest
 }: LabeledInputProps) => {
   return (
@@ -20,6 +20,7 @@ const LabeledInput = ({
           showLabel ? '' : 'sr-only'
         }`}>
         {label}
+        {required && <span className='text-badge-red'> *</span>}
       </span>
 
       <input

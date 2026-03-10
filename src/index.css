@@ -28,6 +28,7 @@
 :root {
   font-family: Pretendard;
   background-color: #f6f5f8;
+  box-sizing: border-box;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -54,6 +55,7 @@
   --color-badge-red: #ff6f6f;
 
   --font-coolvetica: 'Coolvetica', sans-serif;
+  --shadow-box: 2px 4px 10px 0 rgba(0, 0, 0, 0.05);
   --shadow-card: 0px 0px 14px 0px rgba(223, 219, 240, 0.4);
   --shadow-modal: 4px 4px 7px 0px rgba(0, 0, 0, 0.1);
   --shadow-dropdown: 2px 4px 7px 0px rgba(0, 0, 0, 0.1);
@@ -89,4 +91,14 @@
 
 input::placeholder {
   color: var(--color-light-black);
+}
+
+.input-field {
+  @apply bg-white w-[295px] px-[14.6px] py-[10.5px] rounded-[9px] border-[0.9px] border-purple-stroke focus:outline-1 focus:outline-primary;
+}
+
+@layer base {
+  label {
+    @apply flex flex-col gap-[12.5px];
+  }
 }

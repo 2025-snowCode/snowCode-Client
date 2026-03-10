@@ -12,6 +12,8 @@ import StudentProfilePage from '@/pages/admin/student/StudentProfilePage';
 import KakaoCallbackPage from '@/pages/common/KakaoCallbackPage';
 import PrivateRoute from '@/widgets/private-route/ui/PrivateRoute';
 import {useSyncUserRole} from '@/features/auth/sync-user-role/model/useSyncUserRole';
+import UnitEditorPage from '@/pages/unit-editor/UnitEditorPage';
+import AssignmentManagePage from '@/pages/manage-assignment/AssignmentManagePage';
 
 const AppRoutes = () => {
   useSyncUserRole();
@@ -36,12 +38,18 @@ const AppRoutes = () => {
         <Route element={<PrivateRoute allowedRoles={['admin']} />}>
           <Route path='admin'>
             <Route index element={<Dashboard />} />
-            {/* <Route path='assignments' element={<AssignmentsPage />} /> */}
+            <Route
+              path='assignments/manage'
+              element={<AssignmentManagePage />}
+            />
             <Route
               path='assignments/create'
               element={<AssignmentCreatePage />}
             />
-            <Route path='assignments/:id' element={<AssignmentSelectPage />} />
+            <Route
+              path='assignments/select'
+              element={<AssignmentSelectPage />}
+            />
             <Route path='courses/:id' element={<CourseOverviewPage />} />
             <Route path='courses/create' element={<CourseCreatePage />} />
             <Route path='student' element={<StudentManagementPage />} />
@@ -49,6 +57,7 @@ const AppRoutes = () => {
               path='student/profile/:studentId'
               element={<StudentProfilePage />}
             />
+            <Route path='units/:id' element={<UnitEditorPage />} />
           </Route>
         </Route>
       </Route>

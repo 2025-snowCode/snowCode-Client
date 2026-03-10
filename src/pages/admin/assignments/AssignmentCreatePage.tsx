@@ -3,7 +3,7 @@ import LabeledInput from '@/shared/ui/LabeledInput';
 import FileUpload from '@/shared/ui/FileUpload';
 import {useState} from 'react';
 import LabeledDropdown from '@/shared/ui/LabeledDropdown';
-import Button from '@/shared/ui/Button';
+import Button from '@/shared/ui/button/Button';
 import AddIcon from '@/assets/svg/addIcon.svg?react';
 
 const PUBLIC_OPTIONS = ['공개', '비공개'];

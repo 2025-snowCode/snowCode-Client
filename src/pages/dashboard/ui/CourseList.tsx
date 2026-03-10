@@ -1,8 +1,8 @@
-import type {DashboardCourse} from '@/entities/course/model/types';
+import type {TDashboardCourse} from '@/entities/course/model/schemas';
 import CourseCard from './CourseCard';
 
 interface CourseListProps {
-  courseList: DashboardCourse[];
+  courseList: TDashboardCourse[];
   onDelete: (courseId: number) => void;
 }
 
