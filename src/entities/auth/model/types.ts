@@ -1,5 +1,5 @@
 import {z} from 'zod';
-import type {UserType} from '@/shared/model/common';
+import type {UserType} from '@/shared/model/types';
 
 /**
  * 카카오 로그인 API 응답 스키마
