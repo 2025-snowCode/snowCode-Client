@@ -8,6 +8,7 @@ interface LabeledDropdownProps
   className?: string;
   options: string[];
   placeholder?: string;
+  defaultValue?: string;
   onSelect?: (value: string) => void;
   errorMessage?: string;
 }
@@ -17,11 +18,12 @@ const LabeledDropdown = ({
   className,
   options,
   placeholder,
+  defaultValue,
   onSelect,
   errorMessage,
   ...rest
 }: LabeledDropdownProps) => {
-  const [selectedValue, setSelectedValue] = useState('');
+  const [selectedValue, setSelectedValue] = useState(defaultValue ?? '');
 
   const handleSelect = (option: string) => {
     setSelectedValue(option);

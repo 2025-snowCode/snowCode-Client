@@ -10,6 +10,13 @@ export const SEMESTER_CODE_MAP = {
   겨울학기: 'WINTER',
 } as const;
 
+export const SEMESTER_DISPLAY_MAP = Object.fromEntries(
+  Object.entries(SEMESTER_CODE_MAP).map(([display, code]) => [code, display])
+) as Record<
+  (typeof SEMESTER_CODE_MAP)[keyof typeof SEMESTER_CODE_MAP],
+  keyof typeof SEMESTER_CODE_MAP
+>;
+
 /** 강의 생성 폼 유효성 검사 스키마 */
 export const courseFormSchema = z.object({
   title: z.string().min(1, '강의 명을 입력해주세요.'),
