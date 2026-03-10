@@ -1,10 +1,10 @@
-import type {DashboardCourse} from '@/entities/course/model/types';
+import type {TDashboardCourse} from '@/entities/course/model/schemas';
 import {formatCourseOptionLabel} from '@/shared/lib/course';
 import {useMemo, useState} from 'react';
 
 const ALL_COURSES_OPTION = '전체 강의' as const;
 
-export const useCourseFilter = (courses: DashboardCourse[]) => {
+export const useCourseFilter = (courses: TDashboardCourse[]) => {
   const [selectedCourseId, setSelectedCourseId] = useState<number | null>(null);
 
   // 강의 선택 드롭다운 메뉴 옵션

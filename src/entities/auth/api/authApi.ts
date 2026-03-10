@@ -1,5 +1,5 @@
 import {publicAxios} from '@/shared/api/axiosInstance';
-import type {ApiResponse} from '@/shared/model/common';
+import type {ApiResponse} from '@/shared/model/types';
 import {
   kakaoLoginApiResponseSchema,
   type KakaoLoginApiResponse,

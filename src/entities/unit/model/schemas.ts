@@ -1,4 +1,16 @@
+import {assignmentSchema} from '@/entities/assignment/model/schemas';
 import {z} from 'zod';
+
+// 단원 도메인 스키마
+export const unitSchema = z.object({
+  id: z.number(),
+  title: z.string(),
+  releaseDate: z.string(),
+  dueDate: z.string(),
+  isOpen: z.boolean().optional(),
+  assignmentCount: z.number(),
+  assignments: z.array(assignmentSchema),
+});
 
 // 단원 생성/수정 폼 스키마
 export const unitFormSchema = z
@@ -13,5 +25,5 @@ export const unitFormSchema = z
     path: ['dueDate'],
   });
 
-// 단원 생성/수정 폼 타입
+export type TUnit = z.infer<typeof unitSchema>;
 export type TUnitFormSchema = z.infer<typeof unitFormSchema>;
