@@ -1,19 +1,20 @@
 import {useMutation, useQueryClient} from '@tanstack/react-query';
-import {createCourse, courseQueries} from '@/entities/course';
+import {updateCourse, courseQueries} from '@/entities/course';
 import {handleApiError} from '@/shared/lib/handleApiError';
 import {useNavigate} from 'react-router-dom';
 import {ROUTES} from '@/shared/config/routes';
 import {
   SEMESTER_CODE_MAP,
   type CourseFormValues,
-} from './courseFormSchema';
+} from '@/features/course/create-course/model/courseFormSchema';
 
-export const useCreateCourse = () => {
+export const useEditCourse = (courseId: number) => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
   const {mutate, isPending} = useMutation({
-    mutationFn: createCourse,
+    mutationFn: (data: Parameters<typeof updateCourse>[1]) =>
+      updateCourse(courseId, data),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: courseQueries.getAllCourses().queryKey,
@@ -21,7 +22,7 @@ export const useCreateCourse = () => {
       navigate(ROUTES.ADMIN.ROOT);
     },
     onError: (error) => {
-      handleApiError(error, '강의 개설에 실패했습니다. 다시 시도해주세요.');
+      handleApiError(error, '강의 수정에 실패했습니다. 다시 시도해주세요.');
     },
   });
 
