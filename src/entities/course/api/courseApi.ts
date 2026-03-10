@@ -33,3 +33,11 @@ export const createCourse = async (
   const response = await privateAxios.post('/courses', data);
   return response.data;
 };
+
+export const updateCourse = async (
+  courseId: number,
+  data: CreateCourseRequest
+): Promise<CreateCourseResponse> => {
+  const response = await privateAxios.put(`/courses/${courseId}`, data);
+  return response.data;
+};
