@@ -9,7 +9,19 @@ import {useCallback} from 'react';
 export const useKakaoLogin = () => {
   const navigate = useNavigate();
   const {login} = useUserStore();
-  const {mutate} = useKakaoMutation();
+
+  const {mutate} = useKakaoMutation({
+    onSuccess: ({response}) => {
+      const userType = response.role === 'ADMIN' ? 'admin' : 'student';
+      login(response.name, userType, response.accessToken);
+      navigate(userType === 'admin' ? '/admin' : '/student');
+    },
+    onError: (error) => {
+      console.error('Login error:', error);
+      alert('로그인에 실패했습니다. 다시 시도해주세요.');
+      navigate('/');
+    },
+  });
 
   const handleLogin = useCallback(
     (code: string, state: string | null) => {
@@ -24,23 +36,9 @@ export const useKakaoLogin = () => {
         return;
       }
 
-      mutate(
-        {code, role, studentId},
-        {
-          onSuccess: ({response}) => {
-            const userType = response.role === 'ADMIN' ? 'admin' : 'student';
-            login(response.name, userType, response.accessToken);
-            navigate(userType === 'admin' ? '/admin' : '/student');
-          },
-          onError: (error) => {
-            console.error('Login error:', error);
-            alert('로그인에 실패했습니다. 다시 시도해주세요.');
-            navigate('/');
-          },
-        }
-      );
+      mutate({code, role, studentId});
     },
-    [login, navigate, mutate]
+    [navigate, mutate]
   );
 
   return {handleLogin};
