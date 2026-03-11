@@ -1,6 +1,6 @@
 import type {Assignment} from '@/entities/assignment/model/types';
-import type {ApiResponse, SemesterCode} from '@/shared/model/common';
-export type {CreateCourseRequest, CreateCourseResponse} from '@/entities/course/model/courseSchema';
+import type {ApiResponse, SemesterCode} from '@/shared/model/types';
+export type {CreateCourseRequest, CreateCourseResponse} from './courseSchema';
 
 /**
  * 일정(Schedule) 인터페이스 정의
