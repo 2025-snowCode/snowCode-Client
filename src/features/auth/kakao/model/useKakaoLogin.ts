@@ -3,6 +3,7 @@ import {useUserStore} from '@/entities/auth/model/useUserStore';
 import {kakaoLogin} from '@/entities/auth/api/authApi';
 import {kakaoService} from '../lib/kakaoService';
 import {useCallback} from 'react';
+import {ROUTES} from '@/shared/config/routes';
 
 /**
  * 카카오 로그인 프로세스를 처리하는 커스텀 훅
@@ -20,7 +21,7 @@ export const useKakaoLogin = () => {
 
       if (!code || !role || !['ADMIN', 'USER'].includes(role)) {
         alert('카카오 로그인에 실패했습니다.');
-        navigate('/');
+        navigate(ROUTES.ROOT);
         return;
       }
 
@@ -37,11 +38,11 @@ export const useKakaoLogin = () => {
 
         // 3. 사용자 정보 저장 및 이동
         login(userName, userType, jwtToken);
-        navigate(userType === 'admin' ? '/admin' : '/student');
+        navigate(userType === 'admin' ? ROUTES.ADMIN.ROOT : ROUTES.STUDENT.ROOT);
       } catch (error) {
         console.error('Login error:', error);
         alert('로그인에 실패했습니다. 다시 시도해주세요.');
-        navigate('/');
+        navigate(ROUTES.ROOT);
       }
     },
     [login, navigate]

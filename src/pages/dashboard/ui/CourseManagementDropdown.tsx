@@ -1,6 +1,7 @@
 import EllipsisIcon from '@/assets/svg/ellipsisIcon.svg?react';
 import Dropdown from '@/shared/ui/Dropdown';
 import {useNavigate} from 'react-router-dom';
+import {ROUTES} from '@/shared/config/routes';
 
 interface CourseManagementDropdownProps {
   courseId: number;
@@ -18,7 +19,7 @@ const CourseManagementDropdown = ({
   // 드롭다운 메뉴 옵션 선택 핸들러
   const handleSelect = (option: string) => {
     const actions: Record<string, () => void> = {
-      수정하기: () => navigate('courses/create'),
+      수정하기: () => navigate(ROUTES.ADMIN.COURSES.EDIT(courseId)),
       삭제하기: () => onDelete(courseId),
     };
 

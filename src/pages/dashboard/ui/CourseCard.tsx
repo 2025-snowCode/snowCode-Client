@@ -2,6 +2,7 @@ import {formatCourseTermWithSlash} from '@/shared/lib/course';
 import CourseManagementDropdown from './CourseManagementDropdown';
 import {useNavigate} from 'react-router-dom';
 import {useUserStore} from '@/entities/auth/model/useUserStore';
+import {ROUTES} from '@/shared/config/routes';
 import type {TDashboardCourse} from '@/entities/course/model/schemas';
 
 interface CourseCardProps extends TDashboardCourse {
@@ -27,7 +28,7 @@ const CourseCard = ({onDelete, ...course}: CourseCardProps) => {
     <li className='w-148 flex items-stretch bg-white rounded-3xl shadow-card *:first:hover:opacity-50'>
       {/* 좌측: 강의 기본 정보 */}
       <div
-        onClick={() => navigate(`courses/${id}`)}
+        onClick={() => navigate(userType === 'admin' ? ROUTES.ADMIN.COURSES.DETAIL(id) : ROUTES.STUDENT.COURSES.DETAIL(id))}
         className='cursor-pointer flex-1 flex flex-col gap-1.5 pl-8 pr-6.5 py-5.5'>
         <p className='text-sm font-light text-light-black'>
           {formatCourseTermWithSlash(year, semester, section)}
