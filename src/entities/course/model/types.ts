@@ -1,4 +1,4 @@
-import type {Assignment} from '@/entities/assignment/model/types';
+import type {Assignment} from '@/entities/assignment/model/schemas';
 import type {ApiResponse, SemesterCode} from '@/shared/model/types';
 export type {CreateCourseRequest, CreateCourseResponse} from './courseSchema';
 
