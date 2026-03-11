@@ -1,12 +1,10 @@
 import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {deleteCourse, courseQueries} from '@/entities/course';
+import {assignmentQueries} from '@/entities/assignment';
 import {handleApiError} from '@/shared/lib/handleApiError';
-import {useNavigate} from 'react-router-dom';
-import {ROUTES} from '@/shared/config/routes';
 
-export const useDeleteCourse = (courseId: number) => {
+export const useDeleteCourse = (courseId: number, onSuccess?: () => void) => {
   const queryClient = useQueryClient();
-  const navigate = useNavigate();
 
   const {mutate, isPending} = useMutation({
     mutationFn: () => deleteCourse(courseId),
@@ -14,7 +12,10 @@ export const useDeleteCourse = (courseId: number) => {
       queryClient.invalidateQueries({
         queryKey: courseQueries.getAllCourses().queryKey,
       });
-      navigate(ROUTES.ADMIN.ROOT);
+      queryClient.invalidateQueries({
+        queryKey: assignmentQueries.getAssignmentSchedules().queryKey,
+      });
+      onSuccess?.();
     },
     onError: (error) => {
       handleApiError(error, '강의 삭제에 실패했습니다. 다시 시도해주세요.');
