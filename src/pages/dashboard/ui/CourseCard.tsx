@@ -5,11 +5,9 @@ import {useUserStore} from '@/entities/auth/model/useUserStore';
 import {ROUTES} from '@/shared/config/routes';
 import type {TDashboardCourse} from '@/entities/course/model/schemas';
 
-interface CourseCardProps extends TDashboardCourse {
-  onDelete: (courseId: number) => void;
-}
+interface CourseCardProps extends TDashboardCourse {}
 
-const CourseCard = ({onDelete, ...course}: CourseCardProps) => {
+const CourseCard = ({...course}: CourseCardProps) => {
   const navigate = useNavigate();
   const userType = useUserStore((state) => state.userType);
 
@@ -48,7 +46,7 @@ const CourseCard = ({onDelete, ...course}: CourseCardProps) => {
         <div className='relative pl-4 border-l-[0.5px] border-[#7A768C]'>
           {/* 관리자용 강의 관리 버튼 */}
           {userType === 'admin' && (
-            <CourseManagementDropdown courseId={id} onDelete={onDelete} />
+            <CourseManagementDropdown courseId={id} />
           )}
 
           <p>문제 수</p>

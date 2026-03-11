@@ -3,15 +3,14 @@ import CourseCard from './CourseCard';
 
 interface CourseListProps {
   courseList: TDashboardCourse[];
-  onDelete: (courseId: number) => void;
 }
 
-const CourseList = ({courseList, onDelete}: CourseListProps) => {
+const CourseList = ({courseList}: CourseListProps) => {
   return (
     <>
       <ul className='flex flex-col gap-4'>
         {courseList.map((course) => (
-          <CourseCard key={course.id} {...course} onDelete={onDelete} />
+          <CourseCard key={course.id} {...course} />
         ))}
       </ul>
     </>
