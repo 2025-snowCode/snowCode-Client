@@ -5,7 +5,7 @@ import {useUserStore} from '@/entities/auth/model/useUserStore';
 import {ROUTES} from '@/shared/config/routes';
 import type {TDashboardCourse} from '@/entities/course/model/schemas';
 
-interface CourseCardProps extends TDashboardCourse {}
+type CourseCardProps = TDashboardCourse;
 
 const CourseCard = ({...course}: CourseCardProps) => {
   const navigate = useNavigate();
