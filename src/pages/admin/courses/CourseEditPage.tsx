@@ -19,10 +19,10 @@ export const CourseEditPage = () => {
     ...courseQueries.getCourseDetails(courseId),
     placeholderData: () => {
       const listData = queryClient.getQueryData<{
-        courseCount: number;
-        courses: TDashboardCourse[];
+        success: boolean;
+        response: {count: number; courses: TDashboardCourse[]};
       }>(courseQueries.getAllCourses().queryKey);
-      const course = listData?.courses.find((c) => c.id === courseId);
+      const course = listData?.response?.courses.find((c) => c.id === courseId);
       if (!course) return undefined;
       return {
         success: true,
@@ -33,6 +33,7 @@ export const CourseEditPage = () => {
           year: course.year,
           semester: course.semester,
           unitCount: course.unitCount,
+          description: course.description,
           units: [],
         },
       };
@@ -47,6 +48,7 @@ export const CourseEditPage = () => {
     section: data.section,
     year: String(data.year) as CourseFormValues['year'],
     semester: SEMESTER_DISPLAY_MAP[data.semester],
+    description: data.description ?? '',
   };
 
   return (
