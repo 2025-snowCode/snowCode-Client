@@ -1,0 +1,40 @@
+import Button from '@/shared/ui/button/Button';
+
+interface ConfirmModalProps {
+  title: string;
+  description?: string;
+  confirmLabel?: string;
+  cancelLabel?: string;
+  onConfirm: () => void;
+  onCancel: () => void;
+}
+
+export default function ConfirmModal({
+  title,
+  description,
+  confirmLabel = '확인',
+  cancelLabel = '취소',
+  onConfirm,
+  onCancel,
+}: ConfirmModalProps) {
+  return (
+    <div className='fixed inset-0 z-50 flex items-center justify-center bg-black/40'>
+      <div className='bg-white rounded-2xl p-8 w-80 flex flex-col gap-6 shadow-lg'>
+        <div className='flex flex-col gap-2'>
+          <p className='text-lg font-semibold text-primary-black'>{title}</p>
+          {description && (
+            <p className='text-sm text-secondary-black'>{description}</p>
+          )}
+        </div>
+        <div className='flex gap-3 justify-center'>
+          <Button color='secondary' onClick={onCancel}>
+            {cancelLabel}
+          </Button>
+          <Button color='primary' onClick={onConfirm}>
+            {confirmLabel}
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+}
