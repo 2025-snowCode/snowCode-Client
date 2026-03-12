@@ -10,7 +10,7 @@ export const courseOverviewSchema = z.object({
   semester: semesterCodeSchema,
   section: z.string(),
   unitCount: z.number(),
-  description: z.string().optional(),
+  description: z.string().catch(''),
   studentCount: z.number().optional(),
   units: z.array(unitSchema),
 });

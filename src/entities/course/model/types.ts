@@ -37,6 +37,7 @@ export interface BaseCourse {
   year: number;
   semester: SemesterCode;
   section: string;
+  description: string;
   unitCount: number;
 }
 
@@ -54,7 +55,6 @@ export interface CourseOverview extends BaseCourse {
  * 기본 정보 + 강의 설명, 과제 개수
  */
 export interface DashboardCourse extends BaseCourse {
-  description: string;
   assignmentCount: number;
 }
 
