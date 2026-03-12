@@ -5,7 +5,7 @@ import UserIdInputPage from '@/pages/common/UserIdInputPage';
 import Dashboard from '@/pages/dashboard/Dashboard';
 import AssignmentSelectPage from '@/pages/select-assignment/AssignmentSelectPage';
 import CourseOverviewPage from '@/pages/course-overview/CourseOverviewPage';
-import AssignmentCreatePage from '@/pages/admin/assignments/AssignmentCreatePage';
+import AssignmentFormPage from '@/pages/admin/assignments/AssignmentFormPage';
 import CourseCreatePage from '@/pages/admin/courses/CourseCreatePage';
 import StudentManagementPage from '@/pages/admin/student/StudentManagementPage';
 import StudentProfilePage from '@/pages/admin/student/StudentProfilePage';
@@ -42,9 +42,10 @@ const AppRoutes = () => {
               path='assignments/manage'
               element={<AssignmentManagePage />}
             />
+            <Route path='assignments/create' element={<AssignmentFormPage />} />
             <Route
-              path='assignments/create'
-              element={<AssignmentCreatePage />}
+              path='assignments/edit/:id'
+              element={<AssignmentFormPage />}
             />
             <Route
               path='assignments/select'
