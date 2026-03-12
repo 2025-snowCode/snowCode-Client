@@ -1,6 +1,7 @@
 import {queryOptions} from '@tanstack/react-query';
 import {
   getAllAssignments,
+  getAssignment,
   getAssignmentsByCourse,
   getAssignmentSchedules,
 } from './assignmentApi';
@@ -33,5 +34,12 @@ export const assignmentQueries = {
       enabled: !!courseId,
       select: (data) =>
         data.response.courses.flatMap((course) => course.assignments),
+    }),
+
+  getAssignment: (assignmentId: number) =>
+    queryOptions({
+      queryKey: ['assignments', assignmentId],
+      queryFn: () => getAssignment(assignmentId),
+      select: (data) => data.response,
     }),
 };

@@ -19,5 +19,33 @@ export const assignmentScheduleSchema = z.object({
   ),
 });
 
+export const assignmentFormSchema = z.object({
+  title: z.string(),
+  score: z.number(),
+  description: z.string(),
+  testcases: z.array(
+    z.object({
+      testcase: z.string(),
+      answer: z.string(),
+    })
+  ),
+});
+
+export const assignmentDetailSchema = z.object({
+  id: z.number(),
+  title: z.string(),
+  description: z.string(),
+  count: z.number(),
+  testcases: z.array(
+    z.object({
+      id: z.number(),
+      testcase: z.string(),
+      answer: z.string(),
+    })
+  ),
+});
+
 export type TAssignment = z.infer<typeof assignmentSchema>;
 export type TAssignmentSchedule = z.infer<typeof assignmentScheduleSchema>;
+export type TAssignmentForm = z.infer<typeof assignmentFormSchema>;
+export type TAssignmentDetail = z.infer<typeof assignmentDetailSchema>;

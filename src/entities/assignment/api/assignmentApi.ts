@@ -1,7 +1,11 @@
 import {z} from 'zod';
 import {privateAxios} from '@/shared/api/axiosInstance';
 import {apiResponseSchema} from '@/shared/model/schemas';
-import {assignmentScheduleSchema} from '../model/schemas';
+import {
+  assignmentDetailSchema,
+  assignmentScheduleSchema,
+  type TAssignmentForm,
+} from '../model/schemas';
 import {assignmentCourseSchema} from '@/entities/course/model/schemas';
 
 // 과제 일정 조회 API
@@ -42,4 +46,25 @@ export const getAssignmentsByCourse = async (courseId: number) => {
 export const deleteAssignment = async (assignmentId: number) => {
   const response = await privateAxios.delete(`/assignments/${assignmentId}`);
   return apiResponseSchema(z.string()).parse(response.data);
+};
+
+// 과제 조회 API
+export const getAssignment = async (assignmentId: number) => {
+  const response = await privateAxios.get(`/assignments/${assignmentId}`);
+  return apiResponseSchema(assignmentDetailSchema).parse(response.data);
+};
+
+// 과제 추가 API
+export const createAssignment = async (form: TAssignmentForm) => {
+  const response = await privateAxios.post('/assignments', form);
+  return apiResponseSchema(assignmentDetailSchema).parse(response.data);
+};
+
+// 과제 수정 API
+export const updateAssignment = async (
+  assignmentId: number,
+  form: TAssignmentForm
+) => {
+  const response = await privateAxios.put(`/assignments/${assignmentId}`, form);
+  return apiResponseSchema(assignmentDetailSchema).parse(response.data);
 };
