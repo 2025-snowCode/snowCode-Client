@@ -20,7 +20,7 @@ const LabeledInput = ({
           showLabel ? '' : 'sr-only'
         }`}>
         {label}
-        {required && <span className='text-badge-red'> *</span>}
+        {required && label && <span className='text-badge-red'> *</span>}
       </span>
 
       <input
