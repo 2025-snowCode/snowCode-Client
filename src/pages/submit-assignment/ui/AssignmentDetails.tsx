@@ -1,10 +1,10 @@
 import {useNavigate} from 'react-router-dom';
-import {getAssignmentResponse} from '../mock';
 import ArrowleftIcon from '@/assets/svg/arrowleftIcon.svg?react';
+import {mockAssignmentDetail} from '../mock';
 
 const AssignmentDetails = () => {
   const navigate = useNavigate();
-  const {title, description, testcases} = getAssignmentResponse.response;
+  const {title, description, testcases} = mockAssignmentDetail.response;
 
   return (
     <section className='py-10.5 pl-19.5 pr-10.5 font-medium text-primary-black'>
