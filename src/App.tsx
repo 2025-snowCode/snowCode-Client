@@ -51,7 +51,10 @@ const AppRoutes = () => {
               path='assignments/select'
               element={<AssignmentSelectPage />}
             />
-            <Route path='assignments/:id' element={<AssignmentSubmitPage />} />
+            <Route
+              path='assignments/:assignmentId'
+              element={<AssignmentSubmitPage />}
+            />
             <Route path='courses/:id' element={<CourseOverviewPage />} />
             <Route path='courses/create' element={<CourseCreatePage />} />
             <Route path='student' element={<StudentManagementPage />} />
