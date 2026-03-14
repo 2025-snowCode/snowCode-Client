@@ -1,7 +1,7 @@
 import {useNavigate} from 'react-router-dom';
 import {useUserStore} from '@/entities/auth/model/useUserStore';
-import {authMutations} from '@/entities/auth/api/authMutations';
 import {useMutation} from '@tanstack/react-query';
+import {kakaoMutations} from '@/features/auth/kakao/api/kakaoMutations';
 import {useCallback} from 'react';
 import {ROUTES} from '@/shared/config/routes';
 
@@ -10,7 +10,7 @@ export const useKakaoLogin = () => {
   const {login} = useUserStore();
 
   const {mutate} = useMutation({
-    ...authMutations.kakaoLogin,
+    ...kakaoMutations.kakaoLogin,
     onSuccess: ({response}) => {
       const userType = response.role === 'ADMIN' ? 'admin' : 'student';
       login(response.name, userType, response.accessToken);
