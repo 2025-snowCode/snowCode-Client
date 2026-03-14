@@ -1,25 +1,23 @@
 import {publicAxios} from '@/shared/api/axiosInstance';
-import type {UserType} from '@/shared/model/types';
-import {kakaoLoginResponseSchema} from '../model/schemas';
+import type {ApiResponse} from '@/shared/model/types';
+import {
+  kakaoLoginApiResponseSchema,
+  type KakaoLoginApiResponse,
+} from '@/entities/auth/model/types';
 
 export const kakaoLogin = async (
   oAuthToken: string,
   role: 'ADMIN' | 'USER',
   studentId?: string
-) => {
+): Promise<ApiResponse<KakaoLoginApiResponse>> => {
   const response = await publicAxios.post('/oauth2/authorization', {
     provider: 'KAKAO',
     role,
     ...(studentId && {studentId}),
     OAuthToken: oAuthToken,
   });
-  const data = kakaoLoginResponseSchema.parse(response.data.response);
   return {
-    userName: data.name,
-    userType: (data.role === 'ADMIN' ? 'admin' : 'student') as Exclude<
-      UserType,
-      'guest'
-    >,
-    accessToken: data.accessToken,
+    ...response.data,
+    response: kakaoLoginApiResponseSchema.parse(response.data.response),
   };
 };
