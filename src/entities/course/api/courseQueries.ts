@@ -1,4 +1,4 @@
-import {getAllCourses, getCourseById} from './courseApi';
+import {getAllCourses, getCourseById} from '@/entities/course/api/courseApi';
 import {queryOptions} from '@tanstack/react-query';
 
 export const courseQueries = {

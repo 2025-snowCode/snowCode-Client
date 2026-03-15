@@ -1,4 +1,4 @@
-import {deleteCourse} from './courseApi';
+import {deleteCourse} from '@/entities/course/api/courseApi';
 
 export const courseMutations = {
   // 강의 삭제 뮤테이션 옵션
