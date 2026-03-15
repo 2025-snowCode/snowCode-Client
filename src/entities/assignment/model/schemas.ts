@@ -33,6 +33,14 @@ export const assignmentScheduleSchema = z.object({
   ),
 });
 
+export const assignmentSubmissionResultSchema = z.object({
+  condeId: z.number(),
+  score: z.number(),
+});
+
 export type TAssignment = z.infer<typeof assignmentSchema>;
 export type TAssignmentSchedule = z.infer<typeof assignmentScheduleSchema>;
 export type TAssignmentDetails = z.infer<typeof assignmentDetailsSchema>;
+export type TAssignmentSubmissionResult = z.infer<
+  typeof assignmentSubmissionResultSchema
+>;
