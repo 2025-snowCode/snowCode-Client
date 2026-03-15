@@ -1,13 +1,10 @@
-import type {SubmissionStatus} from '@/shared/model/types';
 import StatusCircle from './StatusCircle';
 import {useEffect, useRef} from 'react';
-import {Link} from 'react-router-dom';
+import {useLocation, Link, useParams} from 'react-router-dom';
+import type {TAssignment} from '@/entities/assignment/model/schemas';
 
-interface SideBarItemProps {
-  id: number;
+interface SideBarItemProps extends TAssignment {
   index: number;
-  title: string;
-  submittedStatus: SubmissionStatus | string;
   isOpen: boolean;
   isLast: boolean;
   isFirst: boolean;
@@ -26,7 +23,8 @@ const SideBarItem = ({
   isActive,
   isLocked,
 }: SideBarItemProps) => {
-  const sideBarBorderClass = isOpen ? 'border-r border-purple-stroke' : '';
+  const {courseId} = useParams();
+  const {pathname} = useLocation();
   const activeItemRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
@@ -38,9 +36,16 @@ const SideBarItem = ({
     }
   }, [isActive, isOpen]);
 
+  const assignmentPath = pathname.startsWith('/admin')
+    ? `/admin/courses/${courseId}/assignments/${id}`
+    : `/student/courses/${courseId}/assignments/${id}`;
+
+  const sideBarBorderClass = isOpen ? 'border-r border-purple-stroke' : '';
+
   return (
     <Link
-      to={`/admin/assignments/${id}`}
+      to={assignmentPath}
+      state={{index}}
       ref={activeItemRef}
       className={`${isLocked ? 'pointer-events-none opacity-60' : ''} flex items-center cursor-pointer ${isActive ? 'bg-primary/5' : 'hover:bg-primary/5'}`}>
       {/* 과제 제출여부 표시 배지 */}
@@ -61,7 +66,7 @@ const SideBarItem = ({
       {isOpen && (
         <div className='flex-1 h-7.75 flex items-center gap-2 pl-7.5'>
           <div className='bg-primary flex-center shrink-0 w-5 h-5 rounded-full text-white text-base'>
-            {index + 1}
+            {index}
           </div>
           <span className='text-lg text-secondary-black font-medium truncate'>
             {title}

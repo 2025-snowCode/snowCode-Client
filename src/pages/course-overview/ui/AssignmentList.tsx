@@ -1,20 +1,26 @@
 import Badge from '@/shared/ui/badge/Badge';
-import {Link} from 'react-router-dom';
+import {useLocation, Link} from 'react-router-dom';
 import type {TAssignment} from '@/entities/assignment/model/schemas';
 
 interface AssignmentListProps {
   isOpen?: boolean;
   assignments: TAssignment[];
+  courseId: number;
 }
 
 interface AssignmentItemProps extends TAssignment {
   id: number;
   index: number;
   isOpen?: boolean;
+  courseId: number;
 }
 
 // 문제 목록
-const AssignmentList = ({isOpen, assignments}: AssignmentListProps) => {
+const AssignmentList = ({
+  isOpen,
+  assignments,
+  courseId,
+}: AssignmentListProps) => {
   return (
     <ul className='flex flex-col divide-y divide-[#EEEBFC]'>
       {assignments.map((assignment, index) => (
@@ -22,6 +28,7 @@ const AssignmentList = ({isOpen, assignments}: AssignmentListProps) => {
           key={assignment.id}
           index={index + 1}
           isOpen={isOpen}
+          courseId={courseId}
           {...assignment}
         />
       ))}
@@ -36,8 +43,13 @@ const AssignmentItem = ({
   index,
   submittedStatus,
   isOpen,
+  courseId,
 }: AssignmentItemProps) => {
+  const {pathname} = useLocation();
   const isLocked = isOpen === false ? 'opacity-60 pointer-events-none' : '';
+  const assignmentPath = pathname.startsWith('/admin')
+    ? `/admin/courses/${courseId}/assignments/${id}`
+    : `/student/courses/${courseId}/assignments/${id}`;
 
   return (
     <li className={`w-full p-4 ${isLocked}`}>
@@ -49,7 +61,7 @@ const AssignmentItem = ({
           </span>
 
           {isOpen ? (
-            <Link to={`/admin/assignments/${id}`} className='min-w-0'>
+            <Link to={assignmentPath} state={{index}} className='min-w-0'>
               <p className='truncate text-secondary-black text-base font-normal hover:text-primary hover:underline hover:underline-offset-4 cursor-pointer'>
                 {title}
               </p>

@@ -23,7 +23,7 @@ const CourseContent = ({
   return (
     <section className='bg-white w-full flex-1 rounded-b-[30px]'>
       {units.map((unit, index) => (
-        <UnitItem key={unit.id} index={index} {...unit} />
+        <UnitItem key={unit.id} index={index} courseId={courseId} {...unit} />
       ))}
     </section>
   );
