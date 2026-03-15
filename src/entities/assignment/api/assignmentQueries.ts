@@ -40,6 +40,6 @@ export const assignmentQueries = {
     queryOptions({
       queryKey: ['assignments', assignmentId],
       queryFn: () => getAssignment(assignmentId),
-      select: (data) => data.response,
+      select: (data) => data,
     }),
 };

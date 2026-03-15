@@ -56,13 +56,15 @@ export const deleteAssignment = async (assignmentId: number) => {
 // 과제 조회 API
 export const getAssignment = async (assignmentId: number) => {
   const response = await privateAxios.get(`/assignments/${assignmentId}`);
-  return apiResponseSchema(assignmentDetailSchema).parse(response.data);
+  const parsed = apiResponseSchema(assignmentDetailSchema).parse(response.data);
+  return parsed.response;
 };
 
 // 과제 추가 API
 export const createAssignment = async (form: TAssignmentForm) => {
   const response = await privateAxios.post('/assignments', form);
-  return apiResponseSchema(assignmentDetailSchema).parse(response.data);
+  const parsed = apiResponseSchema(assignmentDetailSchema).parse(response.data);
+  return parsed.response;
 };
 
 // 과제 수정 API
@@ -71,5 +73,6 @@ export const updateAssignment = async (
   form: TAssignmentForm
 ) => {
   const response = await privateAxios.put(`/assignments/${assignmentId}`, form);
-  return apiResponseSchema(assignmentDetailSchema).parse(response.data);
+  const parsed = apiResponseSchema(assignmentDetailSchema).parse(response.data);
+  return parsed.response;
 };
