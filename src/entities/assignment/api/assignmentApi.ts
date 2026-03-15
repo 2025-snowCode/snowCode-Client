@@ -4,6 +4,7 @@ import {apiResponseSchema} from '@/shared/model/schemas';
 import {
   assignmentDetailsSchema,
   assignmentScheduleSchema,
+  assignmentSubmissionResultSchema,
 } from '../model/schemas';
 import {assignmentCourseSchema} from '@/entities/course/model/schemas';
 
@@ -53,6 +54,20 @@ export const deleteAssignment = async (assignmentId: number) => {
   return apiResponseSchema(z.string()).parse(response.data);
 };
 
+// 과제 코드 조회 API
+export const getAssignmentCode = async (codeId: number) => {
+  const response = await privateAxios.get(`/code/${codeId}`);
+  const parsed = apiResponseSchema(
+    z.object({
+      id: z.number(),
+      code: z.number(),
+      language: z.string(),
+    })
+  ).parse(response.data);
+
+  return parsed.response;
+};
+
 // 과제 제출 API
 export const submitAssignment = async (
   unitId: number,
@@ -60,13 +75,15 @@ export const submitAssignment = async (
   code: string
 ) => {
   const response = await privateAxios.post(
-    `/assignments/${unitId}/${assignmentId}/execute`,
+    `/assignments/${unitId}/${assignmentId}/code`,
     {
       code: code,
       language: 'PYTHON',
     }
   );
-  return apiResponseSchema(
-    z.object({condeId: z.number(), score: z.number()})
-  ).parse(response.data);
+  const parsed = apiResponseSchema(assignmentSubmissionResultSchema).parse(
+    response.data
+  );
+
+  return parsed.response;
 };
