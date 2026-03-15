@@ -22,7 +22,9 @@ const AssignmentFormPage = () => {
   const [title, setTitle] = useState('');
   const [score, setScore] = useState('');
   const [description, setDescription] = useState('');
-  const [testcases, setTestcases] = useState([{testcase: '', answer: ''}]);
+  const [testcases, setTestcases] = useState([
+    {testcase: '', answer: '', isHidden: false},
+  ]);
 
   const {data: assignmentData} = useQuery({
     ...assignmentQueries.getAssignment(assignmentId ?? 0),
@@ -32,11 +34,13 @@ const AssignmentFormPage = () => {
   useEffect(() => {
     if (assignmentData) {
       setTitle(assignmentData.title);
+      setScore(assignmentData.score.toString());
       setDescription(assignmentData.description);
       setTestcases(
-        assignmentData.testcases.map(({testcase, answer}) => ({
+        assignmentData.testcases.map(({testcase, answer, isHidden}) => ({
           testcase,
           answer,
+          isHidden,
         }))
       );
     }
@@ -67,7 +71,7 @@ const AssignmentFormPage = () => {
   });
 
   const handleAddTestcase = () => {
-    setTestcases([...testcases, {testcase: '', answer: ''}]);
+    setTestcases([...testcases, {testcase: '', answer: '', isHidden: false}]);
   };
 
   const handleConfirm = () => {
@@ -120,6 +124,7 @@ const AssignmentFormPage = () => {
                 index={idx}
                 testcase={tc.testcase}
                 answer={tc.answer}
+                isHidden={tc.isHidden}
                 onTestcaseChange={(value) => {
                   const updated = [...testcases];
                   updated[idx] = {...updated[idx], testcase: value};
@@ -128,6 +133,11 @@ const AssignmentFormPage = () => {
                 onAnswerChange={(value) => {
                   const updated = [...testcases];
                   updated[idx] = {...updated[idx], answer: value};
+                  setTestcases(updated);
+                }}
+                onHiddenChange={(value) => {
+                  const updated = [...testcases];
+                  updated[idx] = {...updated[idx], isHidden: value};
                   setTestcases(updated);
                 }}
               />
