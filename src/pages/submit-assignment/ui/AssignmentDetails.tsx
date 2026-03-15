@@ -2,11 +2,15 @@ import {useNavigate} from 'react-router-dom';
 import ArrowleftIcon from '@/assets/svg/arrowleftIcon.svg?react';
 import type {TAssignmentDetails} from '@/entities/assignment/model/schemas';
 
+interface AssignmentDetailsProps extends TAssignmentDetails {
+  index?: number;
+}
 const AssignmentDetails = ({
+  index,
   title,
   description,
   testcases,
-}: TAssignmentDetails) => {
+}: AssignmentDetailsProps) => {
   const navigate = useNavigate();
 
   return (
@@ -18,7 +22,9 @@ const AssignmentDetails = ({
           className='absolute w-4.5 h-4.5 cursor-pointer -left-9.5'
         />
         {/* TODO: 인데스 배지 추가 */}
-        <h2 className='relative text-xl/9'>1. {title}</h2>
+        <h2 className='relative text-xl/9'>
+          {index}. {title}
+        </h2>
       </div>
       <p className='mt-4 text-lg/7.5'>{description}</p>
 
