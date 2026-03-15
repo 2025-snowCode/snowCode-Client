@@ -68,11 +68,13 @@ const AppRoutes = () => {
       <Route element={<AssignmentSubmitLayout />}>
         <Route element={<PrivateRoute allowedRoles={['admin']} />}>
           <Route
-            path='admin/assignments/:assignmentId'
+            path='admin/courses/:courseId/assignments/:assignmentId'
             element={<AssignmentSubmitPage />}
           />
+        </Route>
+        <Route element={<PrivateRoute allowedRoles={['student']} />}>
           <Route
-            path='student/assignments/:assignmentId'
+            path='student/courses/:courseId/assignments/:assignmentId'
             element={<AssignmentSubmitPage />}
           />
         </Route>
