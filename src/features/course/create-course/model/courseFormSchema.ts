@@ -1,8 +1,8 @@
 import {z} from 'zod';
 
-export const YEAR_OPTIONS = ['2021', '2022', '2023', '2024', '2025', '2026'] as const;
 export const SEMESTER_OPTIONS = ['1학기', '2학기', '여름학기', '겨울학기'] as const;
-
+const currentYear = new Date().getFullYear();
+export const YEAR_OPTIONS = Array.from({length:6}, (_,i)=>String(currentYear - 5 +i)) as unknown as readonly string[];
 export const SEMESTER_CODE_MAP = {
   '1학기': 'FIRST',
   '2학기': 'SECOND',
@@ -21,7 +21,7 @@ export const SEMESTER_DISPLAY_MAP = Object.fromEntries(
 export const courseFormSchema = z.object({
   title: z.string().min(1, '강의 명을 입력해주세요.'),
   section: z.string().min(1, '분반을 입력해주세요.'),
-  year: z.enum(YEAR_OPTIONS, {
+  year: z.enum([YEAR_OPTIONS[0], ...YEAR_OPTIONS.slice(1)], {
     errorMap: () => ({message: '연도를 선택해주세요.'}),
   }),
   semester: z.enum(SEMESTER_OPTIONS, {
