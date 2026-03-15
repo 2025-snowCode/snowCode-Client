@@ -27,6 +27,7 @@ export const assignmentFormSchema = z.object({
     z.object({
       testcase: z.string(),
       answer: z.string(),
+      isHidden: z.boolean(),
     })
   ),
 });
@@ -34,6 +35,7 @@ export const assignmentFormSchema = z.object({
 export const assignmentDetailSchema = z.object({
   id: z.number(),
   title: z.string(),
+  score: z.number(),
   description: z.string(),
   count: z.number(),
   testcases: z.array(
@@ -41,6 +43,7 @@ export const assignmentDetailSchema = z.object({
       id: z.number(),
       testcase: z.string(),
       answer: z.string(),
+      isHidden: z.boolean(),
     })
   ),
 });
