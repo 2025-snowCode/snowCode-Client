@@ -15,7 +15,8 @@ const CodeEditor = () => {
   return (
     <Group
       orientation='vertical'
-      className='h-full bg-[#1e1e1e] rounded-[30px]'>
+      className='h-full bg-[#1e1e1e] rounded-[30px]'
+      style={{height: '100%'}}>
       {/* 상단 패널: 코드 에디터와 버튼들 */}
       <Panel
         id='top-panel'

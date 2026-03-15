@@ -45,7 +45,7 @@ const SideBarItem = ({
       className={`${isLocked ? 'pointer-events-none opacity-60' : ''} flex items-center cursor-pointer ${isActive ? 'bg-primary/5' : 'hover:bg-primary/5'}`}>
       {/* 과제 제출여부 표시 배지 */}
       <div
-        className={`w-30 shrink-0 flex flex-col items-center ${sideBarBorderClass}`}>
+        className={`w-26 shrink-0 flex flex-col items-center ${sideBarBorderClass}`}>
         <div
           className={`w-px flex-1 min-h-1.5 ${isFirst ? '' : 'bg-purple-stroke'}`}
         />

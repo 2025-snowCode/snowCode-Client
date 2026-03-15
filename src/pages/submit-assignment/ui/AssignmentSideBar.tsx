@@ -31,9 +31,9 @@ const AssignmentProgressSideBar = () => {
     <>
       <aside
         ref={sideBarRef}
-        className={`${isOpen ? 'w-120 overflow-y-auto' : 'w-30 overflow-hidden'} transition-[width] duration-150 ease-in-out flex flex-col fixed top-0 left-0 z-30 bg-white h-full shadow-box`}>
+        className={`${isOpen ? 'w-120 overflow-y-auto' : 'w-26 overflow-hidden'} transition-[width] duration-150 ease-in-out flex flex-col fixed top-0 left-0 z-26 bg-white h-full shadow-box`}>
         <div
-          className={`w-30 flex flex-col items-center pt-10 ${sideBarBorderClass}`}>
+          className={`w-26 flex flex-col items-center pt-10 ${sideBarBorderClass}`}>
           <img
             src={snowCodeLogo}
             alt='SnowCode Logo'
@@ -53,7 +53,7 @@ const AssignmentProgressSideBar = () => {
               {/* 단원 제목 영역 */}
               <div
                 className={`flex items-end h-9 ${!unit.isOpen ? 'opacity-60' : ''}`}>
-                <div className={`w-30 h-full shrink-0 ${sideBarBorderClass}`} />
+                <div className={`w-26 h-full shrink-0 ${sideBarBorderClass}`} />
                 {isOpen && (
                   <div className='flex-1 pl-7.5 flex items-center gap-2'>
                     <h3 className='text-base text-light-black'>{unit.title}</h3>
@@ -90,7 +90,7 @@ const AssignmentProgressSideBar = () => {
         <div className={`sticky bottom-0 h-10 bg-white`}>
           <button
             onClick={onToggleSidebar}
-            className={`w-30 h-10 flex-center ${sideBarBorderClass}`}>
+            className={`w-26 h-10 flex-center ${sideBarBorderClass}`}>
             <EllipsisIcon className='cursor-pointer w-8.25 h-1.75 text-primary' />
           </button>
           <div className='flex-1' />

@@ -7,7 +7,7 @@ const AssignmentDetails = () => {
   const {title, description, testcases} = mockAssignmentDetail.response;
 
   return (
-    <section className='py-10.5 pl-19.5 pr-10.5 font-medium text-primary-black'>
+    <section className='h-full py-6.5 pl-15.5 pr-8.5 font-medium text-primary-black overflow-y-auto'>
       {/* 과제 제목 및 설명 */}
       <div className='relative flex items-center'>
         <ArrowleftIcon
@@ -15,14 +15,14 @@ const AssignmentDetails = () => {
           className='absolute w-4.5 h-4.5 cursor-pointer -left-9.5'
         />
         {/* TODO: 인데스 배지 추가 */}
-        <h2 className='relative text-2xl/9'>1. {title}</h2>
+        <h2 className='relative text-xl/9'>1. {title}</h2>
       </div>
-      <p className='mt-7.5 text-[20px]/7.5'>{description}</p>
+      <p className='mt-4 text-lg/7.5'>{description}</p>
 
       {/* 입, 출력 예제 */}
-      <div className='mt-12.5'>
-        <h3 className='bg-[#EDE9FF] rounded-t-[10px] px-7 py-4 text-lg/[27px]'>
-          입력 예제
+      <div className='mt-8'>
+        <h3 className='bg-[#EDE9FF] rounded-t-[10px] px-7 py-3 text-base/[27px]'>
+          입출력 예제
         </h3>
         <ul className='bg-gray rounded-b-[10px] divide-y divide-purple-stroke'>
           {testcases.map(({id, testcase, answer}, idx) => (
