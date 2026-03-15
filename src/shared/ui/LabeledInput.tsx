@@ -31,7 +31,7 @@ const LabeledInput = forwardRef<HTMLInputElement, LabeledInputProps>(
         <label
           htmlFor={inputId}
           className={twMerge(
-            'font-medium text-base leading-[150%]',
+            'font-medium text-base leading-[150%] flex-row gap-1',
             !showLabel && 'sr-only'
           )}>
           {label}
