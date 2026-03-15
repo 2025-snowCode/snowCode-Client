@@ -15,6 +15,7 @@ import {useSyncUserRole} from '@/features/auth/sync-user-role/model/useSyncUserR
 import UnitEditorPage from '@/pages/unit-editor/UnitEditorPage';
 import AssignmentManagePage from '@/pages/manage-assignment/AssignmentManagePage';
 import AssignmentSubmitPage from '@/pages/submit-assignment/AssignmentSubmitPage';
+import AssignmentSubmitLayout from '@/pages/submit-assignment/AssignmentSubmitLayout';
 
 const AppRoutes = () => {
   useSyncUserRole();
@@ -51,10 +52,6 @@ const AppRoutes = () => {
               path='assignments/select'
               element={<AssignmentSelectPage />}
             />
-            <Route
-              path='assignments/:assignmentId'
-              element={<AssignmentSubmitPage />}
-            />
             <Route path='courses/:id' element={<CourseOverviewPage />} />
             <Route path='courses/create' element={<CourseCreatePage />} />
             <Route path='student' element={<StudentManagementPage />} />
@@ -64,6 +61,20 @@ const AppRoutes = () => {
             />
             <Route path='units/:id' element={<UnitEditorPage />} />
           </Route>
+        </Route>
+      </Route>
+
+      {/* 과제 제출 페이지 */}
+      <Route element={<AssignmentSubmitLayout />}>
+        <Route element={<PrivateRoute allowedRoles={['admin']} />}>
+          <Route
+            path='admin/assignments/:assignmentId'
+            element={<AssignmentSubmitPage />}
+          />
+          <Route
+            path='student/assignments/:assignmentId'
+            element={<AssignmentSubmitPage />}
+          />
         </Route>
       </Route>
     </Routes>
