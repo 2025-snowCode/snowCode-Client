@@ -8,6 +8,7 @@ export const ENDPOINTS = {
     DETAIL: (id: number | string) => `/courses/${id}`,
   },
   ASSIGNMENTS: {
+    ROOT: '/assignments',
     SCHEDULE: '/assignments/schedule',
     MY: '/assignments/my',
     DETAIL: (id: number | string) => `/assignments/${id}`,

@@ -1,7 +1,7 @@
 import Button from '@/shared/ui/button/Button';
 import SurfaceCard from '@/shared/ui/SurfaceCard';
 
-type AssignmentFormLayoutProps = {
+interface AssignmentFormLayoutProps {
   title: string;
   titleExtra?: React.ReactNode;
   content: React.ReactNode;
@@ -10,7 +10,7 @@ type AssignmentFormLayoutProps = {
   cancelLabel?: string;
   confirmLabel?: string;
   confirmDisabled?: boolean;
-};
+}
 
 const AssignmentFormLayout = ({
   title,
