@@ -1,4 +1,4 @@
-import {useNavigate, useParams} from 'react-router-dom';
+import {Navigate, useNavigate, useParams} from 'react-router-dom';
 import {useQuery} from '@tanstack/react-query';
 import {ROUTES} from '@/shared/config/routes';
 import AssignmentFormLayout from '@/widgets/assignment-form-layout/ui/AssignmentFormLayout';
@@ -12,26 +12,27 @@ import {useRef} from 'react';
 export const CourseEditPage = () => {
   const {id} = useParams<{id: string}>();
   const courseId = Number(id);
+  const isValidId = id !== undefined && !isNaN(courseId);
   const navigate = useNavigate();
   const formRef = useRef<HTMLFormElement>(null);
 
   const {data, isLoading, isError} = useQuery({
     ...courseQueries.getCourseDetails(courseId),
+    enabled: isValidId,
   });
   const {submit, isPending} = useEditCourse(courseId);
 
-  if (!id || isNaN(courseId)) {
-    navigate(ROUTES.ADMIN.ROOT);
-    return null;
+  if (!isValidId) {
+    return <Navigate to={ROUTES.ADMIN.ROOT} />;
   }
 
-  if (isLoading || !data) {
+  if (isError) {
     return (
       <AssignmentFormLayout
         title='강의 수정'
         content={
           <div className='flex justify-center py-20 text-light-black'>
-            데이터를 불러오는 중입니다...
+            데이터를 불러오는 중에 오류가 발생했습니다.
           </div>
         }
         onCancel={() => navigate(ROUTES.ADMIN.ROOT)}
@@ -41,13 +42,13 @@ export const CourseEditPage = () => {
     );
   }
 
-  if (isError || !data) {
+  if (isLoading || !data) {
     return (
       <AssignmentFormLayout
         title='강의 수정'
         content={
           <div className='flex justify-center py-20 text-light-black'>
-            데이터를 불러오는 중에 오류가 발생했습니다.
+            데이터를 불러오는 중입니다.
           </div>
         }
         onCancel={() => navigate(ROUTES.ADMIN.ROOT)}
