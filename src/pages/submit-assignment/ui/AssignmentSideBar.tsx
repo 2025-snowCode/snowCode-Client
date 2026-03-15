@@ -6,16 +6,21 @@ import EllipsisIcon from '@/assets/svg/ellipsisIcon.svg?react';
 import {useParams} from 'react-router-dom';
 import LockedIcon from '@/assets/svg/lock.svg?react';
 import {formatDateMonthDay} from '@/shared/lib/course';
-import {mockSideBarCourse} from '../mock';
 import {useClickOutside} from '@/shared/lib';
+import type {TUnit} from '@/entities/unit/model/schemas';
 
-const AssignmentProgressSideBar = () => {
+interface AssignmentSideBarProps {
+  units: TUnit[];
+}
+
+const AssignmentSideBar = ({units}: AssignmentSideBarProps) => {
   const {assignmentId} = useParams();
   const sideBarRef = useRef<HTMLElement>(null);
   const [isOpen, setIsOpen] = useState(false);
 
-  const units = mockSideBarCourse.response.units;
-  const sideBarBorderClass = isOpen ? 'border-r border-purple-stroke' : '';
+  const onToggleSidebar = () => {
+    setIsOpen((prev) => !prev);
+  };
 
   const onCloseSideBar = useCallback(() => {
     if (isOpen) setIsOpen(false);
@@ -23,9 +28,7 @@ const AssignmentProgressSideBar = () => {
 
   useClickOutside({ref: sideBarRef, onClickOutside: onCloseSideBar});
 
-  const onToggleSidebar = () => {
-    setIsOpen((prev) => !prev);
-  };
+  const sideBarBorderClass = isOpen ? 'border-r border-purple-stroke' : '';
 
   return (
     <>
@@ -74,7 +77,7 @@ const AssignmentProgressSideBar = () => {
               {unit.assignments.map((assignment, index) => (
                 <SideBarItem
                   key={assignment.id}
-                  index={index}
+                  index={index + 1}
                   isOpen={isOpen}
                   isFirst={index === 0}
                   isLast={index === unit.assignmentCount - 1}
@@ -105,4 +108,4 @@ const AssignmentProgressSideBar = () => {
   );
 };
 
-export default AssignmentProgressSideBar;
+export default AssignmentSideBar;
