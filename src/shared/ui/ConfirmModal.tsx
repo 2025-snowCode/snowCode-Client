@@ -18,10 +18,18 @@ export default function ConfirmModal({
   onCancel,
 }: ConfirmModalProps) {
   return (
-    <div className='fixed inset-0 z-50 flex items-center justify-center bg-black/40'>
-      <div className='bg-white rounded-2xl p-8 w-80 flex flex-col gap-6 shadow-lg'>
+    <div
+      className='fixed inset-0 z-50 flex items-center justify-center bg-black/40'
+      role='presentation'>
+      <section
+        role='dialog'
+        aria-modal='true'
+        aria-labelledby='confirm-modal-title'
+        className='bg-white rounded-2xl p-8 w-80 flex flex-col gap-6 shadow-lg'>
         <div className='flex flex-col gap-2'>
-          <p className='text-lg font-semibold text-primary-black'>{title}</p>
+          <h2 id='confirm-modal-title' className='text-lg font-semibold text-primary-black'>
+            {title}
+          </h2>
           {description && (
             <p className='text-sm text-secondary-black'>{description}</p>
           )}
@@ -34,7 +42,7 @@ export default function ConfirmModal({
             {confirmLabel}
           </Button>
         </div>
-      </div>
+      </section>
     </div>
   );
 }
