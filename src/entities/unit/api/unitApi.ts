@@ -3,10 +3,11 @@ import {privateAxios} from '@/shared/api/axiosInstance';
 import {apiResponseSchema} from '@/shared/model/schemas';
 import {type TUnitFormSchema} from '../model/schemas';
 import {unitSchema} from '../model/schemas';
+import {ENDPOINTS} from '@/shared/config/endpoints';
 
 // 강의별 전체 단원 조회
 export const getAllUnitsByCourseId = async (courseId: number) => {
-  const response = await privateAxios.get(`/courses/${courseId}/units`);
+  const response = await privateAxios.get(ENDPOINTS.UNITS.BY_COURSE(courseId));
   return apiResponseSchema(
     z.object({
       count: z.number(),
@@ -19,25 +20,25 @@ export const getAllUnitsByCourseId = async (courseId: number) => {
 
 // 단일 단원 조회
 export const getUnitById = async (unitId: number) => {
-  const response = await privateAxios.get(`/units/${unitId}`);
+  const response = await privateAxios.get(ENDPOINTS.UNITS.DETAIL(unitId));
   return apiResponseSchema(unitSchema).parse(response.data);
 };
 
 // 단원 삭제
 export const deleteUnit = async (unitId: number) => {
-  const response = await privateAxios.delete(`/units/${unitId}`);
+  const response = await privateAxios.delete(ENDPOINTS.UNITS.DETAIL(unitId));
   return apiResponseSchema(z.string()).parse(response.data);
 };
 
 // 단원 생성
 export const createUnit = async (courseId: number, unit: TUnitFormSchema) => {
-  const response = await privateAxios.post(`/units/${courseId}`, unit);
+  const response = await privateAxios.post(ENDPOINTS.UNITS.CREATE(courseId), unit);
   return apiResponseSchema(unitSchema).parse(response.data);
 };
 
 // 단원 수정
 export const updateUnit = async (unitId: number, unit: TUnitFormSchema) => {
-  const response = await privateAxios.put(`/units/${unitId}`, unit);
+  const response = await privateAxios.put(ENDPOINTS.UNITS.DETAIL(unitId), unit);
   return apiResponseSchema(unitSchema).parse(response.data);
 };
 
@@ -47,7 +48,7 @@ export const deleteAssignmentFromUnit = async (
   assignmentId: number
 ) => {
   const response = await privateAxios.delete(
-    `/units/${unitId}/assignments/${assignmentId}`
+    ENDPOINTS.UNITS.ASSIGNMENT_DETAIL(unitId, assignmentId)
   );
   return apiResponseSchema(z.string()).parse(response.data);
 };
