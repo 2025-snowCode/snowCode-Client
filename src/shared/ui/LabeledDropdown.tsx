@@ -41,7 +41,7 @@ const LabeledDropdown = ({
   );
 
   return (
-    <label className='flex flex-col gap-3'>
+    <div className='flex flex-col gap-3'>
       <span className='font-medium text-base leading-[150%]'>{label}</span>
 
       <Dropdown
@@ -55,7 +55,7 @@ const LabeledDropdown = ({
       {errorMessage && (
         <span className='text-sm text-badge-red'>{errorMessage}</span>
       )}
-    </label>
+    </div>
   );
 };
 
