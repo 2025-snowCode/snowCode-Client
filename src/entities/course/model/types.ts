@@ -1,4 +1,4 @@
-import type {Assignment} from '@/entities/assignment/model/schemas';
+import type {TAssignment} from '@/entities/assignment/model/schemas';
 import type {ApiResponse, SemesterCode} from '@/shared/model/types';
 export type {CreateCourseRequest, CreateCourseResponse} from './courseSchema';
 
@@ -25,7 +25,7 @@ export interface Unit {
   dueDate: string;
   isOpen?: boolean;
   assignmentCount: number;
-  assignments: Assignment[];
+  assignments: TAssignment[];
 }
 
 /**
@@ -63,7 +63,7 @@ export interface DashboardCourse extends BaseCourse {
  */
 export interface AssignmentSelectCourse extends Omit<BaseCourse, 'unitCount'> {
   count: number;
-  assignments: Pick<Assignment, 'id' | 'title'>[];
+  assignments: Pick<TAssignment, 'id' | 'title'>[];
 }
 
 // 강의 상세 응답 타입 정의
@@ -92,4 +92,3 @@ export type CourseOptionsResponse = ApiResponse<{
   count: number;
   courses: DashboardCourse[];
 }>;
-
