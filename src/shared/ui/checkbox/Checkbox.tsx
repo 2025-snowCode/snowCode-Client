@@ -1,4 +1,4 @@
-import styles from '@/shared/ui/checkbox/Checkbox.module.scss';
+import styles from '@/shared/ui/checkbox/Checkbox.module.css';
 import type {ChangeEvent, InputHTMLAttributes} from 'react';
 
 interface CheckboxProps extends Omit<

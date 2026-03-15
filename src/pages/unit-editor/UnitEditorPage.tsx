@@ -68,7 +68,7 @@ const UnitEditorPage = () => {
     onSuccess: (data) => {
       // 단원 목록 갱신
       invalidateUnitList();
-      setSelectedUnitId(data.response.id);
+      setSelectedUnitId(data.id);
       setActiveMode('editing'); // 생성 후 편집 모드로 전환
       resetStore(); // 단원 폼 초기화
       alert('새 단원이 성공적으로 생성되었습니다.');

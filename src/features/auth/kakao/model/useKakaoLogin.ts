@@ -11,9 +11,9 @@ export const useKakaoLogin = () => {
 
   const {mutate} = useMutation({
     ...kakaoMutations.kakaoLogin,
-    onSuccess: ({response}) => {
-      const userType = response.role === 'ADMIN' ? 'admin' : 'student';
-      login(response.name, userType, response.accessToken);
+    onSuccess: (data) => {
+      const userType = data.role === 'ADMIN' ? 'admin' : 'student';
+      login(data.name, userType, data.accessToken);
       navigate(userType === 'admin' ? '/admin' : '/student');
     },
     onError: (error) => {
