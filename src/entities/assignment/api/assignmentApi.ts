@@ -52,3 +52,21 @@ export const deleteAssignment = async (assignmentId: number) => {
   const response = await privateAxios.delete(`/assignments/${assignmentId}`);
   return apiResponseSchema(z.string()).parse(response.data);
 };
+
+// 과제 제출 API
+export const submitAssignment = async (
+  unitId: number,
+  assignmentId: number,
+  code: string
+) => {
+  const response = await privateAxios.post(
+    `/assignments/${unitId}/${assignmentId}/execute`,
+    {
+      code: code,
+      language: 'PYTHON',
+    }
+  );
+  return apiResponseSchema(
+    z.object({condeId: z.number(), score: z.number()})
+  ).parse(response.data);
+};
