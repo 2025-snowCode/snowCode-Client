@@ -1,4 +1,4 @@
-import AssignmentList from './AssignmentList';
+import AssignmentList from '@/pages/course-overview/ui/AssignmentList';
 import Lock from '@/assets/svg/lock.svg?react';
 import Badge from '@/shared/ui/badge/Badge';
 import {formatPeriod} from '@/shared/lib/course';

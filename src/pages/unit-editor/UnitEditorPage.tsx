@@ -1,15 +1,15 @@
-import {UnitList} from './ui/UnitList';
-import {UnitForm} from './ui/UnitForm';
+import {UnitList} from '@/pages/unit-editor/ui/UnitList';
+import {UnitForm} from '@/pages/unit-editor/ui/UnitForm';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import {unitQueries} from '@/entities/unit/api/unitQueries';
+import {unitMutations} from '@/entities/unit/api/unitMutations';
+import {useUnitStore} from '@/entities/unit/model/useUnitStore';
 import {useParams} from 'react-router-dom';
 import {useState} from 'react';
-import type {Mode} from './model/types';
-import {unitMutations} from '@/entities/unit/api/unitMutations';
+import type {Mode} from '@/pages/unit-editor/model/types';
 import type {TUnitFormSchema} from '@/entities/unit/model/schemas';
 import {EmptyState} from '@/shared/ui/EmptyState';
 import SurfaceCard from '@/shared/ui/SurfaceCard';
-import useUnitStore from '@/entities/unit/model/useUnitStore';
 
 const UnitEditorPage = () => {
   const {id} = useParams(); // 강의 ID

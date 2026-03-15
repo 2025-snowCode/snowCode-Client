@@ -1,8 +1,8 @@
 import LogoIcon from '@/assets/images/snowCode_logo.svg?react';
-import CourseList from './ui/CourseList';
+import CourseList from '@/pages/dashboard/ui/CourseList';
 import Button from '@/shared/ui/button/Button';
 import AddIcon from '@/assets/svg/addIcon.svg?react';
-import ScheduleList from './ui/ScheduleList';
+import ScheduleList from '@/pages/dashboard/ui/ScheduleList';
 import {Link} from 'react-router-dom';
 import {useUserStore} from '@/entities/auth/model/useUserStore';
 import {
@@ -10,7 +10,7 @@ import {
 } from '@tanstack/react-query';
 import {EmptyState} from '@/shared/ui/EmptyState';
 import {courseQueries} from '@/entities/course/api/courseQueries';
-import {assignmentQueries} from '@/entities/assignment';
+import {assignmentQueries} from '@/entities/assignment/api/assignmentQueries';
 
 const Dashboard = () => {
   const userType = useUserStore((state) => state.userType);
