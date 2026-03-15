@@ -1,12 +1,11 @@
 import {useMutation, useQueryClient} from '@tanstack/react-query';
-import {updateCourse, courseQueries} from '@/entities/course';
+import {updateCourse} from '@/entities/course/api/courseApi';
+import {courseQueries} from '@/entities/course/api/courseQueries';
 import {handleApiError} from '@/shared/lib/handleApiError';
 import {useNavigate} from 'react-router-dom';
 import {ROUTES} from '@/shared/config/routes';
-import {
-  SEMESTER_CODE_MAP,
-  type CourseFormValues,
-} from '@/features/course/create-course/model/courseFormSchema';
+import {type CourseFormValues} from '@/features/course/create-course/model/schemas';
+import {parseSemester} from '@/shared/lib/course';
 
 export const useEditCourse = (courseId: number) => {
   const queryClient = useQueryClient();
@@ -31,7 +30,7 @@ export const useEditCourse = (courseId: number) => {
       title: data.title,
       section: data.section,
       year: Number(data.year),
-      semester: SEMESTER_CODE_MAP[data.semester],
+      semester: parseSemester(data.semester),
       description: data.description,
       students: [],
     });
