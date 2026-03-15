@@ -1,15 +1,26 @@
 import Button from '@/shared/ui/button/Button';
-import {Editor} from '@monaco-editor/react';
-import {useRef, useState} from 'react';
+import {Editor, type OnMount} from '@monaco-editor/react';
+import {useRef} from 'react';
 import PlayIcon from '@/assets/svg/playIcon.svg?react';
 import {Panel, Group, Separator} from 'react-resizable-panels';
 
-const CodeEditor = () => {
-  const editorRef = useRef(null);
-  const [value, setValue] = useState('');
+type EditorInstance = Parameters<OnMount>[0];
 
-  const handleEditorDidMount = (editor: any) => {
+interface CodeEditorProps {
+  onSubmit: (code: string) => void;
+  isSubmitPending: boolean;
+}
+
+const CodeEditor = ({onSubmit, isSubmitPending}: CodeEditorProps) => {
+  const editorRef = useRef<EditorInstance | null>(null);
+
+  const handleEditorDidMount: OnMount = (editor) => {
     editorRef.current = editor;
+  };
+
+  const handleSubmitCode = () => {
+    const sourceCode = editorRef.current?.getValue() ?? '';
+    onSubmit(sourceCode);
   };
 
   return (
@@ -26,7 +37,6 @@ const CodeEditor = () => {
           <Button color='tonal' size='compact'>
             제출 이력
           </Button>
-
           <div className='flex gap-4'>
             <Button
               color='lightBlack'
@@ -35,8 +45,12 @@ const CodeEditor = () => {
               <PlayIcon className='w-4 h-4' />
               코드 실행
             </Button>
-            <Button color='ghostWhite' size='compact'>
-              제출 및 채점
+            <Button
+              color='ghostWhite'
+              size='compact'
+              onClick={handleSubmitCode}
+              disabled={isSubmitPending}>
+              {isSubmitPending ? '제출 중...' : '제출 및 채점'}
             </Button>
           </div>
         </div>
@@ -45,8 +59,6 @@ const CodeEditor = () => {
           defaultLanguage='python'
           defaultValue='# 코드를 작성하세요'
           onMount={handleEditorDidMount}
-          value={value}
-          onChange={(value) => setValue(value ?? '')}
           options={{
             fontSize: 16,
             padding: {top: 25, bottom: 16},
