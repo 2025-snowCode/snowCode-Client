@@ -8,9 +8,9 @@ export const unitQueries = {
       queryKey: ['units', courseId],
       queryFn: () => getAllUnitsByCourseId(courseId),
       select: (data) => ({
-        unitList: data.response.units,
-        unitCount: data.response.count,
-        firstUnitId: data.response.units[0]?.id ?? null,
+        unitList: data.units,
+        unitCount: data.count,
+        firstUnitId: data.units[0]?.id ?? null,
       }),
     }),
 
@@ -20,7 +20,7 @@ export const unitQueries = {
       queryKey: ['units', 'detail', unitId],
       queryFn: unitId ? () => getUnitById(unitId) : skipToken,
       select: (data) => {
-        return data.response;
+        return data;
       },
     }),
 };

@@ -25,8 +25,11 @@ export const createCourseRequestSchema = courseCoreSchema.extend({
 
 /** 강의 상세 정보 스키마 */
 export const courseOverviewSchema = courseBaseSchema.extend({
+  year: z.number(),
+  semester: semesterCodeSchema,
+  section: z.string(),
+  studentCount: z.number(),
   unitCount: z.number(),
-  studentCount: z.number().optional(),
   units: z.array(unitSchema),
 });
 
