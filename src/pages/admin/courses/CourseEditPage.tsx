@@ -4,9 +4,9 @@ import {ROUTES} from '@/shared/config/routes';
 import AssignmentFormLayout from '@/widgets/assignment-form-layout/ui/AssignmentFormLayout';
 import {CourseForm} from '@/widgets/course-form/ui/CourseForm';
 import {useEditCourse} from '@/features/course/edit-course/model/useEditCourse';
-import {SEMESTER_DISPLAY_MAP} from '@/features/course/create-course/model/courseFormSchema';
 import {courseQueries} from '@/entities/course/api/courseQueries';
-import type {CourseFormValues} from '@/features/course/create-course/model/courseFormSchema';
+import {formatSemester} from '@/shared/lib/course';
+import type {CourseFormValues} from '@/features/course/create-course/model/schemas';
 import {useRef} from 'react';
 
 export const CourseEditPage = () => {
@@ -61,7 +61,7 @@ export const CourseEditPage = () => {
     title: data.title,
     section: data.section,
     year: String(data.year) as CourseFormValues['year'],
-    semester: SEMESTER_DISPLAY_MAP[data.semester],
+    semester: formatSemester(data.semester) as CourseFormValues['semester'],
     description: data.description,
   };
 

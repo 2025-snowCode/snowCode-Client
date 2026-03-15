@@ -1,14 +1,14 @@
 import {z} from 'zod';
 import {privateAxios} from '@/shared/api/axiosInstance';
 import {apiResponseSchema} from '@/shared/model/schemas';
-import {type TUnitFormSchema} from '../model/schemas';
-import {unitSchema} from '../model/schemas';
+import {type TUnitFormSchema} from '@/entities/unit/model/schemas';
+import {unitSchema} from '@/entities/unit/model/schemas';
 import {ENDPOINTS} from '@/shared/config/endpoints';
 
 // 강의별 전체 단원 조회
 export const getAllUnitsByCourseId = async (courseId: number) => {
   const response = await privateAxios.get(ENDPOINTS.UNITS.BY_COURSE(courseId));
-  return apiResponseSchema(
+  const parsed = apiResponseSchema(
     z.object({
       count: z.number(),
       units: z.array(
@@ -16,30 +16,35 @@ export const getAllUnitsByCourseId = async (courseId: number) => {
       ),
     })
   ).parse(response.data);
+  return parsed.response;
 };
 
 // 단일 단원 조회
 export const getUnitById = async (unitId: number) => {
   const response = await privateAxios.get(ENDPOINTS.UNITS.DETAIL(unitId));
-  return apiResponseSchema(unitSchema).parse(response.data);
+  const parsed = apiResponseSchema(unitSchema).parse(response.data);
+  return parsed.response;
 };
 
 // 단원 삭제
 export const deleteUnit = async (unitId: number) => {
   const response = await privateAxios.delete(ENDPOINTS.UNITS.DETAIL(unitId));
-  return apiResponseSchema(z.string()).parse(response.data);
+  const parsed = apiResponseSchema(z.string()).parse(response.data);
+  return parsed.response;
 };
 
 // 단원 생성
 export const createUnit = async (courseId: number, unit: TUnitFormSchema) => {
   const response = await privateAxios.post(ENDPOINTS.UNITS.CREATE(courseId), unit);
-  return apiResponseSchema(unitSchema).parse(response.data);
+  const parsed = apiResponseSchema(unitSchema).parse(response.data);
+  return parsed.response;
 };
 
 // 단원 수정
 export const updateUnit = async (unitId: number, unit: TUnitFormSchema) => {
   const response = await privateAxios.put(ENDPOINTS.UNITS.DETAIL(unitId), unit);
-  return apiResponseSchema(unitSchema).parse(response.data);
+  const parsed = apiResponseSchema(unitSchema).parse(response.data);
+  return parsed.response;
 };
 
 // 단원에 등록된 과제 삭제
@@ -50,5 +55,6 @@ export const deleteAssignmentFromUnit = async (
   const response = await privateAxios.delete(
     ENDPOINTS.UNITS.ASSIGNMENT_DETAIL(unitId, assignmentId)
   );
-  return apiResponseSchema(z.string()).parse(response.data);
+  const parsed = apiResponseSchema(z.string()).parse(response.data);
+  return parsed.response;
 };

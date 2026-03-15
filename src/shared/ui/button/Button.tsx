@@ -1,5 +1,5 @@
 import {twMerge} from 'tailwind-merge';
-import {buttonStyles, type ButtonVariants} from './button-styles';
+import {buttonStyles, type ButtonVariants} from '@/shared/ui/button/button-styles';
 
 interface ButtonProps extends ButtonVariants {
   children: React.ReactNode;

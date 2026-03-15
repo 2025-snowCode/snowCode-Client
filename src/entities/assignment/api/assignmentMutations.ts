@@ -1,9 +1,5 @@
-import type {TAssignmentForm} from '../model/schemas';
-import {
-  createAssignment,
-  deleteAssignment,
-  updateAssignment,
-} from './assignmentApi';
+import type {TAssignmentForm} from '@/entities/assignment/model/schemas';
+import {createAssignment,updateAssignment,deleteAssignment} from '@/entities/assignment/api/assignmentApi';
 
 export const assignmentMutations = {
   deleteAssignment: {

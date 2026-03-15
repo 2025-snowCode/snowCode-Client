@@ -1,5 +1,5 @@
 import type {TAssignment} from '@/entities/assignment/model/schemas';
-import type {TAssignmentCourse} from '@/entities/course/model/schemas';
+import type {TAssignmentCourse} from '@/entities/course/model/types';
 import type {MouseEvent, ReactNode} from 'react';
 
 type T = TAssignmentCourse['assignments'][number];

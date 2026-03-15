@@ -1,6 +1,7 @@
 import {useMutation, useQueryClient} from '@tanstack/react-query';
-import {deleteCourse, courseQueries} from '@/entities/course';
-import {assignmentQueries} from '@/entities/assignment';
+import {deleteCourse} from '@/entities/course/api/courseApi';
+import {courseQueries} from '@/entities/course/api/courseQueries';
+import {assignmentQueries} from '@/entities/assignment/api/assignmentQueries';
 import {handleApiError} from '@/shared/lib/handleApiError';
 
 export const useDeleteCourse = (courseId: number, onSuccess?: () => void) => {

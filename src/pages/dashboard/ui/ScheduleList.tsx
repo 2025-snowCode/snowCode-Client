@@ -1,4 +1,4 @@
-import ScheduleCard from './ScheduleCard';
+import ScheduleCard from '@/pages/dashboard/ui/ScheduleCard';
 import EventMarkerIcon from '@/assets/svg/eventMarkerIcon.svg?react';
 import {formatDateMonthDay} from '@/shared/lib/course';
 import type {TAssignmentSchedule} from '@/entities/assignment/model/schemas';

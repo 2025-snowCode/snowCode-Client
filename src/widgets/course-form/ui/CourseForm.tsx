@@ -8,8 +8,8 @@ import {
   courseFormSchema,
   YEAR_OPTIONS,
   SEMESTER_OPTIONS,
-} from '@/features/course/create-course/model/courseFormSchema';
-import type {CourseFormValues} from '@/features/course/create-course/model/courseFormSchema';
+} from '@/features/course/create-course/model/schemas';
+import type {CourseFormValues} from '@/features/course/create-course/model/schemas';
 
 interface CourseFormProps {
   defaultValues?: Partial<CourseFormValues>;

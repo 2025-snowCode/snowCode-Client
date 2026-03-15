@@ -1,5 +1,5 @@
-import type {TDashboardCourse} from '@/entities/course/model/schemas';
-import CourseCard from './CourseCard';
+import type {TDashboardCourse} from '@/entities/course/model/types';
+import CourseCard from '@/pages/dashboard/ui/CourseCard';
 
 interface CourseListProps {
   courseList: TDashboardCourse[];

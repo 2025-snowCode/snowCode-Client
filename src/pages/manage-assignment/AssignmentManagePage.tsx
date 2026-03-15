@@ -11,7 +11,7 @@ import {courseQueries} from '@/entities/course/api/courseQueries';
 import {useAssignmentList} from '@/features/assignment/filter-assignment/lib/useAssignmentList';
 import {assignmentMutations} from '@/entities/assignment/api/assignmentMutations';
 import {assignmentQueries} from '@/entities/assignment/api/assignmentQueries';
-import AssignmentManageActionsBar from './ui/AssignmentManageActionsBar';
+import AssignmentManageActionsBar from '@/pages/manage-assignment/ui/AssignmentManageActionsBar';
 import AddIcon from '@/assets/svg/addIcon.svg?react';
 import {Link, useNavigate} from 'react-router-dom';
 import {buttonStyles} from '@/shared/ui/button/button-styles';
