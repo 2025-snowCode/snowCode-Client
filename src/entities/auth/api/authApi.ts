@@ -4,13 +4,14 @@ import {
   kakaoLoginApiResponseSchema,
   type KakaoLoginApiResponse,
 } from '@/entities/auth/model/types';
+import {ENDPOINTS} from '@/shared/config/endpoints';
 
 export const kakaoLogin = async (
   oAuthToken: string,
   role: 'ADMIN' | 'USER',
   studentId?: string
 ): Promise<ApiResponse<KakaoLoginApiResponse>> => {
-  const response = await publicAxios.post('/oauth2/authorization', {
+  const response = await publicAxios.post(ENDPOINTS.AUTH.KAKAO_LOGIN, {
     provider: 'KAKAO',
     role,
     ...(studentId && {studentId}),
