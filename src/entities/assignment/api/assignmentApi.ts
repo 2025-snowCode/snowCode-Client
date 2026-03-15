@@ -1,7 +1,7 @@
 import {z} from 'zod';
 import {privateAxios} from '@/shared/api/axiosInstance';
 import {apiResponseSchema} from '@/shared/model/schemas';
-import {assignmentScheduleSchema} from '../model/schemas';
+import {assignmentScheduleSchema} from '@/entities/assignment/model/schemas';
 import {assignmentCourseSchema} from '@/entities/course/model/schemas';
 import {ENDPOINTS} from '@/shared/config/endpoints';
 

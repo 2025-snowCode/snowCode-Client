@@ -3,7 +3,7 @@ import {
   getAllAssignments,
   getAssignmentsByCourse,
   getAssignmentSchedules,
-} from './assignmentApi';
+} from '@/entities/assignment/api/assignmentApi';
 
 export const assignmentQueries = {
   // 과제 일정 조회 쿼리 옵션

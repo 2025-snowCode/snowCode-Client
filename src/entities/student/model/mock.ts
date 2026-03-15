@@ -1,4 +1,4 @@
-import type {CourseStudentsResponse} from './types';
+import type {CourseStudentsResponse} from '@/entities/student/model/types';
 
 const mockCourseStudents: CourseStudentsResponse = {
   success: true,

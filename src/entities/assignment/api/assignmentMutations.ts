@@ -1,4 +1,4 @@
-import {deleteAssignment} from './assignmentApi';
+import {deleteAssignment} from '@/entities/assignment/api/assignmentApi';
 
 export const assignmentMutations = {
   deleteAssignment: {

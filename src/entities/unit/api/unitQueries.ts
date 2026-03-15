@@ -1,5 +1,5 @@
 import {queryOptions, skipToken} from '@tanstack/react-query';
-import {getAllUnitsByCourseId, getUnitById} from './unitApi';
+import {getAllUnitsByCourseId, getUnitById} from '@/entities/unit/api/unitApi';
 
 export const unitQueries = {
   // 강의별 전체 단원 조회 쿼리 옵션

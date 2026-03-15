@@ -1,8 +1,8 @@
 import {z} from 'zod';
 import {privateAxios} from '@/shared/api/axiosInstance';
 import {apiResponseSchema} from '@/shared/model/schemas';
-import {type TUnitFormSchema} from '../model/schemas';
-import {unitSchema} from '../model/schemas';
+import {type TUnitFormSchema} from '@/entities/unit/model/schemas';
+import {unitSchema} from '@/entities/unit/model/schemas';
 import {ENDPOINTS} from '@/shared/config/endpoints';
 
 // 강의별 전체 단원 조회

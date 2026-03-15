@@ -5,7 +5,7 @@ import {
   studentProgressSchema,
   studentUnitSchema,
   studentSchema,
-} from './schemas';
+} from '@/entities/student/model/schemas';
 
 export type ProgressStatus = z.infer<typeof progressStatusSchema>;
 export type StudentProgress = z.infer<typeof studentProgressSchema>;
