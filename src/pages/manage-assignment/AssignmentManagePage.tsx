@@ -22,7 +22,7 @@ const AssignmentManagePage = () => {
   const {
     data: {courses},
   } = useSuspenseQuery(courseQueries.getAllCourses());
-  const {courseOptions, handleCourseSelect, selectedCourseId} =
+  const {courseOptions, handleCourseSelect, selectedCourseId, selectedCourseLabel} =
     useCourseFilter(courses);
   const assignmentList = useAssignmentList(selectedCourseId);
   const queryClient = useQueryClient();
@@ -62,6 +62,7 @@ const AssignmentManagePage = () => {
     <AssignmentPageLayout
       title='문제 관리'
       courseOptions={courseOptions}
+      courseValue={selectedCourseLabel}
       onCourseSelect={handleCourseSelect}
       list={
         <>

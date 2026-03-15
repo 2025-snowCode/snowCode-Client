@@ -7,10 +7,11 @@ import {
   type TAssignmentForm,
 } from '../model/schemas';
 import {assignmentCourseSchema} from '@/entities/course/model/schemas';
+import {ENDPOINTS} from '@/shared/config/endpoints';
 
 // 과제 일정 조회 API
 export const getAssignmentSchedules = async () => {
-  const response = await privateAxios.get('/assignments/schedule');
+  const response = await privateAxios.get(ENDPOINTS.ASSIGNMENTS.SCHEDULE);
   return apiResponseSchema(
     z.object({count: z.number(), schedule: z.array(assignmentScheduleSchema)})
   ).parse(response.data);
@@ -18,7 +19,7 @@ export const getAssignmentSchedules = async () => {
 
 // 전체 과제 목록 조회 API
 export const getAllAssignments = async () => {
-  const response = await privateAxios.get('/assignments/my');
+  const response = await privateAxios.get(ENDPOINTS.ASSIGNMENTS.MY);
   return apiResponseSchema(
     z.object({
       count: z.number(),
@@ -33,7 +34,7 @@ export const getAllAssignments = async () => {
 
 // 강의별 과제 목록 조회 API
 export const getAssignmentsByCourse = async (courseId: number) => {
-  const response = await privateAxios.get(`/courses/${courseId}/assignments`);
+  const response = await privateAxios.get(ENDPOINTS.ASSIGNMENTS.BY_COURSE(courseId));
   return apiResponseSchema(
     z.object({
       count: z.number(),
@@ -44,7 +45,7 @@ export const getAssignmentsByCourse = async (courseId: number) => {
 
 // 과제 삭제 API
 export const deleteAssignment = async (assignmentId: number) => {
-  const response = await privateAxios.delete(`/assignments/${assignmentId}`);
+  const response = await privateAxios.delete(ENDPOINTS.ASSIGNMENTS.DETAIL(assignmentId));
   return apiResponseSchema(z.string()).parse(response.data);
 };
 

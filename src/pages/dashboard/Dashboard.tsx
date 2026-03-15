@@ -6,18 +6,14 @@ import ScheduleList from './ui/ScheduleList';
 import {Link} from 'react-router-dom';
 import {useUserStore} from '@/entities/auth/model/useUserStore';
 import {
-  useMutation,
-  useQueryClient,
   useSuspenseQueries,
 } from '@tanstack/react-query';
 import {EmptyState} from '@/shared/ui/EmptyState';
 import {courseQueries} from '@/entities/course/api/courseQueries';
-import {courseMutations} from '@/entities/course/api/courseMutations';
-import {assignmentQueries} from '@/entities/assignment/api/assignmentQueries';
+import {assignmentQueries} from '@/entities/assignment';
 
 const Dashboard = () => {
   const userType = useUserStore((state) => state.userType);
-  const queryClient = useQueryClient();
 
   // 강의 및 스케쥴 데이터 패칭
   const [
@@ -34,31 +30,6 @@ const Dashboard = () => {
     ],
   });
 
-  // 강의 삭제
-  const {mutate} = useMutation({
-    ...courseMutations.deleteCourse,
-    onSuccess: () => {
-      // 강의 목록 및 스케쥴 목록 갱신
-      queryClient.invalidateQueries({
-        queryKey: courseQueries.getAllCourses().queryKey,
-      });
-      queryClient.invalidateQueries({
-        queryKey: assignmentQueries.getAssignmentSchedules().queryKey,
-      });
-      alert('강의가 성공적으로 삭제되었습니다.');
-    },
-    onError: (error) => {
-      console.error('강의 삭제 실패', error);
-      alert('강의 삭제에 실패했습니다. 다시 시도해주세요.');
-    },
-  });
-
-  // 강의 삭제 핸들러
-  const handleDeleteCourse = (courseId: number) => {
-    if (confirm('강의를 삭제하시겠습니까?')) {
-      mutate(courseId);
-    }
-  };
 
   return (
     <main className='w-full'>
@@ -74,7 +45,7 @@ const Dashboard = () => {
           {courseCount === 0 ? (
             <EmptyState>등록된 강의가 없습니다.</EmptyState>
           ) : (
-            <CourseList courseList={courses} onDelete={handleDeleteCourse} />
+            <CourseList courseList={courses} />
           )}
         </section>
 
