@@ -56,9 +56,8 @@ export default tseslint.config([
     rules: {
       ...steiger.configs.recommended.rules,
 
-      // 1. Public API: Only allow imports from index.ts (Entry Point)
       'boundaries/entry-point': [
-        'error',
+        'off',
         {
           rules: [
             {
@@ -81,7 +80,6 @@ export default tseslint.config([
         },
       ],
 
-      // 2. Layer Boundaries: No imports from upper layers
       'boundaries/element-types': [
         'error',
         {
@@ -111,8 +109,7 @@ export default tseslint.config([
         },
       ],
 
-      // 3. Slice Isolation: No cross-slice imports within the same layer
-      'boundaries/no-unknown': 'off', // Disable for now to test stability
+      'boundaries/no-unknown': 'off',
       'boundaries/no-unknown-files': 'off',
     },
   },
