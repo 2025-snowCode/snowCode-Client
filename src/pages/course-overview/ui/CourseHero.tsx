@@ -1,8 +1,8 @@
 import snowcodeOverviewMini from '@/assets/images/snowcode_overview_mini.svg';
 import {formatCourseTerm} from '@/shared/lib/course';
-import CourseActionsBar from './CourseActionsBar';
+import CourseActionsBar from '@/pages/course-overview/ui/CourseActionsBar';
 import {useUserStore} from '@/entities/auth/model/useUserStore';
-import type {TCourseOverview} from '@/entities/course/model/schemas';
+import type {TCourseOverview} from '@/entities/course/model/types';
 import type {SemesterCode} from '@/shared/model/types';
 
 interface CourseHeroProps {

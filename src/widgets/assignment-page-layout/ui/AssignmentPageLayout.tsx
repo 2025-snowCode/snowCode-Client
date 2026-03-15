@@ -7,6 +7,7 @@ interface AssignmentPageLayoutProps {
   list: ReactNode;
   buttons: ReactNode;
   courseOptions: string[];
+  courseValue: string;
   onCourseSelect: (value: string) => void;
 }
 
@@ -15,6 +16,7 @@ export const AssignmentPageLayout = ({
   list,
   buttons,
   courseOptions,
+  courseValue,
   onCourseSelect,
 }: AssignmentPageLayoutProps) => {
   return (
@@ -22,7 +24,7 @@ export const AssignmentPageLayout = ({
       {/* 상단 영역  */}
       <div className='flex flex-col gap-4 justify-start pt-9.5 pb-5.5 border-b border-purple-stroke'>
         <h1 className='text-primary-black text-2xl/9 font-semibold'>{title}</h1>
-        <CourseSelector options={courseOptions} onSelect={onCourseSelect} />
+        <CourseSelector options={courseOptions} value={courseValue} onSelect={onCourseSelect} />
       </div>
 
       {/* 문제 목록 영역 */}

@@ -1,18 +1,19 @@
 import {useNavigate} from 'react-router-dom';
 import {useUserStore} from '@/entities/auth/model/useUserStore';
-import {authMutations} from '@/entities/auth/api/authMutations';
 import {useMutation} from '@tanstack/react-query';
+import {kakaoMutations} from '@/features/auth/kakao/api/kakaoMutations';
 import {useCallback} from 'react';
+import {ROUTES} from '@/shared/config/routes';
 
 export const useKakaoLogin = () => {
   const navigate = useNavigate();
   const {login} = useUserStore();
 
   const {mutate} = useMutation({
-    ...authMutations.kakaoLogin,
-    onSuccess: ({response}) => {
-      const userType = response.role === 'ADMIN' ? 'admin' : 'student';
-      login(response.name, userType, response.accessToken);
+    ...kakaoMutations.kakaoLogin,
+    onSuccess: (data) => {
+      const userType = data.role === 'ADMIN' ? 'admin' : 'student';
+      login(data.name, userType, data.accessToken);
       navigate(userType === 'admin' ? '/admin' : '/student');
     },
     onError: (error) => {
@@ -31,7 +32,7 @@ export const useKakaoLogin = () => {
 
       if (!code || !role || !['ADMIN', 'USER'].includes(role)) {
         alert('카카오 로그인에 실패했습니다.');
-        navigate('/');
+        navigate(ROUTES.ROOT);
         return;
       }
 

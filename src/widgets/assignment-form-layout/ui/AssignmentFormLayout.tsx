@@ -9,6 +9,7 @@ type AssignmentFormLayoutProps = {
   onConfirm: () => void;
   cancelLabel?: string;
   confirmLabel?: string;
+  confirmDisabled?: boolean;
 };
 
 const AssignmentFormLayout = ({
@@ -19,12 +20,13 @@ const AssignmentFormLayout = ({
   onConfirm,
   cancelLabel = '취소',
   confirmLabel = '저장',
+  confirmDisabled = false,
 }: AssignmentFormLayoutProps) => {
   return (
     <div className='flex flex-col items-center gap-6'>
       <SurfaceCard
         size='medium'
-        className='mx-auto pt-9 pb-8 pl-[56px] pr-[32px] flex flex-col'>
+        className='mx-auto pt-9 pb-8 px-14 flex flex-col'>
         {/* 제목 */}
         <div className='flex items-center gap-3'>
           <h2 className='text-black text-[24px] font-semibold'>{title}</h2>
@@ -39,7 +41,7 @@ const AssignmentFormLayout = ({
           <Button color='outlinePurple' onClick={onCancel}>
             {cancelLabel}
           </Button>
-          <Button color='primary' onClick={onConfirm}>
+          <Button color='primary' onClick={onConfirm} disabled={confirmDisabled}>
             {confirmLabel}
           </Button>
         </div>

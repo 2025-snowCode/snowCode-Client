@@ -6,6 +6,7 @@ import UserIcon from '@/assets/svg/userIcon.svg?react';
 import ChatIcon from '@/assets/svg/chatIcon.svg?react';
 import Button from '@/shared/ui/button/Button';
 import {useUserStore} from '@/entities/auth/model/useUserStore';
+import {ROUTES} from '@/shared/config/routes';
 
 interface NavButton {
   icon: React.ReactElement;
@@ -42,7 +43,7 @@ const AuthenticatedHeader = ({showChat}: {showChat: boolean}) => {
 
   const handleLogout = () => {
     logout();
-    navigate('/');
+    navigate(ROUTES.ROOT);
   };
 
   const commonButtons: NavButton[] = [
@@ -66,13 +67,14 @@ const AuthenticatedHeader = ({showChat}: {showChat: boolean}) => {
   const chatButton: NavButton = {
     icon: <ChatIcon width={24} height={24} />,
     label: '채팅',
-    onClick: () => navigate('/admin/chat'),
+    onClick: () => navigate(ROUTES.ADMIN.CHAT),
   };
 
   const buttons = showChat ? [chatButton, ...commonButtons] : commonButtons;
 
   return (
     <BaseHeader
+      logoHref={showChat ? ROUTES.ADMIN.ROOT : ROUTES.STUDENT.ROOT}
       leftContent={<WelcomeMessage userName={userName} />}
       rightContent={<NavigationBar buttons={buttons} />}
     />

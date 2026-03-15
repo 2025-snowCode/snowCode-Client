@@ -7,7 +7,7 @@ interface KakaoLoginParams {
   studentId: string;
 }
 
-export const authMutations = {
+export const kakaoMutations = {
   kakaoLogin: {
     mutationKey: ['kakaoLogin'],
     mutationFn: async ({code, role, studentId}: KakaoLoginParams) => {

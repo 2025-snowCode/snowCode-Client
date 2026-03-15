@@ -3,7 +3,7 @@ import {
   getAllAssignments,
   getAssignmentsByCourse,
   getAssignmentSchedules,
-} from './assignmentApi';
+} from '@/entities/assignment/api/assignmentApi';
 
 export const assignmentQueries = {
   // 과제 일정 조회 쿼리 옵션
@@ -12,8 +12,8 @@ export const assignmentQueries = {
       queryKey: ['schedules'],
       queryFn: getAssignmentSchedules,
       select: (data) => ({
-        scheduleCount: data.response.count,
-        schedules: data.response.schedule,
+        scheduleCount: data.count,
+        schedules: data.schedule,
       }),
     }),
 
@@ -22,7 +22,7 @@ export const assignmentQueries = {
     queryOptions({
       queryKey: ['assignments'],
       queryFn: getAllAssignments,
-      select: (data) => data.response.assignments,
+      select: (data) => data.assignments,
     }),
 
   // 강의별 과제 목록 조회 쿼리 옵션
@@ -32,6 +32,6 @@ export const assignmentQueries = {
       queryFn: () => getAssignmentsByCourse(courseId),
       enabled: !!courseId,
       select: (data) =>
-        data.response.courses.flatMap((course) => course.assignments),
+        data.courses.flatMap((course) => course.assignments),
     }),
 };

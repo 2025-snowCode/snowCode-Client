@@ -1,5 +1,5 @@
 import {queryOptions, skipToken} from '@tanstack/react-query';
-import {getAllUnitsByCourseId, getUnitById} from './unitApi';
+import {getAllUnitsByCourseId, getUnitById} from '@/entities/unit/api/unitApi';
 
 export const unitQueries = {
   // 강의별 전체 단원 조회 쿼리 옵션
@@ -8,9 +8,9 @@ export const unitQueries = {
       queryKey: ['units', courseId],
       queryFn: () => getAllUnitsByCourseId(courseId),
       select: (data) => ({
-        unitList: data.response.units,
-        unitCount: data.response.count,
-        firstUnitId: data.response.units[0]?.id ?? null,
+        unitList: data.units,
+        unitCount: data.count,
+        firstUnitId: data.units[0]?.id ?? null,
       }),
     }),
 
@@ -20,7 +20,7 @@ export const unitQueries = {
       queryKey: ['units', 'detail', unitId],
       queryFn: unitId ? () => getUnitById(unitId) : skipToken,
       select: (data) => {
-        return data.response;
+        return data;
       },
     }),
 };

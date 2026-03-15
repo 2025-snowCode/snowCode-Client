@@ -1,5 +1,6 @@
 import {useState, useRef, useEffect} from 'react';
 import {useNavigate, useLocation} from 'react-router-dom';
+import {ROUTES} from '@/shared/config/routes';
 import SnowCodeEntryMini from '@/assets/images/snowCode_entry_mini.svg';
 import kakaoLogo from '@/assets/images/kakao_logo.svg';
 import ArrowleftIcon from '@/assets/svg/arrowleftIcon.svg?react';
@@ -63,7 +64,7 @@ export default function UserIdInputPage() {
   const kakaoEnabled = isComplete;
 
   const handleBeforeClick = () => {
-    navigate('/');
+    navigate(ROUTES.ROOT);
   };
 
   const handleKakaoLogin = () => {

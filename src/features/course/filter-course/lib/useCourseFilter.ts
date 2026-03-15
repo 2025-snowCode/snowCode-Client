@@ -1,4 +1,4 @@
-import type {TDashboardCourse} from '@/entities/course/model/schemas';
+import type {TDashboardCourse} from '@/entities/course/model/types';
 import {formatCourseOptionLabel} from '@/shared/lib/course';
 import {useMemo, useState} from 'react';
 
@@ -28,7 +28,6 @@ export const useCourseFilter = (courses: TDashboardCourse[]) => {
     return [ALL_COURSES_OPTION, ...Array.from(courseOptionMap.keys())];
   }, [courseOptionMap]);
 
-  // 강의 선택 핸들러
   const handleCourseSelect = (value: string) => {
     if (value === ALL_COURSES_OPTION) {
       setSelectedCourseId(null);
@@ -39,5 +38,13 @@ export const useCourseFilter = (courses: TDashboardCourse[]) => {
     setSelectedCourseId(courseId);
   };
 
-  return {courseOptions, handleCourseSelect, selectedCourseId};
+  const selectedCourseLabel = useMemo(() => {
+    if (selectedCourseId === null) return ALL_COURSES_OPTION;
+    for (const [key, value] of courseOptionMap.entries()) {
+      if (value === selectedCourseId) return key;
+    }
+    return ALL_COURSES_OPTION;
+  }, [selectedCourseId, courseOptionMap]);
+
+  return {courseOptions, handleCourseSelect, selectedCourseId, selectedCourseLabel};
 };

@@ -1,5 +1,5 @@
-import type {TUnitFormSchema} from '../model/schemas';
-import {createUnit, deleteUnit, updateUnit} from './unitApi';
+import type {TUnitFormSchema} from '@/entities/unit/model/schemas';
+import {createUnit, deleteUnit, updateUnit} from '@/entities/unit/api/unitApi';
 
 export const unitMutations = {
   // 단원 추가 뮤테이션 옵션

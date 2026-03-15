@@ -1,4 +1,4 @@
-import {ListRowStyles, type ListRowVariants} from './list-row-styles';
+import {ListRowStyles, type ListRowVariants} from '@/shared/ui/list-row/list-row-styles';
 import type {ReactNode} from 'react';
 
 interface ListRowProps extends ListRowVariants {

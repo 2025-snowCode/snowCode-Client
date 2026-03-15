@@ -21,3 +21,6 @@ export const assignmentScheduleSchema = z.object({
 
 export type TAssignment = z.infer<typeof assignmentSchema>;
 export type TAssignmentSchedule = z.infer<typeof assignmentScheduleSchema>;
+
+export type Assignment = TAssignment;
+export type AssignmentSchedule = TAssignmentSchedule;

@@ -2,13 +2,14 @@ import {useForm} from 'react-hook-form';
 import Button from '@/shared/ui/button/Button';
 import BinIcon from '@/assets/svg/binIcon.svg?react';
 import LabeledInput from '@/shared/ui/LabeledInput';
-import {UnitAssignmentList} from './UnitAssignmentList';
+import {UnitAssignmentList} from '@/pages/unit-editor/ui/UnitAssignmentList';
 import {zodResolver} from '@hookform/resolvers/zod';
-import {type UnitFormProps} from '../model/types';
+import {type UnitFormProps} from '@/pages/unit-editor/model/types';
 import AddIcon from '@/assets/svg/addIcon.svg?react';
 import {EmptyState} from '@/shared/ui/EmptyState';
 import {useLocation, useNavigate} from 'react-router-dom';
-import useUnitStore from '@/entities/unit/model/useUnitStore';
+import {ROUTES} from '@/shared/config/routes';
+import {useUnitStore} from '@/entities/unit/model/useUnitStore';
 import {unitFormSchema} from '@/entities/unit/model/schemas';
 import type {TUnitFormSchema} from '@/entities/unit/model/schemas';
 
@@ -88,7 +89,7 @@ export const UnitForm = ({
   const handleAssignmentSelect = () => {
     const {title, releaseDate, dueDate} = getValues();
     storeFormData(title, releaseDate, dueDate);
-    navigate('/admin/assignments/select', {
+    navigate(ROUTES.ADMIN.ASSIGNMENTS.SELECT, {
       state: {
         backPath: location.pathname,
       },
