@@ -1,10 +1,12 @@
-import {forwardRef} from 'react';
+import {forwardRef, useId} from 'react';
+import {twMerge} from 'tailwind-merge';
 
 interface LabeledInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
   className?: string;
   showLabel?: boolean;
   errorMessage?: string;
+  id?: string;
 }
 
 const LabeledInput = forwardRef<HTMLInputElement, LabeledInputProps>(
@@ -15,32 +17,46 @@ const LabeledInput = forwardRef<HTMLInputElement, LabeledInputProps>(
       showLabel = true,
       errorMessage,
       required = true,
+      id,
       ...rest
     },
     ref
   ) => {
+    const fallbackId = useId();
+    const inputId = id ?? fallbackId;
+    const errorId = `${inputId}-error`;
+
     return (
-      <label className='flex flex-col gap-3'>
-        <span
-          className={`font-medium text-base leading-[150%] ${
-            showLabel ? '' : 'sr-only'
-          }`}>
+      <div className='flex flex-col gap-3'>
+        <label
+          htmlFor={inputId}
+          className={twMerge(
+            'font-medium text-base leading-[150%]',
+            !showLabel && 'sr-only'
+          )}>
           {label}
           {required && <span className='text-badge-red'> *</span>}
-        </span>
+        </label>
 
         <input
+          id={inputId}
           ref={ref}
-          className={`h-11 rounded-[9px] border px-3.5 outline-none focus:border-primary ${
-            errorMessage ? 'border-badge-red' : 'border-purple-stroke'
-          } ${className ?? ''}`}
+          aria-invalid={Boolean(errorMessage)}
+          aria-describedby={errorMessage ? errorId : undefined}
+          className={twMerge(
+            'h-11 rounded-[9px] border px-3.5 outline-none focus:border-primary',
+            errorMessage ? 'border-badge-red' : 'border-purple-stroke',
+            className
+          )}
           {...rest}
         />
 
         {errorMessage && (
-          <span className='text-sm text-badge-red'>{errorMessage}</span>
+          <span id={errorId} role='alert' className='text-sm text-badge-red'>
+            {errorMessage}
+          </span>
         )}
-      </label>
+      </div>
     );
   }
 );
