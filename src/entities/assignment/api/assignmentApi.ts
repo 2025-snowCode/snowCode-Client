@@ -1,7 +1,10 @@
 import {z} from 'zod';
 import {privateAxios} from '@/shared/api/axiosInstance';
 import {apiResponseSchema} from '@/shared/model/schemas';
-import {assignmentScheduleSchema} from '../model/schemas';
+import {
+  assignmentDetailsSchema,
+  assignmentScheduleSchema,
+} from '../model/schemas';
 import {assignmentCourseSchema} from '@/entities/course/model/schemas';
 
 // 과제 일정 조회 API
@@ -36,6 +39,12 @@ export const getAssignmentsByCourse = async (courseId: number) => {
       courses: z.array(assignmentCourseSchema),
     })
   ).parse(response.data);
+};
+
+// 단일 과제 상세 조회 API
+export const getAssignmentDetails = async (assignmentId: number) => {
+  const response = await privateAxios.get(`/assignments/${assignmentId}`);
+  return apiResponseSchema(assignmentDetailsSchema).parse(response.data);
 };
 
 // 과제 삭제 API

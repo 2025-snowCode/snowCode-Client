@@ -1,10 +1,13 @@
 import {useNavigate} from 'react-router-dom';
 import ArrowleftIcon from '@/assets/svg/arrowleftIcon.svg?react';
-import {mockAssignmentDetail} from '../mock';
+import type {TAssignmentDetails} from '@/entities/assignment/model/schemas';
 
-const AssignmentDetails = () => {
+const AssignmentDetails = ({
+  title,
+  description,
+  testcases,
+}: TAssignmentDetails) => {
   const navigate = useNavigate();
-  const {title, description, testcases} = mockAssignmentDetail.response;
 
   return (
     <section className='h-full py-6.5 pl-15.5 pr-8.5 font-medium text-primary-black overflow-y-auto'>

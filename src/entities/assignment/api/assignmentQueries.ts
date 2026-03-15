@@ -1,6 +1,7 @@
 import {queryOptions} from '@tanstack/react-query';
 import {
   getAllAssignments,
+  getAssignmentDetails,
   getAssignmentsByCourse,
   getAssignmentSchedules,
 } from './assignmentApi';
@@ -15,6 +16,15 @@ export const assignmentQueries = {
         scheduleCount: data.response.count,
         schedules: data.response.schedule,
       }),
+    }),
+
+  // 단일 과제 상세 조회 쿼리 옵션
+  getAssignmentDetails: (assignmentId: number) =>
+    queryOptions({
+      queryKey: ['assignments', assignmentId],
+      queryFn: () => getAssignmentDetails(assignmentId),
+      enabled: !!assignmentId,
+      select: (data) => data.response,
     }),
 
   // 전체 과제 목록 조회 쿼리 옵션
