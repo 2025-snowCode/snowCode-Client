@@ -22,5 +22,5 @@ export const useDeleteCourse = (courseId: number, onSuccess?: () => void) => {
     },
   });
 
-  return {deleteCourse: mutate, isPending};
+  return {handleDelete: mutate, isPending};
 };

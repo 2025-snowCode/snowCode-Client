@@ -17,7 +17,7 @@ const CourseManagementDropdown = ({
 }: CourseManagementDropdownProps) => {
   const navigate = useNavigate();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const {deleteCourse, isPending} = useDeleteCourse(courseId, () => {
+  const {handleDelete, isPending} = useDeleteCourse(courseId, () => {
     alert('강의가 성공적으로 삭제되었습니다.');
   });
 
@@ -52,7 +52,7 @@ const CourseManagementDropdown = ({
           title='강의를 삭제하시겠습니까?'
           description='삭제 시 관련 단원이 함께 삭제됩니다.'
           confirmLabel={isPending ? '삭제 중...' : '삭제'}
-          onConfirm={deleteCourse}
+          onConfirm={() => handleDelete()}
           onCancel={() => setIsDeleteModalOpen(false)}
         />
       )}
