@@ -1,2 +1,2 @@
-export {default as useClickOutside} from './useClickOutside';
-export * from './course';
+export {default as useClickOutside} from '@/shared/lib/useClickOutside';
+export * from '@/shared/lib/course';
