@@ -22,7 +22,7 @@ const AssignmentSelectPage = () => {
   const [selectedAssignments, setSelectedAssignments] = useState<TAssignment[]>(
     currentSelectedAssignments
   );
-  const {courseOptions, handleCourseSelect, selectedCourseId} =
+  const {courseOptions, handleCourseSelect, selectedCourseId, selectedCourseLabel} =
     useCourseFilter(courses);
 
   const assignmentList = useAssignmentList(selectedCourseId);
@@ -52,6 +52,7 @@ const AssignmentSelectPage = () => {
     <AssignmentPageLayout
       title='문제 선택'
       courseOptions={courseOptions}
+      courseValue={selectedCourseLabel}
       onCourseSelect={handleCourseSelect}
       list={
         <AssignmentListContainer

@@ -1,3 +1,4 @@
+import {forwardRef} from 'react';
 import {useForm} from 'react-hook-form';
 import {zodResolver} from '@hookform/resolvers/zod';
 import LabeledInput from '@/shared/ui/LabeledInput';
@@ -15,11 +16,13 @@ interface CourseFormProps {
   onSubmit: (data: CourseFormValues) => void;
 }
 
-export const CourseForm = ({defaultValues, onSubmit}: CourseFormProps) => {
+export const CourseForm = forwardRef<HTMLFormElement, CourseFormProps>(
+  ({defaultValues, onSubmit}, ref) => {
   const {
     register,
     handleSubmit,
     setValue,
+    watch,
     formState: {errors},
   } = useForm<CourseFormValues>({
     resolver: zodResolver(courseFormSchema),
@@ -27,7 +30,7 @@ export const CourseForm = ({defaultValues, onSubmit}: CourseFormProps) => {
   });
 
   return (
-    <form id='course-form' onSubmit={handleSubmit(onSubmit)}>
+    <form ref={ref} onSubmit={handleSubmit(onSubmit)}>
       <div className='space-y-6 w-full'>
         <div className='grid grid-cols-[minmax(0,1fr)_324px] gap-6'>
           <LabeledInput
@@ -49,7 +52,7 @@ export const CourseForm = ({defaultValues, onSubmit}: CourseFormProps) => {
             placeholder='연도를 선택하세요'
             className='w-full'
             options={[...YEAR_OPTIONS]}
-            defaultValue={defaultValues?.year}
+            value={watch('year')}
             errorMessage={errors.year?.message}
             onSelect={(value) =>
               setValue('year', value as CourseFormValues['year'], {
@@ -63,7 +66,7 @@ export const CourseForm = ({defaultValues, onSubmit}: CourseFormProps) => {
             placeholder='학기를 선택하세요'
             className='w-full'
             options={[...SEMESTER_OPTIONS]}
-            defaultValue={defaultValues?.semester}
+            value={watch('semester')}
             errorMessage={errors.semester?.message}
             onSelect={(value) =>
               setValue('semester', value as CourseFormValues['semester'], {
@@ -92,4 +95,6 @@ export const CourseForm = ({defaultValues, onSubmit}: CourseFormProps) => {
       </div>
     </form>
   );
-};
+});
+
+CourseForm.displayName = 'CourseForm';

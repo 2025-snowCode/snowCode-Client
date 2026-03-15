@@ -1,4 +1,3 @@
-import {useState} from 'react';
 import Chevrondown from '@/assets/svg/chevrondown.svg?react';
 import Dropdown from '@/shared/ui/Dropdown';
 
@@ -8,7 +7,7 @@ interface LabeledDropdownProps
   className?: string;
   options: string[];
   placeholder?: string;
-  defaultValue?: string;
+  value?: string;
   onSelect?: (value: string) => void;
   errorMessage?: string;
 }
@@ -18,15 +17,12 @@ const LabeledDropdown = ({
   className,
   options,
   placeholder,
-  defaultValue,
+  value,
   onSelect,
   errorMessage,
   ...rest
 }: LabeledDropdownProps) => {
-  const [selectedValue, setSelectedValue] = useState(defaultValue ?? '');
-
   const handleSelect = (option: string) => {
-    setSelectedValue(option);
     onSelect?.(option);
   };
 
@@ -37,8 +33,8 @@ const LabeledDropdown = ({
         errorMessage ? 'border-badge-red' : 'border-purple-stroke'
       } ${className ?? ''}`}
       {...rest}>
-      <span className={selectedValue ? 'text-black' : 'text-light-black'}>
-        {selectedValue || placeholder}
+      <span className={value ? 'text-black' : 'text-light-black'}>
+        {value || placeholder}
       </span>
       <Chevrondown className='absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4' />
     </button>
