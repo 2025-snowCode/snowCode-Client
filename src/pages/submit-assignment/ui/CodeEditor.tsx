@@ -3,6 +3,7 @@ import {Editor, type OnMount} from '@monaco-editor/react';
 import {useRef} from 'react';
 import PlayIcon from '@/assets/svg/playIcon.svg?react';
 import {Panel, Group, Separator} from 'react-resizable-panels';
+import DragAndDropIcon from '@/assets/svg/dragAndDropIcon.svg?react';
 
 type EditorInstance = Parameters<OnMount>[0];
 
@@ -66,9 +67,12 @@ const CodeEditor = ({onSubmit, isSubmitPending}: CodeEditorProps) => {
         />
       </Panel>
 
-      <Separator />
+      <Separator className='cursor-col-resize flex-center h-3 bg-gray-600 focus:outline-none'>
+        <DragAndDropIcon className='rotate-90 w-3 h-3 text-primary-black' />
+      </Separator>
+
       {/* 하단 패널: 출력 결과 등 추가 정보 표시용 */}
-      <Panel id='bottom-panel' className='bg-secondary-black rounded-t-[30px]'>
+      <Panel id='bottom-panel' minSize='10%' className='bg-secondary-black'>
         {/* TODO: 하단 패널 */}
       </Panel>
     </Group>
