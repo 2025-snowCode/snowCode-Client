@@ -77,11 +77,7 @@ export const CourseEditPage = () => {
         />
       }
       onCancel={() => navigate(ROUTES.ADMIN.ROOT)}
-      onConfirm={() => {
-        formRef.current?.dispatchEvent(
-          new Event('submit', {cancelable: true, bubbles: true})
-        );
-      }}
+      onConfirm={() => formRef.current?.requestSubmit()}
       confirmDisabled={isPending}
     />
   );

@@ -15,7 +15,7 @@ export const CourseCreatePage = () => {
       title='강의 개설'
       content={<CourseForm ref={formRef} onSubmit={submit} />}
       onCancel={() => navigate(ROUTES.ADMIN.ROOT)}
-      onConfirm={() => formRef.current?.requestSubmit}
+      onConfirm={() => formRef.current?.requestSubmit()}
       confirmDisabled={isPending}
     />
   );
