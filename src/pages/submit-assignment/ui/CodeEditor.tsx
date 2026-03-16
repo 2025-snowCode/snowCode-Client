@@ -4,6 +4,7 @@ import {useRef} from 'react';
 import PlayIcon from '@/assets/svg/playIcon.svg?react';
 import {Panel, Group, Separator} from 'react-resizable-panels';
 import DragAndDropIcon from '@/assets/svg/dragAndDropIcon.svg?react';
+import {useCodeExecution} from '@/features/assignment/run-assignment/lib/useCodeExecution';
 
 type EditorInstance = Parameters<OnMount>[0];
 
@@ -14,6 +15,7 @@ interface CodeEditorProps {
 
 const CodeEditor = ({onSubmit, isSubmitPending}: CodeEditorProps) => {
   const editorRef = useRef<EditorInstance | null>(null);
+  const {runCode, output, isRunning} = useCodeExecution();
 
   const handleEditorDidMount: OnMount = (editor) => {
     editorRef.current = editor;
@@ -22,6 +24,12 @@ const CodeEditor = ({onSubmit, isSubmitPending}: CodeEditorProps) => {
   const handleSubmitCode = () => {
     const sourceCode = editorRef.current?.getValue() ?? '';
     onSubmit(sourceCode);
+  };
+
+  const handleRunCode = () => {
+    const sourceCode = editorRef.current?.getValue() ?? '';
+    const input = '';
+    runCode(sourceCode, input);
   };
 
   return (
@@ -42,9 +50,17 @@ const CodeEditor = ({onSubmit, isSubmitPending}: CodeEditorProps) => {
             <Button
               color='lightBlack'
               size='compact'
-              className='flex-center gap-2'>
-              <PlayIcon className='w-4 h-4' />
-              코드 실행
+              className='flex-center gap-2'
+              onClick={handleRunCode}
+              disabled={isRunning}>
+              {isRunning ? (
+                '실행 중...'
+              ) : (
+                <>
+                  <PlayIcon className='w-4 h-4' />
+                  코드 실행
+                </>
+              )}
             </Button>
             <Button
               color='ghostWhite'
@@ -72,8 +88,12 @@ const CodeEditor = ({onSubmit, isSubmitPending}: CodeEditorProps) => {
       </Separator>
 
       {/* 하단 패널: 출력 결과 등 추가 정보 표시용 */}
-      <Panel id='bottom-panel' minSize='10%' className='bg-secondary-black'>
-        {/* TODO: 하단 패널 */}
+      <Panel id='bottom-panel' minSize='10%' className='bg-black'>
+        {output && (
+          <div className='p-4 text-sm text-white whitespace-pre-wrap'>
+            {output}
+          </div>
+        )}
       </Panel>
     </Group>
   );
