@@ -8,6 +8,7 @@ export const circleStyles = tv({
       secondary: 'bg-background border-purple-stroke text-primary',
       success: 'bg-[#C4FFA4] border-[#C4FFA4] text-light-black',
       danger: 'bg-[#FF6F6F] border-[#FF6F6F] text-white',
+      plain: 'bg-white border-white text-light-black',
     },
     size: {
       sm: 'w-6 h-6',

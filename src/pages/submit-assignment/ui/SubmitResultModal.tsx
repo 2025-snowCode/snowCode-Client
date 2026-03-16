@@ -1,9 +1,10 @@
 import type {TAssignmentSubmissionResult} from '@/entities/assignment/model/schemas';
 import DeleteIcon from '@/assets/svg/deleteIcon.svg?react';
+import StatusCircle from './circle/StatusCircle';
 
 const RESULT_NOTICE_TITLE = {
-  PASS: '제출한 코드가 모든 테스트 케이스를 통과했어요!',
-  FAIL: '아직이에요! 제출한 코드가 모든 테스트 케이스를 통과하지 못했어요.',
+  PASSED: '제출한 코드가 모든 테스트 케이스를 통과했어요!',
+  FAILED: '아직이에요! 제출한 코드가 모든 테스트 케이스를 통과하지 못했어요.',
 };
 
 interface SubmitResultModalProps {
@@ -12,18 +13,21 @@ interface SubmitResultModalProps {
 }
 
 const SubmitResultModal = ({result, closeModal}: SubmitResultModalProps) => {
-  const flag = result.score === 100 ? 'PASS' : 'FAIL';
+  const flag = result.score === 100 ? 'PASSED' : 'FAILED';
 
   return (
     <>
       <div className='fixed inset-0 z-50 flex-center'>
         <div
-          className={`w-160 flex flex-col rounded-[10px] text-secondary-black shadow-card ${flag === 'PASS' ? 'bg-[#F2FFEB]' : 'bg-[#FFF4F4]'}`}>
+          className={`w-160 flex flex-col rounded-[10px] text-secondary-black shadow-card ${flag === 'PASSED' ? 'bg-[#F2FFEB]' : 'bg-[#FFF4F4]'}`}>
           <div
-            className={`w-full flex flex-row justify-between items-center rounded-t-[10px] px-6.5 py-5 ${flag === 'PASS' ? 'bg-[#99FF62] text-secondary-black' : 'bg-[#FF6F6F] text-white'}`}>
-            <h3 className='text-base font-medium'>
-              {RESULT_NOTICE_TITLE[flag]}
-            </h3>
+            className={`w-full flex flex-row justify-between items-center rounded-t-[10px] px-6.5 py-5 ${flag === 'PASSED' ? 'bg-[#99FF62] text-secondary-black' : 'bg-[#FF6F6F] text-white'}`}>
+            <div className='flex items-center gap-3'>
+              <StatusCircle variant={'NEUTRAL'} size='sm' />
+              <h3 className='text-base font-medium'>
+                {RESULT_NOTICE_TITLE[flag]}
+              </h3>
+            </div>
             <DeleteIcon className='cursor-pointer' onClick={closeModal} />
           </div>
           <p className='px-6.5 py-4 text-sm/6'>획득 점수: {result.score}점</p>
