@@ -20,4 +20,9 @@ export const ENDPOINTS = {
     ASSIGNMENT_DETAIL: (unitId: number | string, assignmentId: number | string) =>
       `/units/${unitId}/assignments/${assignmentId}`,
   },
+  ENROLLMENTS: {
+    BY_COURSE: (courseId: number | string) => `/courses/${courseId}/enrollments`,
+    DETAIL: (courseId: number | string, memberId: number | string) =>
+      `/courses/${courseId}/enrollments/${memberId}`,
+  },
 } as const;
