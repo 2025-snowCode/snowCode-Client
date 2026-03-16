@@ -42,22 +42,22 @@ const CodeEditor = ({onSubmit, isSubmitPending}: CodeEditorProps) => {
         minSize='30%'
         className='h-full'
         style={{overflow: 'hidden'}}>
-        <div className='px-10.5 py-3.5 flex items-center justify-between sticky top-0 z-10'>
-          <Button color='tonal' size='compact'>
+        <div className='px-10.5 py-2.5 flex items-center justify-between sticky top-0 z-10'>
+          <Button color='tonal' size='compact' className='text-sm'>
             제출 이력
           </Button>
           <div className='flex gap-4'>
             <Button
               color='lightBlack'
               size='compact'
-              className='flex-center gap-2'
+              className='flex-center gap-2 text-sm'
               onClick={handleRunCode}
               disabled={isRunning}>
               {isRunning ? (
                 '실행 중...'
               ) : (
                 <>
-                  <PlayIcon className='w-4 h-4' />
+                  <PlayIcon className='w-3 h-3' />
                   코드 실행
                 </>
               )}
@@ -65,6 +65,7 @@ const CodeEditor = ({onSubmit, isSubmitPending}: CodeEditorProps) => {
             <Button
               color='ghostWhite'
               size='compact'
+              className='text-sm'
               onClick={handleSubmitCode}
               disabled={isSubmitPending}>
               {isSubmitPending ? '제출 중...' : '제출 및 채점'}
@@ -77,13 +78,14 @@ const CodeEditor = ({onSubmit, isSubmitPending}: CodeEditorProps) => {
           defaultValue='# 코드를 작성하세요'
           onMount={handleEditorDidMount}
           options={{
-            fontSize: 16,
+            fontSize: 15,
             padding: {top: 25, bottom: 16},
           }}
         />
       </Panel>
 
-      <Separator className='cursor-col-resize flex-center h-3 bg-gray-600 focus:outline-none'>
+      <Separator
+        className={`cursor-col-resize flex-center h-3 bg-gray-500 focus:outline-none data-[separator='active']:bg-gray-600/80`}>
         <DragAndDropIcon className='rotate-90 w-3 h-3 text-primary-black' />
       </Separator>
 
