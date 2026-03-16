@@ -33,7 +33,6 @@ const AssignmentSubmitPage = () => {
           <AssignmentDetails index={index} {...assignmentDetails} />
         </div>
         <div className='flex-1 min-w-0'>
-          {/* TODO: 코드 에디터 및 제출상태 표시 영역 */}
           <CodeEditor onSubmit={onSubmit} isSubmitPending={isSubmitPending} />
         </div>
 
