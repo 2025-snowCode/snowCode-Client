@@ -1,6 +1,7 @@
 import {useNavigate} from 'react-router-dom';
 import ArrowleftIcon from '@/assets/svg/arrowleftIcon.svg?react';
 import type {TAssignmentDetails} from '@/entities/assignment/model/schemas';
+import IndexCircle from './circle/IndexCircle';
 
 interface AssignmentDetailsProps extends TAssignmentDetails {
   index?: number;
@@ -21,9 +22,13 @@ const AssignmentDetails = ({
           onClick={() => navigate(-1)}
           className='absolute w-4.5 h-4.5 cursor-pointer -left-9.5'
         />
-        {/* TODO: 인데스 배지 추가 */}
-        <h2 className='relative text-xl/9'>
-          {index}. {title}
+        <h2 className='relative flex-center gap-3'>
+          <IndexCircle
+            index={index || 0}
+            color='primary'
+            className='w-6.5 h-6.5'
+          />
+          <span className='text-xl/9'>{title}</span>
         </h2>
       </div>
       <p className='mt-4 text-lg/7.5'>{description}</p>

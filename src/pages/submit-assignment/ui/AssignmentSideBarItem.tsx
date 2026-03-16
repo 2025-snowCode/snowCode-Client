@@ -2,6 +2,7 @@ import StatusCircle from './circle/StatusCircle';
 import {useEffect, useRef} from 'react';
 import {useLocation, Link, useParams} from 'react-router-dom';
 import type {TAssignment} from '@/entities/assignment/model/schemas';
+import IndexCircle from './circle/IndexCircle';
 
 interface SideBarItemProps extends TAssignment {
   index: number;
@@ -54,9 +55,7 @@ const SideBarItem = ({
         <div
           className={`w-px flex-1 min-h-1.5 ${isFirst ? '' : 'bg-purple-stroke'}`}
         />
-        <StatusCircle
-          color={submittedStatus === 'CORRECT' ? 'primary' : 'secondary'}
-        />
+        <StatusCircle variant={submittedStatus || 'NOT_SUBMITTED'} />
         <div
           className={`w-px flex-1 min-h-1.5 ${isLast ? '' : 'bg-purple-stroke'}`}
         />
@@ -65,9 +64,7 @@ const SideBarItem = ({
       {/* 과제 인데스 + 제목 */}
       {isOpen && (
         <div className='flex-1 h-7.75 flex items-center gap-2 pl-7.5'>
-          <div className='bg-primary flex-center shrink-0 w-5 h-5 rounded-full text-white text-base'>
-            {index}
-          </div>
+          <IndexCircle index={index} color='primary' className='w-5 h-5' />
           <span className='text-lg text-secondary-black font-medium truncate'>
             {title}
           </span>
