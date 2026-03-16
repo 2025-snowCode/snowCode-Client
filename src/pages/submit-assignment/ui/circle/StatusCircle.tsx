@@ -1,31 +1,34 @@
 import CheckIcon from '@/assets/svg/checkIcon.svg?react';
-import {tv, type VariantProps} from 'tailwind-variants';
+import DeleteIcon from '@/assets/svg/deleteIcon.svg?react';
+import {circleStyles, type CircleVariants} from './circle-styles';
+import type {SubmissionStatus} from '@/shared/model/types';
+import type {ReactNode} from 'react';
 
-export const statusCircleStyles = tv({
-  base: 'flex-center rounded-full border',
-  variants: {
-    color: {
-      primary: 'bg-primary border-primary text-white',
-      secondary: 'bg-background border-purple-stroke text-primary',
-    },
-    size: {
-      small: 'w-6 h-6',
-      medium: 'w-[31px] h-[31px]',
-    },
-  },
-  defaultVariants: {
-    color: 'primary',
-    size: 'medium',
-  },
-});
+type StatusVariant = SubmissionStatus | 'PASSED' | 'FAILED';
+interface StatusCircleProps extends CircleVariants {
+  variant: StatusVariant;
+}
 
-type StatusCircleVariants = VariantProps<typeof statusCircleStyles>;
-type StatusCircleProps = StatusCircleVariants;
+const statusColorMap: Record<StatusVariant, CircleVariants['color']> = {
+  NOT_SUBMITTED: 'secondary',
+  CORRECT: 'primary',
+  INCORRECT: 'danger',
+  PASSED: 'success',
+  FAILED: 'danger',
+};
 
-const StatusCircle = (props: StatusCircleProps) => {
+const iconMap: Record<StatusVariant, ReactNode> = {
+  NOT_SUBMITTED: <CheckIcon className='w-3 h-3' />,
+  CORRECT: <CheckIcon className='w-3 h-3' />,
+  INCORRECT: <DeleteIcon className='w-3 h-3' />,
+  PASSED: <CheckIcon className='w-3 h-3' />,
+  FAILED: <DeleteIcon className='w-3 h-3' />,
+};
+
+const StatusCircle = ({variant, ...props}: StatusCircleProps) => {
   return (
-    <div className={statusCircleStyles(props)}>
-      <CheckIcon className='w-3 h-3' />
+    <div className={circleStyles({...props, color: statusColorMap[variant]})}>
+      {iconMap[variant]}
     </div>
   );
 };
