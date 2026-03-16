@@ -1,4 +1,4 @@
-import StatusCircle from './StatusCircle';
+import StatusCircle from './circle/StatusCircle';
 import {useEffect, useRef} from 'react';
 import {useLocation, Link, useParams} from 'react-router-dom';
 import type {TAssignment} from '@/entities/assignment/model/schemas';
