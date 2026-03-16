@@ -54,9 +54,12 @@ const AppRoutes = () => {
             <Route path='courses/:id' element={<CourseOverviewPage />} />
             <Route path='courses/create' element={<CourseCreatePage />} />
             <Route path='courses/:id/edit' element={<CourseEditPage />} />
-            <Route path='student' element={<StudentManagementPage />} />
             <Route
-              path='student/profile/:studentId'
+              path='courses/:courseId/students'
+              element={<StudentManagementPage />}
+            />
+            <Route
+              path='courses/:courseId/students/:studentId'
               element={<StudentProfilePage />}
             />
             <Route path='units/:id' element={<UnitEditorPage />} />

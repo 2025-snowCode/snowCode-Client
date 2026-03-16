@@ -13,7 +13,7 @@ const CourseActionsBar = ({
   return (
     <article className='flex gap-5'>
       <Link
-        to='/admin/student'
+        to={`/admin/courses/${courseId}/students`}
         className={buttonStyles({
           color: `${isActiveCourse ? 'outlineWhite' : 'outlinePurple'}`,
         })}>

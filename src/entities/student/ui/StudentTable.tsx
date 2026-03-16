@@ -6,9 +6,10 @@ import type {Student} from '@/entities/student/model/types';
 
 interface StudentTableProps {
   students: Student[];
+  courseId: number;
 }
 
-export const StudentTable = ({students}: StudentTableProps) => {
+export const StudentTable = ({students, courseId}: StudentTableProps) => {
   const [selectedStudents, setSelectedStudents] = useState<Set<number>>(
     new Set()
   );
@@ -70,7 +71,7 @@ export const StudentTable = ({students}: StudentTableProps) => {
             </td>
             <td className='pl-4 align-middle'>
               <Link
-                to={`/admin/student/profile/${student.studentId}`}
+                to={`/admin/courses/${courseId}/students/${student.id}`}
                 className='text-primary font-medium hover:underline'>
                 {student.name}
               </Link>
