@@ -1,4 +1,4 @@
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import ArrowleftIcon from '@/assets/svg/arrowleftIcon.svg?react';
 import type {TAssignmentDetails} from '@/entities/assignment/model/schemas';
 import IndexCircle from './circle/IndexCircle';
@@ -13,13 +13,14 @@ const AssignmentDetails = ({
   testcases,
 }: AssignmentDetailsProps) => {
   const navigate = useNavigate();
+  const {courseId} = useParams();
 
   return (
     <section className='h-full py-6.5 pl-15.5 pr-8.5 font-medium text-primary-black overflow-y-auto'>
       {/* 과제 제목 및 설명 */}
       <div className='relative flex items-center'>
         <ArrowleftIcon
-          onClick={() => navigate(-1)}
+          onClick={() => navigate(`/admin/courses/${courseId}`)}
           className='absolute w-4.5 h-4.5 cursor-pointer -left-9.5'
         />
         <h2 className='relative flex-center gap-3'>
