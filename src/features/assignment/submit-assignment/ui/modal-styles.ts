@@ -13,7 +13,7 @@ export const modalStyles = tv({
     tcDescription: 'text-base/6',
     outputWrapper: 'flex flex-col gap-1.5',
     outputTerm: 'text-sm/[21px] text-light-black',
-    outputDescription: 'bg-white rounded-[10px] px-6 py-1.5 text-sm',
+    outputDescription: 'bg-white rounded-[10px] px-6 py-3 text-sm',
   },
   variants: {
     color: {

@@ -81,15 +81,11 @@ const SubmissionResultModal = ({
                   <dt className={styles.outputTerm()}>사용자 출력</dt>
                   <dd className={styles.outputDescription({class: 'mb-2.5'})}>
                     {/* TODO: 응답에 실제 출력값 필드 추가되면 수정 */}
-                    <pre className='py-1.5'>
-                      {result.failedTestCase.expected}
-                    </pre>
+                    <pre>{result.failedTestCase.expected}</pre>
                   </dd>
                   <dt className={styles.outputTerm()}>예상 출력</dt>
                   <dd className={styles.outputDescription()}>
-                    <pre className='py-1.5'>
-                      {result.failedTestCase.expected}
-                    </pre>
+                    <pre>{result.failedTestCase.expected}</pre>
                   </dd>
                 </dl>
               )}

@@ -48,11 +48,11 @@ const AssignmentDetails = ({
               <span className='text-secondary-black'>{`예제 ${idx + 1}`}</span>
               <dl className='text-light-black'>
                 <dt className='mt-4'>입력</dt>
-                <dd className='flex items-center w-full min-h-11.5 px-3 mt-1.5 bg-white border border-purple-stroke rounded-[10px]'>
+                <dd className='flex items-center w-full min-h-11.5 px-3 py-1.5 mt-1.5 bg-white border border-purple-stroke rounded-[10px]'>
                   <pre>{testcase}</pre>
                 </dd>
                 <dt className='mt-4'>출력</dt>
-                <dd className='flex items-center w-full min-h-11.5 px-3 mt-1.5 bg-white border border-purple-stroke rounded-[10px]'>
+                <dd className='flex items-center w-full min-h-11.5 px-3 py-1.5 mt-1.5 bg-white border border-purple-stroke rounded-[10px]'>
                   <pre>{answer}</pre>
                 </dd>
               </dl>
