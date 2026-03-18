@@ -2,6 +2,7 @@ import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 
 import snowCodeEntry from '@/assets/images/snowCode_entry.svg';
+import {ROUTES} from '@/shared/config/routes';
 import snowCodeStudent from '@/assets/images/snowCode_student.svg';
 import snowCodeAdmin from '@/assets/images/snowCode_admin.svg';
 import ArrowrightIcon from '@/assets/svg/arrowrightIcon.svg?react';
@@ -18,9 +19,9 @@ export default function LandingPage() {
 
   const handleNextClick = () => {
     if (selected === 'student') {
-      navigate('/userid?type=student');
+      navigate(`${ROUTES.USER_ID}?type=student`);
     } else if (selected === 'admin') {
-      navigate('/userid?type=admin');
+      navigate(`${ROUTES.USER_ID}?type=admin`);
     } else {
       alert('사용자 유형을 선택해주세요!');
     }

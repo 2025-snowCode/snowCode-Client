@@ -11,7 +11,7 @@ import {courseQueries} from '@/entities/course/api/courseQueries';
 import {useAssignmentList} from '@/features/assignment/filter-assignment/lib/useAssignmentList';
 import {assignmentMutations} from '@/entities/assignment/api/assignmentMutations';
 import {assignmentQueries} from '@/entities/assignment/api/assignmentQueries';
-import AssignmentManageActionsBar from './ui/AssignmentManageActionsBar';
+import AssignmentManageActionsBar from '@/pages/manage-assignment/ui/AssignmentManageActionsBar';
 import AddIcon from '@/assets/svg/addIcon.svg?react';
 import {Link, useNavigate} from 'react-router-dom';
 import {buttonStyles} from '@/shared/ui/button/button-styles';
@@ -22,7 +22,7 @@ const AssignmentManagePage = () => {
   const {
     data: {courses},
   } = useSuspenseQuery(courseQueries.getAllCourses());
-  const {courseOptions, handleCourseSelect, selectedCourseId} =
+  const {courseOptions, handleCourseSelect, selectedCourseId, selectedCourseLabel} =
     useCourseFilter(courses);
   const assignmentList = useAssignmentList(selectedCourseId);
   const queryClient = useQueryClient();
@@ -62,6 +62,7 @@ const AssignmentManagePage = () => {
     <AssignmentPageLayout
       title='문제 관리'
       courseOptions={courseOptions}
+      courseValue={selectedCourseLabel}
       onCourseSelect={handleCourseSelect}
       list={
         <>

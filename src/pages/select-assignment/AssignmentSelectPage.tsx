@@ -5,7 +5,7 @@ import {AssignmentPageLayout} from '@/widgets/assignment-page-layout';
 import ListRow from '@/shared/ui/list-row/ListRow';
 import {useSuspenseQuery} from '@tanstack/react-query';
 import {courseQueries} from '@/entities/course/api/courseQueries';
-import useUnitStore from '@/entities/unit/model/useUnitStore';
+import {useUnitStore} from '@/entities/unit/model/useUnitStore';
 import {useLocation, useNavigate} from 'react-router-dom';
 import type {TAssignment} from '@/entities/assignment/model/schemas';
 import {useAssignmentList} from '@/features/assignment/filter-assignment/lib/useAssignmentList';
@@ -22,7 +22,7 @@ const AssignmentSelectPage = () => {
   const [selectedAssignments, setSelectedAssignments] = useState<TAssignment[]>(
     currentSelectedAssignments
   );
-  const {courseOptions, handleCourseSelect, selectedCourseId} =
+  const {courseOptions, handleCourseSelect, selectedCourseId, selectedCourseLabel} =
     useCourseFilter(courses);
 
   const assignmentList = useAssignmentList(selectedCourseId);
@@ -52,6 +52,7 @@ const AssignmentSelectPage = () => {
     <AssignmentPageLayout
       title='문제 선택'
       courseOptions={courseOptions}
+      courseValue={selectedCourseLabel}
       onCourseSelect={handleCourseSelect}
       list={
         <AssignmentListContainer

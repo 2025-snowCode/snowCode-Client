@@ -6,7 +6,8 @@ import Dashboard from '@/pages/dashboard/Dashboard';
 import AssignmentSelectPage from '@/pages/select-assignment/AssignmentSelectPage';
 import CourseOverviewPage from '@/pages/course-overview/CourseOverviewPage';
 import AssignmentCreatePage from '@/pages/admin/assignments/AssignmentCreatePage';
-import CourseCreatePage from '@/pages/admin/courses/CourseCreatePage';
+import {CourseCreatePage} from '@/pages/admin/courses/CourseCreatePage';
+import {CourseEditPage} from '@/pages/admin/courses/CourseEditPage';
 import StudentManagementPage from '@/pages/admin/student/StudentManagementPage';
 import StudentProfilePage from '@/pages/admin/student/StudentProfilePage';
 import KakaoCallbackPage from '@/pages/common/KakaoCallbackPage';
@@ -54,6 +55,7 @@ const AppRoutes = () => {
             />
             <Route path='courses/:id' element={<CourseOverviewPage />} />
             <Route path='courses/create' element={<CourseCreatePage />} />
+            <Route path='courses/:id/edit' element={<CourseEditPage />} />
             <Route path='student' element={<StudentManagementPage />} />
             <Route
               path='student/profile/:studentId'

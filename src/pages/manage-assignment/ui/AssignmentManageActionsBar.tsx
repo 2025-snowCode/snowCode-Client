@@ -1,6 +1,7 @@
 import EditIcon from '@/assets/svg/editIcon.svg?react';
 import DeleteIcon from '@/assets/svg/deleteIcon.svg?react';
 import {useNavigate} from 'react-router-dom';
+import {ROUTES} from '@/shared/config/routes';
 
 interface AssignmentManageActionsBarProps {
   id: number;
@@ -14,7 +15,7 @@ const AssignmentManageActionsBar = ({
   const navigate = useNavigate();
 
   const handleOnEdit = () => {
-    navigate(`/admin/assignments/${id}`);
+    navigate(ROUTES.ADMIN.ASSIGNMENTS.DETAIL(id));
   };
 
   const handleOnDelete = () => {

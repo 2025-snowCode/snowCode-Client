@@ -1,4 +1,4 @@
-import {getAllCourses, getCourseById} from './courseApi';
+import {getAllCourses, getCourseById} from '@/entities/course/api/courseApi';
 import {queryOptions} from '@tanstack/react-query';
 
 export const courseQueries = {
@@ -8,8 +8,8 @@ export const courseQueries = {
       queryKey: ['courses'],
       queryFn: getAllCourses,
       select: (data) => ({
-        courseCount: data.response.count,
-        courses: data.response.courses,
+        courseCount: data.count,
+        courses: data.courses,
       }),
     }),
 
@@ -18,6 +18,6 @@ export const courseQueries = {
     queryOptions({
       queryKey: ['courses', 'detail', courseId],
       queryFn: () => getCourseById(courseId),
-      select: (data) => data.response,
+      select: (data) => data,
     }),
 };

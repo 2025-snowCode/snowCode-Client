@@ -1,5 +1,4 @@
-import type {TUnit} from '@/entities/unit/model/schemas';
-import type {TUnitFormSchema} from '@/entities/unit/model/schemas';
+import type {TUnit, TUnitFormSchema} from '@/entities/unit/model/schemas';
 
 // 단원 편집 모드 타입
 export type Mode = 'creating' | 'editing';
