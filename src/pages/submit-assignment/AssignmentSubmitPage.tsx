@@ -27,19 +27,23 @@ const AssignmentSubmitPage = () => {
 
   return (
     <>
+      {/* 사이드 바 */}
+      <AssignmentSideBar units={courseDetails.units} />
+
+      {/* 메인 컨텐츠 - 과제 정보 및 웹 ide */}
       <div className='h-full flex gap-4'>
-        <AssignmentSideBar units={courseDetails.units} />
-        <div className='w-127.5 h-full overflow-hidden custom-scrollbar py-3 px-2 bg-white rounded-[30px] shadow-card'>
+        <div className='basis-2/5 h-full overflow-hidden custom-scrollbar bg-white rounded-[30px] py-3 px-2 shadow-card'>
           <AssignmentDetails index={index} {...assignmentDetails} />
         </div>
         <div className='flex-1 min-w-0'>
           <CodeEditor onSubmit={onSubmit} isSubmitPending={isSubmitPending} />
         </div>
-
-        {isModalOpen && result && (
-          <SubmitResultModal result={result} closeModal={closeModal} />
-        )}
       </div>
+
+      {/* 제출 결과 모달 */}
+      {isModalOpen && result && (
+        <SubmitResultModal result={result} closeModal={closeModal} />
+      )}
     </>
   );
 };
