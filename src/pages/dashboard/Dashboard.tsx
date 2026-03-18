@@ -85,7 +85,9 @@ const Dashboard = () => {
           </div>
 
           {scheduleCount === 0 ? (
-            <EmptyState className='pl-24.5'>예정된 과제가 없습니다.</EmptyState>
+            <EmptyState className='pl-24.5'>
+              마감 예정인 과제가 없습니다.
+            </EmptyState>
           ) : (
             <ScheduleList scheduleList={schedules} />
           )}
