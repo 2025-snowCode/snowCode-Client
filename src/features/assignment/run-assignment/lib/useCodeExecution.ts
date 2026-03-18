@@ -11,7 +11,7 @@ export const useCodeExecution = () => {
 
   const runCode = (code: string, input: string) => {
     const ws = new WebSocket(
-      `${import.meta.env.VITE_WS_URL}?token=${accessToken}`
+      `${import.meta.env.VITE_WS_BASE_URL}?token=${accessToken}`
     );
     socketRef.current = ws;
     setIsRunning(true);
