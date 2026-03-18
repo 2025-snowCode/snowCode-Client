@@ -1,6 +1,6 @@
 // import type {TAssignmentSubmissionResult} from '@/entities/assignment/model/schemas';
 import DeleteIcon from '@/assets/svg/deleteIcon.svg?react';
-import StatusCircle from './circle/StatusCircle';
+import StatusCircle from '../../../../pages/submit-assignment/ui/circle/StatusCircle';
 import {tv} from 'tailwind-variants';
 
 const RESULT_MESSAGE = {
@@ -38,7 +38,7 @@ const modalStyles = tv({
   },
 });
 
-interface SubmitResultModalProps {
+interface SubmissionResultModalProps {
   // result: TAssignmentSubmissionResult;
   result: {
     isSuccess: boolean;
@@ -52,7 +52,10 @@ interface SubmitResultModalProps {
   closeModal: () => void;
 }
 
-const SubmitResultModal = ({closeModal, result}: SubmitResultModalProps) => {
+const SubmissionResultModal = ({
+  closeModal,
+  result,
+}: SubmissionResultModalProps) => {
   const status = result.isSuccess ? 'PASSED' : 'FAILED';
 
   const styles = modalStyles({color: status});
@@ -129,4 +132,4 @@ const SubmitResultModal = ({closeModal, result}: SubmitResultModalProps) => {
   );
 };
 
-export default SubmitResultModal;
+export default SubmissionResultModal;
