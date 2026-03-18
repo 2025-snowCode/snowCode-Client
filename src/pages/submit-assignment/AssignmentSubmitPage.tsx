@@ -7,11 +7,13 @@ import {useSuspenseQueries} from '@tanstack/react-query';
 import {courseQueries} from '@/entities/course/api/courseQueries';
 import {useAssignmentSubmit} from '@/features/assignment/submit-assignment/lib/useAssignmentSubmit';
 import SubmitResultModal from './ui/SubmitResultModal';
+import {tcFailResponse, tcPassResponse} from './mock';
 
 const AssignmentSubmitPage = () => {
   const location = useLocation();
   const {courseId, assignmentId} = useParams();
   const {index} = (location.state ?? {}) as {index?: number};
+  const result = tcFailResponse.response;
 
   const [{data: assignmentDetails}, {data: courseDetails}] = useSuspenseQueries(
     {
@@ -22,8 +24,8 @@ const AssignmentSubmitPage = () => {
     }
   );
 
-  const {onSubmit, isSubmitPending, result, isModalOpen, closeModal} =
-    useAssignmentSubmit(courseDetails, Number(assignmentId));
+  const {onSubmit, isSubmitPending, isModalOpen, closeModal} =
+    useAssignmentSubmit(courseDetails, Number(assignmentId)); // result 임시 제거
 
   return (
     <>

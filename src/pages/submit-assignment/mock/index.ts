@@ -293,3 +293,29 @@ export const mockSideBarCourse = {
     ],
   },
 };
+
+export const tcPassResponse = {
+  success: true,
+  response: {
+    isSuccess: true,
+    totalCount: 10,
+    passCount: 10,
+    failedTestCase: {
+      testCaseId: 0,
+      expected: null,
+    },
+  },
+};
+
+export const tcFailResponse = {
+  success: true,
+  response: {
+    isSuccess: false,
+    totalCount: 10,
+    passCount: 3,
+    failedTestCase: {
+      testCaseId: 4,
+      expected: '42',
+    },
+  },
+};
