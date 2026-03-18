@@ -1,6 +1,7 @@
-import Badge from '@/shared/ui/badge/Badge';
+import {ROUTES} from '@/shared/config/routes';
 import {Link} from 'react-router-dom';
 import type {TAssignment} from '@/entities/assignment/model/schemas';
+import Badge from '@/shared/ui/badge/Badge';
 
 interface AssignmentListProps {
   isOpen?: boolean;
@@ -30,6 +31,7 @@ const AssignmentList = ({isOpen, assignments}: AssignmentListProps) => {
 
 // 개별 문제 항목
 const AssignmentItem = ({
+  id,
   title,
   index,
   submittedStatus,
@@ -47,11 +49,11 @@ const AssignmentItem = ({
           </span>
 
           {isOpen ? (
-            <Link to={`/admin/assignments/${index}`} className='min-w-0'>
-              <p className='truncate text-secondary-black text-base font-normal hover:text-primary hover:underline hover:underline-offset-4 cursor-pointer'>
-                {title}
-              </p>
-            </Link>
+              <Link to={ROUTES.ADMIN.ASSIGNMENTS.DETAIL(id)} className='min-w-0'>
+                <p className='truncate text-secondary-black text-base font-normal hover:text-primary hover:underline hover:underline-offset-4 cursor-pointer'>
+                  {title}
+                </p>
+              </Link>
           ) : (
             <p className='truncate text-secondary-black text-base font-normal'>
               {title}

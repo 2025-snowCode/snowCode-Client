@@ -14,12 +14,12 @@ export const useKakaoLogin = () => {
     onSuccess: (data) => {
       const userType = data.role === 'ADMIN' ? 'admin' : 'student';
       login(data.name, userType, data.accessToken);
-      navigate(userType === 'admin' ? '/admin' : '/student');
+      navigate(userType === 'admin' ? ROUTES.ADMIN.ROOT : ROUTES.STUDENT.ROOT);
     },
     onError: (error) => {
       console.error('Login error:', error);
       alert('로그인에 실패했습니다. 다시 시도해주세요.');
-      navigate('/');
+      navigate(ROUTES.ROOT);
     },
   });
 

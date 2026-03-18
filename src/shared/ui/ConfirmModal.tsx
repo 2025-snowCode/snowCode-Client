@@ -1,3 +1,4 @@
+import {useEffect} from 'react';
 import Button from '@/shared/ui/button/Button';
 
 interface ConfirmModalProps {
@@ -17,15 +18,24 @@ export default function ConfirmModal({
   onConfirm,
   onCancel,
 }: ConfirmModalProps) {
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onCancel();
+    };
+    window.addEventListener('keydown', handleEsc);
+    return () => window.removeEventListener('keydown', handleEsc);
+  }, [onCancel]);
+
   return (
     <div
       className='fixed inset-0 z-50 flex items-center justify-center bg-black/40'
-      role='presentation'>
+      onClick={onCancel}>
       <section
         role='dialog'
         aria-modal='true'
         aria-labelledby='confirm-modal-title'
-        className='bg-white rounded-2xl p-8 w-80 flex flex-col gap-6 shadow-lg'>
+        className='bg-white rounded-2xl p-8 w-80 flex flex-col gap-6 shadow-lg'
+        onClick={(e) => e.stopPropagation()}>
         <div className='flex flex-col gap-2'>
           <h2 id='confirm-modal-title' className='text-lg font-semibold text-primary-black'>
             {title}

@@ -18,6 +18,9 @@ export const useEditCourse = (courseId: number) => {
       queryClient.invalidateQueries({
         queryKey: courseQueries.getAllCourses().queryKey,
       });
+      queryClient.invalidateQueries({
+        queryKey: courseQueries.getCourseDetails(courseId).queryKey,
+      });
       navigate(ROUTES.ADMIN.ROOT);
     },
     onError: (error) => {
@@ -31,7 +34,7 @@ export const useEditCourse = (courseId: number) => {
       section: data.section,
       year: Number(data.year),
       semester: parseSemester(data.semester),
-      description: data.description,
+      description: data.description ?? '',
       students: [],
     });
   };
