@@ -16,14 +16,19 @@ import AddIcon from '@/assets/svg/addIcon.svg?react';
 import {Link, useNavigate} from 'react-router-dom';
 import {buttonStyles} from '@/shared/ui/button/button-styles';
 import Button from '@/shared/ui/button/Button';
+import {ROUTES} from '@/shared/config/routes';
 
 const AssignmentManagePage = () => {
   const navigate = useNavigate();
   const {
     data: {courses},
   } = useSuspenseQuery(courseQueries.getAllCourses());
-  const {courseOptions, handleCourseSelect, selectedCourseId, selectedCourseLabel} =
-    useCourseFilter(courses);
+  const {
+    courseOptions,
+    handleCourseSelect,
+    selectedCourseId,
+    selectedCourseLabel,
+  } = useCourseFilter(courses);
   const assignmentList = useAssignmentList(selectedCourseId);
   const queryClient = useQueryClient();
 
@@ -87,7 +92,7 @@ const AssignmentManagePage = () => {
               size: 'compact',
               content: 'mixed',
             })}
-            to='/admin/assignments/create'>
+            to={ROUTES.ADMIN.ASSIGNMENTS.CREATE}>
             <AddIcon className='w-4 h-4' />
             문제 추가
           </Link>

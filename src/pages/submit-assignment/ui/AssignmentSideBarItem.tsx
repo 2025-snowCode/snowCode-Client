@@ -3,6 +3,7 @@ import {useEffect, useRef} from 'react';
 import {useLocation, Link, useParams} from 'react-router-dom';
 import type {TAssignment} from '@/entities/assignment/model/schemas';
 import IndexCircle from './circle/IndexCircle';
+import {ROUTES} from '@/shared/config/routes';
 
 interface SideBarItemProps extends TAssignment {
   index: number;
@@ -38,8 +39,8 @@ const SideBarItem = ({
   }, [isActive, isOpen]);
 
   const assignmentPath = pathname.startsWith('/admin')
-    ? `/admin/courses/${courseId}/assignments/${id}`
-    : `/student/courses/${courseId}/assignments/${id}`;
+    ? `${ROUTES.ADMIN.ASSIGNMENTS.SUBMIT(courseId!, id)}`
+    : `${ROUTES.STUDENT.ASSIGNMENTS.SUBMIT(courseId!, id)}`;
 
   const sideBarBorderClass = isOpen ? 'border-r border-purple-stroke' : '';
 

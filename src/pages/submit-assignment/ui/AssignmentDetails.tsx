@@ -2,6 +2,7 @@ import {useNavigate, useParams} from 'react-router-dom';
 import ArrowleftIcon from '@/assets/svg/arrowleftIcon.svg?react';
 import type {TAssignmentDetails} from '@/entities/assignment/model/schemas';
 import IndexCircle from './circle/IndexCircle';
+import {ROUTES} from '@/shared/config/routes';
 
 interface AssignmentDetailsProps extends TAssignmentDetails {
   index?: number;
@@ -21,7 +22,7 @@ const AssignmentDetails = ({
       <div className='relative flex items-center'>
         <button
           className='cursor-pointer absolute -left-9.5'
-          onClick={() => navigate(`/admin/courses/${courseId}`)}>
+          onClick={() => navigate(ROUTES.ADMIN.COURSES.DETAIL(courseId!))}>
           <ArrowleftIcon className='w-4.5 h-4.5' />
         </button>
 
