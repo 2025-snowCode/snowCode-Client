@@ -3,17 +3,19 @@ import MenuIcon from '@/assets/svg/menuIcon.svg?react';
 import {useCallback, useRef, useState} from 'react';
 import SideBarItem from './AssignmentSideBarItem';
 import EllipsisIcon from '@/assets/svg/ellipsisIcon.svg?react';
-import {useParams} from 'react-router-dom';
+import {Link, useLocation, useParams} from 'react-router-dom';
 import LockedIcon from '@/assets/svg/lock.svg?react';
 import {formatDateMonthDay} from '@/shared/lib/course';
 import {useClickOutside} from '@/shared/lib';
 import type {TUnit} from '@/entities/unit/model/schemas';
+import {ROUTES} from '@/shared/config/routes';
 
 interface AssignmentSideBarProps {
   units: TUnit[];
 }
 
 const AssignmentSideBar = ({units}: AssignmentSideBarProps) => {
+  const {pathname} = useLocation();
   const {assignmentId} = useParams();
   const sideBarRef = useRef<HTMLElement>(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -38,11 +40,19 @@ const AssignmentSideBar = ({units}: AssignmentSideBarProps) => {
         {/* 로고 및 토글 버튼 영역 */}
         <div
           className={`w-26 flex flex-col items-center pt-10 ${sideBarBorderClass}`}>
-          <img
-            src={snowCodeLogo}
-            alt='SnowCode Logo'
-            className='w-15.5 h-10 mb-10'
-          />
+          <Link
+            to={
+              pathname.startsWith('/admin')
+                ? ROUTES.ADMIN.ROOT
+                : ROUTES.STUDENT.ROOT
+            }>
+            <img
+              src={snowCodeLogo}
+              alt='SnowCode Logo'
+              className='w-15.5 h-10 mb-10'
+            />
+          </Link>
+
           <button
             onClick={onToggleSidebar}
             className={`${isOpen ? 'bg-purple-stroke' : 'bg-white'} cursor-pointer w-11 h-11 flex-center rounded-full drop-shadow-[0_0_8px_rgba(0,0,0,0.10)]`}>
