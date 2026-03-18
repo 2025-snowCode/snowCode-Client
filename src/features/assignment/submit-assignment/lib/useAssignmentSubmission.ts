@@ -4,7 +4,7 @@ import type {TCourseOverview} from '@/entities/course/model/schemas';
 import {useMutation} from '@tanstack/react-query';
 import {useState} from 'react';
 
-export const useAssignmentSubmit = (
+export const useAssignmentSubmission = (
   courseDetails: TCourseOverview,
   assignmentId: number
 ) => {
