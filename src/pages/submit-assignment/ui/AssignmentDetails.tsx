@@ -19,10 +19,12 @@ const AssignmentDetails = ({
     <section className='h-full py-6.5 pl-15.5 pr-8.5 font-medium text-primary-black overflow-y-auto'>
       {/* 과제 제목 및 설명 */}
       <div className='relative flex items-center'>
-        <ArrowleftIcon
-          onClick={() => navigate(`/admin/courses/${courseId}`)}
-          className='absolute w-4.5 h-4.5 cursor-pointer -left-9.5'
-        />
+        <button
+          className='cursor-pointer absolute -left-9.5'
+          onClick={() => navigate(`/admin/courses/${courseId}`)}>
+          <ArrowleftIcon className='w-4.5 h-4.5' />
+        </button>
+
         <h2 className='relative flex-center gap-3'>
           <IndexCircle
             index={index || 0}
@@ -37,8 +39,9 @@ const AssignmentDetails = ({
       {/* 입, 출력 예제 */}
       <div className='mt-8'>
         <h3 className='bg-[#EDE9FF] rounded-t-[10px] px-7 py-3 text-base/[27px]'>
-          입출력 예제
+          입/출력 예제
         </h3>
+
         <ul className='bg-gray rounded-b-[10px] divide-y divide-purple-stroke'>
           {testcases.map(({id, testcase, answer}, idx) => (
             <li key={id} className='text-base/6 px-7 pt-5 pb-9.5'>
