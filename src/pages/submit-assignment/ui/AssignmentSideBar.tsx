@@ -34,7 +34,8 @@ const AssignmentSideBar = ({units}: AssignmentSideBarProps) => {
     <>
       <aside
         ref={sideBarRef}
-        className={`${isOpen ? 'w-120 overflow-y-auto' : 'w-26 overflow-hidden'} transition-[width] duration-150 ease-in-out flex flex-col fixed top-0 left-0 z-26 bg-white h-full shadow-box`}>
+        className={`${isOpen ? 'w-120 overflow-y-auto' : 'w-26 overflow-hidden'} transition-[width] duration-150 ease-in-out flex flex-col fixed top-0 left-0 z-30 bg-white h-full shadow-box`}>
+        {/* 로고 및 토글 버튼 영역 */}
         <div
           className={`w-26 flex flex-col items-center pt-10 ${sideBarBorderClass}`}>
           <img
@@ -50,10 +51,9 @@ const AssignmentSideBar = ({units}: AssignmentSideBarProps) => {
         </div>
 
         {/* 네비게이션 */}
-        <nav className='flex-1'>
+        <nav className=''>
           {units.map((unit) => (
             <div key={unit.id}>
-              {/* 단원 제목 영역 */}
               <div
                 className={`flex items-end h-9 ${!unit.isOpen ? 'opacity-60' : ''}`}>
                 <div className={`w-26 h-full shrink-0 ${sideBarBorderClass}`} />
@@ -73,7 +73,6 @@ const AssignmentSideBar = ({units}: AssignmentSideBarProps) => {
                 )}
               </div>
 
-              {/* 과제 아이템 영역 */}
               {unit.assignments.map((assignment, index) => (
                 <SideBarItem
                   key={assignment.id}
@@ -90,15 +89,17 @@ const AssignmentSideBar = ({units}: AssignmentSideBarProps) => {
           ))}
         </nav>
 
-        <div className={`sticky bottom-0 h-10 bg-white`}>
+        <div className={`flex-1 w-26 ${sideBarBorderClass}`} />
+
+        <div className='sticky bottom-0 bg-white'>
           <button
             onClick={onToggleSidebar}
-            className={`w-26 h-10 flex-center ${sideBarBorderClass}`}>
-            <EllipsisIcon className='cursor-pointer w-8.25 h-1.75 text-primary' />
+            className={`cursor-pointer w-26 h-full pt-3 pb-6 flex-center ${sideBarBorderClass}`}>
+            <EllipsisIcon className='w-8.25 h-1.75 text-primary' />
           </button>
-          <div className='flex-1' />
         </div>
       </aside>
+
       <div
         className={`overlay fixed inset-0 z-20 bg-black/45 transition-opacity duration-150 ${
           isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
