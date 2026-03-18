@@ -32,14 +32,12 @@ export const assignmentQueries = {
       queryKey: ['courses', courseId, 'assignments'],
       queryFn: () => getAssignmentsByCourse(courseId),
       enabled: !!courseId,
-      select: (data) =>
-        data.courses.flatMap((course) => course.assignments),
+      select: (data) => data.courses.flatMap((course) => course.assignments),
     }),
 
   getAssignment: (assignmentId: number) =>
     queryOptions({
       queryKey: ['assignments', assignmentId],
       queryFn: () => getAssignment(assignmentId),
-      select: (data) => data,
     }),
 };
