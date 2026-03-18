@@ -50,8 +50,13 @@ export const getAssignmentsByCourse = async (courseId: number) => {
 
 // 단일 과제 상세 조회 API
 export const getAssignmentDetails = async (assignmentId: number) => {
-  const response = await privateAxios.get(`/assignments/${assignmentId}`);
-  return apiResponseSchema(assignmentDetailsSchema).parse(response.data);
+  const response = await privateAxios.get(
+    ENDPOINTS.ASSIGNMENTS.DETAIL(assignmentId)
+  );
+  const parsed = apiResponseSchema(assignmentDetailsSchema).parse(
+    response.data
+  );
+  return parsed.response;
 };
 
 // 과제 삭제 API
@@ -65,7 +70,7 @@ export const deleteAssignment = async (assignmentId: number) => {
 
 // 과제 코드 조회 API
 export const getAssignmentCode = async (codeId: number) => {
-  const response = await privateAxios.get(`/code/${codeId}`);
+  const response = await privateAxios.get(ENDPOINTS.ASSIGNMENTS.CODE(codeId));
   const parsed = apiResponseSchema(
     z.object({
       id: z.number(),
@@ -73,7 +78,6 @@ export const getAssignmentCode = async (codeId: number) => {
       language: z.string(),
     })
   ).parse(response.data);
-
   return parsed.response;
 };
 
@@ -84,7 +88,7 @@ export const submitAssignment = async (
   code: string
 ) => {
   const response = await privateAxios.post(
-    `/assignments/${unitId}/${assignmentId}/code`,
+    ENDPOINTS.ASSIGNMENTS.SUBMIT(unitId, assignmentId),
     {
       code: code,
       language: 'PYTHON',
@@ -93,6 +97,5 @@ export const submitAssignment = async (
   const parsed = apiResponseSchema(assignmentSubmissionResultSchema).parse(
     response.data
   );
-
   return parsed.response;
 };
