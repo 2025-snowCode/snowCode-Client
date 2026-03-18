@@ -5,8 +5,8 @@ import {assignmentQueries} from '@/entities/assignment/api/assignmentQueries';
 import {useLocation, useParams} from 'react-router-dom';
 import {useSuspenseQueries} from '@tanstack/react-query';
 import {courseQueries} from '@/entities/course/api/courseQueries';
-import {useAssignmentSubmit} from '@/features/assignment/submit-assignment/lib/useAssignmentSubmit';
-import SubmitResultModal from './ui/SubmitResultModal';
+import {useAssignmentSubmission} from '@/features/assignment/submit-assignment/lib/useAssignmentSubmission';
+import SubmissionResultModal from '@/features/assignment/submit-assignment/ui/SubmissionResultModal';
 import {tcFailResponse, tcPassResponse} from './mock';
 
 const AssignmentSubmitPage = () => {
@@ -25,7 +25,7 @@ const AssignmentSubmitPage = () => {
   );
 
   const {onSubmit, isSubmitPending, isModalOpen, closeModal} =
-    useAssignmentSubmit(courseDetails, Number(assignmentId)); // result 임시 제거
+    useAssignmentSubmission(courseDetails, Number(assignmentId)); // result 임시 제거
 
   return (
     <>
@@ -44,7 +44,7 @@ const AssignmentSubmitPage = () => {
 
       {/* 제출 결과 모달 */}
       {isModalOpen && result && (
-        <SubmitResultModal result={result} closeModal={closeModal} />
+        <SubmissionResultModal result={result} closeModal={closeModal} />
       )}
     </>
   );
