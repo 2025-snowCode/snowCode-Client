@@ -82,7 +82,7 @@ const CourseStats = ({
   isAdmin,
 }: CourseStatsProps) => {
   const studentInfo =
-    isAdmin && studentCount !== undefined ? ` | ${studentCount}명` : '';
+    isAdmin && studentCount !== undefined ? ` | ${studentCount - 1}명` : '';
   const courseStats = `${unitCount}단원 | ${assignmentCount}문제${studentInfo}`;
 
   return (
