@@ -1,7 +1,8 @@
 import {assignmentMutations} from '@/entities/assignment/api/assignmentMutations';
 import type {TAssignmentSubmissionResult} from '@/entities/assignment/model/schemas';
+import {courseQueries} from '@/entities/course/api/courseQueries';
 import type {TCourseOverview} from '@/entities/course/model/schemas';
-import {useMutation} from '@tanstack/react-query';
+import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {useState} from 'react';
 
 export const useAssignmentSubmission = (
@@ -17,10 +18,15 @@ export const useAssignmentSubmission = (
     unit.assignments.some((assignment) => assignment.id === assignmentId)
   )?.id;
 
+  const queryClient = useQueryClient();
+
   // 과제 제출 API 호출
   const {mutate: submit, isPending: isSubmitPending} = useMutation({
     ...assignmentMutations.submitAssignment,
     onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: courseQueries.getCourseDetails(courseDetails.id).queryKey,
+      });
       setIsModalOpen(true);
       setResult({condeId: data.condeId, score: data.score});
     },
