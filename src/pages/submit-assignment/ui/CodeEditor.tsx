@@ -42,7 +42,7 @@ const CodeEditor = ({onSubmit, isSubmitPending}: CodeEditorProps) => {
         minSize='30%'
         className='h-full'
         style={{overflow: 'hidden'}}>
-        <div className='px-10.5 py-2.5 flex items-center justify-between sticky top-0 z-10'>
+        <div className='px-10.5 py-2.5 flex items-center justify-between z-10'>
           <Button color='tonal' size='compact' className='text-sm'>
             제출 이력
           </Button>
