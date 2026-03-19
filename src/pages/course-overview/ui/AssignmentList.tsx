@@ -2,7 +2,6 @@ import {ROUTES} from '@/shared/config/routes';
 import {useLocation, Link} from 'react-router-dom';
 import type {TAssignment} from '@/entities/assignment/model/schemas';
 import Badge from '@/shared/ui/badge/Badge';
-import {ROUTES} from '@/shared/config/routes';
 
 interface AssignmentListProps {
   isOpen?: boolean;
@@ -60,7 +59,7 @@ const AssignmentItem = ({
           </span>
 
           {isOpen ? (
-            <Link to={ROUTES.ADMIN.ASSIGNMENTS.DETAIL(id)} className='min-w-0'>
+            <Link to={assignmentPath} state={{index}} className='min-w-0'>
               <p className='truncate text-secondary-black text-base font-normal hover:text-primary hover:underline hover:underline-offset-4 cursor-pointer'>
                 {title}
               </p>

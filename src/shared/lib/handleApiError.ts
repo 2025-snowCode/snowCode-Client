@@ -1,7 +1,10 @@
 import axios from 'axios';
-import { errorResponseSchema } from '@/shared/model/schemas'; 
+import {errorResponseSchema} from '@/shared/model/schemas';
 
-export const handleApiError = (error: unknown, fallbackMessage?: string): void => {
+export const handleApiError = (
+  error: unknown,
+  fallbackMessage?: string
+): void => {
   let message = fallbackMessage;
 
   if (!message && axios.isAxiosError(error)) {
@@ -19,9 +22,9 @@ export const handleApiError = (error: unknown, fallbackMessage?: string): void =
   if (import.meta.env.DEV) {
     console.error('[DEBUG_API_ERROR]', error);
   } else {
-    const safeLog = axios.isAxiosError(error) 
-      ? { status: error.response?.status, code: error.code } 
-      : { message: 'Unexpected Error' };
+    const safeLog = axios.isAxiosError(error)
+      ? {status: error.response?.status, code: error.code}
+      : {message: 'Unexpected Error'};
     console.error('[API_ERROR]', safeLog);
   }
 
