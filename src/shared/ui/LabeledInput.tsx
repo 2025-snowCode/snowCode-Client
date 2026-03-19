@@ -16,7 +16,7 @@ const LabeledInput = forwardRef<HTMLInputElement, LabeledInputProps>(
       className,
       showLabel = true,
       errorMessage,
-      required = true,
+      required = false,
       id,
       ...rest
     },

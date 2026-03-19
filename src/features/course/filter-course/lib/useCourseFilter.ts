@@ -8,8 +8,9 @@ export const useCourseFilter = (courses: TDashboardCourse[]) => {
   const [selectedCourseId, setSelectedCourseId] = useState<number | null>(null);
 
   // 강의 선택 드롭다운 메뉴 옵션
-  const courseOptionMap = useMemo(() => {
-    const map = new Map<string, number>();
+  const courseMaps = useMemo(() => {
+    const labelToId = new Map<string, number>();
+    const idToLabel = new Map<number, string>();
 
     courses.forEach((course) => {
       const label = formatCourseOptionLabel(
@@ -18,15 +19,16 @@ export const useCourseFilter = (courses: TDashboardCourse[]) => {
         course.semester,
         course.section
       );
-      map.set(label, course.id);
+      labelToId.set(label, course.id);
+      idToLabel.set(course.id, label);
     });
 
-    return map;
+    return {labelToId, idToLabel};
   }, [courses]);
 
   const courseOptions = useMemo(() => {
-    return [ALL_COURSES_OPTION, ...Array.from(courseOptionMap.keys())];
-  }, [courseOptionMap]);
+    return [ALL_COURSES_OPTION, ...Array.from(courseMaps.labelToId.keys())];
+  }, [courseMaps.labelToId]);
 
   const handleCourseSelect = (value: string) => {
     if (value === ALL_COURSES_OPTION) {
@@ -34,17 +36,14 @@ export const useCourseFilter = (courses: TDashboardCourse[]) => {
       return;
     }
 
-    const courseId = courseOptionMap.get(value) ?? null;
+    const courseId = courseMaps.labelToId.get(value) ?? null;
     setSelectedCourseId(courseId);
   };
 
   const selectedCourseLabel = useMemo(() => {
     if (selectedCourseId === null) return ALL_COURSES_OPTION;
-    for (const [key, value] of courseOptionMap.entries()) {
-      if (value === selectedCourseId) return key;
-    }
-    return ALL_COURSES_OPTION;
-  }, [selectedCourseId, courseOptionMap]);
+    return courseMaps.idToLabel.get(selectedCourseId) ?? ALL_COURSES_OPTION;
+  }, [selectedCourseId, courseMaps]);
 
   return {courseOptions, handleCourseSelect, selectedCourseId, selectedCourseLabel};
 };

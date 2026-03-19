@@ -30,7 +30,7 @@ export const useCreateCourse = () => {
       section: data.section,
       year: Number(data.year),
       semester: parseSemester(data.semester),
-      description: data.description,
+      description: data.description ?? '',
       students: [],
     });
   };

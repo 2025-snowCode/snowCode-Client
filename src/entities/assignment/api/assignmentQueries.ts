@@ -3,6 +3,7 @@ import {
   getAllAssignments,
   getAssignmentCode,
   getAssignmentDetails,
+  getAssignment,
   getAssignmentsByCourse,
   getAssignmentSchedules,
 } from '@/entities/assignment/api/assignmentApi';
@@ -44,11 +45,9 @@ export const assignmentQueries = {
       select: (data) => data.courses.flatMap((course) => course.assignments),
     }),
 
-  // 과제 코드 조회 쿼리 옵션
-  getAssignmentCode: (codeId: number) =>
+  getAssignment: (assignmentId: number) =>
     queryOptions({
-      queryKey: ['code', codeId],
-      queryFn: () => getAssignmentCode(codeId),
-      enabled: !!codeId,
+      queryKey: ['assignments', assignmentId],
+      queryFn: () => getAssignment(assignmentId),
     }),
 };

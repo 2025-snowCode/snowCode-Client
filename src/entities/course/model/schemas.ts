@@ -9,13 +9,13 @@ export const courseCoreSchema = z.object({
   section: z.string().min(1, '분반을 입력해주세요.'),
   year: z.number().min(2001).max(2099),
   semester: semesterCodeSchema,
-  description: z.string().catch('').optional(),
-});
+  description: z.string().nullish().transform((v) => v ?? ''),
+})
 
 /** 강의 기본 정보 (ID 포함) */
 export const courseBaseSchema = courseCoreSchema.extend({
   id: z.number(),
-  description: z.string().catch(''), // 응답에서는 기본값 처리
+  description: z.string().nullish().transform((v) => v ?? ''), // 응답에서는 기본값 처리
 });
 
 /** 강의 추가/수정 요청 스키마 */
