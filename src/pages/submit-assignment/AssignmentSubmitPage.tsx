@@ -1,4 +1,3 @@
-import AssignmentDetails from './ui/AssignmentDetails';
 import CodeEditor from './ui/CodeEditor';
 import AssignmentSideBar from './ui/AssignmentSideBar';
 import {assignmentQueries} from '@/entities/assignment/api/assignmentQueries';
@@ -8,6 +7,7 @@ import {courseQueries} from '@/entities/course/api/courseQueries';
 import {useAssignmentSubmission} from '@/features/assignment/submit-assignment/lib/useAssignmentSubmission';
 import SubmissionResultModal from '@/features/assignment/submit-assignment/ui/SubmissionResultModal';
 import {tcFailResponse, tcPassResponse} from './mock';
+import AssignmentProblem from './ui/AssignmentProblem';
 
 const AssignmentSubmitPage = () => {
   const location = useLocation();
@@ -15,14 +15,12 @@ const AssignmentSubmitPage = () => {
   const {index} = (location.state ?? {}) as {index?: number};
   const result = tcFailResponse.response;
 
-  const [{data: assignmentDetails}, {data: courseDetails}] = useSuspenseQueries(
-    {
-      queries: [
-        assignmentQueries.getAssignmentDetails(Number(assignmentId)),
-        courseQueries.getCourseDetails(Number(courseId)),
-      ],
-    }
-  );
+  const [{data: assignment}, {data: courseDetails}] = useSuspenseQueries({
+    queries: [
+      assignmentQueries.getAssignment(Number(assignmentId)),
+      courseQueries.getCourseDetails(Number(courseId)),
+    ],
+  });
 
   const {onSubmit, isSubmitPending, isModalOpen, closeModal} =
     useAssignmentSubmission(courseDetails, Number(assignmentId)); // result 임시 제거
@@ -35,7 +33,7 @@ const AssignmentSubmitPage = () => {
       {/* 메인 컨텐츠 - 과제 정보 및 웹 ide */}
       <div className='h-full flex gap-4'>
         <div className='basis-2/5 h-full overflow-hidden custom-scrollbar bg-white rounded-[30px] py-3 px-2 shadow-card'>
-          <AssignmentDetails index={index} {...assignmentDetails} />
+          <AssignmentProblem index={index} {...assignment} />
         </div>
         <div className='flex-1 min-w-0'>
           <CodeEditor onSubmit={onSubmit} isSubmitPending={isSubmitPending} />

@@ -1,18 +1,18 @@
 import {useNavigate, useParams} from 'react-router-dom';
 import ArrowleftIcon from '@/assets/svg/arrowleftIcon.svg?react';
-import type {TAssignmentDetails} from '@/entities/assignment/model/schemas';
+import type {TAssignmentDetail} from '@/entities/assignment/model/schemas';
 import IndexCircle from './circle/IndexCircle';
 import {ROUTES} from '@/shared/config/routes';
 
-interface AssignmentDetailsProps extends TAssignmentDetails {
+interface AssignmentProblemProps extends TAssignmentDetail {
   index?: number;
 }
-const AssignmentDetails = ({
+const AssignmentProblem = ({
   index,
   title,
   description,
   testcases,
-}: AssignmentDetailsProps) => {
+}: AssignmentProblemProps) => {
   const navigate = useNavigate();
   const {courseId} = useParams();
 
@@ -65,4 +65,4 @@ const AssignmentDetails = ({
   );
 };
 
-export default AssignmentDetails;
+export default AssignmentProblem;
