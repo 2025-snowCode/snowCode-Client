@@ -39,7 +39,7 @@ export const useAssignmentSubmission = (
   // 제출 함수
   const onSubmit = (code: string) => {
     submit({
-      unitId: unitId ?? 0,
+      unitId: unitId!,
       assignmentId: Number(assignmentId),
       code,
     });

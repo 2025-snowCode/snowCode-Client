@@ -50,8 +50,13 @@ const SideBarItem = ({
       to={assignmentPath}
       state={{index, codeId}}
       ref={activeItemRef}
-      className={`${isLocked ? 'pointer-events-none opacity-60' : ''} flex items-center cursor-pointer ${isActive ? 'bg-primary/5' : 'hover:bg-primary/5'}`}>
-      {/* 과제 제출여부 표시 배지 */}
+      className={`${isLocked ? 'pointer-events-none opacity-60' : ''} 
+         ${isActive ? 'bg-primary/5' : 'hover:bg-primary/5'} 
+         flex items-center cursor-pointer`}
+      tabIndex={isLocked ? -1 : undefined}
+      onClick={(e) => {
+        if (isLocked) e.preventDefault();
+      }}>
       <div
         className={`w-26 shrink-0 flex flex-col items-center ${sideBarBorderClass}`}>
         <div
@@ -63,7 +68,6 @@ const SideBarItem = ({
         />
       </div>
 
-      {/* 과제 인데스 + 제목 */}
       {isOpen && (
         <div className='flex-1 h-7.75 flex items-center gap-2 pl-7.5'>
           <IndexCircle index={index} color='primary' className='w-5 h-5' />

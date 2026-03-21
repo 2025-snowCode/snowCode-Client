@@ -10,7 +10,6 @@ interface AssignmentListProps {
 }
 
 interface AssignmentItemProps extends TAssignment {
-  id: number;
   index: number;
   isOpen?: boolean;
   courseId: number;

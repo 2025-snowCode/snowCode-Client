@@ -28,7 +28,7 @@ const AssignmentSubmitPage = () => {
   });
 
   const {data: assignmentCode} = useQuery({
-    ...assignmentQueries.getAssignmentCode(Number(codeId) ?? 0),
+    ...assignmentQueries.getAssignmentCode(Number(codeId || 0)),
     enabled: !!codeId,
   });
 
