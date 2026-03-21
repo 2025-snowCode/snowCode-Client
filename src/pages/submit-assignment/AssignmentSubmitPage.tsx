@@ -9,9 +9,9 @@ import {useAssignmentSubmission} from '@/features/assignment/submit-assignment/l
 import SubmissionResultModal from '@/features/assignment/submit-assignment/ui/SubmissionResultModal';
 import {tcFailResponse, tcPassResponse} from './mock';
 import {Group, Panel, Separator} from 'react-resizable-panels';
-import DragAndDropIcon from '@/assets/svg/dragAndDropIcon.svg?react';
 import Terminal from './ui/Terminal';
 import {useCodeExecution} from '@/features/assignment/run-assignment/lib/useCodeExecution';
+import EllipsisIcon from '@/assets/svg/ellipsisIcon.svg?react';
 
 const AssignmentSubmitPage = () => {
   const location = useLocation();
@@ -46,7 +46,7 @@ const AssignmentSubmitPage = () => {
         <div className='flex-1 min-w-0'>
           <Group
             orientation='vertical'
-            className='h-full bg-[#1e1e1e] rounded-[30px]'>
+            className='h-full bg-primary-black rounded-[30px]'>
             <Panel
               id='top-panel'
               minSize='30%'
@@ -61,7 +61,7 @@ const AssignmentSubmitPage = () => {
             </Panel>
 
             <Separator className='cursor-row-resize flex-center h-3 bg-gray-500 focus:outline-none data-[separator="active"]:bg-gray-600/80'>
-              <DragAndDropIcon className='rotate-90 w-3 h-3 text-primary-black' />
+              <EllipsisIcon className='w-4.5 h-4.5 text-primary-black' />
             </Separator>
 
             <Panel id='bottom-panel' minSize='10%'>
