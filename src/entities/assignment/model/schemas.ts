@@ -5,6 +5,7 @@ export const assignmentSchema = z.object({
   id: z.number(),
   title: z.string(),
   submittedStatus: submissionStatusSchema.optional(),
+  codeId: z.number().optional(),
 });
 
 export const assignmentScheduleSchema = z.object({
@@ -36,7 +37,6 @@ export const assignmentFormSchema = z.object({
 export const assignmentDetailSchema = z.object({
   id: z.number(),
   title: z.string(),
-  score: z.number(),
   description: z.string(),
   count: z.number(),
   testcases: z.array(
@@ -44,7 +44,7 @@ export const assignmentDetailSchema = z.object({
       id: z.number(),
       testcase: z.string(),
       answer: z.string(),
-      isHidden: z.boolean(),
+      isPublic: z.boolean().optional(),
     })
   ),
 });
@@ -52,6 +52,12 @@ export const assignmentDetailSchema = z.object({
 export const assignmentSubmissionResultSchema = z.object({
   condeId: z.number(),
   score: z.number(),
+});
+
+export const assignmentCodeSchema = z.object({
+  id: z.number(),
+  code: z.string(),
+  language: z.string(),
 });
 
 export type TAssignment = z.infer<typeof assignmentSchema>;
