@@ -7,7 +7,7 @@ interface TestcaseRowProps {
   index: number;
   testcase: string;
   answer: string;
-  isHidden: boolean;
+  isPublic: boolean;
   onTestcaseChange: (value: string) => void;
   onAnswerChange: (value: string) => void;
   onHiddenChange: (value: boolean) => void;
@@ -17,7 +17,7 @@ const TestcaseRow = ({
   index,
   testcase,
   answer,
-  isHidden,
+  isPublic,
   onTestcaseChange,
   onAnswerChange,
   onHiddenChange,
@@ -44,7 +44,7 @@ const TestcaseRow = ({
         label={isFirst ? '공개 여부' : ''}
         options={PUBLIC_OPTIONS}
         className='w-full'
-        value={isHidden ? '비공개' : '공개'}
+        value={isPublic ? '비공개' : '공개'}
         onSelect={(value) => onHiddenChange(value === '비공개')}
       />
     </div>

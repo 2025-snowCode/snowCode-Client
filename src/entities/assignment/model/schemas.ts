@@ -26,7 +26,6 @@ export const assignmentFormSchema = z.object({
   description: z.string(),
   testcases: z.array(
     z.object({
-      id: z.number(),
       testcase: z.string(),
       answer: z.string(),
       isPublic: z.boolean(),
