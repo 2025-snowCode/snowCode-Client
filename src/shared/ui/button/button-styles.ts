@@ -15,6 +15,7 @@ export const buttonStyles = tv({
       lightBlack: 'bg-light-black text-white border-none',
     },
     size: {
+      xs: 'w-fit px-2.5 py-1',
       default: 'w-24 h-10 px-3 py-1.5',
       compact: 'w-fit px-3 py-1.5',
       wide: 'w-40 py-[15px]',
