@@ -71,7 +71,7 @@ const AssignmentFormPage = () => {
   });
 
   const handleAddTestcase = () => {
-    setTestcases([...testcases, {testcase: '', answer: '', isPublic: false}]);
+    setTestcases([...testcases, {testcase: '', answer: '', isPublic: true}]);
   };
 
   const handleConfirm = () => {

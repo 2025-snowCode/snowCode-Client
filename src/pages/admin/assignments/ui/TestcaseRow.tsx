@@ -44,7 +44,7 @@ const TestcaseRow = ({
         label={isFirst ? '공개 여부' : ''}
         options={PUBLIC_OPTIONS}
         className='w-full'
-        value={isPublic ? '비공개' : '공개'}
+        value={isPublic ? '공개' : '비공개'}
         onSelect={(value) => onHiddenChange(value === '비공개')}
       />
     </div>
