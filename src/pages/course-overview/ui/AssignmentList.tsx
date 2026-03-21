@@ -43,6 +43,7 @@ const AssignmentItem = ({
   submittedStatus,
   isOpen,
   courseId,
+  codeId,
 }: AssignmentItemProps) => {
   const {pathname} = useLocation();
   const isLocked = isOpen === false ? 'opacity-60 pointer-events-none' : '';
@@ -59,7 +60,10 @@ const AssignmentItem = ({
           </span>
 
           {isOpen ? (
-            <Link to={assignmentPath} state={{index}} className='min-w-0'>
+            <Link
+              to={assignmentPath}
+              state={{index, codeId}}
+              className='min-w-0'>
               <p className='truncate text-secondary-black text-base font-normal hover:text-primary hover:underline hover:underline-offset-4 cursor-pointer'>
                 {title}
               </p>

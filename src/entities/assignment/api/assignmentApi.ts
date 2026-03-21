@@ -2,6 +2,7 @@ import {z} from 'zod';
 import {privateAxios} from '@/shared/api/axiosInstance';
 import {apiResponseSchema} from '@/shared/model/schemas';
 import {
+  assignmentCodeSchema,
   assignmentDetailSchema,
   assignmentScheduleSchema,
   assignmentSubmissionResultSchema,
@@ -61,13 +62,7 @@ export const getAssignment = async (assignmentId: number) => {
 // 과제 코드 조회 API
 export const getAssignmentCode = async (codeId: number) => {
   const response = await privateAxios.get(ENDPOINTS.ASSIGNMENTS.CODE(codeId));
-  const parsed = apiResponseSchema(
-    z.object({
-      id: z.number(),
-      code: z.number(),
-      language: z.string(),
-    })
-  ).parse(response.data);
+  const parsed = apiResponseSchema(assignmentCodeSchema).parse(response.data);
   return parsed.response;
 };
 

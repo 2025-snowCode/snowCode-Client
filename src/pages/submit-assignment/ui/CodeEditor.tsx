@@ -11,9 +11,14 @@ type EditorInstance = Parameters<OnMount>[0];
 interface CodeEditorProps {
   onSubmit: (code: string) => void;
   isSubmitPending: boolean;
+  assignmentCode?: string;
 }
 
-const CodeEditor = ({onSubmit, isSubmitPending}: CodeEditorProps) => {
+const CodeEditor = ({
+  onSubmit,
+  isSubmitPending,
+  assignmentCode,
+}: CodeEditorProps) => {
   const editorRef = useRef<EditorInstance | null>(null);
   const {runCode, output, isRunning} = useCodeExecution();
 
@@ -75,7 +80,7 @@ const CodeEditor = ({onSubmit, isSubmitPending}: CodeEditorProps) => {
         <Editor
           theme='vs-dark'
           defaultLanguage='python'
-          defaultValue='# 코드를 작성하세요'
+          defaultValue={assignmentCode ?? '# 코드를 작성하세요'}
           onMount={handleEditorDidMount}
           options={{
             fontSize: 15,

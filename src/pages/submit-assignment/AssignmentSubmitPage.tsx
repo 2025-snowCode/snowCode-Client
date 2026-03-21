@@ -2,7 +2,7 @@ import CodeEditor from './ui/CodeEditor';
 import AssignmentSideBar from './ui/AssignmentSideBar';
 import {assignmentQueries} from '@/entities/assignment/api/assignmentQueries';
 import {useLocation, useParams} from 'react-router-dom';
-import {useSuspenseQueries} from '@tanstack/react-query';
+import {useQuery, useSuspenseQueries} from '@tanstack/react-query';
 import {courseQueries} from '@/entities/course/api/courseQueries';
 import {useAssignmentSubmission} from '@/features/assignment/submit-assignment/lib/useAssignmentSubmission';
 import SubmissionResultModal from '@/features/assignment/submit-assignment/ui/SubmissionResultModal';
@@ -12,14 +12,22 @@ import AssignmentProblem from './ui/AssignmentProblem';
 const AssignmentSubmitPage = () => {
   const location = useLocation();
   const {courseId, assignmentId} = useParams();
-  const {index} = (location.state ?? {}) as {index?: number};
-  const result = tcFailResponse.response;
+  const {index, codeId} = (location.state ?? {}) as {
+    index?: number;
+    codeId?: number;
+  };
+  const result = tcPassResponse.response;
 
   const [{data: assignment}, {data: courseDetails}] = useSuspenseQueries({
     queries: [
       assignmentQueries.getAssignment(Number(assignmentId)),
       courseQueries.getCourseDetails(Number(courseId)),
     ],
+  });
+
+  const {data: assignmentCode} = useQuery({
+    ...assignmentQueries.getAssignmentCode(Number(codeId) ?? 0),
+    enabled: !!codeId,
   });
 
   const {onSubmit, isSubmitPending, isModalOpen, closeModal} =
@@ -36,7 +44,11 @@ const AssignmentSubmitPage = () => {
           <AssignmentProblem index={index} {...assignment} />
         </div>
         <div className='flex-1 min-w-0'>
-          <CodeEditor onSubmit={onSubmit} isSubmitPending={isSubmitPending} />
+          <CodeEditor
+            onSubmit={onSubmit}
+            isSubmitPending={isSubmitPending}
+            assignmentCode={assignmentCode}
+          />
         </div>
       </div>
 
