@@ -2,7 +2,7 @@ import {formatCourseTermWithSlash} from '@/shared/lib/course';
 import CourseManagementDropdown from '@/pages/dashboard/ui/CourseManagementDropdown';
 import {useLocation, useNavigate} from 'react-router-dom';
 import {ROUTES} from '@/shared/config/routes';
-import type {TDashboardCourse} from '@/entities/course/model/types';
+import type {TDashboardCourse} from '@/entities/course/model/schemas';
 
 type CourseCardProps = TDashboardCourse;
 

@@ -2,7 +2,7 @@ import Button from '@/shared/ui/button/Button';
 import {Editor, type Monaco, type OnMount} from '@monaco-editor/react';
 import {useRef} from 'react';
 import PlayIcon from '@/assets/svg/playIcon.svg?react';
-import OneDarkPro from '@/themes/OneDarkPro.json';
+import OneDarkPro from '@/themes/onedarkpro.json';
 
 const editorOptions = {
   fontLigatures: true,

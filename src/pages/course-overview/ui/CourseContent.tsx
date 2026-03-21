@@ -2,7 +2,7 @@ import snowCodeOverview from '@/assets/images/snowcode_overview.svg';
 import UnitItem from '@/pages/course-overview/ui/UnitItem';
 import CourseActionsBar from '@/pages/course-overview/ui/CourseActionsBar';
 import {useUserStore} from '@/entities/auth/model/useUserStore';
-import type {TCourseOverview} from '@/entities/course/model/types';
+import type {TCourseOverview} from '@/entities/course/model/schemas';
 
 interface CourseContentProps {
   units: TCourseOverview['units'];

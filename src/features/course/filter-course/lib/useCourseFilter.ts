@@ -1,4 +1,4 @@
-import type {TDashboardCourse} from '@/entities/course/model/types';
+import type {TDashboardCourse} from '@/entities/course/model/schemas';
 import {formatCourseOptionLabel} from '@/shared/lib/course';
 import {useMemo, useState} from 'react';
 

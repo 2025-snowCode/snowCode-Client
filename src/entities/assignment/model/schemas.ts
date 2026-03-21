@@ -37,6 +37,7 @@ export const assignmentFormSchema = z.object({
 export const assignmentDetailSchema = z.object({
   id: z.number(),
   title: z.string(),
+  score: z.number().optional(),
   description: z.string(),
   count: z.number(),
   testcases: z.array(
