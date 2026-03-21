@@ -24,6 +24,7 @@ const SideBarItem = ({
   isFirst,
   isActive,
   isLocked,
+  codeId,
 }: SideBarItemProps) => {
   const {courseId} = useParams();
   const {pathname} = useLocation();
@@ -47,7 +48,7 @@ const SideBarItem = ({
   return (
     <Link
       to={assignmentPath}
-      state={{index}}
+      state={{index, codeId}}
       ref={activeItemRef}
       className={`${isLocked ? 'pointer-events-none opacity-60' : ''} flex items-center cursor-pointer ${isActive ? 'bg-primary/5' : 'hover:bg-primary/5'}`}>
       {/* 과제 제출여부 표시 배지 */}

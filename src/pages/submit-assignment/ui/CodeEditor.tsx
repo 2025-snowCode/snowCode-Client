@@ -39,13 +39,10 @@ interface CodeEditorProps {
 }
 
 const CodeEditor = ({
-  
   onSubmit,
- 
   isSubmitPending,
   runCode,
   isRunning,
-,
   assignmentCode,
 }: CodeEditorProps) => {
   const editorRef = useRef<EditorInstance | null>(null);
@@ -114,10 +111,11 @@ const CodeEditor = ({
       <Editor
         theme='OneDarkPro'
         defaultLanguage='python'
-        defaultValue={assignmentCode ?? '# 코드를 작성하세요'}
+        defaultValue={assignmentCode}
         beforeMount={handleEditorWillMount}
         onMount={handleEditorDidMount}
         options={{
+          placeholder: '# 코드를 작성하세요',
           padding: {top: 10, bottom: 15},
           fontSize: 15.5,
           ...editorOptions,

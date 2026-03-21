@@ -39,6 +39,8 @@ const AssignmentSubmitPage = () => {
   const {onSubmit, isSubmitPending, isModalOpen, closeModal} =
     useAssignmentSubmission(courseDetails, Number(assignmentId)); // result 임시 제거
 
+  const isEditorReady = !codeId || (codeId && assignmentCode);
+
   return (
     <>
       {/* 사이드 바 */}
@@ -58,13 +60,18 @@ const AssignmentSubmitPage = () => {
               minSize='30%'
               className='h-full'
               style={{overflow: 'hidden'}}>
-              <CodeEditor
-                onSubmit={onSubmit}
-                isSubmitPending={isSubmitPending}
-                assignmentCode={assignmentCode}
-                runCode={runCode}
-                isRunning={isRunning}
-              />
+              {isEditorReady ? (
+                <CodeEditor
+                  key={codeId ?? 'new'}
+                  onSubmit={onSubmit}
+                  isSubmitPending={isSubmitPending}
+                  assignmentCode={assignmentCode}
+                  runCode={runCode}
+                  isRunning={isRunning}
+                />
+              ) : (
+                <></>
+              )}
             </Panel>
 
             <Separator className='cursor-row-resize flex-center h-3 bg-gray-500 focus:outline-none data-[separator="active"]:bg-gray-600/80'>
