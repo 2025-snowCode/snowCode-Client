@@ -1,7 +1,32 @@
 import Button from '@/shared/ui/button/Button';
-import {Editor, type OnMount} from '@monaco-editor/react';
+import {Editor, type Monaco, type OnMount} from '@monaco-editor/react';
 import {useRef} from 'react';
 import PlayIcon from '@/assets/svg/playIcon.svg?react';
+import OneDarkPro from '@/themes/OneDarkPro.json';
+
+const editorOptions = {
+  wordWrap: 'on',
+  minimap: {
+    enabled: false,
+  },
+  hideCursorInOverviewRuler: true,
+  overviewRulerBorder: false,
+  overviewRulerLanes: 0,
+  folding: false,
+  glyphMargin: false,
+  lineDecorationsWidth: 15,
+  lineNumbers: 'off',
+  renderLineHighlight: 'none',
+  cursorBlinking: 'expand',
+  quickSuggestions: false,
+  suggestOnTriggerCharacters: false,
+  acceptSuggestionOnEnter: 'off',
+  tabCompletion: 'off',
+  wordBasedSuggestions: 'off',
+  parameterHints: {
+    enabled: false,
+  },
+} as const;
 
 type EditorInstance = Parameters<OnMount>[0];
 
@@ -20,6 +45,19 @@ const CodeEditor = ({
 }: CodeEditorProps) => {
   const editorRef = useRef<EditorInstance | null>(null);
 
+  const handleEditorWillMount = (monaco: Monaco) => {
+    monaco.editor.defineTheme('OneDarkPro', {
+      base: 'vs-dark',
+      inherit: true,
+      ...OneDarkPro,
+      rules: [...OneDarkPro.rules, {token: 'comment', foreground: '#C4FFA4'}],
+      colors: {
+        ...OneDarkPro.colors,
+        'editor.background': '#2C2A36',
+      },
+    });
+  };
+
   const handleEditorDidMount: OnMount = (editor) => {
     editorRef.current = editor;
   };
@@ -37,14 +75,14 @@ const CodeEditor = ({
 
   return (
     <div className='h-full'>
-      <div className='px-10.5 py-2.5 flex items-center justify-between'>
-        <Button color='tonal' size='compact' className='text-sm'>
+      <div className='bg-primary-black px-7 pt-4 pb-2.5 flex items-center justify-end'>
+        {/* <Button color='tonal' size='xs' className='text-sm'>
           제출 이력
-        </Button>
+        </Button> */}
         <div className='flex gap-4'>
           <Button
             color='lightBlack'
-            size='compact'
+            size='xs'
             className='flex-center gap-2 text-sm'
             onClick={handleRunCode}
             disabled={isRunning}>
@@ -59,7 +97,7 @@ const CodeEditor = ({
           </Button>
           <Button
             color='ghostWhite'
-            size='compact'
+            size='xs'
             className='text-sm'
             onClick={handleSubmitCode}
             disabled={isSubmitPending}>
@@ -69,13 +107,15 @@ const CodeEditor = ({
       </div>
 
       <Editor
-        theme='vs-dark'
+        theme='OneDarkPro'
         defaultLanguage='python'
         defaultValue='# 코드를 작성하세요'
+        beforeMount={handleEditorWillMount}
         onMount={handleEditorDidMount}
         options={{
-          fontSize: 15,
-          padding: {top: 25, bottom: 16},
+          padding: {top: 10, bottom: 15},
+          fontSize: 15.5,
+          ...editorOptions,
         }}
       />
     </div>
