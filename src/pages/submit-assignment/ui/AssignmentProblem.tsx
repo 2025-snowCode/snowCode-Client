@@ -1,4 +1,4 @@
-import {useNavigate, useParams} from 'react-router-dom';
+import {Link, useLocation, useParams} from 'react-router-dom';
 import ArrowleftIcon from '@/assets/svg/arrowleftIcon.svg?react';
 import type {TAssignmentDetail} from '@/entities/assignment/model/schemas';
 import IndexCircle from './circle/IndexCircle';
@@ -13,18 +13,22 @@ const AssignmentProblem = ({
   description,
   testcases,
 }: AssignmentProblemProps) => {
-  const navigate = useNavigate();
+  const {pathname} = useLocation();
   const {courseId} = useParams();
+
+  const publicTestcases = testcases.filter(({isPublic}) => isPublic);
+
+  const toCourseList = pathname.startsWith('/admin')
+    ? ROUTES.ADMIN.COURSES.DETAIL(courseId!)
+    : ROUTES.STUDENT.COURSES.DETAIL(courseId!);
 
   return (
     <section className='h-full py-6.5 pl-15.5 pr-8.5 font-medium text-primary-black overflow-y-auto'>
       {/* 과제 제목 및 설명 */}
       <div className='relative flex items-center'>
-        <button
-          className='cursor-pointer absolute -left-9.5'
-          onClick={() => navigate(ROUTES.ADMIN.COURSES.DETAIL(courseId!))}>
+        <Link to={toCourseList} className='cursor-pointer absolute -left-9.5'>
           <ArrowleftIcon className='w-4.5 h-4.5' />
-        </button>
+        </Link>
 
         <h2 className='relative flex-center gap-3'>
           <IndexCircle
@@ -44,7 +48,7 @@ const AssignmentProblem = ({
         </h3>
 
         <ul className='bg-gray rounded-b-[10px] divide-y divide-purple-stroke'>
-          {testcases.map(({id, testcase, answer}, idx) => (
+          {publicTestcases.map(({id, testcase, answer}, idx) => (
             <li key={id} className='text-base/6 px-7 pt-5 pb-9.5'>
               <span className='text-secondary-black'>{`예제 ${idx + 1}`}</span>
               <dl className='text-light-black'>
