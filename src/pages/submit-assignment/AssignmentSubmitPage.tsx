@@ -6,7 +6,6 @@ import {useQuery, useSuspenseQueries} from '@tanstack/react-query';
 import {courseQueries} from '@/entities/course/api/courseQueries';
 import {useAssignmentSubmission} from '@/features/assignment/submit-assignment/lib/useAssignmentSubmission';
 import SubmissionResultModal from '@/features/assignment/submit-assignment/ui/SubmissionResultModal';
-import {tcFailResponse, tcPassResponse} from './mock';
 import {Group, Panel, Separator} from 'react-resizable-panels';
 import Terminal from './ui/Terminal';
 import {useCodeExecution} from '@/features/assignment/run-assignment/lib/useCodeExecution';
@@ -20,7 +19,6 @@ const AssignmentSubmitPage = () => {
     index?: number;
     codeId?: number;
   };
-  const result = tcPassResponse.response;
 
   const [{data: assignment}, {data: courseDetails}] = useSuspenseQueries({
     queries: [
@@ -36,7 +34,7 @@ const AssignmentSubmitPage = () => {
 
   const {runCode, output, isRunning} = useCodeExecution();
 
-  const {onSubmit, isSubmitPending, isModalOpen, closeModal} =
+  const {onSubmit, result, isSubmitPending, isModalOpen, closeModal} =
     useAssignmentSubmission(courseDetails, Number(assignmentId)); // result 임시 제거
 
   const isEditorReady = !codeId || (codeId && assignmentCode);

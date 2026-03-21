@@ -14,6 +14,7 @@ export const useAssignmentSubmission = (
   );
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // unitId 찾기
   const unitId = courseDetails.units.find((unit) =>
     unit.assignments.some((assignment) => assignment.id === assignmentId)
   )?.id;
@@ -28,7 +29,7 @@ export const useAssignmentSubmission = (
         queryKey: courseQueries.getCourseDetails(courseDetails.id).queryKey,
       });
       setIsModalOpen(true);
-      setResult({condeId: data.condeId, score: data.score});
+      setResult(data);
     },
     onError: (error) => {
       console.error('과제 제출 실패:', error);
@@ -37,7 +38,6 @@ export const useAssignmentSubmission = (
 
   // 제출 함수
   const onSubmit = (code: string) => {
-    console.log('Submitting assignment with code:', code);
     submit({
       unitId: unitId ?? 0,
       assignmentId: Number(assignmentId),
