@@ -50,8 +50,16 @@ export const assignmentDetailSchema = z.object({
 });
 
 export const assignmentSubmissionResultSchema = z.object({
-  condeId: z.number(),
-  score: z.number(),
+  codeId: z.number(),
+  isSuccess: z.boolean(),
+  totalScore: z.number(),
+  totalCount: z.number(),
+  passCount: z.number(),
+  failedTestCase: z.object({
+    testcaseId: z.number(),
+    actual: z.string().nullable(),
+    expected: z.string().nullable(),
+  }),
 });
 
 export const assignmentCodeSchema = z.object({

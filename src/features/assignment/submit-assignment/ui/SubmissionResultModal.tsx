@@ -2,6 +2,7 @@
 import DeleteIcon from '@/assets/svg/deleteIcon.svg?react';
 import StatusCircle from '@/pages/submit-assignment/ui/circle/StatusCircle';
 import {modalStyles} from './modal-styles';
+import type {TAssignmentSubmissionResult} from '@/entities/assignment/model/schemas';
 
 const RESULT_MESSAGE = {
   PASSED: '제출한 코드가 모든 테스트 케이스를 통과했어요!',
@@ -10,16 +11,7 @@ const RESULT_MESSAGE = {
 const VISIBLE_TC_LIMIT = 4;
 
 interface SubmissionResultModalProps {
-  // result: TAssignmentSubmissionResult;
-  result: {
-    isSuccess: boolean;
-    totalCount: number;
-    passCount: number;
-    failedTestCase: {
-      testCaseId: number;
-      expected: string | null;
-    };
-  };
+  result: TAssignmentSubmissionResult;
   closeModal: () => void;
 }
 
@@ -80,8 +72,7 @@ const SubmissionResultModal = ({
                 <dl className={styles.outputWrapper()}>
                   <dt className={styles.outputTerm()}>사용자 출력</dt>
                   <dd className={styles.outputDescription({class: 'mb-2.5'})}>
-                    {/* TODO: 응답에 실제 출력값 필드 추가되면 수정 */}
-                    <pre>{result.failedTestCase.expected}</pre>
+                    <pre>{result.failedTestCase.actual}</pre>
                   </dd>
                   <dt className={styles.outputTerm()}>예상 출력</dt>
                   <dd className={styles.outputDescription()}>
