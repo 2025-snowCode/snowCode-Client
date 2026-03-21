@@ -50,3 +50,10 @@ export const assignmentCourseSchema = courseBaseSchema.extend({
   count: z.number(),
   assignments: z.array(assignmentSchema.pick({id: true, title: true})),
 });
+
+export type TCourseCore = z.infer<typeof courseCoreSchema>;
+export type TCourseBase = z.infer<typeof courseBaseSchema>;
+export type TCreateCourseRequest = z.infer<typeof createCourseRequestSchema>;
+export type TCourseOverview = z.infer<typeof courseOverviewSchema>;
+export type TDashboardCourse = z.infer<typeof dashboardCourseSchema>;
+export type TAssignmentCourse = z.infer<typeof assignmentCourseSchema>;
