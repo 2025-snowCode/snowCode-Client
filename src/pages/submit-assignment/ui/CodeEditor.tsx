@@ -5,6 +5,7 @@ import PlayIcon from '@/assets/svg/playIcon.svg?react';
 import OneDarkPro from '@/themes/OneDarkPro.json';
 
 const editorOptions = {
+  fontLigatures: true,
   wordWrap: 'on',
   minimap: {
     enabled: false,
@@ -117,6 +118,7 @@ const CodeEditor = ({
         options={{
           placeholder: '# 코드를 작성하세요',
           padding: {top: 10, bottom: 15},
+          fontFamily: 'jetbrains mono, monospace',
           fontSize: 15.5,
           ...editorOptions,
         }}
