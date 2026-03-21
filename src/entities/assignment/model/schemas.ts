@@ -44,7 +44,7 @@ export const assignmentDetailSchema = z.object({
       id: z.number(),
       testcase: z.string(),
       answer: z.string(),
-      isPublic: z.boolean().optional(),
+      isPublic: z.boolean(),
     })
   ),
 });
