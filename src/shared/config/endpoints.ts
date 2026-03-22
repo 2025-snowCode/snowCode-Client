@@ -12,13 +12,20 @@ export const ENDPOINTS = {
     SCHEDULE: '/assignments/schedule',
     MY: '/assignments/my',
     DETAIL: (id: number | string) => `/assignments/${id}`,
-    BY_COURSE: (courseId: number | string) => `/courses/${courseId}/assignments`,
+    BY_COURSE: (courseId: number | string) =>
+      `/courses/${courseId}/assignments`,
   },
   UNITS: {
     BY_COURSE: (courseId: number | string) => `/courses/${courseId}/units`,
     DETAIL: (id: number | string) => `/units/${id}`,
     CREATE: (courseId: number | string) => `/units/${courseId}`,
-    ASSIGNMENT_DETAIL: (unitId: number | string, assignmentId: number | string) =>
-      `/units/${unitId}/assignments/${assignmentId}`,
+    ASSIGNMENT_DETAIL: (
+      unitId: number | string,
+      assignmentId: number | string
+    ) => `/units/${unitId}/assignments/${assignmentId}`,
+  },
+  CHATS: {
+    ROOT: '/chats',
+    DETAIL: (chatRoomId: number | string) => `/chats/${chatRoomId}`,
   },
 } as const;
