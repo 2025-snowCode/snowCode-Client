@@ -1,24 +1,22 @@
-import ProfileImage from '@/assets/svg/profileImage.svg?react';
 import Ellipse from '@/assets/svg/ellipse.svg?react';
+import ChatProfile from '@/entities/chat/ui/ChatProfile';
 
 interface ChatRoomItemProps {
+  memberId: number;
   name: string;
   studentId: string;
   lastMessage: string;
 }
 
-function Profile() {
-  return <ProfileImage className='w-10 h-10 rounded-full shrink-0' />;
-}
-
 export default function ChatRoomItem({
+  memberId,
   name,
   studentId,
   lastMessage,
 }: ChatRoomItemProps) {
   return (
     <div className='flex items-center gap-3'>
-      <Profile />
+      <ChatProfile memberId={memberId} />
       <div className='flex-1 min-w-0'>
         <div className='font-normal text-sm text-secondary-black flex items-center flex-wrap'>
           <span>{name}</span>

@@ -40,6 +40,7 @@ export default function ChatRoomList({
                 : 'hover:bg-background'
             }`}>
             <ChatRoomItem
+              memberId={room.opponentMemberId}
               name={room.name}
               studentId={room.studentId}
               lastMessage={room.lastMessage}

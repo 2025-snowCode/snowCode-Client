@@ -1,8 +1,8 @@
 import {useState} from 'react';
 import type {TChatRoomDetail} from '@/entities/chat/model/types';
-import ProfileImage from '@/assets/svg/profileImage.svg?react';
 import {formatTime, formatDateLabel, getDateKey} from '@/shared/lib/chat';
 import ChatRoomItem from '@/entities/chat/ui/ChatRoomItem';
+import ChatProfile from '@/entities/chat/ui/ChatProfile';
 
 interface ChatMessagePanelProps {
   chatRoom: TChatRoomDetail | null;
@@ -16,11 +16,7 @@ interface MessageItemProps {
   isMine: boolean;
   isFirstInGroup: boolean;
   isLastInGroup: boolean;
-}
-
-function Profile({size = 'md'}: {size?: 'sm' | 'md'}) {
-  const sizeClass = size === 'sm' ? 'w-7 h-7' : 'w-10 h-10';
-  return <ProfileImage className={`${sizeClass} rounded-full shrink-0`} />;
+  opponentId: number;
 }
 
 function MessageItem({
@@ -28,13 +24,14 @@ function MessageItem({
   isMine,
   isFirstInGroup,
   isLastInGroup,
+  opponentId,
 }: MessageItemProps) {
   return (
     <div
       className={`flex gap-2 ${isMine ? 'justify-end items-end' : 'justify-start items-start'} ${!isFirstInGroup ? '-mt-1' : ''}`}>
       {!isMine && (
         <div className='w-7 shrink-0 flex justify-center self-start'>
-          {isFirstInGroup ? <Profile size='sm' /> : null}
+          {isFirstInGroup ? <ChatProfile memberId={opponentId} size='sm' /> : null}
         </div>
       )}
 
@@ -116,6 +113,7 @@ export default function ChatMessagePanel({
       {/* 헤더 */}
       <div className='px-6 py-4 border-b border-stroke'>
         <ChatRoomItem
+          memberId={chatRoom.opponentId}
           name={chatRoom.opponentName}
           studentId={chatRoom.opponentStudentId ?? ''}
           lastMessage={lastMessage}
@@ -153,6 +151,7 @@ export default function ChatMessagePanel({
                     isMine={isMine}
                     isFirstInGroup={isFirstInGroup}
                     isLastInGroup={isLastInGroup}
+                    opponentId={chatRoom.opponentId}
                   />
                 );
               })}
