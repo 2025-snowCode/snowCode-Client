@@ -1,7 +1,8 @@
+import {useQuery} from '@tanstack/react-query';
 import {useSearchParams} from 'react-router-dom';
 import ChatRoomList from '@/widgets/chat-room-list/ui/ChatRoomList';
 import ChatMessagePanel from '@/widgets/chat-message-panel/ui/ChatMessagePanel';
-import {useChatRooms, useChatRoomDetail, useChatSocket} from '@/entities/chat';
+import {chatQueries, useChatSocket} from '@/entities/chat';
 
 export default function ChatPage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -10,8 +11,8 @@ export default function ChatPage() {
   // TODO: useUserStore에서 가져오기
   const myMemberId = 2;
 
-  const {data: chatRoomList} = useChatRooms();
-  const {data: chatRoomDetail} = useChatRoomDetail(selectedRoomId);
+  const {data: chatRoomList} = useQuery(chatQueries.getChatRooms());
+  const {data: chatRoomDetail} = useQuery(chatQueries.getChatRoomDetail(selectedRoomId));
   const {messages, sendMessage} = useChatSocket(selectedRoomId);
 
   const selectedRoom =
