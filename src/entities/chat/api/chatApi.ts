@@ -1,5 +1,10 @@
 import {privateAxios} from '@/shared/api/axiosInstance';
 import {ENDPOINTS} from '@/shared/config/endpoints';
+import {apiResponseSchema} from '@/shared/model/schemas';
+import {
+  chatRoomListResponseSchema,
+  chatRoomDetailSchema,
+} from '@/entities/chat/model/schemas';
 import type {
   TChatRoomListResponse,
   TChatRoomDetail,
@@ -7,12 +12,12 @@ import type {
 
 export const getChatRooms = async (): Promise<TChatRoomListResponse> => {
   const res = await privateAxios.get(ENDPOINTS.CHATS.ROOT);
-  return res.data.response;
+  return apiResponseSchema(chatRoomListResponseSchema).parse(res.data).response;
 };
 
 export const getChatRoomDetail = async (
   chatRoomId: number
 ): Promise<TChatRoomDetail> => {
   const res = await privateAxios.get(ENDPOINTS.CHATS.DETAIL(chatRoomId));
-  return res.data.response;
+  return apiResponseSchema(chatRoomDetailSchema).parse(res.data).response;
 };
