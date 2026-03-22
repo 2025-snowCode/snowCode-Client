@@ -3,13 +3,12 @@ import {useSearchParams} from 'react-router-dom';
 import ChatRoomList from '@/widgets/chat-room-list/ui/ChatRoomList';
 import ChatMessagePanel from '@/widgets/chat-message-panel/ui/ChatMessagePanel';
 import {chatQueries, useChatSocket} from '@/entities/chat';
+import {useUserStore} from '@/entities/auth/model/useUserStore';
 
 export default function ChatPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedRoomId = Number(searchParams.get('roomId')) || null;
-
-  // TODO: useUserStore에서 가져오기
-  const myMemberId = 2;
+  const myMemberId = useUserStore((s) => s.memberId) ?? 0;
 
   const {data: chatRoomList} = useQuery(chatQueries.getChatRooms());
   const {data: chatRoomDetail} = useQuery(chatQueries.getChatRoomDetail(selectedRoomId));
