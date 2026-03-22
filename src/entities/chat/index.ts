@@ -14,3 +14,5 @@ export type {
   TChatRoomDetail,
   TSendMessage,
 } from '@/entities/chat/model/types';
+export {useChatRooms, useChatRoomDetail} from '@/entities/chat/model/queries';
+export {useChatSocket} from '@/entities/chat/model/useChatSocket';
