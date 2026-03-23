@@ -2,7 +2,7 @@ import snowCodeOverview from '@/assets/images/snowcode_overview.svg';
 import UnitItem from '@/pages/course-overview/ui/UnitItem';
 import CourseActionsBar from '@/pages/course-overview/ui/CourseActionsBar';
 import {useUserStore} from '@/entities/auth/model/useUserStore';
-import type {TCourseOverview} from '@/entities/course/model/types';
+import type {TCourseOverview} from '@/entities/course/model/schemas';
 
 interface CourseContentProps {
   units: TCourseOverview['units'];
@@ -23,7 +23,7 @@ const CourseContent = ({
   return (
     <section className='bg-white w-full flex-1 rounded-b-[30px]'>
       {units.map((unit, index) => (
-        <UnitItem key={unit.id} index={index} {...unit} />
+        <UnitItem key={unit.id} index={index} courseId={courseId} {...unit} />
       ))}
     </section>
   );

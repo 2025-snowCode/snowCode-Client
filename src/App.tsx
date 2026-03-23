@@ -16,6 +16,8 @@ import {useSyncUserRole} from '@/features/auth/sync-user-role/model/useSyncUserR
 import UnitEditorPage from '@/pages/unit-editor/UnitEditorPage';
 import AssignmentManagePage from '@/pages/manage-assignment/AssignmentManagePage';
 import ChatPage from '@/pages/chat/ChatPage';
+import AssignmentSubmitPage from '@/pages/submit-assignment/AssignmentSubmitPage';
+import AssignmentSubmitLayout from '@/pages/submit-assignment/AssignmentSubmitLayout';
 
 const AppRoutes = () => {
   useSyncUserRole();
@@ -64,6 +66,22 @@ const AppRoutes = () => {
             <Route path='units/:id' element={<UnitEditorPage />} />
             <Route path='chat' element={<ChatPage />} />
           </Route>
+        </Route>
+      </Route>
+
+      {/* 과제 제출 페이지 */}
+      <Route element={<AssignmentSubmitLayout />}>
+        <Route element={<PrivateRoute allowedRoles={['admin']} />}>
+          <Route
+            path='admin/courses/:courseId/assignments/:assignmentId'
+            element={<AssignmentSubmitPage />}
+          />
+        </Route>
+        <Route element={<PrivateRoute allowedRoles={['student']} />}>
+          <Route
+            path='student/courses/:courseId/assignments/:assignmentId'
+            element={<AssignmentSubmitPage />}
+          />
         </Route>
       </Route>
     </Routes>

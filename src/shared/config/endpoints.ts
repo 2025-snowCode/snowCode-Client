@@ -14,6 +14,9 @@ export const ENDPOINTS = {
     DETAIL: (id: number | string) => `/assignments/${id}`,
     BY_COURSE: (courseId: number | string) =>
       `/courses/${courseId}/assignments`,
+    CODE: (codeId: number | string) => `/code/${codeId}`,
+    SUBMIT: (unitId: number | string, assignmentId: number | string) =>
+      `/assignments/${unitId}/${assignmentId}/code`,
   },
   UNITS: {
     BY_COURSE: (courseId: number | string) => `/courses/${courseId}/units`,

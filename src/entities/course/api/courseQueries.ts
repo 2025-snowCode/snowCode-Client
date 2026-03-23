@@ -18,6 +18,5 @@ export const courseQueries = {
     queryOptions({
       queryKey: ['courses', 'detail', courseId],
       queryFn: () => getCourseById(courseId),
-      select: (data) => data,
     }),
 };

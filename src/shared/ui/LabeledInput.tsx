@@ -44,7 +44,7 @@ const LabeledInput = forwardRef<HTMLInputElement, LabeledInputProps>(
           aria-invalid={Boolean(errorMessage)}
           aria-describedby={errorMessage ? errorId : undefined}
           className={twMerge(
-            'h-11 rounded-[9px] border px-3.5 outline-none focus:border-primary',
+            'bg-white h-11 rounded-[9px] border px-3.5 outline-none focus:border-primary',
             errorMessage ? 'border-badge-red' : 'border-purple-stroke',
             className
           )}

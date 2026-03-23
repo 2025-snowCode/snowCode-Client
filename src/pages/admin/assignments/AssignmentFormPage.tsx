@@ -23,7 +23,7 @@ const AssignmentFormPage = () => {
   const [score, setScore] = useState('');
   const [description, setDescription] = useState('');
   const [testcases, setTestcases] = useState([
-    {testcase: '', answer: '', isHidden: false},
+    {testcase: '', answer: '', isPublic: false},
   ]);
 
   const {data: assignmentData} = useQuery({
@@ -34,13 +34,13 @@ const AssignmentFormPage = () => {
   useEffect(() => {
     if (assignmentData) {
       setTitle(assignmentData.title);
-      setScore(assignmentData.score.toString());
+      setScore((assignmentData.score ?? 0).toString());
       setDescription(assignmentData.description);
       setTestcases(
-        assignmentData.testcases.map(({testcase, answer, isHidden}) => ({
+        assignmentData.testcases.map(({testcase, answer, isPublic}) => ({
           testcase,
           answer,
-          isHidden,
+          isPublic,
         }))
       );
     }
@@ -71,7 +71,7 @@ const AssignmentFormPage = () => {
   });
 
   const handleAddTestcase = () => {
-    setTestcases([...testcases, {testcase: '', answer: '', isHidden: false}]);
+    setTestcases([...testcases, {testcase: '', answer: '', isPublic: true}]);
   };
 
   const handleConfirm = () => {
@@ -124,7 +124,7 @@ const AssignmentFormPage = () => {
                 index={idx}
                 testcase={tc.testcase}
                 answer={tc.answer}
-                isHidden={tc.isHidden}
+                isPublic={tc.isPublic}
                 onTestcaseChange={(value) => {
                   const updated = [...testcases];
                   updated[idx] = {...updated[idx], testcase: value};
@@ -137,7 +137,7 @@ const AssignmentFormPage = () => {
                 }}
                 onHiddenChange={(value) => {
                   const updated = [...testcases];
-                  updated[idx] = {...updated[idx], isHidden: value};
+                  updated[idx] = {...updated[idx], isPublic: value};
                   setTestcases(updated);
                 }}
               />
