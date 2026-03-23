@@ -2,7 +2,7 @@ import snowcodeOverviewMini from '@/assets/images/snowcode_overview_mini.svg';
 import {formatCourseTerm} from '@/shared/lib/course';
 import CourseActionsBar from '@/pages/course-overview/ui/CourseActionsBar';
 import {useUserStore} from '@/entities/auth/model/useUserStore';
-import type {TCourseOverview} from '@/entities/course/model/types';
+import type {TCourseOverview} from '@/entities/course/model/schemas';
 import type {SemesterCode} from '@/shared/model/types';
 
 interface CourseHeroProps {
@@ -82,7 +82,7 @@ const CourseStats = ({
   isAdmin,
 }: CourseStatsProps) => {
   const studentInfo =
-    isAdmin && studentCount !== undefined ? ` | ${studentCount}명` : '';
+    isAdmin && studentCount !== undefined ? ` | ${studentCount - 1}명` : '';
   const courseStats = `${unitCount}단원 | ${assignmentCount}문제${studentInfo}`;
 
   return (

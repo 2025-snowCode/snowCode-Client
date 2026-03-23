@@ -11,6 +11,8 @@ export const ROUTES = {
       CREATE: '/admin/assignments/create',
       SELECT: '/admin/assignments/select',
       DETAIL: (id: number | string) => `/admin/assignments/${id}`,
+      SUBMIT: (courseId: number | string, assignmentId: number | string) =>
+        `/admin/courses/${courseId}/assignments/${assignmentId}`,
     },
     COURSES: {
       CREATE: '/admin/courses/create',
@@ -30,6 +32,10 @@ export const ROUTES = {
     ROOT: '/student',
     COURSES: {
       DETAIL: (id: number | string) => `/student/courses/${id}`,
+    },
+    ASSIGNMENTS: {
+      SUBMIT: (courseId: number | string, assignmentId: number | string) =>
+        `/student/courses/${courseId}/assignments/${assignmentId}`,
     },
   },
 } as const;

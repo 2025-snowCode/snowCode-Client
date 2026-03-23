@@ -8,7 +8,7 @@ import type {
   TCourseBase,
   TCourseOverview,
   TDashboardCourse,
-} from '@/entities/course/model/types';
+} from '@/entities/course/model/schemas';
 import {z} from 'zod';
 import {privateAxios} from '@/shared/api/axiosInstance';
 import {apiResponseSchema} from '@/shared/model/schemas';

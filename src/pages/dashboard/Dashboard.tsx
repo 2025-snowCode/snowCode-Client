@@ -5,9 +5,7 @@ import AddIcon from '@/assets/svg/addIcon.svg?react';
 import ScheduleList from '@/pages/dashboard/ui/ScheduleList';
 import {Link} from 'react-router-dom';
 import {useUserStore} from '@/entities/auth/model/useUserStore';
-import {
-  useSuspenseQueries,
-} from '@tanstack/react-query';
+import {useSuspenseQueries} from '@tanstack/react-query';
 import {EmptyState} from '@/shared/ui/EmptyState';
 import {courseQueries} from '@/entities/course/api/courseQueries';
 import {assignmentQueries} from '@/entities/assignment/api/assignmentQueries';
@@ -29,7 +27,6 @@ const Dashboard = () => {
       assignmentQueries.getAssignmentSchedules(),
     ],
   });
-
 
   return (
     <main className='w-full'>
@@ -56,7 +53,9 @@ const Dashboard = () => {
           </div>
 
           {scheduleCount === 0 ? (
-            <EmptyState className='pl-24.5'>예정된 과제가 없습니다.</EmptyState>
+            <EmptyState className='pl-24.5'>
+              마감 예정인 과제가 없습니다.
+            </EmptyState>
           ) : (
             <ScheduleList scheduleList={schedules} />
           )}

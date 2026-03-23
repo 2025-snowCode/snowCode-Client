@@ -2,7 +2,7 @@ import {formatCourseTermWithSlash} from '@/shared/lib/course';
 import CourseManagementDropdown from '@/pages/dashboard/ui/CourseManagementDropdown';
 import {useLocation, useNavigate} from 'react-router-dom';
 import {ROUTES} from '@/shared/config/routes';
-import type {TDashboardCourse} from '@/entities/course/model/types';
+import type {TDashboardCourse} from '@/entities/course/model/schemas';
 
 type CourseCardProps = TDashboardCourse;
 
@@ -50,9 +50,9 @@ const CourseCard = ({...course}: CourseCardProps) => {
         </div>
         <div className='relative pl-4 border-l-[0.5px] border-[#7A768C]'>
           {/* 우측 상단 옵션 */}
-      {pathname.startsWith('/admin') && (
-        <CourseManagementDropdown courseId={id} />
-      )}
+          {pathname.startsWith('/admin') && (
+            <CourseManagementDropdown courseId={id} />
+          )}
 
           <p>문제 수</p>
           <p className='font-medium'>{assignmentCount}개</p>

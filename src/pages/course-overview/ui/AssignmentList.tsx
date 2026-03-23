@@ -1,20 +1,25 @@
 import {ROUTES} from '@/shared/config/routes';
-import {Link} from 'react-router-dom';
+import {useLocation, Link} from 'react-router-dom';
 import type {TAssignment} from '@/entities/assignment/model/schemas';
 import Badge from '@/shared/ui/badge/Badge';
 
 interface AssignmentListProps {
   isOpen?: boolean;
   assignments: TAssignment[];
+  courseId: number;
 }
 
 interface AssignmentItemProps extends TAssignment {
   index: number;
   isOpen?: boolean;
+  courseId: number;
 }
 
-// 문제 목록
-const AssignmentList = ({isOpen, assignments}: AssignmentListProps) => {
+const AssignmentList = ({
+  isOpen,
+  assignments,
+  courseId,
+}: AssignmentListProps) => {
   return (
     <ul className='flex flex-col divide-y divide-[#EEEBFC]'>
       {assignments.map((assignment, index) => (
@@ -22,6 +27,7 @@ const AssignmentList = ({isOpen, assignments}: AssignmentListProps) => {
           key={assignment.id}
           index={index + 1}
           isOpen={isOpen}
+          courseId={courseId}
           {...assignment}
         />
       ))}
@@ -29,19 +35,23 @@ const AssignmentList = ({isOpen, assignments}: AssignmentListProps) => {
   );
 };
 
-// 개별 문제 항목
 const AssignmentItem = ({
   id,
   title,
   index,
   submittedStatus,
   isOpen,
+  courseId,
+  codeId,
 }: AssignmentItemProps) => {
+  const {pathname} = useLocation();
   const isLocked = isOpen === false ? 'opacity-60 pointer-events-none' : '';
+  const assignmentPath = pathname.startsWith('/admin')
+    ? `${ROUTES.ADMIN.ASSIGNMENTS.SUBMIT(courseId!, id)}`
+    : `${ROUTES.STUDENT.ASSIGNMENTS.SUBMIT(courseId!, id)}`;
 
   return (
     <li className={`w-full p-4 ${isLocked}`}>
-      {/* 좌측: 인덱스, 문제명 */}
       <div className='max-w-185 mx-auto flex items-center justify-between'>
         <div className='flex items-center gap-7.5 flex-1'>
           <span className='w-7.5 h-7.5 shrink-0 flex-center rounded-full border border-purple-stroke text-base text-light-black font-medium'>
@@ -49,11 +59,14 @@ const AssignmentItem = ({
           </span>
 
           {isOpen ? (
-              <Link to={ROUTES.ADMIN.ASSIGNMENTS.DETAIL(id)} className='min-w-0'>
-                <p className='truncate text-secondary-black text-base font-normal hover:text-primary hover:underline hover:underline-offset-4 cursor-pointer'>
-                  {title}
-                </p>
-              </Link>
+            <Link
+              to={assignmentPath}
+              state={{index, codeId}}
+              className='min-w-0'>
+              <p className='truncate text-secondary-black text-base font-normal hover:text-primary hover:underline hover:underline-offset-4 cursor-pointer'>
+                {title}
+              </p>
+            </Link>
           ) : (
             <p className='truncate text-secondary-black text-base font-normal'>
               {title}
@@ -61,7 +74,6 @@ const AssignmentItem = ({
           )}
         </div>
 
-        {/* 우측: 제출현황 배지 */}
         {isOpen && (
           <div className='shrink-0 ml-2'>
             <Badge
