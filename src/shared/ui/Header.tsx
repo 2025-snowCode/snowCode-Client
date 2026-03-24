@@ -40,6 +40,7 @@ const AuthenticatedHeader = ({showChat}: {showChat: boolean}) => {
   const navigate = useNavigate();
   const userName = useUserStore((state) => state.userName);
   const logout = useUserStore((state) => state.logout);
+  const userType = useUserStore((state) => state.userType);
 
   const handleLogout = () => {
     logout();
@@ -67,14 +68,14 @@ const AuthenticatedHeader = ({showChat}: {showChat: boolean}) => {
   const chatButton: NavButton = {
     icon: <ChatIcon width={24} height={24} />,
     label: '채팅',
-    onClick: () => navigate(ROUTES.ADMIN.CHAT),
+    onClick: () => navigate(userType === 'admin' ? ROUTES.ADMIN.CHAT : ROUTES.STUDENT.CHAT),
   };
 
   const buttons = showChat ? [chatButton, ...commonButtons] : commonButtons;
 
   return (
     <BaseHeader
-      logoHref={showChat ? ROUTES.ADMIN.ROOT : ROUTES.STUDENT.ROOT}
+      logoHref={userType === 'admin' ? ROUTES.ADMIN.ROOT : ROUTES.STUDENT.ROOT}
       leftContent={<WelcomeMessage userName={userName} />}
       rightContent={<NavigationBar buttons={buttons} />}
     />
@@ -98,7 +99,7 @@ export default function Header() {
     case 'admin':
       return <AuthenticatedHeader showChat={true} />;
     case 'student':
-      return <AuthenticatedHeader showChat={false} />;
+      return <AuthenticatedHeader showChat={true} />;
     case 'guest':
     default:
       return <GuestHeader />;
