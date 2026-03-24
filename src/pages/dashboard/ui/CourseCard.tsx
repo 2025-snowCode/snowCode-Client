@@ -1,16 +1,14 @@
 import {formatCourseTermWithSlash} from '@/shared/lib/course';
-import CourseManagementDropdown from './CourseManagementDropdown';
-import {useNavigate} from 'react-router-dom';
-import {useUserStore} from '@/entities/auth/model/useUserStore';
-import type {DashboardCourse} from '@/entities/course/model/types';
+import CourseManagementDropdown from '@/pages/dashboard/ui/CourseManagementDropdown';
+import {useLocation, useNavigate} from 'react-router-dom';
+import {ROUTES} from '@/shared/config/routes';
+import type {TDashboardCourse} from '@/entities/course/model/schemas';
 
-interface CourseCardProps extends DashboardCourse {
-  onDelete: (courseId: number) => void;
-}
+type CourseCardProps = TDashboardCourse;
 
-const CourseCard = ({onDelete, ...course}: CourseCardProps) => {
+const CourseCard = ({...course}: CourseCardProps) => {
   const navigate = useNavigate();
-  const userType = useUserStore((state) => state.userType);
+  const {pathname} = useLocation();
 
   const {
     id,
@@ -26,9 +24,15 @@ const CourseCard = ({onDelete, ...course}: CourseCardProps) => {
   return (
     <li className='w-148 flex items-stretch bg-white rounded-3xl shadow-card *:first:hover:opacity-50'>
       {/* 좌측: 강의 기본 정보 */}
-      <div
-        onClick={() => navigate(`courses/${id}`)}
-        className='cursor-pointer flex-1 flex flex-col gap-1.5 pl-8 pr-6.5 py-5.5'>
+      <button
+        onClick={() =>
+          navigate(
+            pathname.startsWith('/admin')
+              ? ROUTES.ADMIN.COURSES.DETAIL(id)
+              : ROUTES.STUDENT.COURSES.DETAIL(id)
+          )
+        }
+        className='cursor-pointer flex-1 flex flex-col gap-1.5 pl-8 pr-6.5 py-5.5 text-left'>
         <p className='text-sm font-light text-light-black'>
           {formatCourseTermWithSlash(year, semester, section)}
         </p>
@@ -36,7 +40,7 @@ const CourseCard = ({onDelete, ...course}: CourseCardProps) => {
         <p className='text-base font-light text-secondary-black line-clamp-3'>
           {description}
         </p>
-      </div>
+      </button>
 
       {/* 우측: 단원 수, 문제 수 */}
       <div className=' bg-gray flex-center px-7.5 py-6 rounded-r-3xl text-center text-base font-normal whitespace-nowrap'>
@@ -45,9 +49,9 @@ const CourseCard = ({onDelete, ...course}: CourseCardProps) => {
           <p className='font-medium'>{unitCount}개</p>
         </div>
         <div className='relative pl-4 border-l-[0.5px] border-[#7A768C]'>
-          {/* 관리자용 강의 관리 버튼 */}
-          {userType === 'admin' && (
-            <CourseManagementDropdown courseId={id} onDelete={onDelete} />
+          {/* 우측 상단 옵션 */}
+          {pathname.startsWith('/admin') && (
+            <CourseManagementDropdown courseId={id} />
           )}
 
           <p>문제 수</p>

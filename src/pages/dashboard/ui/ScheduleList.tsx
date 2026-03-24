@@ -1,10 +1,10 @@
-import ScheduleCard from './ScheduleCard';
+import ScheduleCard from '@/pages/dashboard/ui/ScheduleCard';
 import EventMarkerIcon from '@/assets/svg/eventMarkerIcon.svg?react';
 import {formatDateMonthDay} from '@/shared/lib/course';
-import type {Schedule} from '@/entities/course/model/types';
+import type {TAssignmentSchedule} from '@/entities/assignment/model/schemas';
 
 interface ScheduleListProps {
-  scheduleList: Schedule[];
+  scheduleList: TAssignmentSchedule[];
 }
 
 // 스케줄 목록 컴포넌트
