@@ -79,7 +79,9 @@ const AuthenticatedHeader = ({showChat}: {showChat: boolean}) => {
   };
 
   const buttons = showChat
-    ? [assignmentButton, chatButton, ...commonButtons]
+    ? userType === 'admin'
+      ? [assignmentButton, chatButton, ...commonButtons]
+      : [chatButton, ...commonButtons]
     : [...commonButtons];
 
   return (
