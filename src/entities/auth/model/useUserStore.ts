@@ -1,14 +1,12 @@
 import {create} from 'zustand';
-import {persist, createJSONStorage} from 'zustand/middleware';
-import type {UserType} from '@/shared/model/types';
-
+import {persist} from 'zustand/middleware';
+import type {UserType} from '@/shared/model/common';
 
 type AuthenticatedUserType = Exclude<UserType, 'guest'>;
 
 interface UserState {
   userType: UserType;
   userName: string;
-  memberId: number | null;
   isAuthenticated: boolean;
   accessToken: string | null;
 
@@ -17,8 +15,7 @@ interface UserState {
   login: (
     userName: string,
     userType: AuthenticatedUserType,
-    accessToken: string,
-    memberId: number
+    accessToken: string
   ) => void;
   logout: () => void;
 }
@@ -28,19 +25,17 @@ export const useUserStore = create<UserState>()(
     (set) => ({
       userType: 'guest',
       userName: '',
-      memberId: null,
       isAuthenticated: false,
       accessToken: null,
 
       setUserType: (userType) => set({userType}),
       setUserName: (userName) => set({userName}),
 
-      login: (userName, userType, accessToken, memberId) => {
+      login: (userName, userType, accessToken) => {
         set({
           userName,
           userType,
           accessToken,
-          memberId,
           isAuthenticated: true,
         });
       },
@@ -56,11 +51,8 @@ export const useUserStore = create<UserState>()(
     }),
     {
       name: 'user-storage',
-      storage: createJSONStorage(() => sessionStorage),
       partialize: (state) => ({
         userType: state.userType,
-        userName: state.userName,
-        memberId: state.memberId,
         isAuthenticated: state.isAuthenticated,
         accessToken: state.accessToken,
       }),

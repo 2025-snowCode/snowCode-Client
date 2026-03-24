@@ -1,16 +1,15 @@
-import type {TDashboardCourse} from '@/entities/course/model/schemas';
+import type {DashboardCourse} from '@/entities/course/model/types';
 import {formatCourseOptionLabel} from '@/shared/lib/course';
 import {useMemo, useState} from 'react';
 
 const ALL_COURSES_OPTION = '전체 강의' as const;
 
-export const useCourseFilter = (courses: TDashboardCourse[]) => {
+export const useCourseFilter = (courses: DashboardCourse[]) => {
   const [selectedCourseId, setSelectedCourseId] = useState<number | null>(null);
 
   // 강의 선택 드롭다운 메뉴 옵션
-  const courseMaps = useMemo(() => {
-    const labelToId = new Map<string, number>();
-    const idToLabel = new Map<number, string>();
+  const courseOptionMap = useMemo(() => {
+    const map = new Map<string, number>();
 
     courses.forEach((course) => {
       const label = formatCourseOptionLabel(
@@ -19,31 +18,26 @@ export const useCourseFilter = (courses: TDashboardCourse[]) => {
         course.semester,
         course.section
       );
-      labelToId.set(label, course.id);
-      idToLabel.set(course.id, label);
+      map.set(label, course.id);
     });
 
-    return {labelToId, idToLabel};
+    return map;
   }, [courses]);
 
   const courseOptions = useMemo(() => {
-    return [ALL_COURSES_OPTION, ...Array.from(courseMaps.labelToId.keys())];
-  }, [courseMaps.labelToId]);
+    return [ALL_COURSES_OPTION, ...Array.from(courseOptionMap.keys())];
+  }, [courseOptionMap]);
 
+  // 강의 선택 핸들러
   const handleCourseSelect = (value: string) => {
     if (value === ALL_COURSES_OPTION) {
       setSelectedCourseId(null);
       return;
     }
 
-    const courseId = courseMaps.labelToId.get(value) ?? null;
+    const courseId = courseOptionMap.get(value) ?? null;
     setSelectedCourseId(courseId);
   };
 
-  const selectedCourseLabel = useMemo(() => {
-    if (selectedCourseId === null) return ALL_COURSES_OPTION;
-    return courseMaps.idToLabel.get(selectedCourseId) ?? ALL_COURSES_OPTION;
-  }, [selectedCourseId, courseMaps]);
-
-  return {courseOptions, handleCourseSelect, selectedCourseId, selectedCourseLabel};
+  return {courseOptions, handleCourseSelect, selectedCourseId};
 };

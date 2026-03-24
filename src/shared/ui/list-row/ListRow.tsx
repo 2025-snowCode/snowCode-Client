@@ -1,11 +1,10 @@
-import {ListRowStyles, type ListRowVariants} from '@/shared/ui/list-row/list-row-styles';
-import type {ReactNode} from 'react';
+import {ListRowStyles, type ListRowVariants} from './list-row-styles';
 
 interface ListRowProps extends ListRowVariants {
   selected?: boolean;
-  leftIcon?: ReactNode;
+  leftIcon?: React.ReactNode;
   title: string;
-  rightIcon?: ReactNode;
+  rightIcon?: React.ReactNode;
   className?: string;
 }
 

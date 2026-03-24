@@ -1,58 +1,39 @@
-import AssignmentListContainer from '@/entities/assignment/ui/AssignmentListContainer';
+import AssignmentListContainer from './ui/AssignmentListContainer';
 import {useState} from 'react';
+import {
+  response,
+  courseOptionsResponse,
+} from '@/shared/mocks/assignmentSelectResponse';
 import {useCourseFilter} from '@/features/course/filter-course/lib/useCourseFilter';
 import {AssignmentPageLayout} from '@/widgets/assignment-page-layout';
 import ListRow from '@/shared/ui/list-row/ListRow';
-import {useSuspenseQuery} from '@tanstack/react-query';
-import {courseQueries} from '@/entities/course/api/courseQueries';
-import {useUnitStore} from '@/entities/unit/model/useUnitStore';
-import {useLocation, useNavigate} from 'react-router-dom';
-import type {TAssignment} from '@/entities/assignment/model/schemas';
-import {useAssignmentList} from '@/features/assignment/filter-assignment/lib/useAssignmentList';
-import Button from '@/shared/ui/button/Button';
 
 const AssignmentSelectPage = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const {
-    data: {courses},
-  } = useSuspenseQuery(courseQueries.getAllCourses());
-  const {setAssignments, assignments: currentSelectedAssignments} =
-    useUnitStore();
-  const [selectedAssignments, setSelectedAssignments] = useState<TAssignment[]>(
-    currentSelectedAssignments
-  );
-  const {courseOptions, handleCourseSelect, selectedCourseId, selectedCourseLabel} =
-    useCourseFilter(courses);
+  const {courses} = courseOptionsResponse.response; // /courses/my API 응답 모킹
+  const [selectedAssignments, setSelectedAssignments] = useState<number[]>([]); // 선택된 문제 ID 목록
 
-  const assignmentList = useAssignmentList(selectedCourseId);
+  const {courseOptions, handleCourseSelect} = useCourseFilter(courses);
+
+  // 문제 목록 /courses/{courseId}/assignments API 응답 모킹
+  const assignmentList = response.response.courses.flatMap(
+    (course) => course.assignments
+  );
 
   // 문제 선택 핸들러
-  const handleAssignmentSelect = (assignment: TAssignment) => {
+  const handleAssignmentSelect = (assignmentId: number) => {
     setSelectedAssignments((prev) => {
-      if (prev.some((a) => a.id === assignment.id)) {
-        return prev.filter((a) => a.id !== assignment.id);
+      if (prev.includes(assignmentId)) {
+        return prev.filter((id) => id !== assignmentId); // 선택 해제
+      } else {
+        return [...prev, assignmentId]; // 선택 추가
       }
-      return [...prev, assignment];
     });
-  };
-
-  // 이전 페이지로 돌아가기
-  const returnToPreviousPage = () => {
-    navigate(location.state?.backPath ?? -1);
-  };
-
-  // 등록 핸들러
-  const handleConfirm = () => {
-    setAssignments(selectedAssignments);
-    returnToPreviousPage();
   };
 
   return (
     <AssignmentPageLayout
       title='문제 선택'
       courseOptions={courseOptions}
-      courseValue={selectedCourseLabel}
       onCourseSelect={handleCourseSelect}
       list={
         <AssignmentListContainer
@@ -62,22 +43,13 @@ const AssignmentSelectPage = () => {
           renderItem={(assignment) => (
             <ListRow
               title={assignment.title}
-              selected={selectedAssignments.some((a) => a.id === assignment.id)}
-              className='cursor-pointer'
+              selected={selectedAssignments.includes(assignment.id)}
             />
           )}
         />
       }
-      buttons={
-        <div className='flex gap-5'>
-          <Button color='outlinePurple' onClick={() => returnToPreviousPage()}>
-            취소
-          </Button>
-          <Button color='primary' onClick={handleConfirm}>
-            등록
-          </Button>
-        </div>
-      }
+      onCancel={() => {}}
+      onConfirm={() => {}}
     />
   );
 };

@@ -2,16 +2,16 @@ import {useForm} from 'react-hook-form';
 import Button from '@/shared/ui/button/Button';
 import BinIcon from '@/assets/svg/binIcon.svg?react';
 import LabeledInput from '@/shared/ui/LabeledInput';
-import {UnitAssignmentList} from '@/pages/unit-editor/ui/UnitAssignmentList';
+import {UnitAssignmentList} from './UnitAssignmentList';
 import {zodResolver} from '@hookform/resolvers/zod';
-import {type UnitFormProps} from '@/pages/unit-editor/model/types';
+import {type UnitFormProps} from '../model/types';
 import AddIcon from '@/assets/svg/addIcon.svg?react';
 import {EmptyState} from '@/shared/ui/EmptyState';
-import {useLocation, useNavigate} from 'react-router-dom';
-import {ROUTES} from '@/shared/config/routes';
-import {useUnitStore} from '@/entities/unit/model/useUnitStore';
-import {unitFormSchema} from '@/entities/unit/model/schemas';
-import type {TUnitFormSchema} from '@/entities/unit/model/schemas';
+// import {useState} from 'react';
+import {
+  unitFormSchema,
+  type TUnitFormSchema,
+} from '@/entities/unit/model/types';
 
 export const UnitForm = ({
   unit,
@@ -20,40 +20,23 @@ export const UnitForm = ({
   onCreateUnit,
   onUpdateUnit,
   onDeleteUnit,
-  isPending,
 }: UnitFormProps) => {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const {
-    storeFormData,
-    resetStore,
-    title: storedTitle,
-    releaseDate: storedReleaseDate,
-    dueDate: storedDueDate,
-    assignments: storedAssignments,
-  } = useUnitStore();
-
-  const currentAssignmentList =
-    mode === 'editing' ? (unit?.assignments ?? []) : storedAssignments;
-
-  const assignmentListKey =
-    mode === 'editing' ? `edit-${unit?.id}` : 'creating-assignments';
+  // const [assignmentIds, setAssignmentIds] = useState<number[]>([]);
 
   const {
     register,
     handleSubmit,
     reset,
-    getValues,
-    formState: {errors},
+    formState: {errors, isSubmitting},
   } = useForm<TUnitFormSchema>({
     resolver: zodResolver(unitFormSchema),
     values:
       mode === 'creating'
         ? {
-            title: storedTitle,
-            releaseDate: storedReleaseDate,
-            dueDate: storedDueDate,
-            assignmentIds: storedAssignments.map((a) => a.id),
+            title: '',
+            releaseDate: '',
+            dueDate: '',
+            assignmentIds: [],
           }
         : {
             title: unit?.title || '',
@@ -63,7 +46,7 @@ export const UnitForm = ({
   });
 
   // 단원 생성/업데이트 핸들러
-  const onSubmit = (data: TUnitFormSchema) => {
+  const onSubmit = async (data: TUnitFormSchema) => {
     if (mode === 'editing' && unit) {
       onUpdateUnit(unit.id, data);
       return;
@@ -81,19 +64,7 @@ export const UnitForm = ({
 
   // 단원 편집 취소 핸들러
   const handleCancel = () => {
-    if (mode === 'creating') resetStore();
     reset();
-  };
-
-  // 문제 선택 페이지로 이동 핸들러
-  const handleAssignmentSelect = () => {
-    const {title, releaseDate, dueDate} = getValues();
-    storeFormData(title, releaseDate, dueDate);
-    navigate(ROUTES.ADMIN.ASSIGNMENTS.SELECT, {
-      state: {
-        backPath: location.pathname,
-      },
-    });
   };
 
   return (
@@ -117,14 +88,13 @@ export const UnitForm = ({
         </div>
 
         {/* 폼 본문 */}
-        <div className='flex-1 p-7.5 space-y-3 overflow-y-auto '>
+        <div className='flex-1 p-7.5 space-y-8 overflow-y-auto '>
           {/* 단원 제목 섹션 */}
           <section className='grid grid-cols-2 gap-5.5'>
             <LabeledInput
               {...register('title')}
               label='제목'
               placeholder='단원 제목을 입력하세요'
-              errorMessage={errors.title?.message}
             />
           </section>
 
@@ -135,48 +105,40 @@ export const UnitForm = ({
               label='공개일'
               type='date'
               placeholder='날짜를 선택하세요'
-              errorMessage={errors.releaseDate?.message}
             />
             <LabeledInput
               {...register('dueDate')}
               label='마감일'
               type='date'
               placeholder='마감일을 선택하세요'
-              errorMessage={errors.dueDate?.message}
             />
+            <span className='col-span-2 text-xs text-badge-red -mt-3 h-1'>
+              {errors.dueDate?.message}
+            </span>
           </section>
 
-          <hr className='border-stroke mb-5' />
+          <hr className='border-stroke mb-7 -mt-3' />
 
           {/* 문제 등록 섹션 */}
           <section className=''>
             <h4 className='text-base/6 font-medium'>문제 등록</h4>
 
             {/* 드래그 앤 드롭 가능한 문제 리스트 */}
-            {currentAssignmentList.length > 0 ? (
-              <UnitAssignmentList
-                key={assignmentListKey}
-                assignmentList={currentAssignmentList}
-              />
-            ) : (
+            {!unit || unit.assignmentCount === 0 ? (
               <EmptyState className='mt-4 mb-5'>
                 등록된 문제가 없습니다.
               </EmptyState>
+            ) : (
+              <UnitAssignmentList assignmentList={unit.assignments} />
             )}
 
             {/* 문제 연결 버튼 */}
-            {mode === 'creating' && (
-              <div className='mt-3.5'>
-                <Button
-                  onClick={handleAssignmentSelect}
-                  color='tonal'
-                  size='compact'
-                  content='mixed'>
-                  <AddIcon className='w-3 h-3' />
-                  문제 연결
-                </Button>
-              </div>
-            )}
+            <div className='mt-3.5'>
+              <Button color='tonal' size='compact' content='mixed'>
+                <AddIcon className='w-3 h-3' />
+                문제 연결
+              </Button>
+            </div>
           </section>
         </div>
       </form>
@@ -188,8 +150,8 @@ export const UnitForm = ({
         </Button>
         <Button
           type='submit'
-          form={`unit-form-${unitIndex}`}
-          disabled={isPending}>
+          formID={`unit-form-${unitIndex}`}
+          disabled={isSubmitting}>
           저장
         </Button>
       </div>

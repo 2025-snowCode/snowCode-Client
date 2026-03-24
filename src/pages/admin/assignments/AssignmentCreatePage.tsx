@@ -57,12 +57,6 @@ const AssignmentCreatePage = () => {
                   label={idx === 0 ? '공개 여부' : ''}
                   options={PUBLIC_OPTIONS}
                   className='w-full'
-                  value={examples[idx].공개}
-                  onSelect={(val) => {
-                    const newExamples = [...examples];
-                    newExamples[idx].공개 = val;
-                    setExamples(newExamples);
-                  }}
                 />
               </div>
             ))}

@@ -1,10 +1,8 @@
-import styles from '@/shared/ui/checkbox/Checkbox.module.css';
+import styles from './Checkbox.module.css';
 import type {ChangeEvent, InputHTMLAttributes} from 'react';
 
-interface CheckboxProps extends Omit<
-  InputHTMLAttributes<HTMLInputElement>,
-  'onChange' | 'checked'
-> {
+interface CheckboxProps
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'checked'> {
   checked: boolean;
   onChange: (checked: boolean) => void;
   className?: string;

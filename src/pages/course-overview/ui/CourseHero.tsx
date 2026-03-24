@@ -1,12 +1,12 @@
 import snowcodeOverviewMini from '@/assets/images/snowcode_overview_mini.svg';
 import {formatCourseTerm} from '@/shared/lib/course';
-import CourseActionsBar from '@/pages/course-overview/ui/CourseActionsBar';
+import CourseActionsBar from './CourseActionsBar';
 import {useUserStore} from '@/entities/auth/model/useUserStore';
-import type {TCourseOverview} from '@/entities/course/model/schemas';
-import type {SemesterCode} from '@/shared/model/types';
+import type {CourseOverview} from '@/entities/course/model/types';
+import type {SemesterCode} from '@/shared/model/common';
 
 interface CourseHeroProps {
-  course: Omit<TCourseOverview, 'units'>;
+  courseData: Omit<CourseOverview, 'units'>;
   assignmentCount: number;
   isActiveCourse: boolean;
 }
@@ -27,18 +27,18 @@ interface CourseStatsProps {
 
 // 강의 상세 페이지 Hero 섹션
 const CourseHero = ({
-  course,
+  courseData,
   assignmentCount,
   isActiveCourse,
 }: CourseHeroProps) => {
   const isAdmin = useUserStore((state) => state.userType) === 'admin';
-  const {id, title, year, semester, section, unitCount, studentCount} = course;
+  const {title, year, semester, section, unitCount, studentCount} = courseData;
 
   return (
     <section className='relative w-full flex-center flex-col pt-38.5 pb-12.5 rounded-t-[30px] bg-radial-gradient'>
       {isAdmin && isActiveCourse && (
         <nav className='absolute top-36 right-35'>
-          <CourseActionsBar courseId={id} isActiveCourse={true} />
+          <CourseActionsBar isActiveCourse={true} />
         </nav>
       )}
 
@@ -66,8 +66,8 @@ const CourseInfo = ({title, year, semester, section}: CourseInfoProps) => {
   return (
     <article className='flex-center flex-col text-white'>
       <img src={snowcodeOverviewMini} alt='snowCode logo' />
-      <h1 className='pb-px text-2xl font-medium leading-9'>{title}</h1>
-      <p className='pb-2.75 text-base font-normal leading-6'>
+      <h1 className='pb-[1px] text-2xl font-medium leading-9'>{title}</h1>
+      <p className='pb-[11px] text-base font-normal leading-6'>
         {formatCourseTerm(year, semester, section)}
       </p>
     </article>
@@ -82,7 +82,7 @@ const CourseStats = ({
   isAdmin,
 }: CourseStatsProps) => {
   const studentInfo =
-    isAdmin && studentCount !== undefined ? ` | ${studentCount - 1}명` : '';
+    isAdmin && studentCount !== undefined ? ` | ${studentCount}명` : '';
   const courseStats = `${unitCount}단원 | ${assignmentCount}문제${studentInfo}`;
 
   return (

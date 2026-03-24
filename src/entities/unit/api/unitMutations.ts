@@ -1,17 +1,12 @@
-import type {TUnitFormSchema} from '@/entities/unit/model/schemas';
-import {createUnit, deleteUnit, updateUnit} from '@/entities/unit/api/unitApi';
+import type {TUnitFormSchema} from '../model/types';
+import {createUnit, deleteUnit, updateUnit} from './unitApi';
 
 export const unitMutations = {
   // 단원 추가 뮤테이션 옵션
   createUnit: {
     mutationKey: ['createUnit'],
-    mutationFn: ({
-      courseId,
-      unitForm,
-    }: {
-      courseId: number;
-      unitForm: TUnitFormSchema;
-    }) => createUnit(courseId, unitForm),
+    mutationFn: ({courseId, unit}: {courseId: number; unit: TUnitFormSchema}) =>
+      createUnit(courseId, unit),
   },
 
   // 단원 수정 뮤테이션 옵션
