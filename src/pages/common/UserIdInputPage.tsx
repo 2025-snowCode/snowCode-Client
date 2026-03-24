@@ -141,7 +141,7 @@ export default function UserIdInputPage() {
           로컬 로그인 (테스트용)
         </button>
 
-        {showLocalForm && <LocalLoginForm isAdmin={isAdmin} studentId={isAdmin ? undefined : userIdString} />}
+        {showLocalForm && <LocalLoginForm isAdmin={isAdmin} studentId={isAdmin ? undefined : (isComplete? userIdString: undefined)} />}
       </div>
     </div>
   );

@@ -35,7 +35,7 @@ export default function LocalLoginForm({
   });
 
   const handleLocalSubmit = () => {
-    if (!localName || !localEmail || !localOAuthToken) {
+    if (!localName || !localEmail.trim() || !localOAuthToken.trim()) {
       alert('이름, 이메일, OAuthToken을 모두 입력해주세요.');
       return;
     }
@@ -53,12 +53,14 @@ export default function LocalLoginForm({
   };
 
   return (
-    <div className='flex flex-col gap-3 w-95 text-left mt-6 animate-in fade-in slide-in-from-top-2 duration-300'>
+    <form onSubmit={(e) => {e.preventDefault(); handleLocalSubmit();}}
+    className='flex flex-col gap-3 w-95 text-left mt-6 animate-in fade-in slide-in-from-top-2 duration-300'>
       <div className='flex flex-col gap-2'>
-        <label className='text-xs font-medium text-secondary-black'>
+        <label htmlFor='locale-name' className='text-xs font-medium text-secondary-black'>
           테스트용 이름
         </label>
         <input
+          id='locale-name'
           type='text'
           placeholder='이름'
           value={localName}
@@ -68,10 +70,11 @@ export default function LocalLoginForm({
       </div>
 
       <div className='flex flex-col gap-2'>
-        <label className='text-xs font-medium text-secondary-black'>
+        <label htmlFor='local-email' className='text-xs font-medium text-secondary-black'>
           테스트용 이메일
         </label>
         <input
+          id='local-email'
           type='email'
           placeholder='이메일'
           value={localEmail}
@@ -81,10 +84,11 @@ export default function LocalLoginForm({
       </div>
 
       <div className='flex flex-col gap-2'>
-        <label className='text-xs font-medium text-secondary-black'>
+        <label htmlFor='local-oauth-token' className='text-xs font-medium text-secondary-black'>
           OAuth Token
         </label>
         <input
+          id='local-oauth-token'
           type='password'
           placeholder='OAuthToken'
           value={localOAuthToken}
@@ -94,11 +98,12 @@ export default function LocalLoginForm({
       </div>
 
       <button
+        type='submit'
         disabled={isPending}
         onClick={handleLocalSubmit}
         className='bg-primary text-white text-sm font-semibold py-3.5 rounded-lg cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed hover:bg-primary/90 transition-all mt-2'>
         {isPending ? '로그인 중...' : '로컬 로그인 실행'}
       </button>
-    </div>
+    </form>
   );
 }
