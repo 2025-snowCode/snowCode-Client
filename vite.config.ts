@@ -11,6 +11,13 @@ export default defineConfig(({mode}) => {
     define: {
       global: 'globalThis',
     },
+    optimizeDeps: {
+      esbuildOptions: {
+        define: {
+          global: 'globalThis',
+        },
+      },
+    },
     server: {
       proxy: {
         '/api': {

@@ -7,7 +7,9 @@ import {useUserStore} from '@/entities/auth/model/useUserStore';
 
 export default function ChatPage() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const selectedRoomId = Number(searchParams.get('roomId')) || null;
+  const roomIdParam = searchParams.get('roomId');
+  const selectedRoomId =
+    roomIdParam !== null && roomIdParam !== '' ? Number(roomIdParam) : null;
   const myMemberId = useUserStore((s) => s.memberId) ?? 0;
 
   const {data: chatRoomList} = useQuery(chatQueries.getChatRooms());
@@ -27,7 +29,14 @@ export default function ChatPage() {
   };
 
   const handleSendMessage = (content: string) => {
-    sendMessage({type: 'TEXT', content});
+    if (!selectedRoomId || !chatRoomDetail) return;
+
+    sendMessage({
+      type: 'TEXT',
+      content,
+      chatRoomId: selectedRoomId,
+      receiverId: chatRoomDetail.opponentId,
+    });
   };
 
   return (
