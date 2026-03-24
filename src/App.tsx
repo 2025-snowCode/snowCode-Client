@@ -14,6 +14,7 @@ import KakaoCallbackPage from '@/pages/common/KakaoCallbackPage';
 import PrivateRoute from '@/widgets/private-route/ui/PrivateRoute';
 import {useSyncUserRole} from '@/features/auth/sync-user-role/model/useSyncUserRole';
 import AssignmentManagePage from '@/pages/manage-assignment/AssignmentManagePage';
+import ChatPage from '@/pages/chat/ChatPage';
 import AssignmentSubmitPage from '@/pages/submit-assignment/AssignmentSubmitPage';
 import AssignmentSubmitLayout from '@/pages/submit-assignment/AssignmentSubmitLayout';
 import UnitLayout from './pages/admin/units/UnitLayout';
@@ -36,6 +37,7 @@ const AppRoutes = () => {
           <Route path='student'>
             <Route index element={<Dashboard />} />
             <Route path='courses/:id' element={<CourseOverviewPage />} />
+            <Route path='chat' element={<ChatPage />} />
           </Route>
         </Route>
 
@@ -59,15 +61,19 @@ const AppRoutes = () => {
             <Route path='courses/:id' element={<CourseOverviewPage />} />
             <Route path='courses/create' element={<CourseCreatePage />} />
             <Route path='courses/:id/edit' element={<CourseEditPage />} />
-            <Route path='student' element={<StudentManagementPage />} />
             <Route
-              path='student/profile/:studentId'
+              path='courses/:courseId/students'
+              element={<StudentManagementPage />}
+            />
+            <Route
+              path='courses/:courseId/students/:studentId'
               element={<StudentProfilePage />}
             />
             <Route path='units/:courseId' element={<UnitLayout />}>
               <Route path='create' element={<UnitCreatePage />} />
               <Route path='edit/:unitId' element={<UnitEditPage />} />
             </Route>
+            <Route path='chat' element={<ChatPage />} />
           </Route>
         </Route>
       </Route>

@@ -27,4 +27,13 @@ export const ENDPOINTS = {
       assignmentId: number | string
     ) => `/units/${unitId}/assignments/${assignmentId}`,
   },
+  CHATS: {
+    ROOT: '/chats',
+    DETAIL: (chatRoomId: number | string) => `/chats/${chatRoomId}`,
+  },
+  ENROLLMENTS: {
+    BY_COURSE: (courseId: number | string) => `/courses/${courseId}/enrollments`,
+    DETAIL: (courseId: number | string, memberId: number | string) =>
+      `/courses/${courseId}/enrollments/${memberId}`,
+  },
 } as const;
