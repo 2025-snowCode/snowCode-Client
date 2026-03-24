@@ -12,7 +12,6 @@ export default function ChatRoomItem({
   memberId,
   name,
   studentId,
-  lastMessage,
 }: ChatRoomItemProps) {
   return (
     <div className='flex items-center gap-3'>
@@ -24,9 +23,6 @@ export default function ChatRoomItem({
           <span className='text-secondary-black text-sm font-normal'>
             {studentId}
           </span>
-        </div>
-        <div className='text-xs px-3.5 py-0.5 bg-background rounded-[20px] border border-stroke text-secondary-black mt-0.5 w-fit max-w-full break-all'>
-          {lastMessage}
         </div>
       </div>
     </div>
