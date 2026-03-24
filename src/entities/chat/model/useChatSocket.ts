@@ -1,5 +1,5 @@
 import {useEffect, useRef, useState} from 'react';
-import type {Client} from '@stomp/stompjs';
+import type {Client, IFrame} from '@stomp/stompjs';
 import {createStompClient} from '@/shared/lib/stompClient';
 import {socketMessageResponseSchema} from '@/entities/chat/model/schemas';
 import type {TChatMessage, TSendMessage} from '@/entities/chat/model/schemas';
@@ -13,16 +13,14 @@ export const useChatSocket = (chatRoomId: number | null) => {
 
     const client = createStompClient();
 
-    client.onConnect = () => {
-      console.log('Connected to WebSocket');
-      // 개인 큐 구독 (서버의 convertAndSendToUser 대응)
-      client.subscribe('/user/queue/messages', (frame) => {
+    client.onConnect = (frame: IFrame) => { 
+      console.log('Connected to WebSocket:', frame);
+      
+      client.subscribe('/user/queue/messages', (frame: IFrame) => {
         try {
           const rawData = JSON.parse(frame.body);
-          console.log('Received raw message:', rawData);
           const parsed = socketMessageResponseSchema.parse(rawData);
 
-          // 현재 보고 있는 채팅방의 메시지인 경우에만 상태 업데이트
           if (parsed.chatRoomId === chatRoomId) {
             const message: TChatMessage = {
               messageId: Date.now(),
@@ -34,12 +32,12 @@ export const useChatSocket = (chatRoomId: number | null) => {
             setMessages((prev) => [...prev, message]);
           }
         } catch (error) {
-          console.error('Failed to parse or map chat message:', error);
+          console.error('Failed to parse chat message:', error);
         }
       });
     };
 
-    client.onStompError = (frame) => {
+    client.onStompError = (frame: IFrame) => {
       console.error('Broker reported error: ' + frame.headers['message']);
       console.error('Additional details: ' + frame.body);
     };
@@ -48,7 +46,7 @@ export const useChatSocket = (chatRoomId: number | null) => {
     clientRef.current = client;
 
     return () => {
-      console.log('WebSocket 비활성화중');
+      console.log('WebSocket 비활성화 중');
       client.deactivate();
       clientRef.current = null;
       setMessages([]);
@@ -56,11 +54,15 @@ export const useChatSocket = (chatRoomId: number | null) => {
   }, [chatRoomId]);
 
   const sendMessage = (payload: TSendMessage) => {
-    console.log('메세지 전송중:', payload);
-    clientRef.current?.publish({
-      destination: '/pub/chat',
-      body: JSON.stringify(payload),
-    });
+    if (clientRef.current && clientRef.current.connected) {
+      console.log('메시지 전송 중:', payload);
+      clientRef.current.publish({
+        destination: '/pub/chat',
+        body: JSON.stringify(payload),
+      });
+    } else {
+      console.error('WebSocket이 연결되어 있지 않습니다.');
+    }
   };
 
   return {messages, sendMessage};
