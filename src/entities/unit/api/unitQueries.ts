@@ -15,12 +15,9 @@ export const unitQueries = {
     }),
 
   // 단일 단원 조회 쿼리 옵션
-  getUnitDetails: (unitId: number | null) =>
+  getUnitDetail: (unitId: number | null) =>
     queryOptions({
       queryKey: ['units', 'detail', unitId],
       queryFn: unitId ? () => getUnitById(unitId) : skipToken,
-      select: (data) => {
-        return data;
-      },
     }),
 };

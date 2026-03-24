@@ -12,9 +12,10 @@ export const useAssignmentList = (
   const {data: allAssignments} = useQuery(
     assignmentQueries.getAllAssignments()
   );
-  const {data: assignments} = useQuery(
-    assignmentQueries.getAssignmentsByCourse(selectedCourseId ?? 0)
-  );
+  const {data: assignments} = useQuery({
+    ...assignmentQueries.getAssignmentsByCourse(selectedCourseId ?? 0),
+    enabled: selectedCourseId !== null,
+  });
 
   return unique(
     selectedCourseId ? (assignments ?? []) : (allAssignments ?? [])

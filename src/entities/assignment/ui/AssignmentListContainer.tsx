@@ -1,8 +1,8 @@
 import type {TAssignment} from '@/entities/assignment/model/schemas';
-import type {TAssignmentCourse} from '@/entities/course/model/schemas';
+import type {TCourseWithAssignments} from '@/entities/course/model/schemas';
 import type {MouseEvent, ReactNode} from 'react';
 
-type T = TAssignmentCourse['assignments'][number];
+type T = TCourseWithAssignments['courses'][number];
 
 interface AssignmentListContainerProps<T> {
   items: T[];
@@ -21,6 +21,7 @@ const AssignmentListContainer = ({
     event.stopPropagation();
     onSelect?.(item);
   };
+
   return (
     <div className='custom-scrollbar'>
       <h3 className='text-lg/[27px] font-medium mb-4'>{title}</h3>

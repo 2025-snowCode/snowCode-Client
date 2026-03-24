@@ -1,4 +1,3 @@
-import {assignmentSchema} from '@/entities/assignment/model/schemas';
 import {unitSchema} from '@/entities/unit/model/schemas';
 import {semesterCodeSchema} from '@/shared/model/schemas';
 import {z} from 'zod';
@@ -46,9 +45,19 @@ export const dashboardCourseSchema = courseBaseSchema.extend({
 });
 
 /** 과제 선택 시 강의 목록용 스키마 */
-export const assignmentCourseSchema = courseBaseSchema.extend({
+export const courseWithAssignmentsSchema = z.object({
+  id: z.number(),
+  title: z.string(),
+  year: z.number(),
+  semester: semesterCodeSchema,
+  section: z.string(),
   count: z.number(),
-  assignments: z.array(assignmentSchema.pick({id: true, title: true})),
+  courses: z.array(
+    z.object({
+      id: z.number(),
+      title: z.string(),
+    })
+  ),
 });
 
 export type TCourseCore = z.infer<typeof courseCoreSchema>;
@@ -56,4 +65,6 @@ export type TCourseBase = z.infer<typeof courseBaseSchema>;
 export type TCreateCourseRequest = z.infer<typeof createCourseRequestSchema>;
 export type TCourseOverview = z.infer<typeof courseOverviewSchema>;
 export type TDashboardCourse = z.infer<typeof dashboardCourseSchema>;
-export type TAssignmentCourse = z.infer<typeof assignmentCourseSchema>;
+export type TCourseWithAssignments = z.infer<
+  typeof courseWithAssignmentsSchema
+>;

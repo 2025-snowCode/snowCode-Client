@@ -5,12 +5,19 @@ import {Link} from 'react-router-dom';
 interface CourseActionsBarProps {
   courseId: number;
   isActiveCourse: boolean;
+  firstUnitId?: number;
 }
-// 강의 관리 버튼 바 (관리자 전용)
+
 const CourseActionsBar = ({
   courseId,
   isActiveCourse,
+  firstUnitId,
 }: CourseActionsBarProps) => {
+  const unitPath =
+    isActiveCourse && firstUnitId
+      ? ROUTES.ADMIN.UNITS.EDIT(courseId, firstUnitId)
+      : ROUTES.ADMIN.UNITS.CREATE(courseId);
+
   return (
     <article className='flex gap-5'>
       <Link
@@ -21,7 +28,7 @@ const CourseActionsBar = ({
         학생 목록
       </Link>
       <Link
-        to={ROUTES.ADMIN.UNITS.DETAIL(courseId)}
+        to={unitPath}
         className={buttonStyles({
           color: `${isActiveCourse ? 'outlinePurple' : 'primary'}`,
         })}>

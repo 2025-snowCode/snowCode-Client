@@ -25,7 +25,9 @@ export const ROUTES = {
         `/admin/courses/${courseId}/students/${studentId}`,
     },
     UNITS: {
-      DETAIL: (id: number | string) => `/admin/units/${id}`,
+      CREATE: (courseId: number | string) => `/admin/units/${courseId}/create`,
+      EDIT: (courseId: number | string, unitId: number | string) =>
+        `/admin/units/${courseId}/edit/${unitId}`,
     },
   },
 

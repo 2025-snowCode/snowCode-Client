@@ -3,20 +3,21 @@ import Badge from '@/shared/ui/badge/Badge';
 import Button from '@/shared/ui/button/Button';
 import AddIcon from '@/assets/svg/addIcon.svg?react';
 import type {TUnit} from '@/entities/unit/model/schemas';
+import {useParams} from 'react-router-dom';
 
 interface UnitListProps {
   unitList: Pick<TUnit, 'id' | 'title' | 'assignmentCount'>[] | undefined;
-  onUnitClick: (id: number) => void;
-  selectedUnitId?: number | null;
-  onAddNewUnit?: () => void;
+  onAddNewUnit: () => void;
+  onClickUnit: (unitId: number) => void;
 }
 
 export const UnitList = ({
   unitList,
-  onUnitClick,
-  selectedUnitId,
   onAddNewUnit,
+  onClickUnit,
 }: UnitListProps) => {
+  const {unitId} = useParams();
+
   return (
     <div className='flex flex-col h-full'>
       {/* 단원 리스트 헤더 */}
@@ -27,9 +28,9 @@ export const UnitList = ({
         {/* 단원 아이템 */}
         {unitList?.map(({id, title, assignmentCount}) => (
           <li
-            onClick={() => onUnitClick(id)}
+            onClick={() => onClickUnit(id)}
             key={id}
-            className={`flex flex-col py-5 px-12 gap-2.5 cursor-pointer ${selectedUnitId === id ? 'bg-background' : ''}`}>
+            className={`flex flex-col py-5 px-12 gap-2.5 cursor-pointer ${Number(unitId) === id ? 'bg-background' : ''}`}>
             {/* 과제 수 배지 */}
             <div>
               <Badge variant='index' kind='problem'>
@@ -40,7 +41,7 @@ export const UnitList = ({
             {/* 단원 제목 및 화살표 아이콘 */}
             <div className='flex justify-between items-center'>
               <h3 className='text-lg/normal font-medium'>{title}</h3>
-              {id === selectedUnitId && <ArrowrightIcon className='w-4.5' />}
+              {id === Number(unitId) && <ArrowrightIcon className='w-4.5' />}
             </div>
           </li>
         ))}

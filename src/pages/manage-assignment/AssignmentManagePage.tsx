@@ -91,6 +91,7 @@ const AssignmentManagePage = () => {
               color: 'tonal',
               size: 'compact',
               content: 'mixed',
+              className: 'mt-3',
             })}
             to={ROUTES.ADMIN.ASSIGNMENTS.CREATE}>
             <AddIcon className='w-4 h-4' />

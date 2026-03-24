@@ -20,6 +20,7 @@ const CourseOverviewPage = () => {
         course={course}
         assignmentCount={totalAssignmentCount}
         isActiveCourse={hasUnits}
+        firstUnitId={course.units[0]?.id}
       />
       <CourseContent
         units={course.units}
