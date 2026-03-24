@@ -1,22 +1,25 @@
 import {useState, useRef, useEffect} from 'react';
-import {useNavigate, useLocation} from 'react-router-dom';
+import {useNavigate, useSearchParams} from 'react-router-dom';
 import {ROUTES} from '@/shared/config/routes';
 import SnowCodeEntryMini from '@/assets/images/snowCode_entry_mini.svg';
 import kakaoLogo from '@/assets/images/kakao_logo.svg';
 import ArrowleftIcon from '@/assets/svg/arrowleftIcon.svg?react';
 import Button from '@/shared/ui/button/Button';
 import {kakaoService} from '@/features/auth/kakao/lib/kakaoService';
+import LocalLoginForm from '@/features/auth/local/ui/LocalLoginForm';
 
 export default function UserIdInputPage() {
   const navigate = useNavigate();
-  const location = useLocation();
-  const type = new URLSearchParams(location.search).get('type');
+  const [searchParams] = useSearchParams();
+  const type = searchParams.get('type');
   const isAdmin = type === 'admin';
 
   const length = 7;
   const [userId, setUserId] = useState<string[]>(new Array(length).fill(''));
   const [activeIndex, setActiveIndex] = useState(0);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+
+  const [showLocalForm, setShowLocalForm] = useState(false);
 
   useEffect(() => {
     inputRefs.current[activeIndex]?.focus();
@@ -80,18 +83,19 @@ export default function UserIdInputPage() {
           color='ghost'
           onClick={handleBeforeClick}
           size='none'
-          className='leading-7 text-lg'>
+          className='leading-7 text-lg hover:text-primary transition-colors'>
           이전으로
         </Button>
       </div>
+
       <div className='w-[216px] h-[216px] mt-19'>
-        <img src={SnowCodeEntryMini} alt='SnowCode Entry Mini' />
+        <img src={SnowCodeEntryMini} alt='SnowCode' />
       </div>
 
       <div className='flex flex-col items-center gap-6'>
-        <div className='text-[32px] text-primary-black not-italic font-semibold leading-[150%]'>
+        <h1 className='text-[32px] text-primary-black font-semibold leading-[150%]'>
           학번을 입력해주세요
-        </div>
+        </h1>
 
         <div className='flex justify-center gap-2.5 mb-13'>
           {userId.map((digit, i) => (
@@ -110,12 +114,13 @@ export default function UserIdInputPage() {
               onClick={() => setActiveIndex(i)}
               className={`
                   w-10 h-12 text-center border rounded-md text-lg font-medium
+                  transition-all duration-200
                   ${
                     activeIndex === i
-                      ? 'border-primary focus:outline-none focus:ring-0'
+                      ? 'border-primary ring-1 ring-primary/20 outline-none'
                       : digit
                         ? 'border-stroke text-primary-black'
-                        : 'border-stroke'
+                        : 'border-stroke text-gray-400'
                   }
                 `}
             />
@@ -125,14 +130,18 @@ export default function UserIdInputPage() {
         <button
           disabled={!kakaoEnabled}
           onClick={handleKakaoLogin}
-          className='flex items-center gap-2 justify-center text-primary-black text-lg font-semibold leading-[150%] bg-[#fade4a] w-[380px] py-4 rounded-lg mx-auto cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed'>
-          <img
-            src={kakaoLogo}
-            alt='카카오 로고'
-            className='w-[26px] h-[26px]'
-          />
+          className='flex items-center gap-2 justify-center text-primary-black text-lg font-semibold leading-[150%] bg-[#fade4a] w-[380px] py-4 rounded-lg mx-auto cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed hover:brightness-95 transition-all shadow-sm'>
+          <img src={kakaoLogo} alt='카카오' className='w-[26px] h-[26px]' />
           카카오 로그인
         </button>
+
+        <button
+          onClick={() => setShowLocalForm((prev) => !prev)}
+          className='text-sm text-gray-400 underline cursor-pointer hover:text-secondary-black transition-colors py-2'>
+          로컬 로그인 (테스트용)
+        </button>
+
+        {showLocalForm && <LocalLoginForm isAdmin={isAdmin} studentId={isAdmin ? undefined : (isComplete? userIdString: undefined)} />}
       </div>
     </div>
   );

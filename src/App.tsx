@@ -35,6 +35,7 @@ const AppRoutes = () => {
           <Route path='student'>
             <Route index element={<Dashboard />} />
             <Route path='courses/:id' element={<CourseOverviewPage />} />
+            <Route path='chat' element={<ChatPage />} />
           </Route>
         </Route>
 

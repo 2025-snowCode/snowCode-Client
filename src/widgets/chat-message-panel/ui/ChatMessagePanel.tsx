@@ -31,7 +31,9 @@ function MessageItem({
       className={`flex gap-2 ${isMine ? 'justify-end items-end' : 'justify-start items-start'} ${!isFirstInGroup ? '-mt-1' : ''}`}>
       {!isMine && (
         <div className='w-7 shrink-0 flex justify-center self-start'>
-          {isFirstInGroup ? <ChatProfile memberId={opponentId} size='sm' /> : null}
+          {isFirstInGroup ? (
+            <ChatProfile memberId={opponentId} size='sm' />
+          ) : null}
         </div>
       )}
 
@@ -168,7 +170,10 @@ export default function ChatMessagePanel({
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => {
-            if (e.key === 'Enter' && !e.shiftKey) handleSend();
+            if (e.key === 'Enter' && !e.shiftKey) {
+              e.preventDefault();
+              handleSend();
+            }
           }}
         />
         <button

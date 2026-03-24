@@ -41,6 +41,7 @@ const AuthenticatedHeader = ({showChat}: {showChat: boolean}) => {
   const navigate = useNavigate();
   const userName = useUserStore((state) => state.userName);
   const logout = useUserStore((state) => state.logout);
+  const userType = useUserStore((state) => state.userType);
 
   const handleLogout = () => {
     logout();
@@ -68,7 +69,7 @@ const AuthenticatedHeader = ({showChat}: {showChat: boolean}) => {
   const chatButton: NavButton = {
     icon: <ChatIcon width={24} height={24} />,
     label: '채팅',
-    onClick: () => navigate(ROUTES.ADMIN.CHAT),
+    onClick: () => navigate(userType === 'admin' ? ROUTES.ADMIN.CHAT : ROUTES.STUDENT.CHAT),
   };
 
   const assignmentButton: NavButton = {
@@ -78,12 +79,14 @@ const AuthenticatedHeader = ({showChat}: {showChat: boolean}) => {
   };
 
   const buttons = showChat
-    ? [assignmentButton, chatButton, ...commonButtons]
+    ? userType === 'admin'
+      ? [assignmentButton, chatButton, ...commonButtons]
+      : [chatButton, ...commonButtons]
     : [...commonButtons];
 
   return (
     <BaseHeader
-      logoHref={showChat ? ROUTES.ADMIN.ROOT : ROUTES.STUDENT.ROOT}
+      logoHref={userType === 'admin' ? ROUTES.ADMIN.ROOT : ROUTES.STUDENT.ROOT}
       leftContent={<WelcomeMessage userName={userName} />}
       rightContent={<NavigationBar buttons={buttons} />}
     />
@@ -101,14 +104,16 @@ const GuestHeader = () => (
 );
 
 export default function Header() {
-  const userType = useUserStore((state) => state.userType);
+  const {userType, isAuthenticated} = useUserStore();
+
+  if (!isAuthenticated) {
+    return <GuestHeader />;
+  }
 
   switch (userType) {
     case 'admin':
-      return <AuthenticatedHeader showChat={true} />;
     case 'student':
-      return <AuthenticatedHeader showChat={false} />;
-    case 'guest':
+      return <AuthenticatedHeader showChat={true} />;
     default:
       return <GuestHeader />;
   }
