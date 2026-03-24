@@ -31,7 +31,12 @@ export const ProgressIndicators = ({
   return (
     <div className={`flex gap-2.5 ${className}`}>
       {statuses.map((progress, index) => {
-        const config = STATUS_CONFIG[progress.status];
+        const config = STATUS_CONFIG[
+          progress.status as keyof typeof STATUS_CONFIG
+        ] ?? {
+          color: 'bg-gray border border-stroke',
+          label: '알 수 없음',
+        };
 
         return (
           <div
