@@ -4,17 +4,14 @@ import {useUserStore} from '@/entities/auth/model/useUserStore';
 
 export function useSyncUserRole() {
   const {pathname} = useLocation();
-  const {setUserType, isAuthenticated} = useUserStore();
+  const {setUserType} = useUserStore();
 
   useEffect(() => {
-    if (isAuthenticated) return;
-
-    if (pathname.startsWith('/admin')) {
-      setUserType('admin');
-    } else if (pathname.startsWith('/student')) {
-      setUserType('student');
-    } else {
-      setUserType('guest');
-    }
-  }, [pathname, setUserType, isAuthenticated]);
+    const userType = pathname.startsWith('/admin')
+      ? 'admin'
+      : pathname.startsWith('/student')
+        ? 'student'
+        : 'guest';
+    setUserType(userType);
+  }, [pathname, setUserType]);
 }

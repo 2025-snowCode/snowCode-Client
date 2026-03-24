@@ -1,22 +1,59 @@
-import {useNavigate} from 'react-router-dom';
-import {ROUTES} from '@/shared/config/routes';
 import AssignmentFormLayout from '@/widgets/assignment-form-layout/ui/AssignmentFormLayout';
-import {CourseForm} from '@/widgets/course-form/ui/CourseForm';
-import {useCreateCourse} from '@/features/course/create-course/model/useCreateCourse';
-import { useRef } from 'react';
+import LabeledInput from '@/shared/ui/LabeledInput';
+import FileUpload from '@/shared/ui/FileUpload';
+import LabeledDropdown from '@/shared/ui/LabeledDropdown';
 
-export const CourseCreatePage = () => {
-  const navigate = useNavigate();
-  const {submit, isPending} = useCreateCourse();
-  const formRef = useRef<HTMLFormElement>(null);
+const YEAR_OPTIONS = ['2021', '2022', '2023', '2024', '2025', '2026'];
+const SEMESTER_OPTIONS = ['1학기', '2학기', '여름학기', '겨울학기'];
 
+const CourseCreatePage = () => {
   return (
     <AssignmentFormLayout
       title='강의 개설'
-      content={<CourseForm ref={formRef} onSubmit={submit} />}
-      onCancel={() => navigate(ROUTES.ADMIN.ROOT)}
-      onConfirm={() => formRef.current?.requestSubmit()}
-      confirmDisabled={isPending}
+      content={
+        <div className='space-y-6 max-w-[728px]'>
+          <div className='grid grid-cols-[minmax(0,1fr)_324px] gap-6'>
+            <LabeledInput
+              label='강의 명'
+              placeholder='강의 명을 입력하세요'
+              className='w-full'
+            />
+            <LabeledInput
+              label='분반'
+              placeholder='강의 분반을 입력하세요'
+              className='w-full'
+            />
+            <LabeledDropdown
+              label='연도'
+              placeholder='연도를 선택하세요'
+              className='w-full'
+              options={YEAR_OPTIONS}
+            />
+            <LabeledDropdown
+              label='학기'
+              placeholder='학기를 선택하세요'
+              className='w-full'
+              options={SEMESTER_OPTIONS}
+            />
+          </div>
+
+          <LabeledInput
+            label='강의 소개를 입력하세요'
+            placeholder='강의 소개를 입력하세요'
+            className='w-full'
+          />
+
+          <FileUpload
+            label='강의 공유'
+            onFileChange={() => {}}
+            className='mb-9'
+          />
+        </div>
+      }
+      onCancel={() => {}}
+      onConfirm={() => {}}
     />
   );
 };
+
+export default CourseCreatePage;

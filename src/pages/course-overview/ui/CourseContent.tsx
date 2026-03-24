@@ -1,35 +1,30 @@
 import snowCodeOverview from '@/assets/images/snowcode_overview.svg';
-import UnitItem from '@/pages/course-overview/ui/UnitItem';
-import CourseActionsBar from '@/pages/course-overview/ui/CourseActionsBar';
+import UnitItem from './UnitItem';
+import CourseActionsBar from './CourseActionsBar';
 import {useUserStore} from '@/entities/auth/model/useUserStore';
-import type {TCourseOverview} from '@/entities/course/model/schemas';
+import type {CourseOverview} from '@/entities/course/model/types';
 
 interface CourseContentProps {
-  units: TCourseOverview['units'];
+  units: CourseOverview['units'];
   isActiveCourse: boolean;
-  courseId: number;
 }
 
-const CourseContent = ({
-  courseId,
-  units,
-  isActiveCourse,
-}: CourseContentProps) => {
+const CourseContent = ({units, isActiveCourse}: CourseContentProps) => {
   // 빈 강의
   if (isActiveCourse === false) {
-    return <EmptyCourse courseId={courseId} />;
+    return <EmptyCourse />;
   }
 
   return (
     <section className='bg-white w-full flex-1 rounded-b-[30px]'>
       {units.map((unit, index) => (
-        <UnitItem key={unit.id} index={index} courseId={courseId} {...unit} />
+        <UnitItem key={unit.id} index={index} {...unit} />
       ))}
     </section>
   );
 };
 
-const EmptyCourse = ({courseId}: {courseId: number}) => {
+const EmptyCourse = () => {
   const userType = useUserStore((state) => state.userType);
 
   return (
@@ -40,9 +35,7 @@ const EmptyCourse = ({courseId}: {courseId: number}) => {
         아직 생성된 단원이 없어요
       </p>
       {/* 강의 관리 버튼은 관리자 전용 */}
-      {userType === 'admin' && (
-        <CourseActionsBar isActiveCourse={false} courseId={courseId} />
-      )}
+      {userType === 'admin' && <CourseActionsBar isActiveCourse={false} />}
     </section>
   );
 };

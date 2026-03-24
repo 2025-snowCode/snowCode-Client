@@ -1,59 +1,32 @@
-import {UnitList} from '@/pages/unit-editor/ui/UnitList';
-import {UnitForm} from '@/pages/unit-editor/ui/UnitForm';
+import {UnitList} from './ui/UnitList';
+import {UnitForm} from './ui/UnitForm';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import {unitQueries} from '@/entities/unit/api/unitQueries';
-import {unitMutations} from '@/entities/unit/api/unitMutations';
-import {useUnitStore} from '@/entities/unit/model/useUnitStore';
 import {useParams} from 'react-router-dom';
-import {useState} from 'react';
-import type {Mode} from '@/pages/unit-editor/model/types';
-import type {TUnitFormSchema} from '@/entities/unit/model/schemas';
+import {useEffect, useState} from 'react';
+import type {Mode} from './model/types';
+import {unitMutations} from '@/entities/unit/api/unitMutations';
+import type {TUnitFormSchema} from '@/entities/unit/model/types';
 import {EmptyState} from '@/shared/ui/EmptyState';
 import SurfaceCard from '@/shared/ui/SurfaceCard';
 
 const UnitEditorPage = () => {
   const {id} = useParams(); // 강의 ID
   const courseId = Number(id);
-
-  const {
-    resetStore,
-    title: storedTitle,
-    assignments: storedAssignments,
-    releaseDate: storedReleaseDate,
-    dueDate: storedDueDate,
-  } = useUnitStore();
-  const {data} = useQuery(unitQueries.getUnitList(courseId));
-  const initialMode =
-    data === undefined ? null : data.unitCount === 0 ? 'creating' : 'editing';
-
-  const [activeMode, setActiveMode] = useState<Mode | null>(null);
+  const [mode, setMode] = useState<Mode>('idle');
   const [selectedUnitId, setSelectedUnitId] = useState<number | null>(null);
+  const [currentIndex, setCurrentIndex] = useState<number>(1);
+  const {data: unitList} = useQuery(unitQueries.getUnitList(courseId));
+  const {data: unit} = useQuery(unitQueries.getUnitDetails(selectedUnitId));
 
-  const hasOngoingCreation =
-    storedTitle !== '' ||
-    storedReleaseDate !== '' ||
-    storedDueDate !== '' ||
-    storedAssignments.length > 0;
-
-  const currentMode: Mode | null =
-    activeMode ?? (hasOngoingCreation ? 'creating' : initialMode);
-  const currentUnitId =
-    currentMode === 'creating'
-      ? null
-      : (selectedUnitId ?? data?.firstUnitId ?? null);
-
-  // 현재 단원 인덱스 계산
-  const currentIndex = (() => {
-    if (currentMode === 'creating') {
-      return (data?.unitCount ?? 0) + 1; // 항상 마지막 + 1
+  useEffect(() => {
+    if (unitList && unitList?.response.count !== 0 && mode === 'idle') {
+      setSelectedUnitId(unitList.response.units[0].id);
+      setMode('editing'); // 편집 모드
+    } else if (unitList?.response.count === 0 && mode === 'idle') {
+      setMode('creating'); // 생성 모드
     }
-    const index = data?.unitList?.findIndex((u) => u.id === currentUnitId);
-    return index !== undefined && index >= 0 ? index + 1 : 1;
-  })();
-
-  const {data: unitDetail} = useQuery(
-    unitQueries.getUnitDetails(currentUnitId)
-  );
+  }, [unitList, mode]);
 
   const queryClient = useQueryClient();
   const invalidateUnitList = () => {
@@ -63,14 +36,13 @@ const UnitEditorPage = () => {
   };
 
   // 단원 생성
-  const {mutate: addUnit, isPending: isCreating} = useMutation({
+  const {mutate: addUnit} = useMutation({
     ...unitMutations.createUnit,
     onSuccess: (data) => {
       // 단원 목록 갱신
       invalidateUnitList();
-      setSelectedUnitId(data.id);
-      setActiveMode('editing'); // 생성 후 편집 모드로 전환
-      resetStore(); // 단원 폼 초기화
+      setSelectedUnitId(data.response.id);
+      setMode('editing'); // 생성 후 편집 모드로 전환
       alert('새 단원이 성공적으로 생성되었습니다.');
     },
     onError: (error) => {
@@ -80,7 +52,7 @@ const UnitEditorPage = () => {
   });
 
   // 단원 업데이트
-  const {mutate: updateUnit, isPending: isUpdating} = useMutation({
+  const {mutate: updateUnit} = useMutation({
     ...unitMutations.updateUnit,
     onSuccess: () => {
       invalidateUnitList();
@@ -97,8 +69,8 @@ const UnitEditorPage = () => {
     ...unitMutations.deleteUnit,
     onSuccess: () => {
       invalidateUnitList();
+      setMode('idle'); // 삭제 후 대기 모드로 전환
       setSelectedUnitId(null); // 선택된 단원 초기화
-      setActiveMode('creating');
       alert('단원이 성공적으로 삭제되었습니다.');
     },
     onError: (error) => {
@@ -110,18 +82,19 @@ const UnitEditorPage = () => {
   // 단원 선택 핸들러
   const onUnitClick = (id: number) => {
     setSelectedUnitId(id);
-    setActiveMode('editing'); // 편집 모드로 전환
+    setMode('editing'); // 편집 모드로 전환
   };
 
   // 단원 추가 핸들러
   const onAddNewUnit = () => {
     setSelectedUnitId(null);
-    setActiveMode('creating'); // 생성 모드로 전환
+    setCurrentIndex(unitList ? unitList.response.count + 1 : 1); // 새 단원의 인덱스 설정
+    setMode('creating'); // 생성 모드로 전환
   };
 
   // 단원 생성 핸들러
-  const onCreateUnit = (unitForm: TUnitFormSchema) => {
-    addUnit({courseId, unitForm});
+  const onCreateUnit = (unit: TUnitFormSchema) => {
+    addUnit({courseId: courseId, unit});
   };
 
   // 단원 업데이트 핸들러
@@ -146,9 +119,10 @@ const UnitEditorPage = () => {
       {/* 단원 목차 섹션 */}
       <SurfaceCard className='w-112.5 min-w-0' size='large'>
         <UnitList
-          unitList={data?.unitList}
+          unitList={unitList?.response.units}
           onUnitClick={onUnitClick}
-          selectedUnitId={currentUnitId}
+          onChangeIndex={(index) => setCurrentIndex(index)}
+          selectedUnitId={selectedUnitId}
           onAddNewUnit={onAddNewUnit}
         />
       </SurfaceCard>
@@ -156,13 +130,12 @@ const UnitEditorPage = () => {
       {/* 단원 폼 섹션 */}
       <SurfaceCard className='w-185 min-w-0' size='large'>
         <UnitForm
-          unit={unitDetail}
+          unit={unit?.response}
           unitIndex={currentIndex}
-          mode={currentMode}
+          mode={mode}
           onCreateUnit={onCreateUnit}
           onUpdateUnit={onUpdateUnit}
           onDeleteUnit={onDeleteUnit}
-          isPending={isCreating || isUpdating}
         />
       </SurfaceCard>
     </div>

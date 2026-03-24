@@ -1,32 +1,54 @@
 import LogoIcon from '@/assets/images/snowCode_logo.svg?react';
-import CourseList from '@/pages/dashboard/ui/CourseList';
+import CourseList from './ui/CourseList';
 import Button from '@/shared/ui/button/Button';
 import AddIcon from '@/assets/svg/addIcon.svg?react';
-import ScheduleList from '@/pages/dashboard/ui/ScheduleList';
+import ScheduleList from './ui/ScheduleList';
 import {Link} from 'react-router-dom';
 import {useUserStore} from '@/entities/auth/model/useUserStore';
-import {useSuspenseQueries} from '@tanstack/react-query';
+import courseQueryOptions from '@/entities/course/api/courseQueryOptions';
+import {
+  useMutation,
+  useQueryClient,
+  useSuspenseQueries,
+} from '@tanstack/react-query';
+import assignmentQueryOptions from '@/entities/assignment/api/assignmentQueryOptions';
+import {deleteCourse} from '@/entities/course';
 import {EmptyState} from '@/shared/ui/EmptyState';
-import {courseQueries} from '@/entities/course/api/courseQueries';
-import {assignmentQueries} from '@/entities/assignment/api/assignmentQueries';
 
 const Dashboard = () => {
   const userType = useUserStore((state) => state.userType);
+  const queryClient = useQueryClient();
 
   // 강의 및 스케쥴 데이터 패칭
-  const [
-    {
-      data: {courseCount, courses},
-    },
-    {
-      data: {scheduleCount, schedules},
-    },
-  ] = useSuspenseQueries({
-    queries: [
-      courseQueries.getAllCourses(),
-      assignmentQueries.getAssignmentSchedules(),
-    ],
+  const [{data: courses}, {data: schedules}] = useSuspenseQueries({
+    queries: [courseQueryOptions(), assignmentQueryOptions()],
   });
+
+  // 강의 삭제 뮤테이션
+  const {mutate} = useMutation({
+    mutationFn: (courseId: number) => deleteCourse(courseId),
+    onSuccess: () => {
+      // 강의 목록 및 스케쥴 목록 갱신
+      queryClient.invalidateQueries({
+        queryKey: courseQueryOptions().queryKey,
+      });
+      queryClient.invalidateQueries({
+        queryKey: assignmentQueryOptions().queryKey,
+      });
+      alert('강의가 성공적으로 삭제되었습니다.');
+    },
+    onError: (error) => {
+      console.error('강의 삭제 실패', error);
+      alert('강의 삭제에 실패했습니다. 다시 시도해주세요.');
+    },
+  });
+
+  // 강의 삭제 핸들러
+  const handleDeleteCourse = (courseId: number) => {
+    if (confirm('강의를 삭제하시겠습니까?')) {
+      mutate(courseId);
+    }
+  };
 
   return (
     <main className='w-full'>
@@ -39,10 +61,13 @@ const Dashboard = () => {
             {userType === 'admin' && <AddButton />}
           </div>
 
-          {courseCount === 0 ? (
+          {courses.response.count === 0 ? (
             <EmptyState>등록된 강의가 없습니다.</EmptyState>
           ) : (
-            <CourseList courseList={courses} />
+            <CourseList
+              courseList={courses.response.courses}
+              onDelete={handleDeleteCourse}
+            />
           )}
         </section>
 
@@ -52,12 +77,10 @@ const Dashboard = () => {
             <SectionHeader title='내 스케쥴' />
           </div>
 
-          {scheduleCount === 0 ? (
-            <EmptyState className='pl-24.5'>
-              마감 예정인 과제가 없습니다.
-            </EmptyState>
+          {schedules.response.count === 0 ? (
+            <EmptyState className='pl-24.5'>예정된 과제가 없습니다.</EmptyState>
           ) : (
-            <ScheduleList scheduleList={schedules} />
+            <ScheduleList scheduleList={schedules.response.schedule} />
           )}
         </section>
       </div>

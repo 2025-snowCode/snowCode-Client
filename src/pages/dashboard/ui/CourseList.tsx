@@ -1,16 +1,17 @@
-import type {TDashboardCourse} from '@/entities/course/model/schemas';
-import CourseCard from '@/pages/dashboard/ui/CourseCard';
+import type {DashboardCourse} from '@/entities/course/model/types';
+import CourseCard from './CourseCard';
 
 interface CourseListProps {
-  courseList: TDashboardCourse[];
+  courseList: DashboardCourse[];
+  onDelete: (courseId: number) => void;
 }
 
-const CourseList = ({courseList}: CourseListProps) => {
+const CourseList = ({courseList, onDelete}: CourseListProps) => {
   return (
     <>
       <ul className='flex flex-col gap-4'>
         {courseList.map((course) => (
-          <CourseCard key={course.id} {...course} />
+          <CourseCard key={course.id} {...course} onDelete={onDelete} />
         ))}
       </ul>
     </>

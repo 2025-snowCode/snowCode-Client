@@ -1,1 +1,1 @@
-export {AssignmentPageLayout} from '@/widgets/assignment-page-layout/ui/AssignmentPageLayout';
+export {AssignmentPageLayout} from './ui/AssignmentPageLayout';

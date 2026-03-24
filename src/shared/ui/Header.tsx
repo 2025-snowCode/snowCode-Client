@@ -6,8 +6,6 @@ import UserIcon from '@/assets/svg/userIcon.svg?react';
 import ChatIcon from '@/assets/svg/chatIcon.svg?react';
 import Button from '@/shared/ui/button/Button';
 import {useUserStore} from '@/entities/auth/model/useUserStore';
-import {ROUTES} from '@/shared/config/routes';
-import AssignmentIcon from '@/assets/svg/assignmentIcon.svg?react';
 
 interface NavButton {
   icon: React.ReactElement;
@@ -41,11 +39,10 @@ const AuthenticatedHeader = ({showChat}: {showChat: boolean}) => {
   const navigate = useNavigate();
   const userName = useUserStore((state) => state.userName);
   const logout = useUserStore((state) => state.logout);
-  const userType = useUserStore((state) => state.userType);
 
   const handleLogout = () => {
     logout();
-    navigate(ROUTES.ROOT);
+    navigate('/');
   };
 
   const commonButtons: NavButton[] = [
@@ -69,24 +66,13 @@ const AuthenticatedHeader = ({showChat}: {showChat: boolean}) => {
   const chatButton: NavButton = {
     icon: <ChatIcon width={24} height={24} />,
     label: '채팅',
-    onClick: () => navigate(userType === 'admin' ? ROUTES.ADMIN.CHAT : ROUTES.STUDENT.CHAT),
+    onClick: () => navigate('/admin/chat'),
   };
 
-  const assignmentButton: NavButton = {
-    icon: <AssignmentIcon width={23} height={25} />,
-    label: '과제',
-    onClick: () => navigate(ROUTES.ADMIN.ASSIGNMENTS.MANAGE),
-  };
-
-  const buttons = showChat
-    ? userType === 'admin'
-      ? [assignmentButton, chatButton, ...commonButtons]
-      : [chatButton, ...commonButtons]
-    : [...commonButtons];
+  const buttons = showChat ? [chatButton, ...commonButtons] : commonButtons;
 
   return (
     <BaseHeader
-      logoHref={userType === 'admin' ? ROUTES.ADMIN.ROOT : ROUTES.STUDENT.ROOT}
       leftContent={<WelcomeMessage userName={userName} />}
       rightContent={<NavigationBar buttons={buttons} />}
     />
@@ -104,16 +90,14 @@ const GuestHeader = () => (
 );
 
 export default function Header() {
-  const {userType, isAuthenticated} = useUserStore();
-
-  if (!isAuthenticated) {
-    return <GuestHeader />;
-  }
+  const userType = useUserStore((state) => state.userType);
 
   switch (userType) {
     case 'admin':
-    case 'student':
       return <AuthenticatedHeader showChat={true} />;
+    case 'student':
+      return <AuthenticatedHeader showChat={false} />;
+    case 'guest':
     default:
       return <GuestHeader />;
   }

@@ -1,7 +1,7 @@
 import Badge from '@/shared/ui/badge/Badge';
-import type {TAssignmentSchedule} from '@/entities/assignment/model/schemas';
+import type {Schedule} from '@/entities/course/model/types';
 
-type AssignmentType = TAssignmentSchedule['assignments'][number];
+type AssignmentType = Schedule['assignments'][number];
 
 interface ScheduleCardProps extends AssignmentType {
   remainingDays: number;

@@ -8,7 +8,7 @@ import {
   type IndexBadgeVariants,
   type ScheduleBadgeVariants,
   type SubmissionBadgeVariants,
-} from '@/shared/ui/badge/badge-styles';
+} from './badge-styles';
 
 type ScheduleBadgeProps = {
   variant: 'schedule';
