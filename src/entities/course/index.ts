@@ -15,5 +15,4 @@ export type {
   TCourseOverview,
   TDashboardCourse,
   TAssignmentCourse,
-  TSchedule,
-} from '@/entities/course/model/types';
+} from '@/entities/course/model/schemas';
