@@ -93,14 +93,16 @@ const GuestHeader = () => (
 );
 
 export default function Header() {
-  const userType = useUserStore((state) => state.userType);
+  const {userType, isAuthenticated} = useUserStore();
+
+  if (!isAuthenticated) {
+    return <GuestHeader />;
+  }
 
   switch (userType) {
     case 'admin':
-      return <AuthenticatedHeader showChat={true} />;
     case 'student':
       return <AuthenticatedHeader showChat={true} />;
-    case 'guest':
     default:
       return <GuestHeader />;
   }

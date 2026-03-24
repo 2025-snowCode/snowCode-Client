@@ -13,6 +13,8 @@ export function useSyncUserRole() {
       setUserType('admin');
     } else if (pathname.startsWith('/student')) {
       setUserType('student');
+    } else {
+      setUserType('guest');
     }
   }, [pathname, setUserType, isAuthenticated]);
 }
