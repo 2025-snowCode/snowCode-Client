@@ -4,6 +4,7 @@ import ChatRoomList from '@/widgets/chat-room-list/ui/ChatRoomList';
 import ChatMessagePanel from '@/widgets/chat-message-panel/ui/ChatMessagePanel';
 import {chatQueries, useChatSocket} from '@/entities/chat';
 import {useUserStore} from '@/entities/auth/model/useUserStore';
+import { useMemo } from 'react';
 
 export default function ChatPage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -20,9 +21,10 @@ export default function ChatPage() {
     chatRoomList?.chatRoomList.find((r) => r.chatRoomId === selectedRoomId) ??
     null;
 
-  const chatRoom = chatRoomDetail
-    ? {...chatRoomDetail, messages: [...chatRoomDetail.messages, ...messages]}
-    : null;
+  const chatRoom = useMemo(()=> {
+    if(!chatRoomDetail) return null;
+    return {...chatRoomDetail, messages: [...chatRoomDetail.messages, ...messages]};
+  }, [chatRoomDetail, messages])
 
   const handleSelectRoom = (roomId: number) => {
     setSearchParams({roomId: String(roomId)});
