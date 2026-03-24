@@ -55,7 +55,7 @@ export default function ChatPage() {
       />
       <ChatMessagePanel
         chatRoom={chatRoom}
-        lastMessage={selectedRoom?.lastMessage}
+        lastMessage={selectedRoom?.lastMessage ?? undefined}
         myMemberId={myMemberId}
         onSendMessage={handleSendMessage}
       />
