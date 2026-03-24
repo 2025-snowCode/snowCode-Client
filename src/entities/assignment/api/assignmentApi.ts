@@ -8,7 +8,7 @@ import {
   assignmentSubmissionResultSchema,
   type TAssignmentForm,
 } from '@/entities/assignment/model/schemas';
-import {assignmentCourseSchema} from '@/entities/course/model/schemas';
+import {courseWithAssignmentsSchema} from '@/entities/course/model/schemas';
 import {ENDPOINTS} from '@/shared/config/endpoints';
 
 // 과제 일정 조회 API
@@ -41,12 +41,9 @@ export const getAssignmentsByCourse = async (courseId: number) => {
   const response = await privateAxios.get(
     ENDPOINTS.ASSIGNMENTS.BY_COURSE(courseId)
   );
-  const parsed = apiResponseSchema(
-    z.object({
-      count: z.number(),
-      courses: z.array(assignmentCourseSchema),
-    })
-  ).parse(response.data);
+  const parsed = apiResponseSchema(courseWithAssignmentsSchema).parse(
+    response.data
+  );
   return parsed.response;
 };
 

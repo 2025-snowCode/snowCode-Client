@@ -32,7 +32,7 @@ export const assignmentQueries = {
     queryOptions({
       queryKey: ['courses', courseId, 'assignments'],
       queryFn: () => getAssignmentsByCourse(courseId),
-      select: (data) => data.courses.flatMap((course) => course.assignments),
+      select: (data) => data.courses,
     }),
 
   // 과제 상세 조회 쿼리 옵션
