@@ -7,9 +7,11 @@ export {
 export type {
   ProgressStatus,
   StudentProgress,
-  Unit,
+  StudentUnit,
+  StudentUnitAssignment,
   Student,
-  CourseStudentsResponse,
+  StudentDetail,
+  EnrollmentList,
 } from '@/entities/student/model/types';
 export { AssignmentProgressCard } from '@/entities/student/ui/AssignmentProgressCard';
 export { StudentProfile } from '@/entities/student/ui/StudentProfile';
