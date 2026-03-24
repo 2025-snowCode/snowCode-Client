@@ -9,6 +9,7 @@ interface CourseHeroProps {
   course: Omit<TCourseOverview, 'units'>;
   assignmentCount: number;
   isActiveCourse: boolean;
+  firstUnitId?: number;
 }
 
 interface CourseInfoProps {
@@ -30,6 +31,7 @@ const CourseHero = ({
   course,
   assignmentCount,
   isActiveCourse,
+  firstUnitId,
 }: CourseHeroProps) => {
   const isAdmin = useUserStore((state) => state.userType) === 'admin';
   const {id, title, year, semester, section, unitCount, studentCount} = course;
@@ -38,7 +40,11 @@ const CourseHero = ({
     <section className='relative w-full flex-center flex-col pt-38.5 pb-12.5 rounded-t-[30px] bg-radial-gradient'>
       {isAdmin && isActiveCourse && (
         <nav className='absolute top-36 right-35'>
-          <CourseActionsBar courseId={id} isActiveCourse={true} />
+          <CourseActionsBar
+            courseId={id}
+            isActiveCourse={true}
+            firstUnitId={firstUnitId}
+          />
         </nav>
       )}
 
@@ -82,7 +88,7 @@ const CourseStats = ({
   isAdmin,
 }: CourseStatsProps) => {
   const studentInfo =
-    isAdmin && studentCount !== undefined ? ` | ${studentCount - 1}명` : '';
+    isAdmin && studentCount !== undefined ? ` | ${studentCount}명` : '';
   const courseStats = `${unitCount}단원 | ${assignmentCount}문제${studentInfo}`;
 
   return (
