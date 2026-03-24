@@ -1,8 +1,7 @@
 import ListRow from '@/shared/ui/list-row/ListRow';
-import type {Assignment} from '@/entities/assignment/model/types';
+import type {TAssignment} from '@/entities/assignment/model/schemas';
 import {useState} from 'react';
 import DragAndDropIcon from '@/assets/svg/dragAndDropIcon.svg?react';
-import DeleteIcon from '@/assets/svg/deleteIcon.svg?react';
 import {
   closestCorners,
   DndContext,
@@ -25,9 +24,9 @@ import {CSS} from '@dnd-kit/utilities';
 export const UnitAssignmentList = ({
   assignmentList,
 }: {
-  assignmentList: Assignment[];
+  assignmentList: TAssignment[];
 }) => {
-  const [assignments, setAssignments] = useState<Assignment[]>(assignmentList);
+  const [assignments, setAssignments] = useState<TAssignment[]>(assignmentList);
 
   // 과제 인덱스 찾기
   const getAssignmentIndex = (id: UniqueIdentifier) => {
@@ -81,7 +80,7 @@ export const UnitAssignmentList = ({
 };
 
 // 드래그 가능한 과제 아이템 컴포넌트
-const DraggableAssignmentItem = ({id, title}: Assignment) => {
+const DraggableAssignmentItem = ({id, title}: TAssignment) => {
   const {attributes, listeners, setNodeRef, transform, transition, isDragging} =
     useSortable({id});
 
@@ -95,7 +94,6 @@ const DraggableAssignmentItem = ({id, title}: Assignment) => {
       <ListRow
         title={title}
         leftIcon={<DragAndDropIcon />}
-        rightIcon={<DeleteIcon className='w-3 h-3' />}
         className={`cursor-grab touch-none bg-white shadow-box active:cursor-grabbing ${isDragging ? 'z-10 opacity-50' : ''}`}
       />
     </li>
