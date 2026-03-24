@@ -20,8 +20,9 @@ export const ROUTES = {
       EDIT: (id: number | string) => `/admin/courses/${id}/edit`,
     },
     STUDENT: {
-      ROOT: '/admin/student',
-      PROFILE: (studentId: string) => `/admin/student/profile/${studentId}`,
+      ROOT: (courseId: number | string) => `/admin/courses/${courseId}/students`,
+      PROFILE: (courseId: number | string, studentId: number | string) =>
+        `/admin/courses/${courseId}/students/${studentId}`,
     },
     UNITS: {
       DETAIL: (id: number | string) => `/admin/units/${id}`,
