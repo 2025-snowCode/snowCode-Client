@@ -6,10 +6,10 @@ export const messageTypeSchema = z.enum(['TEXT', 'CODE']);
 export const chatRoomSummarySchema = z.object({
   chatRoomId: z.number(),
   opponentMemberId: z.number(),
-  studentId: z.string(),
+  studentId: z.string().nullable(),
   name: z.string(),
-  lastMessage: z.string(),
-  lastSentAt: z.string(),
+  lastMessage: z.string().nullable(),
+  lastSentAt: z.string().nullable(),
 });
 
 /** 채팅방 목록 응답 스키마 */
@@ -33,8 +33,8 @@ export const chatRoomDetailSchema = z.object({
   opponentId: z.number(),
   opponentStudentId: z.string().nullable(),
   opponentName: z.string(),
-  size: z.number(),
-  messages: z.array(chatMessageSchema),
+  size: z.number().nullish().transform(v => v ?? 0),
+  messages: z.array(chatMessageSchema).nullish().transform(v => v ?? []),
 });
 
 /** 웹소켓 메시지 수신 스키마 (백엔드 ChatMessageResponse 대응) */
