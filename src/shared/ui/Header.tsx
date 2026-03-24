@@ -7,6 +7,7 @@ import ChatIcon from '@/assets/svg/chatIcon.svg?react';
 import Button from '@/shared/ui/button/Button';
 import {useUserStore} from '@/entities/auth/model/useUserStore';
 import {ROUTES} from '@/shared/config/routes';
+import AssignmentIcon from '@/assets/svg/assignmentIcon.svg?react';
 
 interface NavButton {
   icon: React.ReactElement;
@@ -71,7 +72,15 @@ const AuthenticatedHeader = ({showChat}: {showChat: boolean}) => {
     onClick: () => navigate(userType === 'admin' ? ROUTES.ADMIN.CHAT : ROUTES.STUDENT.CHAT),
   };
 
-  const buttons = showChat ? [chatButton, ...commonButtons] : commonButtons;
+  const assignmentButton: NavButton = {
+    icon: <AssignmentIcon width={23} height={25} />,
+    label: '과제',
+    onClick: () => navigate(ROUTES.ADMIN.ASSIGNMENTS.MANAGE),
+  };
+
+  const buttons = showChat
+    ? [assignmentButton, chatButton, ...commonButtons]
+    : [...commonButtons];
 
   return (
     <BaseHeader
