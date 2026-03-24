@@ -1,6 +1,7 @@
 import {create} from 'zustand';
-import {persist} from 'zustand/middleware';
+import {persist, createJSONStorage} from 'zustand/middleware';
 import type {UserType} from '@/shared/model/types';
+
 
 type AuthenticatedUserType = Exclude<UserType, 'guest'>;
 
@@ -55,6 +56,7 @@ export const useUserStore = create<UserState>()(
     }),
     {
       name: 'user-storage',
+      storage: createJSONStorage(() => sessionStorage),
       partialize: (state) => ({
         userType: state.userType,
         userName: state.userName,
