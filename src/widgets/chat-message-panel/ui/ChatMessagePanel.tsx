@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import type {TChatRoomDetail} from '@/entities/chat/model/types';
+import type {TChatRoomDetail} from '@/entities/chat/model/schemas';
 import {formatTime, formatDateLabel, getDateKey} from '@/shared/lib/chat';
 import ChatRoomItem from '@/entities/chat/ui/ChatRoomItem';
 import ChatProfile from '@/entities/chat/ui/ChatProfile';

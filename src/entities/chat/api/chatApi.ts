@@ -5,19 +5,13 @@ import {
   chatRoomListResponseSchema,
   chatRoomDetailSchema,
 } from '@/entities/chat/model/schemas';
-import type {
-  TChatRoomListResponse,
-  TChatRoomDetail,
-} from '@/entities/chat/model/types';
 
-export const getChatRooms = async (): Promise<TChatRoomListResponse> => {
+export const getChatRooms = async () => {
   const res = await privateAxios.get(ENDPOINTS.CHATS.ROOT);
   return apiResponseSchema(chatRoomListResponseSchema).parse(res.data).response;
 };
 
-export const getChatRoomDetail = async (
-  chatRoomId: number
-): Promise<TChatRoomDetail> => {
+export const getChatRoomDetail = async (chatRoomId: number) => {
   const res = await privateAxios.get(ENDPOINTS.CHATS.DETAIL(chatRoomId));
   return apiResponseSchema(chatRoomDetailSchema).parse(res.data).response;
 };

@@ -13,6 +13,6 @@ export type {
   TChatMessage,
   TChatRoomDetail,
   TSendMessage,
-} from '@/entities/chat/model/types';
-export {chatQueries} from '@/entities/chat/model/queries';
+} from '@/entities/chat/model/schemas';
+export {chatQueries} from '@/entities/chat/api/chatQueries';
 export {useChatSocket} from '@/entities/chat/model/useChatSocket';

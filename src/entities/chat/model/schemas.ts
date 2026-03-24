@@ -37,8 +37,27 @@ export const chatRoomDetailSchema = z.object({
   messages: z.array(chatMessageSchema),
 });
 
+/** 웹소켓 메시지 수신 스키마 (백엔드 ChatMessageResponse 대응) */
+export const socketMessageResponseSchema = z.object({
+  type: messageTypeSchema,
+  chatRoomId: z.number(),
+  senderId: z.number(),
+  content: z.string(),
+  sendAt: z.string(),
+});
+
 /** 웹소켓 메시지 전송 스키마 */
 export const sendMessageSchema = z.object({
   type: messageTypeSchema,
+  chatRoomId: z.number(),
+  receiverId: z.number(),
   content: z.string(),
 });
+
+export type TMessageType = z.infer<typeof messageTypeSchema>;
+export type TChatRoomSummary = z.infer<typeof chatRoomSummarySchema>;
+export type TChatRoomListResponse = z.infer<typeof chatRoomListResponseSchema>;
+export type TChatMessage = z.infer<typeof chatMessageSchema>;
+export type TChatRoomDetail = z.infer<typeof chatRoomDetailSchema>;
+export type TSendMessage = z.infer<typeof sendMessageSchema>;
+export type TSocketMessageResponse = z.infer<typeof socketMessageResponseSchema>;

@@ -1,5 +1,5 @@
 import {useNavigate} from 'react-router-dom';
-import type {TChatRoomSummary} from '@/entities/chat/model/types';
+import type {TChatRoomSummary} from '@/entities/chat/model/schemas';
 import ChatRoomItem from '@/entities/chat/ui/ChatRoomItem';
 import ArrowLeftIcon from '@/assets/svg/arrowleftIcon.svg?react';
 

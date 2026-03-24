@@ -1,5 +1,5 @@
 import {queryOptions} from '@tanstack/react-query';
-import {getChatRooms, getChatRoomDetail} from '@/entities/chat/api/chatApi';
+import {getChatRooms, getChatRoomDetail} from './chatApi';
 
 export const chatQueries = {
   getChatRooms: () =>
