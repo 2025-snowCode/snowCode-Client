@@ -2,6 +2,7 @@ import {ROUTES} from '@/shared/config/routes';
 import {useLocation, Link} from 'react-router-dom';
 import type {TAssignment} from '@/entities/assignment/model/schemas';
 import Badge from '@/shared/ui/badge/Badge';
+import {useUserStore} from '@/entities/auth/model/useUserStore';
 
 interface AssignmentListProps {
   isOpen?: boolean;
@@ -45,6 +46,7 @@ const AssignmentItem = ({
   codeId,
 }: AssignmentItemProps) => {
   const {pathname} = useLocation();
+  const userType = useUserStore((state) => state.userType);
   const isLocked = isOpen === false ? 'opacity-60 pointer-events-none' : '';
   const assignmentPath = pathname.startsWith('/admin')
     ? `${ROUTES.ADMIN.ASSIGNMENTS.SUBMIT(courseId!, id)}`
@@ -74,7 +76,7 @@ const AssignmentItem = ({
           )}
         </div>
 
-        {isOpen && (
+        {userType !== 'admin' && isOpen && (
           <div className='shrink-0 ml-2'>
             <Badge
               variant='submission'
