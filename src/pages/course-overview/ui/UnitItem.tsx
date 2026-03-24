@@ -1,19 +1,20 @@
-import AssignmentList from './AssignmentList';
+import AssignmentList from '@/pages/course-overview/ui/AssignmentList';
 import Lock from '@/assets/svg/lock.svg?react';
 import Badge from '@/shared/ui/badge/Badge';
 import {formatPeriod} from '@/shared/lib/course';
-import type {Unit} from '@/entities/course/model/types';
+import type {TUnit} from '@/entities/unit/model/schemas';
 
-interface UnitProps extends Unit {
+interface UnitProps extends TUnit {
   index: number;
+  courseId: number;
 }
 
 type UnitHeaderProps = Omit<
   UnitProps,
-  'id' | 'assignmentCount' | 'assignments'
+  'id' | 'assignmentCount' | 'assignments' | 'courseId'
 >;
 
-const UnitItem = ({index, ...unit}: UnitProps) => {
+const UnitItem = ({index, courseId, ...unit}: UnitProps) => {
   const isOpen = unit.isOpen ?? true;
 
   return (
@@ -25,7 +26,11 @@ const UnitItem = ({index, ...unit}: UnitProps) => {
         releaseDate={unit.releaseDate}
         dueDate={unit.dueDate}
       />
-      <AssignmentList isOpen={isOpen} assignments={unit.assignments} />
+      <AssignmentList
+        isOpen={isOpen}
+        assignments={unit.assignments}
+        courseId={courseId}
+      />
     </section>
   );
 };

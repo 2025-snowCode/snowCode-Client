@@ -1,5 +1,5 @@
-import type {Unit} from '@/entities/course/model/types';
-import type {SemesterCode} from '@/shared/model/common';
+import type {TUnit} from '@/entities/unit/model/schemas';
+import type {SemesterCode} from '@/shared/model/types';
 
 const SEMESTER_MAP: Record<SemesterCode, '1' | '2' | '여름' | '겨울'> = {
   FIRST: '1',
@@ -8,10 +8,22 @@ const SEMESTER_MAP: Record<SemesterCode, '1' | '2' | '여름' | '겨울'> = {
   WINTER: '겨울',
 } as const;
 
-// 학기 포맷팅
+// 학기 포맷팅 (코드 → 한국어)
 export const formatSemester = (semester: SemesterCode) => {
   const label = SEMESTER_MAP[semester];
   return `${label}학기`;
+};
+
+const SEMESTER_PARSE_MAP = {
+  '1학기': 'FIRST',
+  '2학기': 'SECOND',
+  '여름학기': 'SUMMER',
+  '겨울학기': 'WINTER',
+} as const;
+
+// 학기 파싱 (한국어 → 코드)
+export const parseSemester = (display: keyof typeof SEMESTER_PARSE_MAP): SemesterCode => {
+  return SEMESTER_PARSE_MAP[display];
 };
 
 // 날짜 포맷팅
@@ -50,7 +62,7 @@ export const formatCourseTerm = (
 };
 
 // 총 과제 수 계산
-export const getTotalAssignmentCount = (units: Unit[]): number => {
+export const getTotalAssignmentCount = (units: TUnit[]): number => {
   return units.reduce((acc, unit) => acc + unit.assignmentCount, 0);
 };
 
