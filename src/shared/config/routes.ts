@@ -30,6 +30,7 @@ export const ROUTES = {
 
   STUDENT: {
     ROOT: '/student',
+    CHAT: '/student/chat',
     COURSES: {
       DETAIL: (id: number | string) => `/student/courses/${id}`,
     },
