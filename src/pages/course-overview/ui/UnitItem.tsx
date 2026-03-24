@@ -3,6 +3,7 @@ import Lock from '@/assets/svg/lock.svg?react';
 import Badge from '@/shared/ui/badge/Badge';
 import {formatPeriod} from '@/shared/lib/course';
 import type {TUnit} from '@/entities/unit/model/schemas';
+import {useUserStore} from '@/entities/auth/model/useUserStore';
 
 interface UnitProps extends TUnit {
   index: number;
@@ -15,7 +16,8 @@ type UnitHeaderProps = Omit<
 >;
 
 const UnitItem = ({index, courseId, ...unit}: UnitProps) => {
-  const isOpen = unit.isOpen ?? true;
+  const userType = useUserStore((state) => state.userType);
+  const isOpen = userType === 'admin' || unit.isOpen;
 
   return (
     <section>
