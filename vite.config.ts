@@ -8,6 +8,16 @@ export default defineConfig(({mode}) => {
   const env = loadEnv(mode, process.cwd());
 
   return {
+    define: {
+      global: 'globalThis',
+    },
+    optimizeDeps: {
+      esbuildOptions: {
+        define: {
+          global: 'globalThis',
+        },
+      },
+    },
     server: {
       proxy: {
         '/api': {

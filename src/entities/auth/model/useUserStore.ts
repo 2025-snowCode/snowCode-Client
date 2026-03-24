@@ -7,6 +7,7 @@ type AuthenticatedUserType = Exclude<UserType, 'guest'>;
 interface UserState {
   userType: UserType;
   userName: string;
+  memberId: number | null;
   isAuthenticated: boolean;
   accessToken: string | null;
 
@@ -15,7 +16,8 @@ interface UserState {
   login: (
     userName: string,
     userType: AuthenticatedUserType,
-    accessToken: string
+    accessToken: string,
+    memberId: number
   ) => void;
   logout: () => void;
 }
@@ -25,17 +27,19 @@ export const useUserStore = create<UserState>()(
     (set) => ({
       userType: 'guest',
       userName: '',
+      memberId: null,
       isAuthenticated: false,
       accessToken: null,
 
       setUserType: (userType) => set({userType}),
       setUserName: (userName) => set({userName}),
 
-      login: (userName, userType, accessToken) => {
+      login: (userName, userType, accessToken, memberId) => {
         set({
           userName,
           userType,
           accessToken,
+          memberId,
           isAuthenticated: true,
         });
       },
@@ -54,6 +58,7 @@ export const useUserStore = create<UserState>()(
       partialize: (state) => ({
         userType: state.userType,
         userName: state.userName,
+        memberId: state.memberId,
         isAuthenticated: state.isAuthenticated,
         accessToken: state.accessToken,
       }),

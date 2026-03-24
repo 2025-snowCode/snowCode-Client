@@ -13,7 +13,7 @@ export const useKakaoLogin = () => {
     ...kakaoMutations.kakaoLogin,
     onSuccess: (data) => {
       const userType = data.role === 'ADMIN' ? 'admin' : 'student';
-      login(data.name, userType, data.accessToken);
+      login(data.name, userType, data.accessToken, data.memberId);
       navigate(userType === 'admin' ? ROUTES.ADMIN.ROOT : ROUTES.STUDENT.ROOT);
     },
     onError: (error) => {

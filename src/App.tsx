@@ -15,6 +15,7 @@ import PrivateRoute from '@/widgets/private-route/ui/PrivateRoute';
 import {useSyncUserRole} from '@/features/auth/sync-user-role/model/useSyncUserRole';
 import UnitEditorPage from '@/pages/unit-editor/UnitEditorPage';
 import AssignmentManagePage from '@/pages/manage-assignment/AssignmentManagePage';
+import ChatPage from '@/pages/chat/ChatPage';
 import AssignmentSubmitPage from '@/pages/submit-assignment/AssignmentSubmitPage';
 import AssignmentSubmitLayout from '@/pages/submit-assignment/AssignmentSubmitLayout';
 
@@ -63,6 +64,7 @@ const AppRoutes = () => {
               element={<StudentProfilePage />}
             />
             <Route path='units/:id' element={<UnitEditorPage />} />
+            <Route path='chat' element={<ChatPage />} />
           </Route>
         </Route>
       </Route>

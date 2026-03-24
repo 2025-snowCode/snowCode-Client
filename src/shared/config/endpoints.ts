@@ -27,4 +27,8 @@ export const ENDPOINTS = {
       assignmentId: number | string
     ) => `/units/${unitId}/assignments/${assignmentId}`,
   },
+  CHATS: {
+    ROOT: '/chats',
+    DETAIL: (chatRoomId: number | string) => `/chats/${chatRoomId}`,
+  },
 } as const;
