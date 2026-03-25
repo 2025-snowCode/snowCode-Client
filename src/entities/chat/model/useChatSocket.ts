@@ -3,6 +3,7 @@ import type {Client} from '@stomp/stompjs';
 import {createStompClient} from '@/shared/lib/stompClient';
 import {socketMessageResponseSchema} from '@/entities/chat/model/schemas';
 import type {TChatMessage, TSendMessage} from '@/entities/chat/model/schemas';
+import {useUserStore} from '@/entities/auth/model/useUserStore';
 
 export const useChatSocket = (chatRoomId: number | null) => {
   const clientRef = useRef<Client | null>(null);
@@ -57,8 +58,10 @@ export const useChatSocket = (chatRoomId: number | null) => {
 
   const sendMessage = (payload: TSendMessage) => {
     console.log('메세지 전송중:', payload);
+    const token = useUserStore.getState().accessToken;
     clientRef.current?.publish({
       destination: '/pub/chat',
+      headers: {Authorization: token ? `Bearer ${token}` : ''},
       body: JSON.stringify(payload),
     });
   };

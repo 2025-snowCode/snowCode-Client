@@ -11,7 +11,7 @@ export const createStompClient = () => {
       const token = useUserStore.getState().accessToken;
       client.brokerURL = `${brokerURL}?token=${token || ''}`;
       client.connectHeaders = {
-        Authorization: token || '',
+        Authorization: token ? `Bearer ${token}` : '',
       };
     },
     reconnectDelay: 5000,
