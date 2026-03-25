@@ -35,7 +35,7 @@ export default function LocalLoginForm({
   });
 
   const handleLocalSubmit = () => {
-    if (!localName || !localEmail.trim()) {
+    if (!localName.trim() || !localEmail.trim()) {
       alert('이름과 이메일을 입력해주세요.');
       return;
     }
