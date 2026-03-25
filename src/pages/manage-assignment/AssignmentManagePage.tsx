@@ -29,7 +29,7 @@ const AssignmentManagePage = () => {
     selectedCourseId,
     selectedCourseLabel,
   } = useCourseFilter(courses);
-  const assignmentList = useAssignmentList(selectedCourseId);
+  const assignmentList = useAssignmentList(selectedCourseId!);
   const queryClient = useQueryClient();
 
   // 문제 삭제 뮤테이션
@@ -91,6 +91,7 @@ const AssignmentManagePage = () => {
               color: 'tonal',
               size: 'compact',
               content: 'mixed',
+              className: 'mt-3',
             })}
             to={ROUTES.ADMIN.ASSIGNMENTS.CREATE}>
             <AddIcon className='w-4 h-4' />

@@ -35,8 +35,8 @@ export default function LocalLoginForm({
   });
 
   const handleLocalSubmit = () => {
-    if (!localName || !localEmail.trim() || !localOAuthToken.trim()) {
-      alert('이름, 이메일, OAuthToken을 모두 입력해주세요.');
+    if (!localName.trim() || !localEmail.trim()) {
+      alert('이름과 이메일을 입력해주세요.');
       return;
     }
     if (!isAdmin && !studentId) {
@@ -85,7 +85,7 @@ export default function LocalLoginForm({
 
       <div className='flex flex-col gap-2'>
         <label htmlFor='local-oauth-token' className='text-xs font-medium text-secondary-black'>
-          OAuth Token
+          OAuth Token (선택 사항)
         </label>
         <input
           id='local-oauth-token'
@@ -100,7 +100,6 @@ export default function LocalLoginForm({
       <button
         type='submit'
         disabled={isPending}
-        onClick={handleLocalSubmit}
         className='bg-primary text-white text-sm font-semibold py-3.5 rounded-lg cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed hover:bg-primary/90 transition-all mt-2'>
         {isPending ? '로그인 중...' : '로컬 로그인 실행'}
       </button>

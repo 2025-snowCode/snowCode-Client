@@ -8,7 +8,7 @@ interface ChatMessagePanelProps {
   chatRoom: TChatRoomDetail | null;
   lastMessage?: string;
   myMemberId: number;
-  onSendMessage: (content: string) => void;
+  onSendMessage: (content: string) => boolean;
 }
 
 interface MessageItemProps {
@@ -85,8 +85,8 @@ export default function ChatMessagePanel({
 
   const handleSend = () => {
     if (!input.trim()) return;
-    onSendMessage(input.trim());
-    setInput('');
+    const sent = onSendMessage(input.trim());
+    if (sent) setInput('');
   };
 
   // 날짜별 메시지 그룹화

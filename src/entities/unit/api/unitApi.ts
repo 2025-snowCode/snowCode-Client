@@ -35,7 +35,10 @@ export const deleteUnit = async (unitId: number) => {
 
 // 단원 생성
 export const createUnit = async (courseId: number, unit: TUnitFormSchema) => {
-  const response = await privateAxios.post(ENDPOINTS.UNITS.CREATE(courseId), unit);
+  const response = await privateAxios.post(
+    ENDPOINTS.UNITS.CREATE(courseId),
+    unit
+  );
   const parsed = apiResponseSchema(unitSchema).parse(response.data);
   return parsed.response;
 };
@@ -43,7 +46,9 @@ export const createUnit = async (courseId: number, unit: TUnitFormSchema) => {
 // 단원 수정
 export const updateUnit = async (unitId: number, unit: TUnitFormSchema) => {
   const response = await privateAxios.put(ENDPOINTS.UNITS.DETAIL(unitId), unit);
-  const parsed = apiResponseSchema(unitSchema).parse(response.data);
+  const parsed = apiResponseSchema(
+    unitSchema.omit({isOpen: true, assignmentCount: true, assignments: true})
+  ).parse(response.data);
   return parsed.response;
 };
 

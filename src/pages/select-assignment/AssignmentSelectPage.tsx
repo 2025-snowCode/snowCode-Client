@@ -10,6 +10,7 @@ import {useLocation, useNavigate} from 'react-router-dom';
 import type {TAssignment} from '@/entities/assignment/model/schemas';
 import {useAssignmentList} from '@/features/assignment/filter-assignment/lib/useAssignmentList';
 import Button from '@/shared/ui/button/Button';
+import {Checkbox} from '@/shared/ui/checkbox/Checkbox';
 
 const AssignmentSelectPage = () => {
   const navigate = useNavigate();
@@ -22,10 +23,14 @@ const AssignmentSelectPage = () => {
   const [selectedAssignments, setSelectedAssignments] = useState<TAssignment[]>(
     currentSelectedAssignments
   );
-  const {courseOptions, handleCourseSelect, selectedCourseId, selectedCourseLabel} =
-    useCourseFilter(courses);
+  const {
+    courseOptions,
+    handleCourseSelect,
+    selectedCourseId,
+    selectedCourseLabel,
+  } = useCourseFilter(courses);
 
-  const assignmentList = useAssignmentList(selectedCourseId);
+  const assignmentList = useAssignmentList(selectedCourseId!);
 
   // 문제 선택 핸들러
   const handleAssignmentSelect = (assignment: TAssignment) => {
@@ -48,6 +53,10 @@ const AssignmentSelectPage = () => {
     returnToPreviousPage();
   };
 
+  const isSelected = (assignment: TAssignment) => {
+    return selectedAssignments.some((a) => a.id === assignment.id);
+  };
+
   return (
     <AssignmentPageLayout
       title='문제 선택'
@@ -62,7 +71,13 @@ const AssignmentSelectPage = () => {
           renderItem={(assignment) => (
             <ListRow
               title={assignment.title}
-              selected={selectedAssignments.some((a) => a.id === assignment.id)}
+              selected={isSelected(assignment)}
+              leftIcon={
+                <Checkbox
+                  checked={isSelected(assignment)}
+                  onChange={() => handleAssignmentSelect(assignment)}
+                />
+              }
               className='cursor-pointer'
             />
           )}

@@ -29,7 +29,7 @@ const Dashboard = () => {
   });
 
   return (
-    <main className='w-full'>
+    <div className='w-full'>
       <h1 className='font-semibold text-[28px]/normal mb-7'>내 대시보드</h1>
       <div className='flex items-start gap-16'>
         {/* 강의 목록 */}
@@ -40,7 +40,7 @@ const Dashboard = () => {
           </div>
 
           {courseCount === 0 ? (
-            <EmptyState>등록된 강의가 없습니다.</EmptyState>
+            <EmptyState className='w-148'>등록된 강의가 없습니다.</EmptyState>
           ) : (
             <CourseList courseList={courses} />
           )}
@@ -53,15 +53,18 @@ const Dashboard = () => {
           </div>
 
           {scheduleCount === 0 ? (
-            <EmptyState className='pl-24.5'>
-              마감 예정인 과제가 없습니다.
-            </EmptyState>
+            <div className='flex items-start gap-5'>
+              <div className='w-20 shrink-0' />
+              <EmptyState className='w-92'>
+                마감 예정인 과제가 없습니다.
+              </EmptyState>
+            </div>
           ) : (
             <ScheduleList scheduleList={schedules} />
           )}
         </section>
       </div>
-    </main>
+    </div>
   );
 };
 
