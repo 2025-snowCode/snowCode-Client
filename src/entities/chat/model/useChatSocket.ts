@@ -49,7 +49,6 @@ export const useChatSocket = (chatRoomId: number | null) => {
     clientRef.current = client;
 
     return () => {
-      console.log('WebSocket 비활성화중');
       client.deactivate();
       clientRef.current = null;
       setMessages([]);
@@ -57,9 +56,13 @@ export const useChatSocket = (chatRoomId: number | null) => {
   }, [chatRoomId]);
 
   const sendMessage = (payload: TSendMessage) => {
+    if (!clientRef.current?.connected) {
+      console.warn('WebSocket 연결이 끊겨 있습니다.');
+      return;
+    }
     console.log('메세지 전송중:', payload);
     const token = useUserStore.getState().accessToken;
-    clientRef.current?.publish({
+    clientRef.current.publish({
       destination: '/pub/chat',
       headers: {Authorization: token ? `Bearer ${token}` : ''},
       body: JSON.stringify(payload),
