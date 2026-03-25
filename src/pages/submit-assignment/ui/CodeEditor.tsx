@@ -2,8 +2,8 @@ import Button from '@/shared/ui/button/Button';
 import {Editor, type Monaco, type OnMount} from '@monaco-editor/react';
 import {useRef} from 'react';
 import PlayIcon from '@/assets/svg/playIcon.svg?react';
-import LoaderIcon from '@/assets/svg/loader.svg?react';
 import OneDarkPro from '@/themes/onedarkpro.json';
+import LoaderIcon from '@/assets/svg/loader.svg?react';
 
 const editorOptions = {
   fontLigatures: true,
@@ -28,6 +28,7 @@ const editorOptions = {
   parameterHints: {
     enabled: false,
   },
+  contextmenu: false,
 } as const;
 
 type EditorInstance = Parameters<OnMount>[0];
@@ -54,11 +55,6 @@ const CodeEditor = ({
       base: 'vs-dark',
       inherit: true,
       ...OneDarkPro,
-      rules: [...OneDarkPro.rules, {token: 'comment', foreground: '#C4FFA4'}],
-      colors: {
-        ...OneDarkPro.colors,
-        'editor.background': '#2C2A36',
-      },
     });
   };
 
@@ -91,7 +87,7 @@ const CodeEditor = ({
             onClick={handleRunCode}
             disabled={isRunning}>
             {isRunning ? (
-              <div className='flex-center gap-1.5 opacity-60'>
+              <div className='flex-center gap-1.5 opacity-80'>
                 <LoaderIcon className='animate-spin text-base text-white' />
                 실행 중...
               </div>
@@ -108,14 +104,7 @@ const CodeEditor = ({
             className='text-sm'
             onClick={handleSubmitCode}
             disabled={isSubmitPending}>
-            {isSubmitPending ? (
-              <div className='flex-center gap-1.5 opacity-60'>
-                <LoaderIcon className='animate-spin text-base text-secondary-black' />
-                제출 중...
-              </div>
-            ) : (
-              '제출 및 채점'
-            )}
+            {isSubmitPending ? '제출 중...' : '제출 및 채점'}
           </Button>
         </div>
       </div>
