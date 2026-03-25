@@ -3,6 +3,7 @@ import {unitQueries} from '@/entities/unit/api/unitQueries';
 import type {TUnitFormSchema} from '@/entities/unit/model/schemas';
 import useUnitStore from '@/entities/unit/model/useUnitStore';
 import {ROUTES} from '@/shared/config/routes';
+import {useToastStore} from '@/shared/model/useToastStore';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {useNavigate} from 'react-router-dom';
 
@@ -14,6 +15,7 @@ export const useCreateUnit = ({courseId}: UseCreateUnitProps) => {
   const navigate = useNavigate();
   const {resetStore} = useUnitStore();
   const queryClient = useQueryClient();
+  const {showToast} = useToastStore();
 
   const {mutate, isPending} = useMutation({
     ...unitMutations.createUnit,
@@ -22,7 +24,7 @@ export const useCreateUnit = ({courseId}: UseCreateUnitProps) => {
         queryKey: unitQueries.getUnitList(courseId).queryKey,
       });
       resetStore();
-      alert('새 단원이 성공적으로 생성되었습니다.');
+      showToast('단원이 생성되었습니다.');
       navigate(ROUTES.ADMIN.UNITS.EDIT(courseId, data.id));
     },
     onError: (error) => {

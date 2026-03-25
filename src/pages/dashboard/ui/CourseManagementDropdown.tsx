@@ -5,6 +5,7 @@ import ConfirmModal from '@/shared/ui/ConfirmModal';
 import {useNavigate} from 'react-router-dom';
 import {ROUTES} from '@/shared/config/routes';
 import {useDeleteCourse} from '@/features/course/delete-course/model/useDeleteCourse';
+import {useToastStore} from '@/shared/model/useToastStore';
 
 interface CourseManagementDropdownProps {
   courseId: number;
@@ -16,10 +17,11 @@ const CourseManagementDropdown = ({
   courseId,
 }: CourseManagementDropdownProps) => {
   const navigate = useNavigate();
+  const {showToast} = useToastStore();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const {handleDelete, isPending} = useDeleteCourse(courseId, () => {
     setIsDeleteModalOpen(false);
-    alert('강의가 성공적으로 삭제되었습니다.');
+    showToast('강의가 삭제되었습니다.');
   });
 
   // 드롭다운 메뉴 옵션 선택 핸들러
@@ -53,7 +55,10 @@ const CourseManagementDropdown = ({
           title='강의를 삭제하시겠습니까?'
           description='삭제 시 관련 단원이 함께 삭제됩니다.'
           confirmLabel={isPending ? '삭제 중...' : '삭제'}
-          onConfirm={() => {if (isPending) return; handleDelete();}}
+          onConfirm={() => {
+            if (isPending) return;
+            handleDelete();
+          }}
           onCancel={() => setIsDeleteModalOpen(false)}
         />
       )}

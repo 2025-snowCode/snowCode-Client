@@ -10,6 +10,7 @@ import {assignmentMutations} from '@/entities/assignment/api/assignmentMutations
 import {assignmentQueries} from '@/entities/assignment/api/assignmentQueries';
 import type {TAssignmentForm} from '@/entities/assignment/model/schemas';
 import TestcaseRow from '@/pages/admin/assignments/ui/TestcaseRow';
+import {useToastStore} from '@/shared/model/useToastStore';
 
 const AssignmentFormPage = () => {
   const {id} = useParams();
@@ -18,6 +19,7 @@ const AssignmentFormPage = () => {
 
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const {showToast} = useToastStore();
 
   const [title, setTitle] = useState('');
   const [score, setScore] = useState('');
@@ -52,7 +54,7 @@ const AssignmentFormPage = () => {
       queryClient.invalidateQueries({
         queryKey: assignmentQueries.getAllAssignments().queryKey,
       });
-      alert('과제가 추가되었습니다.');
+      showToast('과제가 추가되었습니다.');
       navigate(-1);
     },
     onError: () => alert('과제 추가에 실패했습니다.'),
@@ -64,7 +66,7 @@ const AssignmentFormPage = () => {
       queryClient.invalidateQueries({
         queryKey: assignmentQueries.getAllAssignments().queryKey,
       });
-      alert('과제가 수정되었습니다.');
+      showToast('과제가 수정되었습니다.');
       navigate(-1);
     },
     onError: () => alert('과제 수정에 실패했습니다.'),

@@ -17,9 +17,11 @@ import {Link, useNavigate} from 'react-router-dom';
 import {buttonStyles} from '@/shared/ui/button/button-styles';
 import Button from '@/shared/ui/button/Button';
 import {ROUTES} from '@/shared/config/routes';
+import {useToastStore} from '@/shared/model/useToastStore';
 
 const AssignmentManagePage = () => {
   const navigate = useNavigate();
+  const {showToast} = useToastStore();
   const {
     data: {courses},
   } = useSuspenseQuery(courseQueries.getAllCourses());
@@ -44,7 +46,7 @@ const AssignmentManagePage = () => {
           selectedCourseId ?? 0
         ).queryKey,
       });
-      alert('문제가 성공적으로 삭제되었습니다.');
+      showToast('문제가 삭제되었습니다.');
     },
     onError: (error) => {
       console.error('문제 삭제 실패', error);
