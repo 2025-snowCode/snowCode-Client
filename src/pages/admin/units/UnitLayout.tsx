@@ -1,14 +1,16 @@
 import SurfaceCard from '@/shared/ui/SurfaceCard';
 import {UnitList} from './ui/UnitList';
 import {Outlet, useNavigate, useParams} from 'react-router-dom';
-import {useQuery} from '@tanstack/react-query';
+import {useSuspenseQuery} from '@tanstack/react-query';
 import {unitQueries} from '@/entities/unit/api/unitQueries';
 import type {TUnitLayoutContext} from './model/types';
 
 const UnitLayout = () => {
   const navigate = useNavigate();
   const {courseId} = useParams();
-  const {data: units} = useQuery(unitQueries.getUnitList(Number(courseId)));
+  const {data: units} = useSuspenseQuery(
+    unitQueries.getUnitList(Number(courseId))
+  );
 
   const onAddNewUnit = () => navigate('create');
   const onClickUnit = (unitId: number) => navigate(`edit/${unitId}`);

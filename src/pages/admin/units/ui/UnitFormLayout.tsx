@@ -41,7 +41,7 @@ const UnitFormLayout = ({
           취소
         </Button>
         <Button onClick={onSave} disabled={isPending}>
-          저장
+          {isPending ? '저장 중...' : '저장'}
         </Button>
       </div>
     </div>

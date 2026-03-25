@@ -29,7 +29,7 @@ const Dashboard = () => {
   });
 
   return (
-    <main className='w-full'>
+    <div className='w-full'>
       <h1 className='font-semibold text-[28px]/normal mb-7'>내 대시보드</h1>
       <div className='flex items-start gap-16'>
         {/* 강의 목록 */}
@@ -64,7 +64,7 @@ const Dashboard = () => {
           )}
         </section>
       </div>
-    </main>
+    </div>
   );
 };
 

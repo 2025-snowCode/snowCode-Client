@@ -1,4 +1,4 @@
-import {useQuery} from '@tanstack/react-query';
+import {useQuery, useSuspenseQuery} from '@tanstack/react-query';
 import {assignmentQueries} from '@/entities/assignment/api/assignmentQueries';
 import type {TAssignment} from '@/entities/assignment/model/schemas';
 
@@ -6,15 +6,14 @@ import type {TAssignment} from '@/entities/assignment/model/schemas';
 const unique = (list: TAssignment[]) =>
   Array.from(new Map(list.map((a) => [a.id, a])).values());
 
-export const useAssignmentList = (
-  selectedCourseId: number | null
-): TAssignment[] => {
-  const {data: allAssignments} = useQuery(
+export const useAssignmentList = (selectedCourseId: number): TAssignment[] => {
+  const {data: allAssignments} = useSuspenseQuery(
     assignmentQueries.getAllAssignments()
   );
+
   const {data: assignments} = useQuery({
-    ...assignmentQueries.getAssignmentsByCourse(selectedCourseId ?? 0),
-    enabled: selectedCourseId !== null,
+    ...assignmentQueries.getAssignmentsByCourse(selectedCourseId),
+    enabled: !!selectedCourseId,
   });
 
   return unique(
