@@ -49,21 +49,26 @@ export const useChatSocket = (chatRoomId: number | null) => {
     clientRef.current = client;
 
     return () => {
-      console.log('WebSocket 비활성화중');
       client.deactivate();
       clientRef.current = null;
       setMessages([]);
     };
   }, [chatRoomId]);
 
-  const sendMessage = (payload: TSendMessage) => {
+  const sendMessage = (payload: TSendMessage): boolean => {
+    const client = clientRef.current;
+    if (!client?.connected) {
+      console.warn('WebSocket 연결이 끊겨 있습니다.');
+      return false;
+    }
     console.log('메세지 전송중:', payload);
     const token = useUserStore.getState().accessToken;
-    clientRef.current?.publish({
+    client.publish({
       destination: '/pub/chat',
       headers: {Authorization: token ? `Bearer ${token}` : ''},
       body: JSON.stringify(payload),
     });
+    return true;
   };
 
   return {messages, sendMessage};

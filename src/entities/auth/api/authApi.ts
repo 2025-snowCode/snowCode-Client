@@ -24,7 +24,7 @@ export interface LocalLoginParams {
   role: 'ADMIN' | 'USER';
   studentId?: string;
   email: string;
-  oAuthToken: string;
+  oAuthToken?: string;
 }
 
 export const localLogin = async (
@@ -36,7 +36,7 @@ export const localLogin = async (
     role: params.role,
     ...(params.studentId && {studentId: params.studentId}),
     email: params.email,
-    OAuthToken: params.oAuthToken,
+    OAuthToken: params.oAuthToken || 'local-login-dummy-token',
   });
   return kakaoLoginApiResponseSchema.parse(response.data.response);
 };

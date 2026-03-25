@@ -4,7 +4,7 @@ import axios, {
   type AxiosInstance,
   type AxiosResponse,
 } from 'axios';
-const BASE_URL = '/api';
+const BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api';
 
 /**
  * publicAxios: 인증 불필요한 요청용

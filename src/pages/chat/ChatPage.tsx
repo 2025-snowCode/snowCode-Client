@@ -35,10 +35,10 @@ export default function ChatPage() {
     setSearchParams({roomId: String(roomId)});
   };
 
-  const handleSendMessage = (content: string) => {
-    if (!selectedRoomId || !chatRoomDetail) return;
+  const handleSendMessage = (content: string): boolean => {
+    if (!selectedRoomId || !chatRoomDetail) return false;
 
-    sendMessage({
+    return sendMessage({
       type: 'TEXT',
       content,
       chatRoomId: selectedRoomId,

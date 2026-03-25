@@ -2,7 +2,7 @@ import AssignmentFormLayout from '@/widgets/assignment-form-layout/ui/Assignment
 import Search from '@/assets/svg/search.svg?react';
 import {useForm} from 'react-hook-form';
 import {Pagination} from '@/shared/ui/pagination/pagination';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import Input from '@/shared/ui/Input';
 import {StudentTable} from '@/entities/student/ui/StudentTable';
 import {useParams} from 'react-router-dom';
@@ -15,11 +15,15 @@ export default function StudentManagementPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const {register, watch} = useForm<{studentSearch: string}>();
   const searchValue = watch('studentSearch');
+  
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchValue]);
 
   const {data} = useQuery(
     studentQueries.getEnrollments(Number(courseId), {
-      page: currentPage - 1,
-      pageSize: 10,
+      page: 0,
+      pageSize: 1000,
       studentId: searchValue || undefined,
     })
   );
@@ -41,6 +45,12 @@ export default function StudentManagementPage() {
     </div>
   );
 
+  const pageSize = 10;
+  const paginatedStudents = data?.students.slice(
+    (currentPage - 1) * pageSize,
+    currentPage * pageSize
+  ) ?? [];
+
   return (
     <div className='flex flex-col items-center gap-6'>
       <AssignmentFormLayout
@@ -48,7 +58,7 @@ export default function StudentManagementPage() {
         titleExtra={titleExtra}
         content={
           <StudentTable
-            students={data?.students ?? []}
+            students={paginatedStudents}
             courseId={Number(courseId)}
           />
         }
@@ -58,8 +68,8 @@ export default function StudentManagementPage() {
         confirmLabel='등록'
       />
       <Pagination
-        totalItems={data?.studentCount ?? 0}
-        pageSize={10}
+        totalItems={data?.students.length ?? 0}
+        pageSize={pageSize}
         currentPage={currentPage}
         onPageChange={(page) => {
           setCurrentPage(page);
