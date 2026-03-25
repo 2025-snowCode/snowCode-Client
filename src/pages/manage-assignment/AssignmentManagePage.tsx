@@ -19,21 +19,27 @@ import Button from '@/shared/ui/button/Button';
 import {ROUTES} from '@/shared/config/routes';
 import {useToastStore} from '@/shared/model/useToastStore';
 import {handleApiError} from '@/shared/lib/handleApiError';
+import {useState} from 'react';
+import ConfirmModal from '@/shared/ui/ConfirmModal';
 
 const AssignmentManagePage = () => {
   const navigate = useNavigate();
   const {showToast} = useToastStore();
+  const queryClient = useQueryClient();
+  const [deleteTargetId, setDeleteTargetId] = useState<number | null>(null);
+
   const {
     data: {courses},
   } = useSuspenseQuery(courseQueries.getAllCourses());
+
   const {
     courseOptions,
     handleCourseSelect,
     selectedCourseId,
     selectedCourseLabel,
   } = useCourseFilter(courses);
+
   const assignmentList = useAssignmentList(selectedCourseId!);
-  const queryClient = useQueryClient();
 
   // 문제 삭제 뮤테이션
   const {mutate: deleteAssignment} = useMutation({
@@ -56,61 +62,71 @@ const AssignmentManagePage = () => {
 
   // 문제 삭제 핸들러
   const onDeleteAssignment = (id: number) => {
-    if (
-      window.confirm(
-        '문제를 삭제하시겠습니까? 삭제된 문제는 복구할 수 없습니다.'
-      )
-    ) {
-      deleteAssignment(id);
-    }
+    setDeleteTargetId(id);
+  };
+
+  const handleConfirmDelete = () => {
+    if (deleteTargetId !== null) deleteAssignment(deleteTargetId);
+    setDeleteTargetId(null);
   };
 
   return (
-    <AssignmentPageLayout
-      title='문제 관리'
-      courseOptions={courseOptions}
-      courseValue={selectedCourseLabel}
-      onCourseSelect={handleCourseSelect}
-      list={
-        <>
-          <AssignmentListContainer
-            items={assignmentList}
-            title={`${assignmentList.length}문제`}
-            renderItem={(assignment) => (
-              <ListRow
-                title={assignment.title}
-                rightIcon={
-                  <AssignmentManageActionsBar
-                    id={assignment.id}
-                    onDelete={onDeleteAssignment}
-                  />
-                }
-              />
-            )}
-          />
-          <Link
-            className={buttonStyles({
-              color: 'tonal',
-              size: 'compact',
-              content: 'mixed',
-              className: 'mt-3',
-            })}
-            to={ROUTES.ADMIN.ASSIGNMENTS.CREATE}>
-            <AddIcon className='w-4 h-4' />
-            문제 추가
-          </Link>
-        </>
-      }
-      buttons={
-        <Button
-          color='primary'
-          onClick={() => {
-            navigate(-1);
-          }}>
-          나가기
-        </Button>
-      }
-    />
+    <>
+      <AssignmentPageLayout
+        title='문제 관리'
+        courseOptions={courseOptions}
+        courseValue={selectedCourseLabel}
+        onCourseSelect={handleCourseSelect}
+        list={
+          <>
+            <AssignmentListContainer
+              items={assignmentList}
+              title={`${assignmentList.length}문제`}
+              renderItem={(assignment) => (
+                <ListRow
+                  title={assignment.title}
+                  rightIcon={
+                    <AssignmentManageActionsBar
+                      id={assignment.id}
+                      onDelete={onDeleteAssignment}
+                    />
+                  }
+                />
+              )}
+            />
+            <Link
+              className={buttonStyles({
+                color: 'tonal',
+                size: 'compact',
+                content: 'mixed',
+                className: 'mt-3',
+              })}
+              to={ROUTES.ADMIN.ASSIGNMENTS.CREATE}>
+              <AddIcon className='w-4 h-4' />
+              문제 추가
+            </Link>
+          </>
+        }
+        buttons={
+          <Button
+            color='primary'
+            onClick={() => {
+              navigate(-1);
+            }}>
+            나가기
+          </Button>
+        }
+      />
+      {deleteTargetId !== null && (
+        <ConfirmModal
+          title='문제를 삭제하시겠습니까?'
+          description='삭제된 문제는 복구할 수 없습니다.'
+          confirmLabel='삭제'
+          onConfirm={handleConfirmDelete}
+          onCancel={() => setDeleteTargetId(null)}
+        />
+      )}
+    </>
   );
 };
 
