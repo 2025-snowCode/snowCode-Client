@@ -18,6 +18,7 @@ import {buttonStyles} from '@/shared/ui/button/button-styles';
 import Button from '@/shared/ui/button/Button';
 import {ROUTES} from '@/shared/config/routes';
 import {useToastStore} from '@/shared/model/useToastStore';
+import {handleApiError} from '@/shared/lib/handleApiError';
 
 const AssignmentManagePage = () => {
   const navigate = useNavigate();
@@ -49,8 +50,7 @@ const AssignmentManagePage = () => {
       showToast('문제가 삭제되었습니다.');
     },
     onError: (error) => {
-      console.error('문제 삭제 실패', error);
-      alert('문제 삭제에 실패했습니다. 다시 시도해주세요.');
+      handleApiError(error, '문제 삭제에 실패했습니다. 다시 시도해주세요.');
     },
   });
 

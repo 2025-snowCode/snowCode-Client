@@ -3,6 +3,7 @@ import {unitQueries} from '@/entities/unit/api/unitQueries';
 import type {TUnitFormSchema} from '@/entities/unit/model/schemas';
 import useUnitStore from '@/entities/unit/model/useUnitStore';
 import {ROUTES} from '@/shared/config/routes';
+import {handleApiError} from '@/shared/lib/handleApiError';
 import {useToastStore} from '@/shared/model/useToastStore';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {useNavigate} from 'react-router-dom';
@@ -28,8 +29,7 @@ export const useCreateUnit = ({courseId}: UseCreateUnitProps) => {
       navigate(ROUTES.ADMIN.UNITS.EDIT(courseId, data.id));
     },
     onError: (error) => {
-      console.error('단원 생성 실패', error);
-      alert('단원 생성에 실패했습니다. 다시 시도해주세요.');
+      handleApiError(error, '단원 생성에 실패했습니다. 다시 시도해주세요.');
     },
   });
 
