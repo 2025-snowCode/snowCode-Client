@@ -54,10 +54,10 @@ const AssignmentFormPage = () => {
       queryClient.invalidateQueries({
         queryKey: assignmentQueries.getAllAssignments().queryKey,
       });
-      showToast('과제가 추가되었습니다.');
+      showToast('문제가 추가되었습니다.');
       navigate(-1);
     },
-    onError: () => alert('과제 추가에 실패했습니다.'),
+    onError: () => alert('문제 추가에 실패했습니다.'),
   });
 
   const {mutate: updateAssignment} = useMutation({
@@ -66,10 +66,10 @@ const AssignmentFormPage = () => {
       queryClient.invalidateQueries({
         queryKey: assignmentQueries.getAllAssignments().queryKey,
       });
-      showToast('과제가 수정되었습니다.');
+      showToast('문제가 수정되었습니다.');
       navigate(-1);
     },
-    onError: () => alert('과제 수정에 실패했습니다.'),
+    onError: () => alert('문제 수정에 실패했습니다.'),
   });
 
   const handleAddTestcase = () => {
