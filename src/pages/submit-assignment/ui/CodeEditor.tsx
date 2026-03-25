@@ -2,6 +2,7 @@ import Button from '@/shared/ui/button/Button';
 import {Editor, type Monaco, type OnMount} from '@monaco-editor/react';
 import {useRef} from 'react';
 import PlayIcon from '@/assets/svg/playIcon.svg?react';
+import LoaderIcon from '@/assets/svg/loader.svg?react';
 import OneDarkPro from '@/themes/onedarkpro.json';
 
 const editorOptions = {
@@ -90,7 +91,10 @@ const CodeEditor = ({
             onClick={handleRunCode}
             disabled={isRunning}>
             {isRunning ? (
-              '실행 중...'
+              <div className='flex-center gap-1.5 opacity-60'>
+                <LoaderIcon className='animate-spin text-base text-white' />
+                실행 중...
+              </div>
             ) : (
               <>
                 <PlayIcon className='w-3 h-3' />
@@ -104,7 +108,14 @@ const CodeEditor = ({
             className='text-sm'
             onClick={handleSubmitCode}
             disabled={isSubmitPending}>
-            {isSubmitPending ? '제출 중...' : '제출 및 채점'}
+            {isSubmitPending ? (
+              <div className='flex-center gap-1.5 opacity-60'>
+                <LoaderIcon className='animate-spin text-base text-secondary-black' />
+                제출 중...
+              </div>
+            ) : (
+              '제출 및 채점'
+            )}
           </Button>
         </div>
       </div>
