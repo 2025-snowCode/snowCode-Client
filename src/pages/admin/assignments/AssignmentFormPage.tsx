@@ -95,7 +95,7 @@ const AssignmentFormPage = () => {
     <AssignmentFormLayout
       title={isEditMode ? '문제 수정' : '문제 등록'}
       content={
-        <div className='space-y-6 max-w-182'>
+        <div className='space-y-6 w-full'>
           <div className='grid grid-cols-[minmax(0,1fr)_160px] gap-6'>
             <LabeledInput
               label='문제 제목'

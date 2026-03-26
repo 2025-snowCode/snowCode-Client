@@ -6,13 +6,19 @@ interface StudentProfileProps {
   name: string;
   studentId: string;
   onChat?: () => void;
+  email: string;
 }
 
 export const StudentProfile = ({
   name,
   studentId,
   onChat,
+  email,
 }: StudentProfileProps) => {
+  const sendEmail = () => {
+    window.location.href = `mailto:${email}`;
+  };
+
   return (
     <div className='flex flex-col bg-white w-112.5 h-117.5 rounded-[30px] items-center justify-center shrink-0 gap-[25.5px]'>
       <ProfileImage className='w-45 h-45' />
@@ -34,7 +40,12 @@ export const StudentProfile = ({
             <span>채팅</span>
           </div>
         </Button>
-        <Button color='primary' size='compact' content='mixed' type='button'>
+        <Button
+          color='primary'
+          size='compact'
+          content='mixed'
+          type='button'
+          onClick={sendEmail}>
           <div className='flex gap-2.5 items-center'>
             <MailIcon />
             <span>메일</span>

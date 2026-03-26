@@ -9,6 +9,7 @@ interface CodePreviewProps {
 
 const editorOptions = {
   readOnly: true,
+  readOnlyMessage: {value: ''},
   fontSize: 14,
   fontFamily: 'jetbrains mono, monospace',
   minimap: {enabled: false},
@@ -17,6 +18,22 @@ const editorOptions = {
   padding: {top: 16, bottom: 16},
   wordWrap: 'on' as const,
   lineNumbers: 'on' as const,
+  hideCursorInOverviewRuler: true,
+  overviewRulerBorder: false,
+  overviewRulerLanes: 0,
+  folding: false,
+  glyphMargin: false,
+  lineDecorationsWidth: 15,
+  cursorBlinking: 'expand' as const,
+  contextmenu: false,
+  renderLineHighlight: 'none' as const,
+  selectionHighlight: false,
+  occurrencesHighlight: 'off' as const,
+  matchBrackets: 'never' as const,
+  links: false,
+  hover: {enabled: false},
+  codeLens: false,
+  smoothScrolling: true,
 };
 
 const CodePreview = ({codeId}: CodePreviewProps) => {

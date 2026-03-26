@@ -64,3 +64,6 @@ export const enrollmentListSchema = z.object({
   studentCount: z.number(),
   students: z.array(studentSchema),
 });
+
+export type TStudent = z.infer<typeof studentSchema>;
+export type TEnrollmentList = z.infer<typeof enrollmentListSchema>;
