@@ -2,6 +2,8 @@ import {unitMutations} from '@/entities/unit/api/unitMutations';
 import {unitQueries} from '@/entities/unit/api/unitQueries';
 import type {TUnitFormSchema} from '@/entities/unit/model/schemas';
 import {ROUTES} from '@/shared/config/routes';
+import {handleApiError} from '@/shared/lib/handleApiError';
+import {useToastStore} from '@/shared/model/useToastStore';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {useNavigate} from 'react-router-dom';
 
@@ -12,22 +14,32 @@ interface UseEditUnitProps {
 
 export const useEditUnit = ({courseId, unitId}: UseEditUnitProps) => {
   const navigate = useNavigate();
+  const {showToast} = useToastStore();
   const queryClient = useQueryClient();
+
+  // 단원 목록 갱신
   const invalidateUnitList = () => {
     queryClient.invalidateQueries({
       queryKey: unitQueries.getUnitList(courseId).queryKey,
     });
   };
 
+  // 단원 상세 갱신
+  const invalidateUnitDetail = () => {
+    queryClient.invalidateQueries({
+      queryKey: unitQueries.getUnitDetail(unitId).queryKey,
+    });
+  };
+
   const {mutate: updateUnit, isPending: isUpdating} = useMutation({
     ...unitMutations.updateUnit,
     onSuccess: () => {
+      invalidateUnitDetail();
       invalidateUnitList();
-      alert('단원이 성공적으로 업데이트되었습니다.');
+      showToast('단원이 수정되었습니다.');
     },
     onError: (error) => {
-      console.error('단원 업데이트 실패', error);
-      alert('단원 업데이트에 실패했습니다. 다시 시도해주세요.');
+      handleApiError(error, '단원 수정에 실패했습니다. 다시 시도해주세요.');
     },
   });
 
@@ -35,12 +47,11 @@ export const useEditUnit = ({courseId, unitId}: UseEditUnitProps) => {
     ...unitMutations.deleteUnit,
     onSuccess: () => {
       invalidateUnitList();
-      alert('단원이 성공적으로 삭제되었습니다.');
+      showToast('단원이 삭제되었습니다.');
       navigate(ROUTES.ADMIN.UNITS.CREATE(courseId));
     },
     onError: (error) => {
-      console.error('단원 삭제 실패', error);
-      alert('단원 삭제에 실패했습니다. 다시 시도해주세요.');
+      handleApiError(error, '단원 삭제에 실패했습니다. 다시 시도해주세요.');
     },
   });
 
@@ -49,9 +60,7 @@ export const useEditUnit = ({courseId, unitId}: UseEditUnitProps) => {
   };
 
   const remove = () => {
-    if (window.confirm('정말로 이 단원을 삭제하시겠습니까?')) {
-      deleteUnit(unitId);
-    }
+    deleteUnit(unitId);
   };
 
   return {submit, remove, isUpdating};

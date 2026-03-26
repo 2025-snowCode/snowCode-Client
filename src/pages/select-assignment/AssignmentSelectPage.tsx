@@ -44,7 +44,12 @@ const AssignmentSelectPage = () => {
 
   // 이전 페이지로 돌아가기
   const returnToPreviousPage = () => {
-    navigate(location.state?.backPath ?? -1);
+    const backPath = location.state?.backPath;
+    if (backPath) {
+      navigate(backPath, {state: {fromAssignmentSelect: true}});
+    } else {
+      navigate(-1);
+    }
   };
 
   // 등록 핸들러

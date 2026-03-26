@@ -4,6 +4,8 @@ import {useLocation, Link, useParams} from 'react-router-dom';
 import type {TAssignment} from '@/entities/assignment/model/schemas';
 import IndexCircle from './circle/IndexCircle';
 import {ROUTES} from '@/shared/config/routes';
+import type {SubmissionStatus} from '@/shared/model/types';
+import {twMerge} from 'tailwind-merge';
 
 interface SideBarItemProps extends TAssignment {
   index: number;
@@ -13,6 +15,12 @@ interface SideBarItemProps extends TAssignment {
   isActive: boolean;
   isLocked: boolean;
 }
+
+const SideBarItemHoverClass = {
+  NOT_SUBMITTED: {base: 'bg-primary/5', hover: 'hover:bg-primary/5'},
+  CORRECT: {base: 'bg-primary/5', hover: 'hover:bg-primary/5'},
+  INCORRECT: {base: 'bg-badge-red/5', hover: 'hover:bg-badge-red/5'},
+} satisfies Record<SubmissionStatus, {base: string; hover: string}>;
 
 const SideBarItem = ({
   id,
@@ -44,19 +52,23 @@ const SideBarItem = ({
     : `${ROUTES.STUDENT.ASSIGNMENTS.SUBMIT(courseId!, id)}`;
 
   const sideBarBorderClass = isOpen ? 'border-r border-purple-stroke' : '';
+  const status = submittedStatus ?? 'NOT_SUBMITTED';
+  const {base, hover} = SideBarItemHoverClass[status];
 
   return (
     <Link
       to={assignmentPath}
       state={{index, codeId}}
       ref={activeItemRef}
-      className={`${isLocked ? 'pointer-events-none opacity-60' : ''} 
-         ${isActive ? 'bg-primary/5' : 'hover:bg-primary/5'} 
-         flex items-center cursor-pointer`}
       tabIndex={isLocked ? -1 : undefined}
       onClick={(e) => {
         if (isLocked) e.preventDefault();
-      }}>
+      }}
+      className={twMerge(
+        'flex items-center cursor-pointer',
+        isLocked && 'pointer-events-none opacity-60',
+        isActive ? base : hover
+      )}>
       <div
         className={`w-26 shrink-0 flex flex-col items-center ${sideBarBorderClass}`}>
         <div

@@ -39,7 +39,7 @@ const AssignmentProblem = ({
           <span className='text-xl/9'>{title}</span>
         </h2>
       </div>
-      <p className='mt-4 text-lg/7.5'>{description}</p>
+      <p className='mt-4 text-lg/7.5 whitespace-pre-wrap'>{description}</p>
 
       {/* 입, 출력 예제 */}
       <div className='mt-8'>

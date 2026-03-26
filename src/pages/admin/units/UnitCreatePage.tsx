@@ -6,7 +6,7 @@ import {
   useParams,
 } from 'react-router-dom';
 import {useCreateUnit} from '@/features/unit/create-unit/model/useCreateUnit';
-import {useRef} from 'react';
+import {useEffect, useRef} from 'react';
 import useUnitStore from '@/entities/unit/model/useUnitStore';
 import type {TUnitLayoutContext, UnitFormHandle} from './model/types';
 import {ROUTES} from '@/shared/config/routes';
@@ -21,6 +21,14 @@ const UnitCreatePage = () => {
   const {title, releaseDate, dueDate, assignments, storeFormData, resetStore} =
     useUnitStore();
 
+  const isFromAssignmentSelct = !!location.state?.fromAssignmentSelect;
+
+  useEffect(() => {
+    if (!isFromAssignmentSelct) {
+      resetStore();
+    }
+  }, [isFromAssignmentSelct, resetStore]);
+
   const {submit, isPending} = useCreateUnit({courseId: Number(courseId)});
 
   // 과제 선택 페이지로 이동
@@ -32,19 +40,23 @@ const UnitCreatePage = () => {
     });
   };
 
-  const defaultValues = {
-    title,
-    releaseDate,
-    dueDate,
-    assignmentIds: assignments.map((a) => a.id),
-  };
+  const isFromAssignmentSelect = !!location.state?.fromAssignmentSelect;
+
+  const defaultValues = isFromAssignmentSelect
+    ? {title, releaseDate, dueDate, assignmentIds: assignments.map((a) => a.id)}
+    : {title: '', releaseDate: '', dueDate: '', assignmentIds: []};
 
   return (
     <UnitFormLayout
       unitNumber={unitCount + 1}
       onSave={() => formRef.current?.requestSubmit()}
       onCancel={() => {
-        formRef.current?.reset();
+        formRef.current?.reset({
+          title: '',
+          releaseDate: '',
+          dueDate: '',
+          assignmentIds: [],
+        });
         resetStore();
       }}
       isPending={isPending}>
