@@ -20,8 +20,10 @@ export default function StudentProfilePage() {
   }
 
   return (
-    <div className='relative left-1/2 -translate-x-1/2 w-fit flex items-center gap-6'>
-      <StudentProfile name={student.name} studentId={student.studentId} />
+    <div className='relative left-1/2 -translate-x-1/2 w-fit flex items-start gap-6'>
+      <div className='sticky top-6'>
+        <StudentProfile name={student.name} studentId={student.studentId} />
+      </div>
       <SurfaceCard size='medium' className='w-184.25 min-w-0 shrink-0'>
         <AssignmentProgressCard student={student} />
       </SurfaceCard>
