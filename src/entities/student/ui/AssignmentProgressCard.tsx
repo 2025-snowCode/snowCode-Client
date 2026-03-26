@@ -1,7 +1,9 @@
+import React, {useState} from 'react';
 import type {StudentDetail} from '@/entities/student/model/types';
 import {ProgressIndicators} from '@/shared/ui/ProgressIndicators';
 import Correct from '@/assets/svg/correct.svg?react';
 import Unsubmitted from '@/assets/svg/unsubmitted.svg?react';
+import CodePreview from '@/features/student/ui/CodePreview';
 
 interface AssignmentProgressCardProps {
   student: StudentDetail;
@@ -10,19 +12,35 @@ interface AssignmentProgressCardProps {
 export const AssignmentProgressCard = ({
   student,
 }: AssignmentProgressCardProps) => {
+  const [expandedCodeIds, setExpandedCodeIds] = useState<Set<number>>(
+    new Set()
+  );
+
   const getStatusIcon = (isCorrect: boolean) => {
     if (isCorrect) {
       return (
-        <div className='w-[31px] h-[31px] rounded-full border border-primary flex items-center justify-center'>
+        <div className='w-7.75 h-7.75 rounded-full border border-primary flex items-center justify-center'>
           <Correct className='w-3 h-3' />
         </div>
       );
     }
     return (
-      <div className='w-[31px] h-[31px] rounded-full border border-light-black flex items-center justify-center'>
+      <div className='w-7.75 h-7.75 rounded-full border border-light-black flex items-center justify-center'>
         <Unsubmitted className='w-3 h-3' />
       </div>
     );
+  };
+
+  const toggleExpandCode = (codeId: number) => {
+    setExpandedCodeIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(codeId)) {
+        next.delete(codeId);
+      } else {
+        next.add(codeId);
+      }
+      return next;
+    });
   };
 
   return (
@@ -40,11 +58,11 @@ export const AssignmentProgressCard = ({
       </div>
 
       {student.units.map((unit, unitIndex) => (
-        <table key={unit.id} className='w-full'>
+        <table key={unit.id} className='w-full border-collapse'>
           <thead>
             <tr className='text-sm text-secondary-black bg-gray'>
               <th className='text-left font-medium py-4.5 pl-4' colSpan={3}>
-                <div className='flex items-center gap-[13px]'>
+                <div className='flex items-center gap-3.25'>
                   <span className='px-3.5 py-1.5 rounded-full bg-secondary-black text-white text-md font-medium'>
                     {unitIndex + 1}
                   </span>
@@ -62,31 +80,45 @@ export const AssignmentProgressCard = ({
           </thead>
           <tbody>
             {unit.assignments.map((assignment, index) => (
-              <tr
-                key={assignment.id}
-                className='border-b border-purple-stroke last:border-b-0'>
-                <td className='px-4 w-8 py-4.5 text-center text-[16px] text-light-black font-medium'>
-                  <div className='rounded-full border border-purple-stroke w-[31px] h-[31px] flex items-center justify-center'>
-                    {index + 1}
-                  </div>
-                </td>
-                <td className='pl-4.5 py-4.5 text-base text-secondary-black'>
-                  {assignment.title}
-                </td>
-                <td className='w-19 py-4.5 text-center items-center justify-center'>
-                  <div className='flex items-center justify-center'>
-                    {getStatusIcon(assignment.isCorrect)}
-                  </div>
-                </td>
-                <td className='w-25 py-4.5 text-center text-sm text-secondary-black'>
-                  {assignment.score}/{assignment.totalScore}
-                </td>
-                <td className='py-4.5 text-center'>
-                  <button className='px-4 py-1.5 text-sm text-primary cursor-pointer'>
-                    보기
-                  </button>
-                </td>
-              </tr>
+              <React.Fragment key={assignment.id}>
+                <tr className='border-b border-purple-stroke last:border-b-0'>
+                  <td className='px-4 w-8 py-4.5 text-center text-[16px] text-light-black font-medium'>
+                    <div className='rounded-full border border-purple-stroke w-7.75 h-7.75 flex items-center justify-center'>
+                      {index + 1}
+                    </div>
+                  </td>
+                  <td className='pl-4.5 py-4.5 text-base text-secondary-black'>
+                    {assignment.title}
+                  </td>
+                  <td className='w-19 py-4.5 text-center items-center justify-center'>
+                    <div className='flex items-center justify-center'>
+                      {getStatusIcon(assignment.isCorrect)}
+                    </div>
+                  </td>
+                  <td className='w-25 py-4.5 text-center text-sm text-secondary-black'>
+                    {assignment.score}/{assignment.totalScore}
+                  </td>
+                  <td className='py-4.5 text-center'>
+                    <button
+                      className='px-4 py-1.5 text-sm text-primary cursor-pointer hover:underline disabled:opacity-30 disabled:cursor-not-allowed'
+                      disabled={!assignment.submittedCodeId}
+                      onClick={() =>
+                        toggleExpandCode(assignment.submittedCodeId)
+                      }>
+                      {expandedCodeIds.has(assignment.submittedCodeId)
+                        ? '닫기'
+                        : '보기'}
+                    </button>
+                  </td>
+                </tr>
+                {expandedCodeIds.has(assignment.submittedCodeId) && (
+                  <tr>
+                    <td colSpan={5} className='px-4 pb-4 bg-gray/10'>
+                      <CodePreview codeId={assignment.submittedCodeId} />
+                    </td>
+                  </tr>
+                )}
+              </React.Fragment>
             ))}
           </tbody>
         </table>
