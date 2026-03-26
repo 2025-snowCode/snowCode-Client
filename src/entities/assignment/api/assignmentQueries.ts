@@ -47,6 +47,5 @@ export const assignmentQueries = {
     queryOptions({
       queryKey: ['code', codeId],
       queryFn: () => getAssignmentCode(codeId),
-      select: (data) => data.code,
     }),
 };

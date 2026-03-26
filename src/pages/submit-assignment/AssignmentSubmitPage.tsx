@@ -63,7 +63,7 @@ const AssignmentSubmitPage = () => {
                   key={codeId ?? 'new'}
                   onSubmit={onSubmit}
                   isSubmitPending={isSubmitPending}
-                  assignmentCode={assignmentCode}
+                  assignmentCode={assignmentCode?.code}
                   runCode={runCode}
                   isRunning={isRunning}
                 />
