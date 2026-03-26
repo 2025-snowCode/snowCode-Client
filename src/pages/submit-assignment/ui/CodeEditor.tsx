@@ -29,6 +29,12 @@ const editorOptions = {
     enabled: false,
   },
   contextmenu: false,
+  selectionHighlight: false,
+  occurrencesHighlight: 'off',
+  links: false,
+  matchBrackets: 'never' as const,
+  hover: {enabled: false},
+  guides: {indentation: false},
 } as const;
 
 type EditorInstance = Parameters<OnMount>[0];
