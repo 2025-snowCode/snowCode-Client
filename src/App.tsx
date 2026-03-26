@@ -12,6 +12,7 @@ import StudentManagementPage from '@/pages/admin/student/StudentManagementPage';
 import StudentProfilePage from '@/pages/admin/student/StudentProfilePage';
 import KakaoCallbackPage from '@/pages/common/KakaoCallbackPage';
 import PrivateRoute from '@/widgets/private-route/ui/PrivateRoute';
+import CourseOwnershipGuard from '@/widgets/course-ownership-guard/ui/CourseOwnershipGuard';
 import {useSyncUserRole} from '@/features/auth/sync-user-role/model/useSyncUserRole';
 import AssignmentManagePage from '@/pages/manage-assignment/AssignmentManagePage';
 import ChatPage from '@/pages/chat/ChatPage';
@@ -36,7 +37,9 @@ const AppRoutes = () => {
         <Route element={<PrivateRoute allowedRoles={['student']} />}>
           <Route path='student'>
             <Route index element={<Dashboard />} />
-            <Route path='courses/:id' element={<CourseOverviewPage />} />
+            <Route path='courses/:courseId' element={<CourseOwnershipGuard />}>
+              <Route index element={<CourseOverviewPage />} />
+            </Route>
             <Route path='chat' element={<ChatPage />} />
           </Route>
         </Route>
@@ -58,20 +61,21 @@ const AppRoutes = () => {
               path='assignments/select'
               element={<AssignmentSelectPage />}
             />
-            <Route path='courses/:id' element={<CourseOverviewPage />} />
             <Route path='courses/create' element={<CourseCreatePage />} />
-            <Route path='courses/:id/edit' element={<CourseEditPage />} />
-            <Route
-              path='courses/:courseId/students'
-              element={<StudentManagementPage />}
-            />
-            <Route
-              path='courses/:courseId/students/:studentId'
-              element={<StudentProfilePage />}
-            />
-            <Route path='units/:courseId' element={<UnitLayout />}>
-              <Route path='create' element={<UnitCreatePage />} />
-              <Route path='edit/:unitId' element={<UnitEditPage />} />
+            <Route path='courses/:courseId' element={<CourseOwnershipGuard />}>
+              <Route index element={<CourseOverviewPage />} />
+              <Route path='edit' element={<CourseEditPage />} />
+              <Route path='students' element={<StudentManagementPage />} />
+              <Route
+                path='students/:studentId'
+                element={<StudentProfilePage />}
+              />
+            </Route>
+            <Route path='units/:courseId' element={<CourseOwnershipGuard />}>
+              <Route element={<UnitLayout />}>
+                <Route path='create' element={<UnitCreatePage />} />
+                <Route path='edit/:unitId' element={<UnitEditPage />} />
+              </Route>
             </Route>
             <Route path='chat' element={<ChatPage />} />
           </Route>
@@ -81,16 +85,20 @@ const AppRoutes = () => {
       {/* 과제 제출 페이지 */}
       <Route element={<AssignmentSubmitLayout />}>
         <Route element={<PrivateRoute allowedRoles={['admin']} />}>
-          <Route
-            path='admin/courses/:courseId/assignments/:assignmentId'
-            element={<AssignmentSubmitPage />}
-          />
+          <Route path='admin/courses/:courseId' element={<CourseOwnershipGuard />}>
+            <Route
+              path='assignments/:assignmentId'
+              element={<AssignmentSubmitPage />}
+            />
+          </Route>
         </Route>
         <Route element={<PrivateRoute allowedRoles={['student']} />}>
-          <Route
-            path='student/courses/:courseId/assignments/:assignmentId'
-            element={<AssignmentSubmitPage />}
-          />
+          <Route path='student/courses/:courseId' element={<CourseOwnershipGuard />}>
+            <Route
+              path='assignments/:assignmentId'
+              element={<AssignmentSubmitPage />}
+            />
+          </Route>
         </Route>
       </Route>
     </Routes>

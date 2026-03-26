@@ -19,7 +19,7 @@ export const UnitList = ({
   const {unitId} = useParams();
 
   return (
-    <div className='flex flex-col h-full custom-scrollbar'>
+    <div className='flex flex-col h-full'>
       {/* 단원 리스트 헤더 */}
       <h2 className='px-12 mt-8 mb-7.5 text-2xl/9 font-semibold'>단원 보기</h2>
 

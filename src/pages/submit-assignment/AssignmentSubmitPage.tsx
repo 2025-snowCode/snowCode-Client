@@ -11,8 +11,14 @@ import Terminal from './ui/Terminal';
 import {useCodeExecution} from '@/features/assignment/run-assignment/lib/useCodeExecution';
 import EllipsisIcon from '@/assets/svg/ellipsisIcon.svg?react';
 import AssignmentProblem from './ui/AssignmentProblem';
+import ChatQuestionModal from '@/features/chat/ui/ChatQuestionModal';
+import ChatIcon from '@/assets/svg/chatIcon.svg?react';
+import {useState, useRef} from 'react';
+import type {CodeEditorRef} from './ui/CodeEditor';
 
 const AssignmentSubmitPage = () => {
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const editorRef = useRef<CodeEditorRef>(null);
   const location = useLocation();
   const {courseId, assignmentId} = useParams();
   const {index, codeId} = (location.state ?? {}) as {
@@ -60,10 +66,11 @@ const AssignmentSubmitPage = () => {
               style={{overflow: 'hidden'}}>
               {isEditorReady ? (
                 <CodeEditor
+                  ref={editorRef}
                   key={codeId ?? 'new'}
                   onSubmit={onSubmit}
                   isSubmitPending={isSubmitPending}
-                  assignmentCode={assignmentCode}
+                  assignmentCode={assignmentCode?.code}
                   runCode={runCode}
                   isRunning={isRunning}
                 />
@@ -82,6 +89,29 @@ const AssignmentSubmitPage = () => {
           </Group>
         </div>
       </div>
+
+      {/* 질문하기 플로팅 버튼 */}
+      {courseDetails.chatRoomId && (
+        <button
+          onClick={() => setIsChatOpen(true)}
+          className='fixed bottom-8 right-8 z-40 w-14 h-14 bg-primary text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform cursor-pointer group'
+        >
+          <ChatIcon className='w-6 h-6' />
+          <div className='absolute right-full mr-3 px-3 py-1 bg-primary text-white text-xs font-semibold rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-lg'>
+            질문하기
+          </div>
+        </button>
+      )}
+
+      {/* 채팅 모달 */}
+      {isChatOpen && courseDetails.chatRoomId && (
+        <ChatQuestionModal
+          chatRoomId={courseDetails.chatRoomId}
+          assignmentTitle={assignment.title}
+          getCurrentCode={() => editorRef.current?.getValue() || assignmentCode?.code || ''}
+          closeModal={() => setIsChatOpen(false)}
+        />
+      )}
 
       {/* 제출 결과 모달 */}
       {isModalOpen && result && (

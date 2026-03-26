@@ -1,4 +1,5 @@
-import {useParams} from 'react-router-dom';
+import {useParams, useNavigate} from 'react-router-dom';
+import {ROUTES} from '@/shared/config/routes';
 import SurfaceCard from '@/shared/ui/SurfaceCard';
 import {StudentProfile} from '@/entities/student/ui/StudentProfile';
 import {AssignmentProgressCard} from '@/entities/student/ui/AssignmentProgressCard';
@@ -10,6 +11,7 @@ export default function StudentProfilePage() {
     courseId: string;
     studentId: string;
   }>();
+  const navigate = useNavigate();
 
   const {data: student} = useQuery(
     studentQueries.getEnrollmentById(Number(courseId), Number(studentId))
@@ -20,8 +22,14 @@ export default function StudentProfilePage() {
   }
 
   return (
-    <div className='relative left-1/2 -translate-x-1/2 w-fit flex items-center gap-6'>
-      <StudentProfile name={student.name} studentId={student.studentId} />
+    <div className='relative left-1/2 -translate-x-1/2 w-fit flex items-start gap-6'>
+      <div className='sticky top-6'>
+        <StudentProfile
+          name={student.name}
+          studentId={student.studentId}
+          onChat={() => navigate(`${ROUTES.ADMIN.CHAT}?memberId=${student.id}`)}
+        />
+      </div>
       <SurfaceCard size='medium' className='w-184.25 min-w-0 shrink-0'>
         <AssignmentProgressCard student={student} />
       </SurfaceCard>

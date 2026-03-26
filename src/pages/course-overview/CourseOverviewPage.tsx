@@ -6,7 +6,7 @@ import {useSuspenseQuery} from '@tanstack/react-query';
 import {courseQueries} from '@/entities/course/api/courseQueries';
 
 const CourseOverviewPage = () => {
-  const {id} = useParams();
+  const {courseId: id} = useParams();
   const courseId = Number(id);
   const {data: course} = useSuspenseQuery(
     courseQueries.getCourseDetails(courseId)
