@@ -49,13 +49,13 @@ export default function LandingPage() {
   return (
     <div className='relative flex flex-col justify-center items-center text-center'>
       {/* 상단 오른쪽 "다음으로" 버튼 */}
-      <div className='absolute top-0 right-15 flex items-center gap-4'>
+      <div className='absolute top-0 right-15 flex items-center gap-4 hover:text-primary'>
         <ArrowrightIcon className='w-4.5 h-6' />
         <Button
           color='ghost'
           onClick={handleNextClick}
           size='none'
-          className='leading-7 text-lg'>
+          className='leading-7 text-lg hover:text-primary'>
           다음으로
         </Button>
       </div>

@@ -77,13 +77,13 @@ export default function UserIdInputPage() {
 
   return (
     <div className='relative flex flex-col items-center text-center'>
-      <div className='absolute top-0 left-15 flex items-center gap-4'>
+      <div className='absolute top-0 left-15 flex items-center gap-4 hover:text-primary'>
         <ArrowleftIcon className='w-4.5 h-6' />
         <Button
           color='ghost'
           onClick={handleBeforeClick}
           size='none'
-          className='leading-7 text-lg hover:text-primary transition-colors'>
+          className='leading-7 text-lg hover:text-primary'>
           이전으로
         </Button>
       </div>
