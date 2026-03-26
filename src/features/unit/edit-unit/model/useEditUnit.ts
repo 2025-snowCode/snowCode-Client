@@ -50,9 +50,7 @@ export const useEditUnit = ({courseId, unitId}: UseEditUnitProps) => {
   };
 
   const remove = () => {
-    if (window.confirm('정말로 이 단원을 삭제하시겠습니까?')) {
-      deleteUnit(unitId);
-    }
+    deleteUnit(unitId);
   };
 
   return {submit, remove, isUpdating};
