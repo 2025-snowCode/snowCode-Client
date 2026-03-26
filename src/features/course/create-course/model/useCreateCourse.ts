@@ -6,10 +6,12 @@ import {useNavigate} from 'react-router-dom';
 import {ROUTES} from '@/shared/config/routes';
 import {type CourseFormValues} from '@/features/course/create-course/model/schemas';
 import {parseSemester} from '@/shared/lib/course';
+import {useToastStore} from '@/shared/model/useToastStore';
 
 export const useCreateCourse = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const {showToast} = useToastStore();
 
   const {mutate, isPending} = useMutation({
     mutationFn: createCourse,
@@ -17,6 +19,7 @@ export const useCreateCourse = () => {
       queryClient.invalidateQueries({
         queryKey: courseQueries.getAllCourses().queryKey,
       });
+      showToast('강의가 개설되었습니다.');
       navigate(ROUTES.ADMIN.ROOT);
     },
     onError: (error) => {

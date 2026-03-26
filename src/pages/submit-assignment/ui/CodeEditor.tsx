@@ -3,6 +3,7 @@ import {Editor, type Monaco, type OnMount} from '@monaco-editor/react';
 import {useRef} from 'react';
 import PlayIcon from '@/assets/svg/playIcon.svg?react';
 import OneDarkPro from '@/themes/onedarkpro.json';
+import LoaderIcon from '@/assets/svg/loader.svg?react';
 
 const editorOptions = {
   fontLigatures: true,
@@ -27,6 +28,7 @@ const editorOptions = {
   parameterHints: {
     enabled: false,
   },
+  contextmenu: false,
 } as const;
 
 type EditorInstance = Parameters<OnMount>[0];
@@ -53,11 +55,6 @@ const CodeEditor = ({
       base: 'vs-dark',
       inherit: true,
       ...OneDarkPro,
-      rules: [...OneDarkPro.rules, {token: 'comment', foreground: '#C4FFA4'}],
-      colors: {
-        ...OneDarkPro.colors,
-        'editor.background': '#2C2A36',
-      },
     });
   };
 
@@ -90,7 +87,10 @@ const CodeEditor = ({
             onClick={handleRunCode}
             disabled={isRunning}>
             {isRunning ? (
-              '실행 중...'
+              <div className='flex-center gap-1.5 opacity-80'>
+                <LoaderIcon className='animate-spin text-base text-white' />
+                실행 중...
+              </div>
             ) : (
               <>
                 <PlayIcon className='w-3 h-3' />

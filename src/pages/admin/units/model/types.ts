@@ -7,7 +7,7 @@ export type TUnitLayoutContext = {
 };
 
 export type UnitFormHandle = {
-  reset: () => void;
+  reset: (values?: Partial<TUnitFormSchema>) => void;
   getValues: () => TUnitFormSchema;
   requestSubmit: () => void;
 };
