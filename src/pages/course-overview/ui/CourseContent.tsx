@@ -39,7 +39,7 @@ const EmptyCourse = ({courseId}: {courseId: number}) => {
         src={snowCodeOverview}
         alt='snowCode 이미지'
       />
-      <p className='mb text-base leading-7 font-normal'>비어있는 강의</p>
+      <p className='text-base leading-7 font-normal'>비어있는 강의</p>
       <p className='mb-5 text-xl leading-9 font-medium'>
         아직 생성된 단원이 없어요
       </p>
