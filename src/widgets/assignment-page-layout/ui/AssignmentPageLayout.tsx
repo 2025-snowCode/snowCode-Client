@@ -1,6 +1,6 @@
 import SurfaceCard from '@/shared/ui/SurfaceCard';
 import {CourseSelector} from '@/features/course/filter-course';
-import type {ReactNode} from 'react';
+import {Suspense, type ReactNode} from 'react';
 
 interface AssignmentPageLayoutProps {
   title: string;
@@ -24,11 +24,17 @@ export const AssignmentPageLayout = ({
       {/* 상단 영역  */}
       <div className='flex flex-col gap-4 justify-start pt-9.5 pb-5.5 border-b border-purple-stroke'>
         <h1 className='text-primary-black text-2xl/9 font-semibold'>{title}</h1>
-        <CourseSelector options={courseOptions} value={courseValue} onSelect={onCourseSelect} />
+        <CourseSelector
+          options={courseOptions}
+          value={courseValue}
+          onSelect={onCourseSelect}
+        />
       </div>
 
       {/* 문제 목록 영역 */}
-      <section className='pt-10'>{list}</section>
+      <Suspense>
+        <section className='pt-10'>{list}</section>
+      </Suspense>
 
       {/* 하단 버튼 영역 */}
       <div className='mb-8.5 mt-auto flex justify-end'>{buttons}</div>
