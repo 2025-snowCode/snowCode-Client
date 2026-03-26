@@ -9,7 +9,9 @@ export const courseQueries = {
       queryFn: getAllCourses,
       select: (data) => ({
         courseCount: data.count,
-        courses: data.courses,
+        courses: data.courses.sort(
+          (a, b) => b.year - a.year || b.semester.localeCompare(a.semester)
+        ),
       }),
     }),
 

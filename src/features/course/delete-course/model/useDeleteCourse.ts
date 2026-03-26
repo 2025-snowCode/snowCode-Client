@@ -3,9 +3,11 @@ import {deleteCourse} from '@/entities/course/api/courseApi';
 import {courseQueries} from '@/entities/course/api/courseQueries';
 import {assignmentQueries} from '@/entities/assignment/api/assignmentQueries';
 import {handleApiError} from '@/shared/lib/handleApiError';
+import {useToastStore} from '@/shared/model/useToastStore';
 
 export const useDeleteCourse = (courseId: number, onSuccess?: () => void) => {
   const queryClient = useQueryClient();
+  const {showToast} = useToastStore();
 
   const {mutate, isPending} = useMutation({
     mutationFn: () => deleteCourse(courseId),
@@ -16,6 +18,7 @@ export const useDeleteCourse = (courseId: number, onSuccess?: () => void) => {
       queryClient.invalidateQueries({
         queryKey: assignmentQueries.getAssignmentSchedules().queryKey,
       });
+      showToast('강의가 삭제되었습니다.');
       onSuccess?.();
     },
     onError: (error) => {

@@ -17,12 +17,14 @@ export const formatSemester = (semester: SemesterCode) => {
 const SEMESTER_PARSE_MAP = {
   '1학기': 'FIRST',
   '2학기': 'SECOND',
-  '여름학기': 'SUMMER',
-  '겨울학기': 'WINTER',
+  여름학기: 'SUMMER',
+  겨울학기: 'WINTER',
 } as const;
 
 // 학기 파싱 (한국어 → 코드)
-export const parseSemester = (display: keyof typeof SEMESTER_PARSE_MAP): SemesterCode => {
+export const parseSemester = (
+  display: keyof typeof SEMESTER_PARSE_MAP
+): SemesterCode => {
   return SEMESTER_PARSE_MAP[display];
 };
 
@@ -34,8 +36,7 @@ export const formatDate = (date: string) => {
 // MM.DD 형식으로 변환
 export const formatDateMonthDay = (date: string) => {
   const [, month, day] = date.split('-');
-
-  return `${month}.${day}`;
+  return `${Number(month)}.${Number(day)}`;
 };
 
 // 년/학기/분반 형식으로 변환

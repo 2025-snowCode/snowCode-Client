@@ -2,6 +2,7 @@ import {Outlet} from 'react-router-dom';
 import Header from '@/shared/ui/Header';
 import {Suspense} from 'react';
 import Loading from './Loading';
+import Toast from './Toast';
 
 const Layout = () => {
   return (
@@ -13,6 +14,7 @@ const Layout = () => {
           </div>
 
           <main>
+            <Toast />
             <Outlet />
           </main>
         </div>

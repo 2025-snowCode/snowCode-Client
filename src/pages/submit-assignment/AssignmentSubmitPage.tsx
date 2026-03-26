@@ -35,7 +35,7 @@ const AssignmentSubmitPage = () => {
   const {runCode, output, isRunning} = useCodeExecution();
 
   const {onSubmit, result, isSubmitPending, isModalOpen, closeModal} =
-    useAssignmentSubmission(courseDetails, Number(assignmentId)); // result 임시 제거
+    useAssignmentSubmission(courseDetails, Number(assignmentId));
 
   const isEditorReady = !codeId || (codeId && assignmentCode);
 
