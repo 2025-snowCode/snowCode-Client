@@ -6,7 +6,11 @@ const Toast = () => {
 
   return (
     isOpen && (
-      <div className='fixed top-10 left-1/2 -translate-x-1/2 z-100 flex-center'>
+      <div
+        className='fixed top-10 left-1/2 -translate-x-1/2 z-100 flex-center'
+        role='status'
+        aria-live='polite'
+        aria-atomic='true'>
         <div className='flex items-center gap-3 bg-white p-4 rounded-md shadow-card'>
           <div className='bg-primary/5 p-2 rounded-md'>
             <CheckIcon className='w-4 h-4 text-primary' />
