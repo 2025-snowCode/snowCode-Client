@@ -1,14 +1,45 @@
 import {useState} from 'react';
+import {tv} from 'tailwind-variants';
 import type {TChatRoomDetail} from '@/entities/chat/model/schemas';
 import {formatTime, formatDateLabel, getDateKey} from '@/shared/lib/chat';
 import ChatRoomItem from '@/entities/chat/ui/ChatRoomItem';
 import ChatProfile from '@/entities/chat/ui/ChatProfile';
+
+const panelStyles = tv({
+  slots: {
+    container: 'flex-1 bg-white flex flex-col overflow-hidden',
+    messageContainer: 'flex-1 overflow-y-auto flex flex-col gap-1 custom-scrollbar',
+    inputArea: 'border-t border-stroke flex flex-col gap-2',
+    emptyState: 'flex-1 bg-white flex-center text-light-black',
+  },
+  variants: {
+    isCompact: {
+      true: {
+        container: '',
+        messageContainer: 'px-4 py-2',
+        inputArea: 'px-4 py-3',
+        emptyState: 'rounded-b-[20px]',
+      },
+      false: {
+        container: 'rounded-[20px] shadow-card',
+        messageContainer: 'px-6 py-4',
+        inputArea: 'px-5 py-4',
+        emptyState: 'rounded-[20px]',
+      },
+    },
+  },
+  defaultVariants: {
+    isCompact: false,
+  },
+});
 
 interface ChatMessagePanelProps {
   chatRoom: TChatRoomDetail | null;
   lastMessage?: string;
   myMemberId: number;
   onSendMessage: (content: string) => boolean;
+  customActions?: React.ReactNode;
+  isCompact?: boolean;
 }
 
 interface MessageItemProps {
@@ -72,15 +103,16 @@ export default function ChatMessagePanel({
   lastMessage = '',
   myMemberId,
   onSendMessage,
+  customActions,
+  isCompact = false,
 }: ChatMessagePanelProps) {
   const [input, setInput] = useState('');
+  const {container, messageContainer, inputArea, emptyState} = panelStyles({
+    isCompact,
+  });
 
   if (!chatRoom) {
-    return (
-      <div className='flex-1 bg-white rounded-[20px] flex-center text-light-black'>
-        채팅방을 선택해주세요
-      </div>
-    );
+    return <div className={emptyState()}>채팅방을 선택해주세요</div>;
   }
 
   const handleSend = () => {
@@ -111,19 +143,21 @@ export default function ChatMessagePanel({
   }
 
   return (
-    <div className='flex-1 bg-white rounded-[20px] shadow-card flex flex-col overflow-hidden'>
+    <div className={container()}>
       {/* 헤더 */}
-      <div className='px-6 py-4 border-b border-stroke'>
-        <ChatRoomItem
-          memberId={chatRoom.opponentId}
-          name={chatRoom.opponentName}
-          studentId={chatRoom.opponentStudentId ?? ''}
-          lastMessage={lastMessage}
-        />
-      </div>
+      {!isCompact && (
+        <div className='px-6 py-4 border-b border-stroke'>
+          <ChatRoomItem
+            memberId={chatRoom.opponentId}
+            name={chatRoom.opponentName}
+            studentId={chatRoom.opponentStudentId ?? ''}
+            lastMessage={lastMessage}
+          />
+        </div>
+      )}
 
       {/* 메시지 영역 */}
-      <div className='flex-1 overflow-y-auto px-6 py-4 flex flex-col gap-1 custom-scrollbar'>
+      <div className={messageContainer()}>
         {dateGroups.map(({dateKey, label, messages}) => (
           <div key={dateKey}>
             {/* 날짜 구분선 */}
@@ -162,26 +196,29 @@ export default function ChatMessagePanel({
         ))}
       </div>
 
-      {/* 입력창 */}
-      <div className='px-5 py-4 flex items-center gap-3'>
-        <input
-          className='flex-1 bg-white rounded-[40px] px-5 py-2 text-sm outline-none shadow-card placeholder:text-light-black'
-          placeholder='채팅을 입력하세요...'
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
-              e.preventDefault();
-              handleSend();
-            }
-          }}
-        />
-        <button
-          className='px-5 py-2 bg-primary text-white rounded-[40px] text-sm font-medium shadow-card disabled:opacity-40 hover:bg-hover transition-colors shrink-0'
-          disabled={!input.trim()}
-          onClick={handleSend}>
-          보내기
-        </button>
+      {/* 액션 및 입력창 */}
+      <div className={inputArea()}>
+        {customActions && <div className='flex items-center gap-2'>{customActions}</div>}
+        <div className='flex items-center gap-3'>
+          <input
+            className='flex-1 bg-white rounded-[40px] px-5 py-2 text-sm outline-none shadow-card border border-stroke placeholder:text-light-black'
+            placeholder='채팅을 입력하세요...'
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && !e.shiftKey && !e.nativeEvent.isComposing) {
+                e.preventDefault();
+                handleSend();
+              }
+            }}
+          />
+          <button
+            className='px-5 py-2 bg-primary text-white rounded-[40px] text-sm font-medium shadow-card disabled:opacity-40 hover:bg-hover transition-colors shrink-0'
+            disabled={!input.trim()}
+            onClick={handleSend}>
+            보내기
+          </button>
+        </div>
       </div>
     </div>
   );
