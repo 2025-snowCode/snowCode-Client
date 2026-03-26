@@ -57,7 +57,7 @@ const UnitFormLayout = ({
           description='삭제된 단원은 복구할 수 없습니다.'
           confirmLabel='삭제'
           cancelLabel='취소'
-          onConfirm={onDelete ?? (() => {})}
+          onConfirm={() => onDelete?.()}
           onCancel={() => setIsDeleteModalOpen(false)}
         />
       )}
