@@ -33,10 +33,14 @@ const EmptyCourse = ({courseId}: {courseId: number}) => {
   const userType = useUserStore((state) => state.userType);
 
   return (
-    <section className='flex-1 flex-center flex-col bg-white w-full pt-30 pb-41 rounded-b-[30px]'>
-      <img className='mb-11' src={snowCodeOverview} alt='snowCode 이미지' />
-      <p className='mb-1.5 text-lg leading-7 font-normal'>비어있는 강의</p>
-      <p className='mb-7 text-2xl leading-9 font-medium'>
+    <section className='flex-1 flex-center flex-col bg-white w-full rounded-b-[30px]'>
+      <img
+        className='-mt-5.5 mb-3 w-40 h-40'
+        src={snowCodeOverview}
+        alt='snowCode 이미지'
+      />
+      <p className='mb text-base leading-7 font-normal'>비어있는 강의</p>
+      <p className='mb-5 text-xl leading-9 font-medium'>
         아직 생성된 단원이 없어요
       </p>
       {/* 강의 관리 버튼은 관리자 전용 */}
