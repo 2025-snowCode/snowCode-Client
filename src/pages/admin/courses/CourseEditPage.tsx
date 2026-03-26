@@ -5,8 +5,10 @@ import AssignmentFormLayout from '@/widgets/assignment-form-layout/ui/Assignment
 import {CourseForm} from '@/widgets/course-form/ui/CourseForm';
 import {useEditCourse} from '@/features/course/edit-course/model/useEditCourse';
 import {courseQueries} from '@/entities/course/api/courseQueries';
+import {studentQueries} from '@/entities/student/api/studentQueries';
 import {formatSemester} from '@/shared/lib/course';
 import type {CourseFormValues} from '@/features/course/create-course/model/schemas';
+import type {TStudent} from '@/entities/student/model/schemas';
 import {useRef} from 'react';
 
 export const CourseEditPage = () => {
@@ -20,6 +22,12 @@ export const CourseEditPage = () => {
     ...courseQueries.getCourseDetails(courseId),
     enabled: isValidId,
   });
+
+  const {data: enrollmentsData} = useQuery({
+    ...studentQueries.getEnrollments(courseId, {page: 0, pageSize: 1000}),
+    enabled: isValidId,
+  });
+
   const {submit, isPending} = useEditCourse(courseId);
 
   if (!isValidId) {
@@ -64,6 +72,7 @@ export const CourseEditPage = () => {
     year: String(data.year) as CourseFormValues['year'],
     semester: formatSemester(data.semester) as CourseFormValues['semester'],
     description: data.description,
+    students: enrollmentsData?.students?.map((s: TStudent) => s.studentId) || [],
   };
 
   return (
