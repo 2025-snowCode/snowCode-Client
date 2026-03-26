@@ -36,6 +36,7 @@ export const courseOverviewSchema = courseBaseSchema.extend({
   studentCount: z.number().optional(),
   unitCount: z.number(),
   units: z.array(unitSchema),
+  chatRoomId: z.number().nullable().optional(),
 });
 
 /** 대시보드 강의 카드용 스키마 */

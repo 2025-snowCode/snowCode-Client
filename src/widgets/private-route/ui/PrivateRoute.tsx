@@ -14,7 +14,9 @@ export default function PrivateRoute({allowedRoles}: PrivateRouteProps) {
   }
 
   if (allowedRoles && !allowedRoles.includes(userType as 'admin' | 'student')) {
-    return <Navigate to='/' replace />;
+    const redirectPath =
+      userType === 'admin' ? ROUTES.ADMIN.ROOT : ROUTES.STUDENT.ROOT;
+    return <Navigate to={redirectPath} replace />;
   }
 
   return <Outlet />;

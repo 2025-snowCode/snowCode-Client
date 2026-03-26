@@ -1,6 +1,6 @@
 import Button from '@/shared/ui/button/Button';
 import {Editor, type Monaco, type OnMount} from '@monaco-editor/react';
-import {useRef} from 'react';
+import {useRef, forwardRef, useImperativeHandle} from 'react';
 import PlayIcon from '@/assets/svg/playIcon.svg?react';
 import OneDarkPro from '@/themes/onedarkpro.json';
 import LoaderIcon from '@/assets/svg/loader.svg?react';
@@ -41,90 +41,93 @@ interface CodeEditorProps {
   assignmentCode?: string;
 }
 
-const CodeEditor = ({
-  onSubmit,
-  isSubmitPending,
-  runCode,
-  isRunning,
-  assignmentCode,
-}: CodeEditorProps) => {
-  const editorRef = useRef<EditorInstance | null>(null);
+export interface CodeEditorRef {
+  getValue: () => string;
+}
 
-  const handleEditorWillMount = (monaco: Monaco) => {
-    monaco.editor.defineTheme('OneDarkPro', {
-      base: 'vs-dark',
-      inherit: true,
-      ...OneDarkPro,
-    });
-  };
+const CodeEditor = forwardRef<CodeEditorRef, CodeEditorProps>(
+  ({onSubmit, isSubmitPending, runCode, isRunning, assignmentCode}, ref) => {
+    const editorRef = useRef<EditorInstance | null>(null);
 
-  const handleEditorDidMount: OnMount = (editor) => {
-    editorRef.current = editor;
-  };
+    useImperativeHandle(ref, () => ({
+      getValue: () => editorRef.current?.getValue() ?? '',
+    }));
 
-  const handleSubmitCode = () => {
-    const sourceCode = editorRef.current?.getValue() ?? '';
-    onSubmit(sourceCode);
-  };
+    const handleEditorWillMount = (monaco: Monaco) => {
+      monaco.editor.defineTheme('OneDarkPro', {
+        base: 'vs-dark',
+        inherit: true,
+        ...OneDarkPro,
+      });
+    };
 
-  const handleRunCode = () => {
-    const sourceCode = editorRef.current?.getValue() ?? '';
-    const input = '';
-    runCode(sourceCode, input);
-  };
+    const handleEditorDidMount: OnMount = (editor) => {
+      editorRef.current = editor;
+    };
 
-  return (
-    <div className='h-full'>
-      <div className='bg-primary-black px-7 pt-4 pb-2.5 flex items-center justify-end'>
-        {/* <Button color='tonal' size='xs' className='text-sm'>
-          제출 이력
-        </Button> */}
-        <div className='flex gap-4'>
-          <Button
-            color='lightBlack'
-            size='xs'
-            className='flex-center gap-2 text-sm'
-            onClick={handleRunCode}
-            disabled={isRunning}>
-            {isRunning ? (
-              <div className='flex-center gap-1.5 opacity-80'>
-                <LoaderIcon className='animate-spin text-base text-white' />
-                실행 중...
-              </div>
-            ) : (
-              <>
-                <PlayIcon className='w-3 h-3' />
-                코드 실행
-              </>
-            )}
-          </Button>
-          <Button
-            color='ghostWhite'
-            size='xs'
-            className='text-sm'
-            onClick={handleSubmitCode}
-            disabled={isSubmitPending}>
-            {isSubmitPending ? '제출 중...' : '제출 및 채점'}
-          </Button>
+    const handleSubmitCode = () => {
+      const sourceCode = editorRef.current?.getValue() ?? '';
+      onSubmit(sourceCode);
+    };
+
+    const handleRunCode = () => {
+      const sourceCode = editorRef.current?.getValue() ?? '';
+      const input = '';
+      runCode(sourceCode, input);
+    };
+
+    return (
+      <div className='h-full'>
+        <div className='bg-primary-black px-7 pt-4 pb-2.5 flex items-center justify-end'>
+          <div className='flex gap-4'>
+            <Button
+              color='lightBlack'
+              size='xs'
+              className='flex-center gap-2 text-sm'
+              onClick={handleRunCode}
+              disabled={isRunning}>
+              {isRunning ? (
+                <div className='flex-center gap-1.5 opacity-80'>
+                  <LoaderIcon className='animate-spin text-base text-white' />
+                  실행 중...
+                </div>
+              ) : (
+                <>
+                  <PlayIcon className='w-3 h-3' />
+                  코드 실행
+                </>
+              )}
+            </Button>
+            <Button
+              color='ghostWhite'
+              size='xs'
+              className='text-sm'
+              onClick={handleSubmitCode}
+              disabled={isSubmitPending}>
+              {isSubmitPending ? '제출 중...' : '제출 및 채점'}
+            </Button>
+          </div>
         </div>
-      </div>
 
-      <Editor
-        theme='OneDarkPro'
-        defaultLanguage='python'
-        defaultValue={assignmentCode}
-        beforeMount={handleEditorWillMount}
-        onMount={handleEditorDidMount}
-        options={{
-          placeholder: '# 코드를 작성하세요',
-          padding: {top: 10, bottom: 15},
-          fontFamily: 'jetbrains mono, monospace',
-          fontSize: 15.5,
-          ...editorOptions,
-        }}
-      />
-    </div>
-  );
-};
+        <Editor
+          theme='OneDarkPro'
+          defaultLanguage='python'
+          defaultValue={assignmentCode}
+          beforeMount={handleEditorWillMount}
+          onMount={handleEditorDidMount}
+          options={{
+            placeholder: '# 코드를 작성하세요',
+            padding: {top: 10, bottom: 15},
+            fontFamily: 'jetbrains mono, monospace',
+            fontSize: 15.5,
+            ...editorOptions,
+          }}
+        />
+      </div>
+    );
+  }
+);
+
+CodeEditor.displayName = 'CodeEditor';
 
 export default CodeEditor;

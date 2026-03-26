@@ -10,7 +10,7 @@ import type {CourseFormValues} from '@/features/course/create-course/model/schem
 import {useRef} from 'react';
 
 export const CourseEditPage = () => {
-  const {id} = useParams<{id: string}>();
+  const {courseId: id} = useParams<{courseId: string}>();
   const courseId = Number(id);
   const isValidId = id !== undefined && !isNaN(courseId);
   const navigate = useNavigate();

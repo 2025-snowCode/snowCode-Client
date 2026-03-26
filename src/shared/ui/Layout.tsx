@@ -7,7 +7,7 @@ import Toast from './Toast';
 const Layout = () => {
   return (
     <Suspense fallback={<Loading />}>
-      <div className='min-h-screen overflow-x-hidden flex justify-center'>
+      <div className='min-h-screen overflow-x-clip flex justify-center'>
         <div className='min-w-289 px-4 py-12'>
           <div className='w-289 pb-8 mx-auto relative z-10'>
             <Header />
