@@ -69,7 +69,7 @@ export default function LandingPage() {
       {/* 텍스트 및 버튼 영역 */}
       <div className='flex flex-col -mt-12'>
         <div className='flex flex-col gap-7'>
-          <span className='text-black-primary text-4xl font-semibold leading-[150%]'>
+          <span className='text-black-primary text-[33px] font-semibold leading-[150%]'>
             환영합니다!
             <br />
             사용자 유형을 선택해주세요.
