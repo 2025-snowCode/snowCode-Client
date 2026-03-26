@@ -16,15 +16,25 @@ export const useEditUnit = ({courseId, unitId}: UseEditUnitProps) => {
   const navigate = useNavigate();
   const {showToast} = useToastStore();
   const queryClient = useQueryClient();
+
+  // 단원 목록 갱신
   const invalidateUnitList = () => {
     queryClient.invalidateQueries({
       queryKey: unitQueries.getUnitList(courseId).queryKey,
     });
   };
 
+  // 단원 상세 갱신
+  const invalidateUnitDetail = () => {
+    queryClient.invalidateQueries({
+      queryKey: unitQueries.getUnitDetail(unitId).queryKey,
+    });
+  };
+
   const {mutate: updateUnit, isPending: isUpdating} = useMutation({
     ...unitMutations.updateUnit,
     onSuccess: () => {
+      invalidateUnitDetail();
       invalidateUnitList();
       showToast('단원이 수정되었습니다.');
     },
@@ -50,9 +60,7 @@ export const useEditUnit = ({courseId, unitId}: UseEditUnitProps) => {
   };
 
   const remove = () => {
-    if (window.confirm('정말로 이 단원을 삭제하시겠습니까?')) {
-      deleteUnit(unitId);
-    }
+    deleteUnit(unitId);
   };
 
   return {submit, remove, isUpdating};

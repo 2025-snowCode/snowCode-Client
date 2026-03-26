@@ -14,10 +14,6 @@ const AssignmentManageActionsBar = ({
 }: AssignmentManageActionsBarProps) => {
   const navigate = useNavigate();
 
-  const handleOnEdit = () => {
-    navigate(ROUTES.ADMIN.ASSIGNMENTS.DETAIL(id));
-  };
-
   const handleOnDelete = () => {
     onDelete(id);
   };
@@ -26,7 +22,7 @@ const AssignmentManageActionsBar = ({
     <div
       className='flex items-center gap-6 *:cursor-pointer *:p-1'
       onClick={(e) => e.stopPropagation()}>
-      <button onClick={handleOnEdit}>
+      <button onClick={() => navigate(ROUTES.ADMIN.ASSIGNMENTS.EDIT(id))}>
         <EditIcon className='w-3.5 h-4' />
       </button>
       <button onClick={handleOnDelete}>
