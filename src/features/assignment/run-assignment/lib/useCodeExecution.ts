@@ -9,10 +9,11 @@ export const useCodeExecution = () => {
   const [output, setOutput] = useState<string | null>(null);
   const [isRunning, setIsRunning] = useState(false);
 
+  const baseURL = import.meta.env.VITE_API_BASE_URL;
+  const wsURL = baseURL.replace('http', 'ws') + '/ws/conn';
+
   const runCode = (code: string, input: string) => {
-    const ws = new WebSocket(
-      `${import.meta.env.VITE_WS_BASE_URL}?token=${accessToken}`
-    );
+    const ws = new WebSocket(`${wsURL}?token=${accessToken}`);
     socketRef.current = ws;
     setIsRunning(true);
 
