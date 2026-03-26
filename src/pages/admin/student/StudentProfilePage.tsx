@@ -27,6 +27,7 @@ export default function StudentProfilePage() {
         <StudentProfile
           name={student.name}
           studentId={student.studentId}
+          email={student.email}
           onChat={() => navigate(`${ROUTES.ADMIN.CHAT}?memberId=${student.id}`)}
         />
       </div>

@@ -6,15 +6,17 @@ interface StudentProfileProps {
   name: string;
   studentId: string;
   onChat?: () => void;
+  email: string;
 }
 
 export const StudentProfile = ({
   name,
   studentId,
   onChat,
+  email,
 }: StudentProfileProps) => {
   const sendEmail = () => {
-    window.location.href = 'mailto:example@gmail.com';
+    window.location.href = `mailto:${email}`;
   };
 
   return (
