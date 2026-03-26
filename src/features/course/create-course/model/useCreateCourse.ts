@@ -34,7 +34,7 @@ export const useCreateCourse = () => {
       year: Number(data.year),
       semester: parseSemester(data.semester),
       description: data.description ?? '',
-      students: [],
+      students: data.students?.map((id) => ({studentId: id})) ?? [],
     });
   };
 
