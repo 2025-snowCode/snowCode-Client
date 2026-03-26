@@ -36,7 +36,7 @@ export const formatDate = (date: string) => {
 // MM.DD 형식으로 변환
 export const formatDateMonthDay = (date: string) => {
   const [, month, day] = date.split('-');
-  return `${Number(month)}.${day}`;
+  return `${Number(month)}.${Number(day)}`;
 };
 
 // 년/학기/분반 형식으로 변환

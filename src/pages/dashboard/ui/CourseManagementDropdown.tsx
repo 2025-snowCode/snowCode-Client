@@ -17,11 +17,9 @@ const CourseManagementDropdown = ({
   courseId,
 }: CourseManagementDropdownProps) => {
   const navigate = useNavigate();
-  const {showToast} = useToastStore();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const {handleDelete, isPending} = useDeleteCourse(courseId, () => {
     setIsDeleteModalOpen(false);
-    showToast('강의가 삭제되었습니다.');
   });
 
   // 드롭다운 메뉴 옵션 선택 핸들러

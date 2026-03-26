@@ -1,12 +1,12 @@
 import {create} from 'zustand';
 
-type ToastStore = {
+interface ToastStore {
   isOpen: boolean;
   message: string;
   timeoutId: ReturnType<typeof setTimeout> | null;
   showToast: (message: string) => void;
   hideToast: () => void;
-};
+}
 
 export const useToastStore = create<ToastStore>()((set, get) => ({
   isOpen: false,

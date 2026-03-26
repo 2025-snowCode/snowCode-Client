@@ -21,11 +21,13 @@ const UnitCreatePage = () => {
   const {title, releaseDate, dueDate, assignments, storeFormData, resetStore} =
     useUnitStore();
 
+  const isFromAssignmentSelct = !!location.state?.fromAssignmentSelect;
+
   useEffect(() => {
-    if (!location.state?.fromAssignmentSelect) {
+    if (!isFromAssignmentSelct) {
       resetStore();
     }
-  }, []);
+  }, [isFromAssignmentSelct, resetStore]);
 
   const {submit, isPending} = useCreateUnit({courseId: Number(courseId)});
 
