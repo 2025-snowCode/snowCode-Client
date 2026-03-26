@@ -5,7 +5,6 @@ import ConfirmModal from '@/shared/ui/ConfirmModal';
 import {useNavigate} from 'react-router-dom';
 import {ROUTES} from '@/shared/config/routes';
 import {useDeleteCourse} from '@/features/course/delete-course/model/useDeleteCourse';
-import {useToastStore} from '@/shared/model/useToastStore';
 
 interface CourseManagementDropdownProps {
   courseId: number;
