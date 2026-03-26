@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 
 import SnowCodeEntry from '@/assets/images/snowCode_entry.svg?react';
@@ -7,12 +7,24 @@ import SnowCodeStudent from '@/assets/images/snowCode_student.svg?react';
 import SnowCodeAdmin from '@/assets/images/snowCode_admin.svg?react';
 import ArrowrightIcon from '@/assets/svg/arrowrightIcon.svg?react';
 import Button from '@/shared/ui/button/Button';
+import {useUserStore} from '@/entities/auth/model/useUserStore';
 
 type HoverState = 'none' | 'student' | 'admin';
 
 export default function LandingPage() {
   const navigate = useNavigate();
+  const {isAuthenticated, userType} = useUserStore();
   const [hover, setHover] = useState<HoverState>('none');
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      if (userType === 'admin') {
+        navigate(ROUTES.ADMIN.ROOT, {replace: true});
+      } else if (userType === 'student') {
+        navigate(ROUTES.STUDENT.ROOT, {replace: true});
+      }
+    }
+  }, [isAuthenticated, userType, navigate]);
   const [selected, setSelected] = useState<'none' | 'student' | 'admin'>(
     'none'
   );

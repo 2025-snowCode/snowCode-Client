@@ -15,6 +15,7 @@ export const courseFormSchema = z.object({
     errorMap: () => ({message: '학기를 선택해주세요.'}),
   }),
   description: z.string().optional(),
+  students: z.array(z.string()).optional(),
 });
 
 export type CourseFormValues = z.infer<typeof courseFormSchema>;

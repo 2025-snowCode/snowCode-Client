@@ -19,7 +19,7 @@ const AssignmentCreatePage = () => {
     <AssignmentFormLayout
       title='문제 등록 및 수정'
       content={
-        <div className='space-y-6 max-w-[728px]'>
+        <div className='space-y-6 w-full'>
           <div className='grid grid-cols-[minmax(0,1fr)_160px] gap-6'>
             <LabeledInput
               label='문제 제목'
