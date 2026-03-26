@@ -58,7 +58,7 @@ const CodePreview = ({codeId}: CodePreviewProps) => {
     <div className='bg-[#2C2A36] w-full h-[400px] rounded-[15px] overflow-hidden border border-white/10 my-2'>
       {isLoading ? (
         <div className='h-full flex items-center justify-center text-white/40 text-sm'>
-          코드를 불러오는 중...ㄴ
+          코드를 불러오는 중...
         </div>
       ) : (
         <Editor
