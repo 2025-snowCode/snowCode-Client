@@ -4,13 +4,15 @@ import ChatRoomList from '@/widgets/chat-room-list/ui/ChatRoomList';
 import ChatMessagePanel from '@/widgets/chat-message-panel/ui/ChatMessagePanel';
 import {chatQueries, useChatSocket} from '@/entities/chat';
 import {useUserStore} from '@/entities/auth/model/useUserStore';
-import {useMemo} from 'react';
+import {useMemo, useEffect} from 'react';
 
 export default function ChatPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const roomIdParam = searchParams.get('roomId');
+  const memberIdParam = searchParams.get('memberId');
   const selectedRoomId =
     roomIdParam !== null && roomIdParam !== '' ? Number(roomIdParam) : null;
+
   const myMemberId = useUserStore((s) => s.memberId) ?? 0;
 
   const {data: chatRoomList} = useQuery(chatQueries.getChatRooms());
@@ -18,6 +20,16 @@ export default function ChatPage() {
     chatQueries.getChatRoomDetail(selectedRoomId)
   );
   const {messages, sendMessage} = useChatSocket(selectedRoomId, myMemberId);
+
+  useEffect(() => {
+    if (!memberIdParam || !chatRoomList) return;
+    const targetRoom = chatRoomList.chatRoomList.find(
+      (r) => r.opponentMemberId === Number(memberIdParam)
+    );
+    if (targetRoom) {
+      setSearchParams({roomId: String(targetRoom.chatRoomId)});
+    }
+  }, [memberIdParam, chatRoomList, setSearchParams]);
 
   const selectedRoom =
     chatRoomList?.chatRoomList.find((r) => r.chatRoomId === selectedRoomId) ??
