@@ -19,7 +19,7 @@ export const UnitList = ({
   const {unitId} = useParams();
 
   return (
-    <div className='flex flex-col h-full'>
+    <div className='flex flex-col h-full custom-scrollbar'>
       {/* 단원 리스트 헤더 */}
       <h2 className='px-12 mt-8 mb-7.5 text-2xl/9 font-semibold'>단원 보기</h2>
 
@@ -48,7 +48,7 @@ export const UnitList = ({
       </ul>
 
       {/* 단원 추가 버튼 */}
-      <div className='px-12 mt-4.5'>
+      <div className='px-12 my-4.5'>
         <Button
           onClick={onAddNewUnit}
           color='primary'
