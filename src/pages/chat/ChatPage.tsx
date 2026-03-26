@@ -17,7 +17,7 @@ export default function ChatPage() {
   const {data: chatRoomDetail} = useQuery(
     chatQueries.getChatRoomDetail(selectedRoomId)
   );
-  const {messages, sendMessage} = useChatSocket(selectedRoomId);
+  const {messages, sendMessage} = useChatSocket(selectedRoomId, myMemberId);
 
   const selectedRoom =
     chatRoomList?.chatRoomList.find((r) => r.chatRoomId === selectedRoomId) ??
