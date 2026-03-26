@@ -2,7 +2,7 @@
  * 서버에서 오는 ISO 문자열이 'Z'(UTC) 표시가 없을 경우를 대비하여
  * 명시적으로 UTC로 해석되도록 보정하는 헬퍼 함수입니다.
  */
-const ensureUTC = (isoString: string) => {
+export const ensureUTC = (isoString: string) => {
   if (!isoString) return isoString;
   const trimmed = isoString.trim();
   // 이미 타임존 정보(Z 또는 +/-)가 있다면 그대로 반환

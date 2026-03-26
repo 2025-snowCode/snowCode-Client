@@ -12,7 +12,7 @@ export const useChatSocket = (
   const clientRef = useRef<Client | null>(null);
   const [messages, setMessages] = useState<TChatMessage[]>([]);
   // 최근 내가 이 탭에서 보낸 메시지들을 추적하여 중복 방지
-  const sentMessagesRef = useRef<Set<string>>(new Set());
+  const sentMessagesRef = useRef<Map<string, number>>(new Map());
 
   useEffect(() => {
     if (!chatRoomId) return;
@@ -29,14 +29,15 @@ export const useChatSocket = (
           const parsed = socketMessageResponseSchema.parse(rawData);
 
           if (parsed.chatRoomId === chatRoomId) {
-            // 이 탭에서 방급 보낸 메시지인지 확인 (중복 방지)
-            const msgKey = `${parsed.content}_${parsed.sendAt.substring(0, 16)}`;
-            if (
-              parsed.senderId === myMemberId &&
-              sentMessagesRef.current.has(msgKey)
-            ) {
-              sentMessagesRef.current.delete(msgKey);
-              return;
+            // 이 탭에서 방금 보낸 메시지인지 확인 (중복 방지)
+            if (parsed.senderId === myMemberId) {
+              const msgKey = parsed.content;
+              const count = sentMessagesRef.current.get(msgKey) ?? 0;
+              if (count > 0) {
+                if (count === 1) sentMessagesRef.current.delete(msgKey);
+                else sentMessagesRef.current.set(msgKey, count - 1);
+                return;
+              }
             }
 
             const message: TChatMessage = {
@@ -83,12 +84,6 @@ export const useChatSocket = (
 
     try {
       const token = useUserStore.getState().accessToken;
-      console.log('메세지 전송 시도:', {
-        destination: '/pub/chat',
-        payload,
-        hasToken: !!token,
-        tokenPrefix: token ? token.substring(0, 10) : 'none',
-      });
 
       client.publish({
         destination: '/pub/chat',
@@ -107,8 +102,11 @@ export const useChatSocket = (
         sendAt: isoString,
       };
 
-      const msgKey = `${payload.content}_${isoString.substring(0, 16)}`;
-      sentMessagesRef.current.add(msgKey);
+      const msgKey = payload.content;
+      sentMessagesRef.current.set(
+        msgKey,
+        (sentMessagesRef.current.get(msgKey) ?? 0) + 1
+      );
 
       setMessages((prev) => [...prev, newMessage]);
 
