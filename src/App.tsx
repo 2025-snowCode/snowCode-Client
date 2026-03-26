@@ -18,12 +18,14 @@ import AssignmentManagePage from '@/pages/manage-assignment/AssignmentManagePage
 import ChatPage from '@/pages/chat/ChatPage';
 import AssignmentSubmitPage from '@/pages/submit-assignment/AssignmentSubmitPage';
 import AssignmentSubmitLayout from '@/pages/submit-assignment/AssignmentSubmitLayout';
-import UnitLayout from './pages/admin/units/UnitLayout';
-import UnitCreatePage from './pages/admin/units/UnitCreatePage';
-import UnitEditPage from './pages/admin/units/UnitEditPage';
+import UnitLayout from '@/pages/admin/units/UnitLayout';
+import UnitCreatePage from '@/pages/admin/units/UnitCreatePage';
+import UnitEditPage from '@/pages/admin/units/UnitEditPage';
+import {useScrollToTop} from '@/shared/lib';
 
 const AppRoutes = () => {
   useSyncUserRole();
+  useScrollToTop();
 
   return (
     <Routes>
@@ -85,7 +87,9 @@ const AppRoutes = () => {
       {/* 과제 제출 페이지 */}
       <Route element={<AssignmentSubmitLayout />}>
         <Route element={<PrivateRoute allowedRoles={['admin']} />}>
-          <Route path='admin/courses/:courseId' element={<CourseOwnershipGuard />}>
+          <Route
+            path='admin/courses/:courseId'
+            element={<CourseOwnershipGuard />}>
             <Route
               path='assignments/:assignmentId'
               element={<AssignmentSubmitPage />}
@@ -93,7 +97,9 @@ const AppRoutes = () => {
           </Route>
         </Route>
         <Route element={<PrivateRoute allowedRoles={['student']} />}>
-          <Route path='student/courses/:courseId' element={<CourseOwnershipGuard />}>
+          <Route
+            path='student/courses/:courseId'
+            element={<CourseOwnershipGuard />}>
             <Route
               path='assignments/:assignmentId'
               element={<AssignmentSubmitPage />}
