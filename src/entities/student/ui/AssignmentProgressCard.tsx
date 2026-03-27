@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import type {StudentDetail} from '@/entities/student/model/types';
 import {ProgressIndicators} from '@/shared/ui/ProgressIndicators';
 import Correct from '@/assets/svg/correct.svg?react';
+import Incorrect from '@/assets/svg/incorrect.svg?react';
 import Unsubmitted from '@/assets/svg/unsubmitted.svg?react';
 import CodePreview from '@/features/student/ui/CodePreview';
 
@@ -16,11 +17,18 @@ export const AssignmentProgressCard = ({
     new Set()
   );
 
-  const getStatusIcon = (isCorrect: boolean) => {
+  const getStatusIcon = (isCorrect: boolean, submittedCodeId: number) => {
     if (isCorrect) {
       return (
         <div className='w-7.75 h-7.75 rounded-full border border-primary flex items-center justify-center'>
           <Correct className='w-3 h-3' />
+        </div>
+      );
+    }
+    if (submittedCodeId) {
+      return (
+        <div className='w-7.75 h-7.75 rounded-full border border-badge-red flex items-center justify-center'>
+          <Incorrect className='w-3 h-3' />
         </div>
       );
     }
@@ -92,7 +100,10 @@ export const AssignmentProgressCard = ({
                   </td>
                   <td className='w-19 py-4.5 text-center items-center justify-center'>
                     <div className='flex items-center justify-center'>
-                      {getStatusIcon(assignment.isCorrect)}
+                      {getStatusIcon(
+                        assignment.isCorrect,
+                        assignment.submittedCodeId
+                      )}
                     </div>
                   </td>
                   <td className='w-25 py-4.5 text-center text-sm text-secondary-black'>
