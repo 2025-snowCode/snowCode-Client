@@ -5,9 +5,6 @@ on:
     branches:
       - release/*
       - main
-  # PR 이벤트 추가로 자동화 범위 확대
-  pull_request:
-    types: [opened, reopened, synchronize]
 
 permissions:
   contents: write
@@ -19,7 +16,7 @@ jobs:
     steps:
       # Checkout 단계 제거 (불필요한 작업 생략)
       - name: Update Draft Release
-        if: startsWith(github.ref, 'refs/heads/release/') || github.event_name == 'pull_request'
+        if: startsWith(github.ref, 'refs/heads/release/')
         uses: release-drafter/release-drafter@v6
         with:
           config-name: template/release-drafter.yml

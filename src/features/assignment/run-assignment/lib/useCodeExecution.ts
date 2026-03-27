@@ -3,7 +3,7 @@ import {apiResponseSchema} from '@/shared/model';
 import {useEffect, useRef, useState} from 'react';
 import z from 'zod';
 
-export const useCodeExecution = () => {
+export const useCodeExecution = (assignmentId?: number) => {
   const {accessToken} = useUserStore();
   const socketRef = useRef<WebSocket | null>(null);
   const [output, setOutput] = useState<string | null>(null);
@@ -39,6 +39,10 @@ export const useCodeExecution = () => {
       setIsRunning(false);
     };
   };
+
+  useEffect(() => {
+    setOutput(null);
+  }, [assignmentId]);
 
   // 언마운트 시 웹소켓 연결 종료
   useEffect(() => {

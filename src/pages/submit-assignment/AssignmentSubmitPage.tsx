@@ -38,7 +38,7 @@ const AssignmentSubmitPage = () => {
     enabled: !!codeId,
   });
 
-  const {runCode, output, isRunning} = useCodeExecution();
+  const {runCode, output, isRunning} = useCodeExecution(Number(assignmentId));
 
   const {onSubmit, result, isSubmitPending, isModalOpen, closeModal} =
     useAssignmentSubmission(courseDetails, Number(assignmentId));
@@ -67,7 +67,8 @@ const AssignmentSubmitPage = () => {
               {isEditorReady ? (
                 <CodeEditor
                   ref={editorRef}
-                  key={codeId ?? 'new'}
+                  id={`code-editor-${assignmentId}`}
+                  key={codeId ?? `new-${assignmentId}`}
                   onSubmit={onSubmit}
                   isSubmitPending={isSubmitPending}
                   assignmentCode={assignmentCode?.code}
@@ -94,8 +95,7 @@ const AssignmentSubmitPage = () => {
       {courseDetails.chatRoomId && (
         <button
           onClick={() => setIsChatOpen(true)}
-          className='fixed bottom-8 right-8 z-40 w-14 h-14 bg-primary text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform cursor-pointer group'
-        >
+          className='fixed bottom-8 right-8 z-40 w-14 h-14 bg-primary text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform cursor-pointer group'>
           <ChatIcon className='w-6 h-6' />
           <div className='absolute right-full mr-3 px-3 py-1 bg-primary text-white text-xs font-semibold rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-lg'>
             질문하기
@@ -108,7 +108,9 @@ const AssignmentSubmitPage = () => {
         <ChatQuestionModal
           chatRoomId={courseDetails.chatRoomId}
           assignmentTitle={assignment.title}
-          getCurrentCode={() => editorRef.current?.getValue() || assignmentCode?.code || ''}
+          getCurrentCode={() =>
+            editorRef.current?.getValue() || assignmentCode?.code || ''
+          }
           closeModal={() => setIsChatOpen(false)}
         />
       )}
