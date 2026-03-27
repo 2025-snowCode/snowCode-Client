@@ -76,19 +76,19 @@ export default function UserIdInputPage() {
   };
 
   return (
-    <div className='relative flex flex-col items-center min-h-[calc(100vh-120px)] text-center'>
-      <div className='absolute top-[43px] left-[60px] flex items-center gap-4'>
-        <ArrowleftIcon className='w-[18px] h-[24px]' />
+    <div className='relative flex flex-col items-center text-center'>
+      <div className='absolute top-0 left-15 flex items-center gap-4 hover:text-primary'>
+        <ArrowleftIcon className='w-4.5 h-6' />
         <Button
           color='ghost'
           onClick={handleBeforeClick}
           size='none'
-          className='leading-7 text-lg hover:text-primary transition-colors'>
+          className='leading-7 text-lg hover:text-primary'>
           이전으로
         </Button>
       </div>
 
-      <div className='w-[216px] h-[216px] mt-19'>
+      <div className='w-54 h-54 mt-10'>
         <img src={SnowCodeEntryMini} alt='SnowCode' />
       </div>
 
@@ -97,7 +97,7 @@ export default function UserIdInputPage() {
           학번을 입력해주세요
         </h1>
 
-        <div className='flex justify-center gap-2.5 mb-13'>
+        <div className='flex justify-center gap-2.5 mb-6.5'>
           {userId.map((digit, i) => (
             <input
               key={i}
@@ -141,7 +141,14 @@ export default function UserIdInputPage() {
           로컬 로그인 (테스트용)
         </button>
 
-        {showLocalForm && <LocalLoginForm isAdmin={isAdmin} studentId={isAdmin ? undefined : (isComplete? userIdString: undefined)} />}
+        {showLocalForm && (
+          <LocalLoginForm
+            isAdmin={isAdmin}
+            studentId={
+              isAdmin ? undefined : isComplete ? userIdString : undefined
+            }
+          />
+        )}
       </div>
     </div>
   );

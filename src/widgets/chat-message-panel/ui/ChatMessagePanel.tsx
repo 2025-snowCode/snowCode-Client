@@ -1,5 +1,7 @@
 import {useState} from 'react';
 import {tv} from 'tailwind-variants';
+import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
+import {oneDark} from 'react-syntax-highlighter/dist/esm/styles/prism';
 import type {TChatRoomDetail} from '@/entities/chat/model/schemas';
 import {formatTime, formatDateLabel, getDateKey} from '@/shared/lib/chat';
 import ChatRoomItem from '@/entities/chat/ui/ChatRoomItem';
@@ -8,7 +10,8 @@ import ChatProfile from '@/entities/chat/ui/ChatProfile';
 const panelStyles = tv({
   slots: {
     container: 'flex-1 bg-white flex flex-col overflow-hidden',
-    messageContainer: 'flex-1 overflow-y-auto flex flex-col gap-1 custom-scrollbar',
+    messageContainer:
+      'flex-1 overflow-y-auto flex flex-col gap-1 custom-scrollbar',
     inputArea: 'border-t border-stroke flex flex-col gap-2',
     emptyState: 'flex-1 bg-white flex-center text-light-black',
   },
@@ -78,12 +81,33 @@ function MessageItem({
         </div>
       )}
 
-      <div
-        className={`max-w-xs px-4 py-2.5 rounded-2xl text-sm whitespace-pre-wrap leading-relaxed ${
-          isMine ? 'bg-primary text-white' : 'bg-background text-primary-black'
-        } ${message.messageType === 'CODE' ? 'font-mono' : ''}`}>
-        {message.content}
-      </div>
+      {message.messageType === 'CODE' ? (
+        <div className='max-w-xs rounded-2xl overflow-hidden text-sm'>
+          <SyntaxHighlighter
+            style={oneDark}
+            PreTag='div'
+            language='python'
+            customStyle={{
+              margin: 0,
+              borderRadius: '1rem',
+              fontSize: '0.75rem',
+              padding: '0.75rem 1rem',
+              maxWidth: '100%',
+              overflowX: 'auto',
+            }}>
+            {message.content}
+          </SyntaxHighlighter>
+        </div>
+      ) : (
+        <div
+          className={`max-w-xs px-4 py-2.5 rounded-2xl text-sm whitespace-pre-wrap leading-relaxed ${
+            isMine
+              ? 'bg-primary text-white'
+              : 'bg-background text-primary-black'
+          }`}>
+          {message.content}
+        </div>
+      )}
 
       {!isMine && (
         <div className='w-12 flex justify-start self-end'>
@@ -198,7 +222,9 @@ export default function ChatMessagePanel({
 
       {/* 액션 및 입력창 */}
       <div className={inputArea()}>
-        {customActions && <div className='flex items-center gap-2'>{customActions}</div>}
+        {customActions && (
+          <div className='flex items-center gap-2'>{customActions}</div>
+        )}
         <div className='flex items-center gap-3'>
           <input
             className='flex-1 bg-white rounded-[40px] px-5 py-2 text-sm outline-none shadow-card border border-stroke placeholder:text-light-black'
@@ -206,7 +232,11 @@ export default function ChatMessagePanel({
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => {
-              if (e.key === 'Enter' && !e.shiftKey && !e.nativeEvent.isComposing) {
+              if (
+                e.key === 'Enter' &&
+                !e.shiftKey &&
+                !e.nativeEvent.isComposing
+              ) {
                 e.preventDefault();
                 handleSend();
               }
