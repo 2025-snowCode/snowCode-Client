@@ -1,10 +1,10 @@
 import {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 
-import snowCodeEntry from '@/assets/images/snowCode_entry.svg';
+import SnowCodeEntry from '@/assets/images/snowCode_entry.svg?react';
 import {ROUTES} from '@/shared/config/routes';
-import snowCodeStudent from '@/assets/images/snowCode_student.svg';
-import snowCodeAdmin from '@/assets/images/snowCode_admin.svg';
+import SnowCodeStudent from '@/assets/images/snowCode_student.svg?react';
+import SnowCodeAdmin from '@/assets/images/snowCode_admin.svg?react';
 import ArrowrightIcon from '@/assets/svg/arrowrightIcon.svg?react';
 import Button from '@/shared/ui/button/Button';
 import {useUserStore} from '@/entities/auth/model/useUserStore';
@@ -39,43 +39,37 @@ export default function LandingPage() {
     }
   };
 
-  const imgSrc =
+  const LogoImg =
     hover === 'student'
-      ? snowCodeStudent
+      ? SnowCodeStudent
       : hover === 'admin'
-        ? snowCodeAdmin
-        : snowCodeEntry;
+        ? SnowCodeAdmin
+        : SnowCodeEntry;
 
   return (
-    <div className='relative flex flex-col justify-center items-center min-h-[calc(100vh-120px)] text-center'>
+    <div className='relative flex flex-col justify-center items-center text-center'>
       {/* 상단 오른쪽 "다음으로" 버튼 */}
-      <div className='absolute top-[43px] right-[60px] flex items-center gap-4'>
-        <ArrowrightIcon className='w-[18px] h-[24px]' />
+      <div className='absolute top-0 right-15 flex items-center gap-4 hover:text-primary'>
+        <ArrowrightIcon className='w-4.5 h-6' />
         <Button
           color='ghost'
           onClick={handleNextClick}
           size='none'
-          className='leading-7 text-lg'>
+          className='leading-7 text-lg hover:text-primary'>
           다음으로
         </Button>
       </div>
 
       {/* 로고 이미지 (선택/호버에 따라 이미지 변경) */}
       <div
-        className={`relative w-[433px] ${
-          imgSrc === snowCodeStudent ? 'h-[439px]' : 'h-[433px]'
-        }`}>
-        <img
-          src={imgSrc}
-          alt='로고'
-          className='w-full h-full transition-all duration-300'
-        />
+        className={`relative w-100 flex-center transition-all duration-700 ${hover !== 'none' ? 'scale-110' : ''}`}>
+        <LogoImg className='w-full h-full' />
       </div>
 
       {/* 텍스트 및 버튼 영역 */}
       <div className='flex flex-col -mt-12'>
         <div className='flex flex-col gap-7'>
-          <span className='text-black-primary text-4xl font-semibold leading-[150%]'>
+          <span className='text-black-primary text-[33px] font-semibold leading-[150%]'>
             환영합니다!
             <br />
             사용자 유형을 선택해주세요.

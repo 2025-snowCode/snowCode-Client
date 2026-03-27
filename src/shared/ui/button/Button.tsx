@@ -1,5 +1,8 @@
 import {twMerge} from 'tailwind-merge';
-import {buttonStyles, type ButtonVariants} from '@/shared/ui/button/button-styles';
+import {
+  buttonStyles,
+  type ButtonVariants,
+} from '@/shared/ui/button/button-styles';
 
 interface ButtonProps extends ButtonVariants {
   children: React.ReactNode;
@@ -19,6 +22,8 @@ const Button = ({
   disabled = false,
   form,
   className,
+  onMouseEnter,
+  onMouseLeave,
   ...props
 }: ButtonProps) => {
   return (
@@ -26,6 +31,8 @@ const Button = ({
       type={type}
       onClick={onClick}
       disabled={disabled}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
       form={form}
       className={twMerge(buttonStyles(props), className)}>
       {children}
