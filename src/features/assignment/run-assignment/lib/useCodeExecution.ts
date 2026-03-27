@@ -1,6 +1,6 @@
 import {useUserStore} from '@/entities/auth/model/useUserStore';
 import {apiResponseSchema} from '@/shared/model';
-import {use, useEffect, useRef, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import z from 'zod';
 
 export const useCodeExecution = (assignmentId?: number) => {
