@@ -62,7 +62,7 @@ export default function LandingPage() {
 
       {/* 로고 이미지 (선택/호버에 따라 이미지 변경) */}
       <div
-        className={`relative w-100 flex-center transition-all duration-800 ${hover !== 'none' ? 'scale-115' : ''}`}>
+        className={`relative w-100 flex-center transition-all duration-700 ${hover !== 'none' ? 'scale-110' : ''}`}>
         <LogoImg className='w-full h-full' />
       </div>
 
