@@ -45,6 +45,7 @@ interface CodeEditorProps {
   runCode: (code: string, input: string) => void;
   isRunning: boolean;
   assignmentCode?: string;
+  id: string;
 }
 
 export interface CodeEditorRef {
@@ -52,7 +53,10 @@ export interface CodeEditorRef {
 }
 
 const CodeEditor = forwardRef<CodeEditorRef, CodeEditorProps>(
-  ({onSubmit, isSubmitPending, runCode, isRunning, assignmentCode}, ref) => {
+  (
+    {onSubmit, isSubmitPending, runCode, isRunning, assignmentCode, id},
+    ref
+  ) => {
     const editorRef = useRef<EditorInstance | null>(null);
 
     useImperativeHandle(ref, () => ({
@@ -116,6 +120,7 @@ const CodeEditor = forwardRef<CodeEditorRef, CodeEditorProps>(
         </div>
 
         <Editor
+          path={id}
           theme='OneDarkPro'
           defaultLanguage='python'
           defaultValue={assignmentCode}

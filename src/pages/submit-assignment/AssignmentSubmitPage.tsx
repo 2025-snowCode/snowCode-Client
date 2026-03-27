@@ -67,6 +67,7 @@ const AssignmentSubmitPage = () => {
               {isEditorReady ? (
                 <CodeEditor
                   ref={editorRef}
+                  id={`code-editor-${assignmentId}`}
                   key={codeId ?? `new-${assignmentId}`}
                   onSubmit={onSubmit}
                   isSubmitPending={isSubmitPending}
