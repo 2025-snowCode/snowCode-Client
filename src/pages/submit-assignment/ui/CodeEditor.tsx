@@ -46,6 +46,7 @@ interface CodeEditorProps {
   isRunning: boolean;
   assignmentCode?: string;
   id: string;
+  onTerminalToggle?: () => void;
 }
 
 export interface CodeEditorRef {
@@ -54,7 +55,15 @@ export interface CodeEditorRef {
 
 const CodeEditor = forwardRef<CodeEditorRef, CodeEditorProps>(
   (
-    {onSubmit, isSubmitPending, runCode, isRunning, assignmentCode, id},
+    {
+      onSubmit,
+      isSubmitPending,
+      runCode,
+      isRunning,
+      assignmentCode,
+      id,
+      onTerminalToggle,
+    },
     ref
   ) => {
     const editorRef = useRef<EditorInstance | null>(null);
@@ -88,7 +97,14 @@ const CodeEditor = forwardRef<CodeEditorRef, CodeEditorProps>(
 
     return (
       <div className='h-full'>
-        <div className='bg-primary-black px-7 pt-4 pb-2.5 flex items-center justify-end'>
+        <div className='bg-primary-black px-7 pt-4 pb-2.5 flex items-center justify-between'>
+          <Button
+            color='tonal'
+            size='xs'
+            className='text-sm'
+            onClick={onTerminalToggle}>
+            제출이력
+          </Button>
           <div className='flex gap-4'>
             <Button
               color='lightBlack'
