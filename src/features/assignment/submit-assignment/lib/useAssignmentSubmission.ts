@@ -1,4 +1,5 @@
 import {assignmentMutations} from '@/entities/assignment/api/assignmentMutations';
+import {assignmentQueries} from '@/entities/assignment/api/assignmentQueries';
 import type {TAssignmentSubmissionResult} from '@/entities/assignment/model/schemas';
 import {courseQueries} from '@/entities/course/api/courseQueries';
 import type {TCourseOverview} from '@/entities/course/model/schemas';
@@ -6,18 +7,15 @@ import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {useState} from 'react';
 
 export const useAssignmentSubmission = (
+  unitId: number,
   courseDetails: TCourseOverview,
-  assignmentId: number
+  assignmentId: number,
+  onSubmitSuccess?: (codeId: number) => void
 ) => {
   const [result, setResult] = useState<TAssignmentSubmissionResult | null>(
     null
   );
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  // unitId 찾기
-  const unitId = courseDetails.units.find((unit) =>
-    unit.assignments.some((assignment) => assignment.id === assignmentId)
-  )?.id;
 
   const queryClient = useQueryClient();
 
@@ -28,6 +26,10 @@ export const useAssignmentSubmission = (
       queryClient.invalidateQueries({
         queryKey: courseQueries.getCourseDetails(courseDetails.id).queryKey,
       });
+      queryClient.invalidateQueries({
+        queryKey: assignmentQueries.getAssignmentSubmissionHistory(unitId, assignmentId).queryKey,
+      });
+      onSubmitSuccess?.(data.codeId);
       setIsModalOpen(true);
       setResult(data);
     },
