@@ -46,7 +46,8 @@ interface CodeEditorProps {
   isRunning: boolean;
   assignmentCode?: string;
   id: string;
-  onTerminalToggle?: () => void;
+  onTerminalToggle: () => void;
+  isTerminalOpen: boolean;
 }
 
 export interface CodeEditorRef {
@@ -63,6 +64,7 @@ const CodeEditor = forwardRef<CodeEditorRef, CodeEditorProps>(
       assignmentCode,
       id,
       onTerminalToggle,
+      isTerminalOpen,
     },
     ref
   ) => {
@@ -103,7 +105,7 @@ const CodeEditor = forwardRef<CodeEditorRef, CodeEditorProps>(
             size='xs'
             className='text-sm'
             onClick={onTerminalToggle}>
-            제출이력
+            {isTerminalOpen ? '제출이력 보기' : '터미널 열기'}
           </Button>
           <div className='flex gap-4'>
             <Button

@@ -114,6 +114,7 @@ const AssignmentSubmitPage = () => {
                   runCode={handleRunCode}
                   isRunning={isRunning}
                   onTerminalToggle={onTerminalToggle}
+                  isTerminalOpen={isTerminalOpen}
                 />
               ) : (
                 <></>
