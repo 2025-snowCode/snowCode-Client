@@ -1,5 +1,6 @@
 import type {TUnit} from '@/entities/unit/model/schemas';
 import type {SemesterCode} from '@/shared/model/types';
+import {ensureUTC} from '@/shared/lib/chat';
 
 const SEMESTER_MAP: Record<SemesterCode, '1' | '2' | '여름' | '겨울'> = {
   FIRST: '1',
@@ -75,4 +76,13 @@ export const formatCourseOptionLabel = (
   section: string
 ) => {
   return `${title} ${formatCourseTermWithSlash(year, semester, section)}`;
+};
+
+// 제출 날짜로부터 며칠 전인지 포맷팅
+export const formatDaysAgo = (isoString: string): string => {
+  const midnight = (d: Date) => d.setHours(0, 0, 0, 0);
+  const days = Math.round(
+    (midnight(new Date()) - midnight(new Date(ensureUTC(isoString)))) / 86400000
+  );
+  return days === 0 ? '오늘' : `${days}일 전`;
 };

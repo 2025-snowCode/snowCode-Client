@@ -68,10 +68,24 @@ export const assignmentCodeSchema = z.object({
   language: z.string(),
 });
 
+export const assignmentSubmissionHistorySchema = z.object({
+  assignmentId: z.number(),
+  submissionList: z.array(
+    z.object({
+      codeId: z.number(),
+      isSuccess: z.boolean(),
+      submittedAt: z.string(),
+    })
+  ),
+});
+
 export type TAssignment = z.infer<typeof assignmentSchema>;
 export type TAssignmentSchedule = z.infer<typeof assignmentScheduleSchema>;
 export type TAssignmentForm = z.infer<typeof assignmentFormSchema>;
 export type TAssignmentDetail = z.infer<typeof assignmentDetailSchema>;
 export type TAssignmentSubmissionResult = z.infer<
   typeof assignmentSubmissionResultSchema
+>;
+export type TAssignmentSubmissionHistory = z.infer<
+  typeof assignmentSubmissionHistorySchema
 >;
