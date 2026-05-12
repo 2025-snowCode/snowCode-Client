@@ -25,7 +25,7 @@ const SubmissionHistoryPanel = ({
               <StatusCircle
                 variant={submission.isSuccess ? 'PASSED' : 'FAILED'}
               />
-              {`#${submissionList.length - index} ${submission.isSuccess ? '모든 테스트 통과' : '테스트 실패'}`}
+              {`#${submissionList.length - index} ${submission.isSuccess ? '맞았습니다!' : '틀렸습니다'}`}
             </span>
             <span className='flex items-center gap-4.75'>
               <time
