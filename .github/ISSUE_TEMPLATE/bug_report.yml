@@ -1,0 +1,44 @@
+name: Bug report
+description: 버그를 보고하여 서비스를 개선하는 데 도움을 주세요.
+title: "[bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 버그 보고서
+        문제를 정확히 파악하기 위해 아래 정보를 최대한 자세히 작성해 주세요.
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: 어떤 버그인가요?
+      description: 발생한 버그를 간략하고 명확하게 설명해 주세요.
+      placeholder: 예시) 로그인 버튼을 눌렀을 때 반응이 없습니다.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: 재현 경로
+      description: 버그가 발생하는 상황을 단계별로 설명해 주세요 (가능하면 Given-When-Then 형식).
+      placeholder: |
+        1. 메인 페이지에 접속합니다.
+        2. 로그인 버튼을 클릭합니다.
+        3. ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected-results
+    attributes:
+      label: 예상 결과
+      description: 원래 기대했던 동작은 무엇이었나요?
+      placeholder: 로그인 팝업이 뜨고 아이디/비밀번호 입력창이 보여야 합니다.
+    validations:
+      required: true
+  - type: textarea
+    id: references
+    attributes:
+      label: 참고 자료 (선택)
+      description: 스크린샷, 오류 로그, 또는 관련 문서 링크를 첨부해 주세요.
+      placeholder: 이미지나 로그 파일을 드래그 앤 드롭 하세요.
+    validations:
+      required: false
