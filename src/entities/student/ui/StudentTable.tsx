@@ -1,42 +1,40 @@
 import {Checkbox} from '@/shared/ui/checkbox/Checkbox';
 import {ProgressIndicators} from '@/shared/ui/ProgressIndicators';
-import {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import type {Student} from '@/entities/student/model/types';
 
 interface StudentTableProps {
   students: Student[];
   courseId: number;
+  selectedIds: Set<number>;
+  onSelectionChange: (newSelected: Set<number>) => void;
 }
 
-export const StudentTable = ({students, courseId}: StudentTableProps) => {
-  const [selectedStudents, setSelectedStudents] = useState<Set<number>>(
-    new Set()
-  );
-  const [selectAll, setSelectAll] = useState(false);
-  useEffect(() => {
-    setSelectedStudents(new Set());
-    setSelectAll(false);
-  }, [students]);
+export const StudentTable = ({
+  students,
+  courseId,
+  selectedIds,
+  onSelectionChange,
+}: StudentTableProps) => {
+  const selectAll =
+    students.length > 0 && selectedIds.size === students.length;
 
   const handleSelectAll = (checked: boolean) => {
-    setSelectAll(checked);
     if (checked) {
-      setSelectedStudents(new Set(students.map((s) => s.id)));
+      onSelectionChange(new Set(students.map((s) => s.id)));
     } else {
-      setSelectedStudents(new Set());
+      onSelectionChange(new Set());
     }
   };
 
   const handleSelectStudent = (id: number, checked: boolean) => {
-    const newSelected = new Set(selectedStudents);
+    const newSelected = new Set(selectedIds);
     if (checked) {
       newSelected.add(id);
     } else {
       newSelected.delete(id);
     }
-    setSelectedStudents(newSelected);
-    setSelectAll(newSelected.size === students.length);
+    onSelectionChange(newSelected);
   };
 
   return (
@@ -61,7 +59,7 @@ export const StudentTable = ({students, courseId}: StudentTableProps) => {
           <tr key={student.id} className='border-b border-stroke h-15'>
             <td className='text-center align-middle'>
               <Checkbox
-                checked={selectedStudents.has(student.id)}
+                checked={selectedIds.has(student.id)}
                 onChange={(checked) => handleSelectStudent(student.id, checked)}
                 aria-label={`${student.name} 학생 선택`}
               />

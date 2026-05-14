@@ -32,38 +32,47 @@ export const studentUnitSchema = z.object({
 });
 
 // 목록 조회용 학생 스키마
-export const studentSchema = z.object({
-  id: z.number(),
-  studentId: z.string(),
-  name: z.string(),
-  score: z.number(),
-  totalScore: z.number(),
-  progress: z.array(studentProgressSchema),
-});
+export const studentSchema = z
+  .object({
+    id: z.number(),
+    studentId: z.union([z.string(), z.number()]).transform((v) => String(v)),
+    name: z.string(),
+    score: z.number(),
+    totalScore: z.number(),
+    progress: z.array(studentProgressSchema),
+  })
+  .passthrough();
 
 // 개별 학생 조회용 스키마
-export const studentDetailSchema = z.object({
-  id: z.number(),
-  name: z.string(),
-  studentId: z.string(),
-  email: z.string(),
-  title: z.string(),
-  score: z.number(),
-  totalScore: z.number(),
-  unitCount: z.number(),
-  progress: z.array(studentProgressSchema),
-  units: z.array(studentUnitSchema),
-});
+export const studentDetailSchema = z
+  .object({
+    id: z.number(),
+    name: z.string(),
+    studentId: z.union([z.string(), z.number()]).transform((v) => String(v)),
+    email: z.string(),
+    title: z.string(),
+    score: z.number(),
+    totalScore: z.number(),
+    unitCount: z.number(),
+    progress: z.array(studentProgressSchema),
+    units: z.array(studentUnitSchema),
+  })
+  .passthrough();
 
 // 목록 조회 response 전체 스키마
-export const enrollmentListSchema = z.object({
-  id: z.number(),
-  title: z.string(),
-  section: z.string(),
-  unitCount: z.number(),
-  studentCount: z.number(),
-  students: z.array(studentSchema),
-});
+export const enrollmentListSchema = z
+  .object({
+    id: z.number(),
+    title: z.string(),
+    section: z.string(),
+    unitCount: z.number(),
+    studentCount: z.number(),
+    students: z
+      .array(studentSchema)
+      .nullish()
+      .transform((v) => v ?? []),
+  })
+  .passthrough();
 
 export type TStudent = z.infer<typeof studentSchema>;
 export type TEnrollmentList = z.infer<typeof enrollmentListSchema>;

@@ -3,8 +3,6 @@ import {useForm} from 'react-hook-form';
 import {zodResolver} from '@hookform/resolvers/zod';
 import LabeledInput from '@/shared/ui/LabeledInput';
 import LabeledDropdown from '@/shared/ui/LabeledDropdown';
-import {Controller} from 'react-hook-form';
-import MultiSelectInput from '@/shared/ui/MultiSelectInput';
 import {
   courseFormSchema,
   YEAR_OPTIONS,
@@ -24,11 +22,13 @@ export const CourseForm = forwardRef<HTMLFormElement, CourseFormProps>(
       handleSubmit,
       setValue,
       watch,
-      control,
       formState: {errors},
     } = useForm<CourseFormValues>({
       resolver: zodResolver(courseFormSchema),
-      defaultValues,
+      defaultValues: {
+        students: [],
+        ...defaultValues,
+      },
     });
 
     return (
@@ -85,23 +85,6 @@ export const CourseForm = forwardRef<HTMLFormElement, CourseFormProps>(
             className='w-full'
             errorMessage={errors.description?.message}
             {...register('description')}
-          />
-
-          <div className='relative left-1/2 h-px w-[calc(100%+112px)] -translate-x-1/2 shrink-0 bg-purple-stroke' />
-
-          <Controller
-            name='students'
-            control={control}
-            render={({field}) => (
-              <MultiSelectInput
-                label='강의 공유'
-                placeholder='공유자를 입력하세요'
-                value={field.value || []}
-                onChange={field.onChange}
-                className='mb-9'
-                errorMessage={errors.students?.message}
-              />
-            )}
           />
         </div>
       </form>

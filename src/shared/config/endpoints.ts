@@ -18,6 +18,9 @@ export const ENDPOINTS = {
     SUBMIT: (unitId: number | string, assignmentId: number | string) =>
       `/assignments/${unitId}/${assignmentId}/code`,
   },
+  TESTCASES: {
+    BULK: (assignmentId: number | string) => `/testcase/${assignmentId}/bulk`,
+  },
   UNITS: {
     BY_COURSE: (courseId: number | string) => `/courses/${courseId}/units`,
     DETAIL: (id: number | string) => `/units/${id}`,
@@ -36,5 +39,7 @@ export const ENDPOINTS = {
       `/courses/${courseId}/enrollments`,
     DETAIL: (courseId: number | string, memberId: number | string) =>
       `/courses/${courseId}/enrollments/${memberId}`,
+    BULK: (courseId: number | string) =>
+      `/courses/${courseId}/enrollments/bulk`,
   },
 } as const;
