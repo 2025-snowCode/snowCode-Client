@@ -84,6 +84,25 @@ export const updateAssignment = async (
   return parsed.response;
 };
 
+// 테스트케이스 JSON 파일 업로드 API
+export const uploadTestcasesBulk = async (
+  assignmentId: number,
+  file: File
+) => {
+  const formData = new FormData();
+  formData.append('file', file);
+
+  const response = await privateAxios.post(
+    ENDPOINTS.TESTCASES.BULK(assignmentId),
+    formData,
+    {
+      headers: {'Content-Type': 'multipart/form-data'},
+    }
+  );
+  const parsed = apiResponseSchema(z.unknown()).parse(response.data);
+  return parsed.response;
+};
+
 // 과제 삭제 API
 export const deleteAssignment = async (assignmentId: number) => {
   const response = await privateAxios.delete(

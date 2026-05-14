@@ -4,6 +4,7 @@ import {
   updateAssignment,
   deleteAssignment,
   submitAssignment,
+  uploadTestcasesBulk,
 } from '@/entities/assignment/api/assignmentApi';
 
 interface UpdateAssignmentVariables {
@@ -26,6 +27,17 @@ export const assignmentMutations = {
     mutationKey: ['updateAssignment'],
     mutationFn: ({assignmentId, form}: UpdateAssignmentVariables) =>
       updateAssignment(assignmentId, form),
+  },
+
+  uploadTestcasesBulk: {
+    mutationKey: ['uploadTestcasesBulk'],
+    mutationFn: ({
+      assignmentId,
+      file,
+    }: {
+      assignmentId: number;
+      file: File;
+    }) => uploadTestcasesBulk(assignmentId, file),
   },
 
   submitAssignment: {
