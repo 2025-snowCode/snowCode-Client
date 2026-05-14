@@ -13,7 +13,7 @@ import EllipsisIcon from '@/assets/svg/ellipsisIcon.svg?react';
 import AssignmentProblem from './ui/AssignmentProblem';
 import ChatQuestionModal from '@/features/chat/ui/ChatQuestionModal';
 import ChatIcon from '@/assets/svg/chatIcon.svg?react';
-import {useState, useRef} from 'react';
+import {useState, useRef, useEffect} from 'react';
 import type {CodeEditorRef} from './ui/CodeEditor';
 import SubmissionHistoryPanel from './ui/SubmissionHistoryPanel';
 
@@ -31,6 +31,10 @@ const AssignmentSubmitPage = () => {
   const [currentCodeId, setCurrentCodeId] = useState<number | undefined>(
     initialCodeId
   );
+
+  useEffect(() => {
+    setCurrentCodeId(initialCodeId);
+  }, [assignmentId]);
 
   const [{data: assignment}, {data: courseDetails}] = useSuspenseQueries({
     queries: [
