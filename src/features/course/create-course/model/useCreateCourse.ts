@@ -32,7 +32,7 @@ export const useCreateCourse = () => {
 
       navigate(ROUTES.ADMIN.ROOT);
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       handleApiError(error, '강의 개설에 실패했습니다. 다시 시도해주세요.');
     },
   });

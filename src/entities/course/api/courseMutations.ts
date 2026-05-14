@@ -3,6 +3,7 @@ import {
   deleteCourse,
   updateCourse,
 } from '@/entities/course/api/courseApi';
+import type {TCourseBase} from '@/entities/course/model/schemas';
 import {
   addEnrollment,
   getEnrollments,
@@ -14,7 +15,7 @@ export const courseMutations = {
     mutationKey: ['createCourse'],
     mutationFn: async (
       payload: Parameters<typeof createCourse>[0]
-    ): Promise<{course: any; failedIds: string[]}> => {
+    ): Promise<{course: TCourseBase; failedIds: string[]}> => {
       const course = await createCourse(payload);
       const students = payload.students ?? [];
 
@@ -51,7 +52,7 @@ export const courseMutations = {
     mutationKey: ['updateCourse', courseId],
     mutationFn: async (
       data: Parameters<typeof updateCourse>[1]
-    ): Promise<{course: any; failedIds: string[]}> => {
+    ): Promise<{course: TCourseBase; failedIds: string[]}> => {
       const course = await updateCourse(courseId, data);
       const students = data.students ?? [];
 
