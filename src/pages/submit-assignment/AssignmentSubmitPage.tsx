@@ -15,16 +15,22 @@ import ChatQuestionModal from '@/features/chat/ui/ChatQuestionModal';
 import ChatIcon from '@/assets/svg/chatIcon.svg?react';
 import {useState, useRef} from 'react';
 import type {CodeEditorRef} from './ui/CodeEditor';
+import SubmissionHistoryPanel from './ui/SubmissionHistoryPanel';
 
 const AssignmentSubmitPage = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [isTerminalOpen, setIsTerminalOpen] = useState(false);
   const editorRef = useRef<CodeEditorRef>(null);
   const location = useLocation();
   const {courseId, assignmentId} = useParams();
-  const {index, codeId} = (location.state ?? {}) as {
+  const {index, codeId: initialCodeId} = (location.state ?? {}) as {
     index?: number;
     codeId?: number;
   };
+
+  const [currentCodeId, setCurrentCodeId] = useState<number | undefined>(
+    initialCodeId
+  );
 
   const [{data: assignment}, {data: courseDetails}] = useSuspenseQueries({
     queries: [
@@ -33,17 +39,50 @@ const AssignmentSubmitPage = () => {
     ],
   });
 
+  // unitId 찾기
+  const unitId = courseDetails.units.find((unit) =>
+    unit.assignments.some(
+      (assignment) => assignment.id === Number(assignmentId)
+    )
+  )?.id;
+
+  const {data: submissionList} = useQuery({
+    ...assignmentQueries.getAssignmentSubmissionHistory(
+      Number(unitId),
+      Number(assignmentId)
+    ),
+    enabled: !!unitId,
+  });
+
   const {data: assignmentCode} = useQuery({
-    ...assignmentQueries.getAssignmentCode(Number(codeId || 0)),
-    enabled: !!codeId,
+    ...assignmentQueries.getAssignmentCode(Number(currentCodeId || 0)),
+    enabled: !!currentCodeId,
   });
 
   const {runCode, output, isRunning} = useCodeExecution(Number(assignmentId));
 
   const {onSubmit, result, isSubmitPending, isModalOpen, closeModal} =
-    useAssignmentSubmission(courseDetails, Number(assignmentId));
+    useAssignmentSubmission(
+      Number(unitId),
+      courseDetails,
+      Number(assignmentId),
+      setCurrentCodeId
+    );
 
-  const isEditorReady = !codeId || (codeId && assignmentCode);
+  const isEditorReady = !currentCodeId || (currentCodeId && assignmentCode);
+
+  const onTerminalToggle = () => {
+    setIsTerminalOpen(!isTerminalOpen);
+  };
+
+  const handleRunCode = (code: string, input: string) => {
+    setIsTerminalOpen(true);
+    runCode(code, input);
+  };
+
+  const onRetrieve = (codeId: number) => {
+    setCurrentCodeId(codeId);
+  };
 
   return (
     <>
@@ -68,12 +107,14 @@ const AssignmentSubmitPage = () => {
                 <CodeEditor
                   ref={editorRef}
                   id={`code-editor-${assignmentId}`}
-                  key={codeId ?? `new-${assignmentId}`}
+                  key={currentCodeId ?? `new-${assignmentId}`}
                   onSubmit={onSubmit}
                   isSubmitPending={isSubmitPending}
                   assignmentCode={assignmentCode?.code}
-                  runCode={runCode}
+                  runCode={handleRunCode}
                   isRunning={isRunning}
+                  onTerminalToggle={onTerminalToggle}
+                  isTerminalOpen={isTerminalOpen}
                 />
               ) : (
                 <></>
@@ -84,8 +125,19 @@ const AssignmentSubmitPage = () => {
               <EllipsisIcon className='w-4.5 h-4.5 text-primary-black' />
             </Separator>
 
-            <Panel id='bottom-panel' minSize='10%'>
-              <Terminal output={output} />
+            <Panel
+              id='bottom-panel'
+              minSize='10%'
+              className={`h-full ${isTerminalOpen ? 'bg-primary-black' : 'bg-light-black'}`}>
+              {isTerminalOpen ? (
+                <Terminal output={output} />
+              ) : (
+                <SubmissionHistoryPanel
+                  submissionList={submissionList || []}
+                  currentCodeId={currentCodeId}
+                  onRetrieve={onRetrieve}
+                />
+              )}
             </Panel>
           </Group>
         </div>

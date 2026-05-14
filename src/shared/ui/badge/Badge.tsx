@@ -49,7 +49,7 @@ const Badge = (props: BadgeProps) => {
     case 'schedule':
       return (
         <span className={scheduleBadgeStyles({schedule: props.schedule})}>
-          {props.children}일 전
+          {props.children}
         </span>
       );
 

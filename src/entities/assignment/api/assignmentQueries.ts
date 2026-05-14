@@ -5,6 +5,7 @@ import {
   getAssignment,
   getAssignmentsByCourse,
   getAssignmentSchedules,
+  getAssignmentSubmissionHistory,
 } from '@/entities/assignment/api/assignmentApi';
 
 export const assignmentQueries = {
@@ -47,5 +48,13 @@ export const assignmentQueries = {
     queryOptions({
       queryKey: ['code', codeId],
       queryFn: () => getAssignmentCode(codeId),
+    }),
+
+  // 과제 제출 이력 조회 쿼리 옵션
+  getAssignmentSubmissionHistory: (unitId: number, assignmentId: number) =>
+    queryOptions({
+      queryKey: ['assignments', unitId, assignmentId, 'submissionHistory'],
+      queryFn: () => getAssignmentSubmissionHistory(unitId, assignmentId),
+      select: (data) => [...data.submissionList].reverse(),
     }),
 };

@@ -20,7 +20,7 @@ const ScheduleCard = ({
         <Badge
           variant='schedule'
           schedule={remainingDays <= 1 ? 'upcoming' : 'later'}>
-          {remainingDays}
+          {remainingDays == 0 ? '오늘' : `${remainingDays}일 전`}
         </Badge>
       </div>
 

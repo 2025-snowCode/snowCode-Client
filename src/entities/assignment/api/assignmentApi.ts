@@ -5,6 +5,7 @@ import {
   assignmentCodeSchema,
   assignmentDetailSchema,
   assignmentScheduleSchema,
+  assignmentSubmissionHistorySchema,
   assignmentSubmissionResultSchema,
   type TAssignmentForm,
 } from '@/entities/assignment/model/schemas';
@@ -106,6 +107,20 @@ export const submitAssignment = async (
     }
   );
   const parsed = apiResponseSchema(assignmentSubmissionResultSchema).parse(
+    response.data
+  );
+  return parsed.response;
+};
+
+// 과제 제출 이력 조회 API
+export const getAssignmentSubmissionHistory = async (
+  unitId: number,
+  assignmentId: number
+) => {
+  const response = await privateAxios.get(
+    ENDPOINTS.ASSIGNMENTS.SUBMIT(unitId, assignmentId)
+  );
+  const parsed = apiResponseSchema(assignmentSubmissionHistorySchema).parse(
     response.data
   );
   return parsed.response;

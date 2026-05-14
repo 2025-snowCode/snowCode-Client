@@ -32,7 +32,8 @@ export const ENDPOINTS = {
     DETAIL: (chatRoomId: number | string) => `/chats/${chatRoomId}`,
   },
   ENROLLMENTS: {
-    BY_COURSE: (courseId: number | string) => `/courses/${courseId}/enrollments`,
+    BY_COURSE: (courseId: number | string) =>
+      `/courses/${courseId}/enrollments`,
     DETAIL: (courseId: number | string, memberId: number | string) =>
       `/courses/${courseId}/enrollments/${memberId}`,
   },
