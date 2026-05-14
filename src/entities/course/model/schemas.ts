@@ -1,6 +1,7 @@
 import {unitSchema} from '@/entities/unit/model/schemas';
 import {semesterCodeSchema} from '@/shared/model/schemas';
 import {z} from 'zod';
+import {studentSchema} from '@/entities/student/model/schemas';
 
 /** 강의 공통 핵심 필드 */
 export const courseCoreSchema = z.object({
@@ -20,7 +21,10 @@ export const courseBaseSchema = courseCoreSchema.extend({
   description: z
     .string()
     .nullish()
-    .transform((v) => v ?? ''), // 응답에서는 기본값 처리
+    .transform((v) => v ?? ''),
+  studentCount: z.number().optional(),
+  unitCount: z.number().optional(),
+  students: z.array(studentSchema).optional(),
 });
 
 /** 강의 추가/수정 요청 스키마 */
@@ -36,6 +40,7 @@ export const courseOverviewSchema = courseBaseSchema.extend({
   studentCount: z.number().optional(),
   unitCount: z.number(),
   units: z.array(unitSchema),
+  students: z.array(studentSchema).optional(),
   chatRoomId: z.number().nullable().optional(),
 });
 

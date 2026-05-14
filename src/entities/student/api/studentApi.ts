@@ -22,5 +22,24 @@ export const getEnrollmentById = async (courseId: number, memberId: number) => {
 
 export const addEnrollment = async (courseId: number, studentId: string) => {
   const res = await privateAxios.post(ENDPOINTS.ENROLLMENTS.BY_COURSE(courseId), {studentId});
-  return apiResponseSchema(z.string()).parse(res.data);
+  return apiResponseSchema(z.unknown()).parse(res.data);
+};
+
+export const addEnrollmentsBulk = async (courseId: number, file: File) => {
+  const formData = new FormData();
+  formData.append('file', file);
+
+  const res = await privateAxios.post(
+    ENDPOINTS.ENROLLMENTS.BULK(courseId),
+    formData
+  );
+
+  return apiResponseSchema(z.unknown()).parse(res.data);
+};
+
+export const deleteEnrollment = async (courseId: number, memberId: number) => {
+  const res = await privateAxios.delete(
+    ENDPOINTS.ENROLLMENTS.DETAIL(courseId, memberId)
+  );
+  return apiResponseSchema(z.unknown()).parse(res.data);
 };

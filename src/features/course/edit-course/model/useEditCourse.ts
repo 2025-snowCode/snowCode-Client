@@ -1,6 +1,6 @@
 import {useMutation, useQueryClient} from '@tanstack/react-query';
-import {updateCourse} from '@/entities/course/api/courseApi';
 import {courseQueries} from '@/entities/course/api/courseQueries';
+import {courseMutations} from '@/entities/course/api/courseMutations';
 import {handleApiError} from '@/shared/lib/handleApiError';
 import {useNavigate} from 'react-router-dom';
 import {ROUTES} from '@/shared/config/routes';
@@ -14,16 +14,25 @@ export const useEditCourse = (courseId: number) => {
   const {showToast} = useToastStore();
 
   const {mutate, isPending} = useMutation({
-    mutationFn: (data: Parameters<typeof updateCourse>[1]) =>
-      updateCourse(courseId, data),
-    onSuccess: () => {
+    ...courseMutations.updateCourse(courseId),
+    onSuccess: (data) => {
       queryClient.invalidateQueries({
         queryKey: courseQueries.getAllCourses().queryKey,
       });
       queryClient.invalidateQueries({
         queryKey: courseQueries.getCourseDetails(courseId).queryKey,
       });
-      showToast('강의가 수정되었습니다.');
+
+      if (data.failedIds.length > 0) {
+        alert(
+          `강의 정보는 수정되었으나, 다음 학생들은 가입되지 않았거나 학번이 올바르지 않아 등록에 실패했습니다:\n${data.failedIds.join(
+            ', '
+          )}`
+        );
+      } else {
+        showToast('강의가 수정되었습니다.');
+      }
+
       navigate(ROUTES.ADMIN.ROOT);
     },
     onError: (error) => {
