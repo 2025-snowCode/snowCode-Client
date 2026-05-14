@@ -49,7 +49,7 @@ export const studentDetailSchema = z
     id: z.number(),
     name: z.string(),
     studentId: z.union([z.string(), z.number()]).transform((v) => String(v)),
-    email: z.string(),
+    email: z.string().nullable(),
     title: z.string(),
     score: z.number(),
     totalScore: z.number(),

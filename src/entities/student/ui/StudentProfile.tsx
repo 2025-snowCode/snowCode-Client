@@ -6,7 +6,7 @@ interface StudentProfileProps {
   name: string;
   studentId: string;
   onChat?: () => void;
-  email: string;
+  email: string | null;
 }
 
 export const StudentProfile = ({
@@ -16,6 +16,10 @@ export const StudentProfile = ({
   email,
 }: StudentProfileProps) => {
   const sendEmail = () => {
+    if (!email) {
+      alert('등록된 이메일이 없습니다.');
+      return;
+    }
     window.location.href = `mailto:${email}`;
   };
 
@@ -45,6 +49,7 @@ export const StudentProfile = ({
           size='compact'
           content='mixed'
           type='button'
+          disabled={!email}
           onClick={sendEmail}>
           <div className='flex gap-2.5 items-center'>
             <MailIcon />
