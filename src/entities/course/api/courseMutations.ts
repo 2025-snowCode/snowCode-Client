@@ -21,29 +21,38 @@ export const courseMutations = {
 
       if (students.length === 0) return {course, failedIds: []};
 
-      const enrollments = await getEnrollments(course.id, {
-        page: 0,
-        pageSize: 1000,
-      });
-      const enrolledStudentIds = new Set(
-        enrollments.response.students.map((s) => s.studentId)
-      );
+      try {
+        const enrollments = await getEnrollments(course.id, {
+          page: 0,
+          pageSize: 1000,
+        });
+        const enrolledStudentIds = new Set(
+          enrollments.response.students.map((s) => String(s.studentId))
+        );
 
-      const missingStudents = students.filter(
-        ({studentId}) => !enrolledStudentIds.has(studentId)
-      );
+        const missingStudents = students.filter(
+          ({studentId}) => !enrolledStudentIds.has(String(studentId))
+        );
 
-      const results = await Promise.allSettled(
-        missingStudents.map(({studentId}) => addEnrollment(course.id, studentId))
-      );
+        const results = await Promise.allSettled(
+          missingStudents.map(({studentId}) =>
+            addEnrollment(course.id, String(studentId))
+          )
+        );
 
-      const failedIds = results
-        .map((result, index) =>
-          result.status === 'rejected' ? missingStudents[index].studentId : null
-        )
-        .filter((id): id is string => id !== null);
+        const failedIds = results
+          .map((result, index) =>
+            result.status === 'rejected'
+              ? String(missingStudents[index].studentId)
+              : null
+          )
+          .filter((id): id is string => id !== null);
 
-      return {course, failedIds};
+        return {course, failedIds};
+      } catch {
+        // 등록 확인 실패 시에도 강의 생성 성공은 유지
+        return {course, failedIds: students.map(({studentId}) => String(studentId))};
+      }
     },
   },
 
@@ -58,29 +67,38 @@ export const courseMutations = {
 
       if (students.length === 0) return {course, failedIds: []};
 
-      const enrollments = await getEnrollments(courseId, {
-        page: 0,
-        pageSize: 1000,
-      });
-      const enrolledStudentIds = new Set(
-        enrollments.response.students.map((student) => student.studentId)
-      );
+      try {
+        const enrollments = await getEnrollments(courseId, {
+          page: 0,
+          pageSize: 1000,
+        });
+        const enrolledStudentIds = new Set(
+          enrollments.response.students.map((student) => String(student.studentId))
+        );
 
-      const missingStudents = students.filter(
-        ({studentId}) => !enrolledStudentIds.has(studentId)
-      );
+        const missingStudents = students.filter(
+          ({studentId}) => !enrolledStudentIds.has(String(studentId))
+        );
 
-      const results = await Promise.allSettled(
-        missingStudents.map(({studentId}) => addEnrollment(courseId, studentId))
-      );
+        const results = await Promise.allSettled(
+          missingStudents.map(({studentId}) =>
+            addEnrollment(courseId, String(studentId))
+          )
+        );
 
-      const failedIds = results
-        .map((result, index) =>
-          result.status === 'rejected' ? missingStudents[index].studentId : null
-        )
-        .filter((id): id is string => id !== null);
+        const failedIds = results
+          .map((result, index) =>
+            result.status === 'rejected'
+              ? String(missingStudents[index].studentId)
+              : null
+          )
+          .filter((id): id is string => id !== null);
 
-      return {course, failedIds};
+        return {course, failedIds};
+      } catch {
+        // 등록 확인 실패 시에도 강의 수정 성공은 유지
+        return {course, failedIds: students.map(({studentId}) => String(studentId))};
+      }
     },
   }),
 

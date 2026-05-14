@@ -16,7 +16,16 @@ export const studentMutations = {
   }),
   deleteEnrollmentsBulk: (courseId: number) => ({
     mutationKey: ['deleteEnrollmentsBulk', courseId],
-    mutationFn: (memberIds: number[]) =>
-      Promise.all(memberIds.map((id) => deleteEnrollment(courseId, id))),
+    mutationFn: async (memberIds: number[]) => {
+      const results = await Promise.allSettled(
+        memberIds.map((id) => deleteEnrollment(courseId, id))
+      );
+      const failed = results
+        .map((result, index) =>
+          result.status === 'rejected' ? memberIds[index] : null
+        )
+        .filter((id): id is number => id !== null);
+      return {total: memberIds.length, failed};
+    },
   }),
 };

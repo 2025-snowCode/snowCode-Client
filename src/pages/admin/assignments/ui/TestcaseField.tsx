@@ -90,7 +90,7 @@ const TestcaseField = ({assignmentId, value, onChange}: TestcaseFieldProps) => {
 
   const handleDeleteTestcase = (index: number) => {
     if (value.length === 1) {
-      onChange([{testcase: '', answer: '', isPublic: false}]);
+      onChange([{testcase: '', answer: '', isPublic: true}]);
       return;
     }
     onChange(value.filter((_, idx) => idx !== index));
@@ -114,7 +114,7 @@ const TestcaseField = ({assignmentId, value, onChange}: TestcaseFieldProps) => {
         error instanceof Error
           ? error.message
           : '테스트 케이스 JSON을 불러오지 못했습니다.';
-      alert(message);
+      showToast(message);
     }
   };
 
@@ -123,7 +123,7 @@ const TestcaseField = ({assignmentId, value, onChange}: TestcaseFieldProps) => {
       <div className='space-y-2'>
         {value.map((tc, idx) => (
           <TestcaseRow
-            key={idx}
+            key={`${idx}-${tc.testcase}-${tc.answer}`}
             index={idx}
             testcase={tc.testcase}
             answer={tc.answer}

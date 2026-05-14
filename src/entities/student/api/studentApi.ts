@@ -31,10 +31,7 @@ export const addEnrollmentsBulk = async (courseId: number, file: File) => {
 
   const res = await privateAxios.post(
     ENDPOINTS.ENROLLMENTS.BULK(courseId),
-    formData,
-    {
-      headers: {'Content-Type': 'multipart/form-data'},
-    }
+    formData
   );
 
   return apiResponseSchema(z.unknown()).parse(res.data);

@@ -4,6 +4,7 @@ import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import {useForm} from 'react-hook-form';
 import {assignmentMutations} from '@/entities/assignment/api/assignmentMutations';
 import {assignmentQueries} from '@/entities/assignment/api/assignmentQueries';
+import {handleApiError} from '@/shared/lib/handleApiError';
 import type {TAssignmentForm} from '@/entities/assignment/model/schemas';
 import {useToastStore} from '@/shared/model/useToastStore';
 
@@ -54,7 +55,7 @@ export const useAssignmentForm = (assignmentId?: number) => {
       showToast('문제가 등록되었습니다.');
       navigate(-1);
     },
-    onError: () => alert('문제 등록에 실패했습니다.'),
+    onError: (error) => handleApiError(error, '문제 등록에 실패했습니다.'),
   });
 
   const {mutate: updateAssignment, isPending: isUpdating} = useMutation({
@@ -69,7 +70,7 @@ export const useAssignmentForm = (assignmentId?: number) => {
       showToast('문제가 수정되었습니다.');
       navigate(-1);
     },
-    onError: () => alert('문제 수정에 실패했습니다.'),
+    onError: (error) => handleApiError(error, '문제 수정에 실패했습니다.'),
   });
 
   const onSubmit = (form: TAssignmentForm) => {

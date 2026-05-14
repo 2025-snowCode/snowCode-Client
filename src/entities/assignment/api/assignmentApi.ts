@@ -94,10 +94,7 @@ export const uploadTestcasesBulk = async (
 
   const response = await privateAxios.post(
     ENDPOINTS.TESTCASES.BULK(assignmentId),
-    formData,
-    {
-      headers: {'Content-Type': 'multipart/form-data'},
-    }
+    formData
   );
   const parsed = apiResponseSchema(z.unknown()).parse(response.data);
   return parsed.response;
