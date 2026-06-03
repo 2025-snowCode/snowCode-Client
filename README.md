@@ -1,6 +1,64 @@
 # snowCode
 
-## commit 컨벤션
+> 교수와 학생을 잇는 프로그래밍 과제 통합 플랫폼
+
+<img alt="스노우코드_표지" src="https://raw.githubusercontent.com/2025-snowCode/snowCode-Client/902499c4bd2cd18369ed407a74d6b8dbecae085e/public/preview.svg" />
+
+<strong>과제 출제부터 제출, 채점, 피드백까지 — 프로그래밍 과제를 위한 올인원 플랫폼, 'snowCode'<strong/>
+
+1. 원스톱 과제 처리 : 코드 작성, 실행, 제출까지 브라우저 하나로 모두 해결
+2. 즉각적인 채점 피드백 : 제출 즉시 자동 채점 결과를 확인하고 오답을 바로 개선
+3. 통일된 실행 환경 : 별도 개발 환경 설치 없이 누구나 동일한 환경에서 안정적으로 코드 실행
+4. 자동화된 채점 시스템 : 테스트 케이스 기반 자동 채점으로 수동 채점 부담 없이 즉시 결과 제공
+
+<br />
+
+## <img src="./public/favicon.svg" style="width: 30px" alt="favicon" /> 서비스 소개
+
+<img width="1440" height="1024" alt="paint_points" src="https://github.com/user-attachments/assets/cd2243b1-4538-48cf-a151-52b8fdb83e1c" />
+
+---
+
+<img width="1440" height="1024" alt="과제제출" src="https://github.com/user-attachments/assets/14792dfa-a0e9-4edc-921f-7c62b700744e" />
+
+---
+
+<img width="1440" height="1024" alt="강의관리" src="https://github.com/user-attachments/assets/d738e701-cf52-41c9-b00d-b77ec154d5bd" />
+
+---
+
+<img width="1440" height="1024" alt="관제관리" src="https://github.com/user-attachments/assets/c850ab5e-dc72-4e69-b13a-6d44511cdd94" />
+
+---
+
+<img width="1440" height="1024" alt="학생관리" src="https://github.com/user-attachments/assets/fb95c901-2114-4fc1-bf0d-23b75eb109da" />
+
+---
+
+<img width="1440" height="1024" alt="채팅" src="https://github.com/user-attachments/assets/87e7f60b-9be8-4d79-9d86-a8068c3b243b" />
+
+---
+
+<br />
+
+## <img src="./public/favicon.svg" style="width: 30px" alt="favicon" /> Team 기술 스택
+
+| 카테고리                    | 기술 스택                                                                                                                                                                                                                               |
+| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **UI Library**              | ![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=white&style=for-the-badge)                                                                                                                                      |
+| **Server State Management** | ![TanStack Query](https://img.shields.io/badge/TanStack%20Query-FF4154?logo=reactquery&logoColor=white&style=for-the-badge)                                                                                                             |
+| **Language**                | ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white&style=for-the-badge)                                                                                                                       |
+| **Build Tool**              | ![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white&style=for-the-badge)                                                                                                                                         |
+| **Styling**                 | ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-grey?style=for-the-badge&logo=tailwind-css&logoColor=38B2AC)                                                                                                                  |
+| **Schema Validation**       | ![Zod](https://img.shields.io/badge/ZOD-3E67B1?logo=zod&logoColor=white&style=for-the-badge)                                                                                                                                            |
+| **Linting**                 | ![ESLint](https://img.shields.io/badge/ESLint-3A33D1?style=for-the-badge)                                                                                                                                                               |
+| **Package Manager**         | ![Pnpm](https://img.shields.io/badge/Pnpm-F69220?logo=pnpm&logoColor=white&style=for-the-badge)                                                                                                                                         |
+| **Deploy**                  | ![VERCEL](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white) ![NGINX](https://img.shields.io/badge/NGINX-009639?logo=nginx&logoColor=white&style=for-the-badge)                                                                                                                                                                                                                  |
+
+<br />
+
+## <img src="./public/favicon.svg" style="width: 30px" alt="favicon" /> Team 컨벤션
+### commit 컨벤션
 **commit 태그 종류**
 
 ```
@@ -31,7 +89,7 @@
 
 <br />
 
-## Issue 컨벤션
+### Issue 컨벤션
 
 **issue 태그 종류**
 ```
